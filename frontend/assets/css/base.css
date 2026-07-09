@@ -1,0 +1,116 @@
+/* Base resets & typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-charcoal);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Selection colors */
+::selection {
+  background-color: var(--color-error-container);
+  color: var(--color-error);
+}
+
+/* Typography styles matching Stitch specs */
+.text-headline-xl {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .text-headline-xl {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+.text-headline-lg {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+}
+
+.text-headline-md {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.text-body-md {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.text-label-md {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+}
+
+.text-label-sm {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+/* Basic utility container classes */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--margin-desktop);
+  padding-right: var(--margin-desktop);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: var(--margin-mobile);
+    padding-right: var(--margin-mobile);
+  }
+}
+
+/* Anchor links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+/* Grayscale overlays for images */
+.image-grayscale {
+  filter: grayscale(20%);
+  transition: filter 0.5s ease-in-out;
+}
+
+.image-grayscale:hover {
+  filter: grayscale(0%);
+}

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Let's Connect | SunPlus Power</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-bright": "#f8f9fb",
+                "secondary-container": "#e2dfde",
+                "tertiary": "#505b6d",
+                "inverse-primary": "#ffb4ac",
+                "on-primary-fixed": "#410003",
+                "on-primary": "#ffffff",
+                "error-container": "#ffdad6",
+                "secondary-fixed": "#e5e2e1",
+                "secondary": "#5f5e5e",
+                "on-secondary-fixed-variant": "#474746",
+                "primary-container": "#d9302f",
+                "inverse-on-surface": "#f0f1f3",
+                "on-background": "#191c1e",
+                "inverse-surface": "#2e3132",
+                "surface-variant": "#e1e2e4",
+                "outline-variant": "#e4beb9",
+                "surface-tint": "#bb171d",
+                "on-tertiary-container": "#f9f9ff",
+                "surface": "#f8f9fb",
+                "on-secondary-container": "#636262",
+                "secondary-fixed-dim": "#c8c6c5",
+                "primary-fixed-dim": "#ffb4ac",
+                "surface-container-low": "#f2f4f6",
+                "on-error": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-container": "#697386",
+                "primary": "#b5111a",
+                "error": "#ba1a1a",
+                "on-surface-variant": "#5b403d",
+                "tertiary-fixed-dim": "#bdc7dc",
+                "surface-container": "#edeef0",
+                "on-secondary-fixed": "#1c1b1b",
+                "on-secondary": "#ffffff",
+                "surface-container-highest": "#e1e2e4",
+                "on-tertiary-fixed-variant": "#3d4759",
+                "on-surface": "#191c1e",
+                "on-primary-fixed-variant": "#93000e",
+                "background": "#f8f9fb",
+                "surface-dim": "#d9dadc",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed": "#d9e3f9",
+                "on-tertiary-fixed": "#121c2c",
+                "primary-fixed": "#ffdad6",
+                "on-primary-container": "#fff8f7",
+                "outline": "#906f6c",
+                "on-error-container": "#93000a",
+                "surface-container-high": "#e7e8ea"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "base": "8px",
+                "container-max": "1280px",
+                "margin-desktop": "48px",
+                "margin-mobile": "16px",
+                "gutter": "24px"
+            },
+            "fontFamily": {
+                "body-lg": ["Inter"],
+                "label-sm": ["Inter"],
+                "headline-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-md": ["Inter"],
+                "headline-xl": ["Inter"],
+                "headline-xl-mobile": ["Inter"]
+            },
+            "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .industrial-pattern {
+            background-color: #f8f9fb;
+            background-image: radial-gradient(#d9dadc 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+        .form-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+    </style>
+
+    <link rel="stylesheet" href="assets/css/variables.css"/>
+    <link rel="stylesheet" href="assets/css/base.css"/>
+    <link rel="stylesheet" href="assets/css/components.css"/>
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+    
+
+    <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/forms.js" defer></script>
+
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-primary min-h-screen industrial-pattern">
+<!-- TopNavBar -->
+<header class="bg-white border-b border-surface-container sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="assets/images/logo.svg"/></a>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="about.html">About Us</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="services.html">Services</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="projects.html">Projects</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="products.html">Products</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="careers.html">Careers</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="dashboard.html">Portal</a>
+</nav>
+<a href="calculator.html" class="btn-primary text-sm font-bold">
+                Solar Calculator
+            </a>
+</div>
+</header>
+<!-- Page Header Section -->
+<section class="bg-white border-b border-surface-container-high py-16 md:py-24">
+<div class="max-w-container-max mx-auto px-margin-desktop text-center">
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-bold text-on-surface mb-4">Partner with Excellence</h1>
+<p class="text-body-lg text-secondary max-w-2xl mx-auto">Connecting global infrastructure with sustainable energy solutions. Reach out to our engineering team or begin your partnership journey below.</p>
+</div>
+</section>
+<!-- Main Contact Suite Navigation (Tabs) -->
+<div class="bg-white sticky top-[73px] z-40 border-b border-surface-container shadow-sm">
+<div class="max-w-container-max mx-auto px-margin-desktop overflow-x-auto">
+<div class="flex whitespace-nowrap gap-8 py-4 justify-center">
+<button class="tab-btn text-on-surface font-label-md border-b-2 border-primary pb-1 transition-all" id="tab-contact" onclick="switchTab('contact')">Contact Us</button>
+<button class="tab-btn text-secondary font-label-md hover:text-on-surface transition-colors pb-1 border-b-2 border-transparent" id="tab-distributor" onclick="switchTab('distributor')">Apply for Distributors</button>
+<button class="tab-btn text-secondary font-label-md hover:text-on-surface transition-colors pb-1 border-b-2 border-transparent" id="tab-warranty" onclick="switchTab('warranty')">Warranty Registration</button>
+<button class="tab-btn text-secondary font-label-md hover:text-on-surface transition-colors pb-1 border-b-2 border-transparent" id="tab-complaint" onclick="switchTab('complaint')">Registration Complaint</button>
+</div>
+</div>
+</div>
+<main class="max-w-container-max mx-auto px-margin-desktop py-12 md:py-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Forms Canvas (Left/Center) -->
+<div class="lg:col-span-8 bg-white border border-surface-container p-8 md:p-12 rounded-lg shadow-sm">
+<!-- Contact Us Form -->
+<div class="form-section" id="form-contact">
+<h2 class="text-headline-md font-bold text-on-surface mb-6">General Inquiry</h2>
+<form id="contact-form" class="space-y-6"><div id="contact-form-feedback"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Full Name</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="John Doe" type="text"/ name="name" required>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Corporate Email</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="john@company.com" type="email"/ name="email" required>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Phone Number</label>
+<input name="phone" type="text" class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="+91 9876543210" required />
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Subject</label>
+<select class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white appearance-none" name="subject">
+<option>Project Consultation</option>
+<option>Technical Support</option>
+<option>Media Inquiry</option>
+<option>Other</option>
+</select>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Message</label>
+<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Describe your project or inquiry in detail..." rows="5" name="message" required></textarea>
+</div>
+<button class="w-full bg-primary text-white font-label-md py-4 rounded hover:opacity-90 transition-opacity flex justify-center items-center gap-2" type="submit">
+                            Send Message <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+<!-- Distributor Form (Hidden by default) -->
+<div class="form-section hidden" id="form-distributor">
+<h2 class="text-headline-md font-bold text-on-surface mb-2">Distributor Application</h2>
+<p class="text-body-md text-secondary mb-8 border-b border-surface-container pb-4">Expand your business with the industry-leading solar technology provider.</p>
+<form id="distributor-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Company Name</label>
+                        <input name="company_name" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Contact Person Name</label>
+                        <input name="contact_person" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Region / Territory of Interest</label>
+                        <input name="region" class="border border-outline rounded p-3 outline-none focus:border-primary" placeholder="State/Country" type="text" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Business Type</label>
+                        <input name="business_type" class="border border-outline rounded p-3 outline-none focus:border-primary" placeholder="EPC/Retail/Distributor" type="text" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Years in Business</label>
+                        <input name="years_in_business" class="border border-outline rounded p-3 outline-none focus:border-primary" type="number" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Corporate Email</label>
+                        <input name="email" class="border border-outline rounded p-3 outline-none focus:border-primary" type="email" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Phone Number</label>
+                        <input name="phone" class="border border-outline rounded p-3 outline-none focus:border-primary" placeholder="+91 98765 43210" type="text" required />
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-label-md text-on-surface mb-2">Partnership Proposal / Message</label>
+                    <textarea name="message" class="border border-outline rounded p-3 outline-none focus:border-primary" rows="4" required></textarea>
+                </div>
+                <button class="w-full bg-primary text-white font-label-md py-4 rounded hover:bg-primary-dark transition-all" type="submit">Submit Application</button>
+            </form>
+            <!-- REMOVED ORIGINAL DISTRIBUTOR FORM<div id="distributor-form-feedback"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Company Name</label>
+<input name="company_name" required class="border border-outline rounded p-3 outline-none" type="text"></div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Annual Revenue (USD)</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text"/>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Territory of Interest</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Country / Region" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Current Product Portfolio</label>
+<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" rows="3"></textarea>
+</div>
+<button class="w-full bg-on-surface text-white font-label-md py-4 rounded hover:opacity-90 transition-opacity" type="submit">Submit Application</button>
+-->
+</div>
+<!-- Warranty Form (Hidden by default) -->
+<div class="form-section hidden" id="form-warranty">
+<h2 class="text-headline-md font-bold text-on-surface mb-6">Product Warranty Registration</h2>
+<form id="warranty-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Product Category</label>
+                        <select name="product_type" class="border border-outline rounded p-3 outline-none focus:border-primary bg-white">
+                            <option>Solar Inverter</option>
+                            <option>PV Modules</option>
+                            <option>Battery Storage</option>
+                            <option>BOS / Cables</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Serial Number / Project ID</label>
+                        <input name="serial_or_project_id" class="border border-outline rounded p-3 outline-none focus:border-primary" placeholder="SPP-XXXX-XXXX" type="text" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Installation Date</label>
+                        <input name="installation_date" class="border border-outline rounded p-3 outline-none focus:border-primary" type="date" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Customer Full Name</label>
+                        <input name="customer_name" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Authorized Installer Name</label>
+                        <input name="installer_name" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Contact Email</label>
+                        <input name="email" class="border border-outline rounded p-3 outline-none focus:border-primary" type="email" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Phone Number</label>
+                        <input name="phone" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                </div>
+                <button class="w-full bg-primary text-white font-label-md py-4 rounded hover:bg-primary-dark transition-all" type="submit">Register Warranty</button>
+            </form>
+            <!-- REMOVED ORIGINAL WARRANTY FORM<div id="warranty-form-feedback"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Serial Number</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="SPP-XXXX-XXXX" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Installation Date</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="date"/>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Authorized Installer Name</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text"/>
+</div>
+<div class="p-4 bg-surface-container rounded border-l-4 border-on-surface">
+<p class="text-label-sm text-on-surface uppercase tracking-wider mb-1">Attachment Required</p>
+<p class="text-body-md mb-4">Please upload a digital copy of your purchase invoice (PDF/JPG).</p>
+<input class="text-body-md text-secondary" type="file"/>
+</div>
+<button class="w-full bg-on-surface text-white font-label-md py-4 rounded hover:opacity-90 transition-all" type="submit">Register Warranty</button>
+-->
+</div>
+<!-- Complaint Form (Hidden by default) -->
+<div class="form-section hidden" id="form-complaint">
+<h2 class="text-headline-md font-bold text-on-surface mb-2">Resolution Request</h2>
+<p class="text-body-md text-secondary mb-8 border-b border-surface-container pb-4">Our engineering standards are absolute. If your experience has been less than exceptional, please let us fix it.</p>
+<form id="complaint-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Full Name</label>
+                        <input name="name" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Phone Number</label>
+                        <input name="phone" class="border border-outline rounded p-3 outline-none focus:border-primary" type="text" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Contact Email</label>
+                        <input name="email" class="border border-outline rounded p-3 outline-none focus:border-primary" type="email" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Associated Reference / Project ID</label>
+                        <input name="project_or_product_id" class="border border-outline rounded p-3 outline-none focus:border-primary" placeholder="SPP-XXXX" type="text" required />
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-label-md text-on-surface mb-2">Nature of Issue</label>
+                        <select name="category" class="border border-outline rounded p-3 outline-none focus:border-primary bg-white">
+                            <option value="installation">Installation</option>
+                            <option value="om">O&M / Maintenance</option>
+                            <option value="product">Product Malfunction</option>
+                            <option value="billing">Billing Dispute</option>
+                            <option value="other">Other Support</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-label-md text-on-surface mb-2">Incident Description</label>
+                    <textarea name="description" class="border border-outline rounded p-3 outline-none focus:border-primary" rows="4" required></textarea>
+                </div>
+                <div class="p-4 bg-surface-container rounded border-l-4 border-primary">
+                    <p class="text-label-sm text-on-surface uppercase tracking-wider mb-1">Attachment Required (Optional)</p>
+                    <p class="text-body-md mb-4">Please upload a photo of the issue (JPG/PNG under 5MB).</p>
+                    <input name="photo" type="file" accept="image/*" class="text-body-md text-secondary" />
+                </div>
+                <button class="w-full bg-primary text-white font-label-md py-4 rounded hover:bg-primary-dark transition-all" type="submit">Submit Urgent Ticket</button>
+            </form>
+            <!-- REMOVED ORIGINAL COMPLAINTS FORM<div id="complaint-form-feedback"></div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Associated Reference Number</label>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Nature of Issue</label>
+<select class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white appearance-none" name="subject">
+<option>Service Delay</option>
+<option>Technical Malfunction</option>
+<option>Registration Error</option>
+<option>Warranty Dispute</option>
+</select>
+</div>
+<div class="flex flex-col">
+<label class="text-label-md text-on-surface mb-2">Incident Description</label>
+<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" rows="4"></textarea>
+</div>
+<button class="w-full bg-on-surface text-white font-label-md py-4 rounded hover:opacity-90 transition-all" type="submit">Submit Urgent Ticket</button>
+-->
+</div>
+</div>
+<!-- Sidebar (Direct Contact Info) -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Contact Card -->
+<div class="bg-on-surface text-white p-8 rounded-lg shadow-md">
+<h3 class="text-headline-md font-bold mb-8">Corporate Hub</h3>
+<div class="space-y-8">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-surface-variant">location_on</span>
+<div>
+<p class="text-label-sm text-surface-variant uppercase">Global Headquarters</p>
+<p class="text-body-md">1200 Energy Plaza, Industrial District<br/>Houston, TX 77002, USA</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-surface-variant">call</span>
+<div>
+<p class="text-label-sm text-surface-variant uppercase">Emergency Support</p>
+<p class="text-body-md font-bold text-white">+1 (800) 555-POWER</p>
+<p class="text-label-sm text-surface-variant/70">Available 24/7 for infrastructure clients</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-surface-variant">mail</span>
+<div>
+<p class="text-label-sm text-surface-variant uppercase">Inquiries</p>
+<p class="text-body-md">solutions@sunpluspower.com</p>
+<p class="text-body-md">press@sunpluspower.com</p>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-white/10">
+<p class="text-label-sm text-surface-variant mb-4 uppercase">Regional Offices</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="text-body-md text-surface-variant">Berlin, DE</div>
+<div class="text-body-md text-surface-variant">Dubai, UAE</div>
+<div class="text-body-md text-surface-variant">Singapore, SG</div>
+<div class="text-body-md text-surface-variant">Tokyo, JP</div>
+</div>
+</div>
+</div>
+<!-- Map Integration -->
+<div class="rounded-lg overflow-hidden border border-surface-container h-64 bg-surface-container relative">
+<img alt="Global office locations map" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2EPCySi0kirhyCCzeQ2sCcbcozE7-X1QUgo4d0iVE8Ee4pXyWrokz_ixFpRzCor0RMzZSfmTQn-C8kdB8SZmhWTFGpBpQTmPG-aNkz6NxtDzh_s0BNt2tbC7DOwsTqvW6ehrMeohQRbttnBOYUTI5Gs8xPDY0Zlt-V586bcgOoaMEE9_u0jz7RDTmfnIV9raYt3z7tfp0Ej-9i7v_Zja_NZcWJhyv0oXiFHoh1PXKwsDe38sIX0AIyA"/>
+<div class="absolute inset-0 bg-on-surface/5 pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 bg-on-surface text-white px-3 py-1 rounded text-label-sm font-bold">GLOBAL REACH</div>
+</div>
+<!-- Trusted Badge -->
+<div class="p-6 bg-white border border-surface-container rounded-lg flex items-center gap-4">
+<div class="w-12 h-12 bg-on-surface/5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<p class="text-label-md font-bold text-on-surface">ISO 9001:2015 Certified</p>
+<p class="text-label-sm text-secondary">Quality Management Excellence</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-surface text-white mt-20">
+<div class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between gap-gutter max-w-container-max mx-auto">
+<div class="space-y-4 max-w-xs">
+<div class="flex items-center gap-2">
+<div class="bg-white p-1 rounded">
+<img alt="" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRLnp57Q_lx0X8NAkGxSxgD6Mo4XLT_8QWKd4SoCNsu3StfYNUxTUhAEyouNodGzmzd3uDKjpBGXTrQuh4S4tMQTYOVLAosxhE_B5n6UOtntYaPzw888CYZG-2pV3VA8eqBA5nQ1ml0nw7KwWO-5BIMoyvZRz8WRByCWmMdLkQOzZM6cyVqa6fhTqXDARYeamk-BQk-HPeK_LW_id2pC_4jB34__ibACsA6v2dlF6_67UBfgx-jUqoPDDVkyHKpWHyPvE"/>
+</div>
+<span class="text-headline-md font-bold">SunPlus Power</span>
+</div>
+<p class="text-body-md text-surface-variant">Providing mission-critical solar infrastructure to the world's most demanding projects.</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-8">
+<div class="flex flex-col gap-2">
+<h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Navigation</h4>
+<a class="text-surface-variant hover:text-white transition-colors text-body-md" href="index.html">Sitemap</a>
+<a class="text-white font-bold text-body-md" href="connect.html">Contact</a>
+<a class="text-surface-variant hover:text-white transition-colors text-body-md" href="media.html">Media Hub</a>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Legal</h4>
+<a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Privacy Policy</a>
+<a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Terms of Service</a>
+</div>
+</div>
+<div class="flex flex-col justify-end">
+<div class="text-label-sm text-surface-variant/50">© 2024 SunPlus Power. Engineering Excellence in Solar.</div>
+</div>
+</div>
+</footer>
+<script>
+        function switchTab(targetId) {
+            // Hide all form sections
+            const sections = document.querySelectorAll('.form-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show target form section
+            const targetSection = document.getElementById('form-' + targetId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('form-transition');
+            }
+
+            // Update tab styles
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('text-on-surface', 'border-primary');
+                tab.classList.add('text-secondary', 'border-transparent');
+            });
+
+            const activeTab = document.getElementById('tab-' + targetId);
+            if (activeTab) {
+                activeTab.classList.remove('text-secondary', 'border-transparent');
+                activeTab.classList.add('text-on-surface', 'border-primary');
+            }
+        }
+        
+        window.onload = () => switchTab('contact');
+    </script>
+</body></html>

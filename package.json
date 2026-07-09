@@ -1,0 +1,14 @@
+{
+  "name": "sunplus-power-v2",
+  "version": "1.0.0",
+  "description": "SunPlus Power India Pvt. Ltd. full-stack site",
+  "scripts": {
+    "build:css": "tailwindcss -i ./frontend/assets/css/input.css -o ./frontend/assets/css/tailwind-compiled.css --minify",
+    "watch:css": "tailwindcss -i ./frontend/assets/css/input.css -o ./frontend/assets/css/tailwind-compiled.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/container-queries": "^0.1.1"
+  }
+}

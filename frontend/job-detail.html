@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Job Description | SunPlus Power Careers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="assets/css/variables.css"/>
+  <link rel="stylesheet" href="assets/css/base.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+  
+  <script src="assets/js/api.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/forms.js" defer></script>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+  <!-- Header / Navigation -->
+    <!-- Header / Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-charcoal border-b border-white/10 shadow-sm transition-all duration-300">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="assets/images/logo.svg"/></a>
+      </div>
+      <nav class="hidden md:flex items-center gap-gutter">
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="index.html">Home</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="about.html">About Us</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="services.html">Services</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="projects.html">Projects</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="products.html">Products</a>
+        <a class="text-primary font-label-bold border-b-2 border-primary pb-1" href="careers.html">Careers</a>
+      </nav>
+      <a href="calculator.html" class="btn-primary text-sm font-bold">
+        Solar Calculator
+      </a>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main class="pt-24 min-h-screen container max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+    <!-- Back Link -->
+    <div class="mb-8">
+      <a href="careers.html" class="inline-flex items-center gap-2 text-secondary hover:text-primary font-bold text-sm">
+        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Openings
+      </a>
+    </div>
+
+    <!-- Error message alert -->
+    <div id="error-container" class="hidden alert-banner error"></div>
+
+    <!-- Skeleton Loaders -->
+    <div id="skeleton-loader" class="space-y-6 animate-pulse">
+      <div class="h-10 bg-surface-container rounded w-1/2"></div>
+      <div class="h-6 bg-surface-container rounded w-1/4"></div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8">
+        <div class="lg:col-span-8 h-80 bg-surface-container rounded"></div>
+        <div class="lg:col-span-4 h-60 bg-surface-container rounded"></div>
+      </div>
+    </div>
+
+    <!-- Job details display wrapper -->
+    <div id="job-detail-content" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+      <!-- Description Section (Left Column) -->
+      <div class="lg:col-span-8 space-y-8">
+        <div>
+          <span id="job-dept-chip" class="chip mb-4">Department</span>
+          <h1 id="job-title" class="text-headline-xl font-bold text-on-surface mb-2">Job Opening Title</h1>
+          <div class="flex flex-wrap gap-4 text-secondary text-sm font-semibold">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">location_on</span>
+              <span id="job-location">Location, India</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">work</span>
+              <span id="job-experience">3-5 Years</span>
+            </span>
+          </div>
+        </div>
+
+        <hr class="border-surface-container-high"/>
+
+        <div class="space-y-4">
+          <h3 class="text-headline-md font-bold text-on-surface">Role Specifications & Responsibilities</h3>
+          <div id="job-description" class="text-body-lg text-secondary leading-relaxed space-y-4 whitespace-pre-wrap">
+            Job description details will load here...
+          </div>
+        </div>
+      </div>
+
+      <!-- Apply Form Sidebar (Right Column) -->
+      <aside class="lg:col-span-4 sticky top-28 bg-white p-8 border border-outline-variant rounded-lg shadow-sm">
+        <h3 class="text-headline-md font-bold text-on-surface mb-4">Apply for Role</h3>
+        <p class="text-body-md text-secondary mb-6">Submit your engineering profile and resume to our recruitment team.</p>
+        
+        <div id="job-apply-form-feedback"></div>
+        
+        <form id="job-apply-form" action="" method="POST" enctype="multipart/form-data" class="space-y-4">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-input" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-input" placeholder="john@company.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="text" name="phone" class="form-input" placeholder="+91 98765 43210" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cover Letter (Optional)</label>
+            <textarea name="cover_letter" class="form-textarea" rows="3" placeholder="Brief pitch of your suitability..."></textarea>
+          </div>
+          <div class="form-group p-4 bg-surface-container rounded border-l-4 border-primary">
+            <label class="form-label mb-1">Resume File</label>
+            <p class="text-xs text-secondary mb-2">Upload resume (PDF/DOC up to 5MB)</p>
+            <input type="file" name="resume" accept=".pdf,.doc,.docx" class="text-sm text-secondary" required />
+          </div>
+          <button type="submit" class="w-full btn-primary py-3.5 mt-2">
+            Submit Application <span class="material-symbols-outlined text-sm">send</span>
+          </button>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+    <!-- Footer -->
+  <footer class="bg-on-surface text-white mt-20">
+    <div class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between gap-gutter max-w-container-max mx-auto">
+      <div class="space-y-4 max-w-xs">
+        <div class="flex items-center gap-2">
+          <div class="bg-white p-1 rounded">
+            <img alt="SunPlus Power Logo" class="h-8 w-auto" src="assets/images/logo.svg"/>
+          </div>
+          <span class="text-headline-md font-bold">SunPlus Power</span>
+        </div>
+        <p class="text-body-md text-surface-variant">Providing mission-critical solar infrastructure to the world's most demanding projects.</p>
+      </div>
+      <div class="flex flex-wrap gap-x-12 gap-y-8">
+        <div class="flex flex-col gap-2">
+          <h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Navigation</h4>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="index.html">Sitemap</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Contact</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="media.html">Media Hub</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Legal</h4>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Privacy Policy</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Terms of Service</a>
+        </div>
+      </div>
+      <div class="flex flex-col justify-end">
+        <div class="text-label-sm text-surface-variant/50">© 2024 SunPlus Power. Engineering Excellence in Solar.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const params = new URLSearchParams(window.location.search);
+      const careerId = params.get("id");
+
+      if (!careerId) {
+        showJobError("No valid career opening ID specified in link.");
+        return;
+      }
+
+      try {
+        const job = await api.get(`/careers/${careerId}`);
+        
+        // Hide loader
+        document.getElementById("skeleton-loader").classList.add("hidden");
+        
+        // Bind job details
+        document.getElementById("job-title").innerText = job.title;
+        document.getElementById("job-dept-chip").innerText = job.department;
+        document.getElementById("job-location").innerText = job.location;
+        document.getElementById("job-experience").innerText = `${job.experience_required} Experience`;
+        document.getElementById("job-description").innerText = job.description;
+
+        // Configure form action endpoint dynamically
+        const form = document.getElementById("job-apply-form");
+        if (form) {
+          form.setAttribute("action", `/careers/${careerId}/apply`);
+        }
+
+        // Show details
+        document.getElementById("job-detail-content").classList.remove("hidden");
+        
+        // Document title adjustment
+        document.title = `${job.title} | SunPlus Careers`;
+
+      } catch (err) {
+        showJobError(err.message || "Failed to load job description. The position might be closed.");
+      }
+    });
+
+    function showJobError(msg) {
+      document.getElementById("skeleton-loader").classList.add("hidden");
+      const errBox = document.getElementById("error-container");
+      errBox.innerText = msg;
+      errBox.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

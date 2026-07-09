@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Blog Reader | SunPlus Power India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="assets/css/variables.css"/>
+  <link rel="stylesheet" href="assets/css/base.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+  
+  <script src="assets/js/api.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+  <!-- Header / Navigation -->
+    <!-- Header / Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-charcoal border-b border-white/10 shadow-sm transition-all duration-300">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="assets/images/logo.svg"/></a>
+      </div>
+      <nav class="hidden md:flex items-center gap-gutter">
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="index.html">Home</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="about.html">About Us</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="services.html">Services</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="projects.html">Projects</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="products.html">Products</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="careers.html">Careers</a>
+      </nav>
+      <a href="calculator.html" class="btn-primary text-sm font-bold">
+        Solar Calculator
+      </a>
+    </div>
+  </header>
+
+  <!-- Main content area -->
+  <main class="pt-24 min-h-screen container max-w-[800px] mx-auto px-margin-mobile py-12">
+    <!-- Back Link -->
+    <div class="mb-8">
+      <a href="media.html" class="inline-flex items-center gap-2 text-secondary hover:text-primary font-bold text-sm">
+        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Media Hub
+      </a>
+    </div>
+
+    <!-- Error element -->
+    <div id="error-container" class="hidden alert-banner error"></div>
+
+    <!-- Skeleton Loaders -->
+    <div id="skeleton-loader" class="space-y-6 animate-pulse">
+      <div class="h-12 bg-surface-container rounded w-3/4"></div>
+      <div class="h-6 bg-surface-container rounded w-1/3"></div>
+      <div class="h-80 bg-surface-container rounded w-full"></div>
+      <div class="h-20 bg-surface-container rounded w-full"></div>
+    </div>
+
+    <!-- Blog Layout container -->
+    <article id="blog-content" class="hidden space-y-8">
+      <!-- Header meta metadata -->
+      <div>
+        <h1 id="blog-title" class="text-headline-xl font-bold text-on-surface mb-4 leading-tight">Blog Post Title</h1>
+        
+        <div class="flex items-center gap-4 text-sm text-secondary">
+          <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span id="blog-author">-</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+            <span id="blog-date">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Banner Image -->
+      <div class="rounded-xl overflow-hidden shadow-md border border-surface-container h-[400px]">
+        <img id="blog-image" class="w-full h-full object-cover" src="" alt="Blog cover image"/>
+      </div>
+
+      <!-- Paragraph Contents -->
+      <div id="blog-body" class="text-body-lg text-secondary leading-relaxed space-y-6 whitespace-pre-wrap">
+        Blog description loading...
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+    <!-- Footer -->
+  <footer class="bg-on-surface text-white mt-20">
+    <div class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between gap-gutter max-w-container-max mx-auto">
+      <div class="space-y-4 max-w-xs">
+        <div class="flex items-center gap-2">
+          <div class="bg-white p-1 rounded">
+            <img alt="SunPlus Power Logo" class="h-8 w-auto" src="assets/images/logo.svg"/>
+          </div>
+          <span class="text-headline-md font-bold">SunPlus Power</span>
+        </div>
+        <p class="text-body-md text-surface-variant">Providing mission-critical solar infrastructure to the world's most demanding projects.</p>
+      </div>
+      <div class="flex flex-wrap gap-x-12 gap-y-8">
+        <div class="flex flex-col gap-2">
+          <h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Navigation</h4>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="index.html">Sitemap</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Contact</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="media.html">Media Hub</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Legal</h4>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Privacy Policy</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Terms of Service</a>
+        </div>
+      </div>
+      <div class="flex flex-col justify-end">
+        <div class="text-label-sm text-surface-variant/50">© 2024 SunPlus Power. Engineering Excellence in Solar.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+
+      if (!slug) {
+        showBlogError("No valid article slug specified in link.");
+        return;
+      }
+
+      try {
+        const blog = await api.get(`/blogs/${slug}`);
+        
+        // Hide loader
+        document.getElementById("skeleton-loader").classList.add("hidden");
+        
+        // Bind elements
+        document.getElementById("blog-title").innerText = blog.title;
+        document.getElementById("blog-author").innerText = blog.author;
+        document.getElementById("blog-date").innerText = new Date(blog.published_at || blog.created_at).toLocaleDateString("en-IN", {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        document.getElementById("blog-image").src = blog.cover_image_url;
+        document.getElementById("blog-image").alt = blog.title;
+        document.getElementById("blog-body").innerText = blog.content;
+
+        // Show contents
+        document.getElementById("blog-content").classList.remove("hidden");
+        
+        // Update page title
+        document.title = `${blog.title} | SunPlus Insights`;
+
+      } catch (err) {
+        showBlogError(err.message || "Failed to load blog post. Slug does not match any published articles.");
+      }
+    });
+
+    function showBlogError(msg) {
+      document.getElementById("skeleton-loader").classList.add("hidden");
+      const errBox = document.getElementById("error-container");
+      errBox.innerText = msg;
+      errBox.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

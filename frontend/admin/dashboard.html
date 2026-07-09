@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Admin Dashboard | SunPlus Power Control Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="../assets/css/variables.css"/>
+  <link rel="stylesheet" href="../assets/css/base.css"/>
+  <link rel="stylesheet" href="../assets/css/components.css"/>
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css"/>
+  
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/admin.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body class="bg-surface text-on-background antialiased flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full bg-charcoal border-b border-white/10 py-4 shadow-md sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="flex items-center gap-3">
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="../assets/images/logo.svg"/>
+        </a>
+        <span class="text-headline-md font-bold text-white tracking-wide">Control Panel</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <button onclick="adminLogout()" class="text-white/80 hover:text-white font-label-bold text-sm flex items-center gap-1.5 border border-white/20 px-4 py-2 rounded hover:bg-white/10 transition-all">
+          <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar + Main Grid -->
+  <div class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-8 gap-8">
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 space-y-2">
+      <div class="p-4 bg-charcoal text-white rounded-lg mb-4">
+        <h4 class="font-bold text-sm uppercase tracking-wider">Console Directory</h4>
+        <p class="text-xs text-white/60">System Operator Active</p>
+      </div>
+      
+      <a href="dashboard.html" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container text-primary font-bold transition-all">
+        <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard Overview
+      </a>
+      <a href="submissions.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">inbox</span> Submissions inbox
+      </a>
+      <a href="projects.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">solar_power</span> Projects Manager
+      </a>
+      <a href="blogs.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">article</span> Insights & Blogs
+      </a>
+      <a href="careers.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">work</span> Careers & Jobs
+      </a>
+    </aside>
+
+    <!-- Main View Section -->
+    <main id="admin-dashboard-view" class="flex-grow space-y-8">
+      <div>
+        <h1 class="text-headline-xl font-bold text-on-surface">Console Overview</h1>
+        <p class="text-body-lg text-secondary mt-1">Aggregate infrastructure leads and project management database.</p>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Lead inquiries -->
+        <div class="card flex flex-col justify-between p-6">
+          <div class="flex justify-between items-start">
+            <span class="text-label-sm text-tertiary font-bold">Leads & Inquiries</span>
+            <span class="material-symbols-outlined text-secondary text-2xl">mail</span>
+          </div>
+          <div class="mt-4">
+            <h2 id="stat-leads" class="text-headline-xl font-bold text-on-surface">-</h2>
+            <a href="submissions.html?tab=leads" class="text-xs text-primary font-bold hover:underline block mt-2">View leads &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Calculator submissions -->
+        <div class="card flex flex-col justify-between p-6">
+          <div class="flex justify-between items-start">
+            <span class="text-label-sm text-tertiary font-bold">Solar Assessments</span>
+            <span class="material-symbols-outlined text-secondary text-2xl">calculate</span>
+          </div>
+          <div class="mt-4">
+            <h2 id="stat-calc" class="text-headline-xl font-bold text-on-surface">-</h2>
+            <a href="submissions.html?tab=calculator" class="text-xs text-primary font-bold hover:underline block mt-2">View solar assessments &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Distributor signups -->
+        <div class="card flex flex-col justify-between p-6">
+          <div class="flex justify-between items-start">
+            <span class="text-label-sm text-tertiary font-bold">Distributors Signups</span>
+            <span class="material-symbols-outlined text-secondary text-2xl">handshake</span>
+          </div>
+          <div class="mt-4">
+            <h2 id="stat-dist" class="text-headline-xl font-bold text-on-surface">-</h2>
+            <a href="submissions.html?tab=distributor" class="text-xs text-primary font-bold hover:underline block mt-2">View distributors &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Complaint resolution -->
+        <div class="card flex flex-col justify-between p-6">
+          <div class="flex justify-between items-start">
+            <span class="text-label-sm text-tertiary font-bold">Open Tickets</span>
+            <span class="material-symbols-outlined text-secondary text-2xl">report_problem</span>
+          </div>
+          <div class="mt-4">
+            <h2 id="stat-tickets" class="text-headline-xl font-bold text-on-surface">-</h2>
+            <a href="submissions.html?tab=complaints" class="text-xs text-primary font-bold hover:underline block mt-2">View tickets &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Total projects -->
+        <div class="card flex flex-col justify-between p-6">
+          <div class="flex justify-between items-start">
+            <span class="text-label-sm text-tertiary font-bold">Active Projects</span>
+            <span class="material-symbols-outlined text-secondary text-2xl">solar_power</span>
+          </div>
+          <div class="mt-4">
+            <h2 id="stat-projects" class="text-headline-xl font-bold text-on-surface">-</h2>
+            <a href="projects.html" class="text-xs text-primary font-bold hover:underline block mt-2">Manage projects &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Active job posts -->
+        <div class="card flex flex-col justify-between p-6">
+          <div class="flex justify-between items-start">
+            <span class="text-label-sm text-tertiary font-bold">Active Job Positions</span>
+            <span class="material-symbols-outlined text-secondary text-2xl">work</span>
+          </div>
+          <div class="mt-4">
+            <h2 id="stat-jobs" class="text-headline-xl font-bold text-on-surface">-</h2>
+            <a href="careers.html" class="text-xs text-primary font-bold hover:underline block mt-2">Manage jobs &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Shortcuts banner -->
+      <div class="p-6 bg-charcoal text-white rounded-lg flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h4 class="font-bold text-base">Engineering Portfolio & blogs Database</h4>
+          <p class="text-sm text-white/70">Create new installations or write press releases directly.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="projects.html" class="btn-primary py-2.5 px-4 text-xs font-bold shadow-none hover:bg-primary-dark">New Project</a>
+          <a href="blogs.html" class="btn-secondary py-2.5 px-4 text-xs font-bold border-white text-white hover:bg-white/10">Write Article</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-6 mt-auto">
+    <div class="max-w-[1440px] mx-auto px-margin-desktop text-center text-label-sm text-white/40">
+      © 2026 SunPlus Power System Operator Dashboard. All changes sync directly to DB.
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "states_config": {
+    "default": 120.0,
+    "maharashtra": 120.0,
+    "gujarat": 125.0,
+    "rajasthan": 130.0,
+    "karnataka": 120.0,
+    "tamil nadu": 122.0,
+    "telangana": 120.0,
+    "delhi": 115.0,
+    "uttar pradesh": 118.0,
+    "madhya pradesh": 122.0,
+    "punjab": 120.0
+  },
+  "cost_per_kw": {
+    "rooftop": 55000.0,
+    "ground-mount": 48000.0
+  },
+  "subsidy_config": {
+    "residential_rooftop": {
+      "slabs": [
+        {"limit": 2.0, "rate": 30000.0},
+        {"limit": 3.0, "rate": 18000.0}
+      ],
+      "max_subsidy": 78000.0
+    }
+  },
+  "default_tariff": 7.0,
+  "degradation_rate": 0.005,
+  "co2_factor": 0.82
+}

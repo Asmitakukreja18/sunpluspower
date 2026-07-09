@@ -1,0 +1,46 @@
+:root {
+  /* Brand personality: Decent Industrial */
+  --color-primary: #d9302f;             /* Red — CTAs, brand accents ONLY, never large surfaces */
+  --color-primary-dark: #b5111a;
+  --color-primary-container: #d9302f;
+  --color-on-primary: #ffffff;
+
+  --color-charcoal: #191c1e;             /* on-surface / body text */
+  --color-navy-grey: #2d3748;            /* secondary structural color — nav, footer, headers */
+  --color-secondary: #5f5e5e;
+  --color-tertiary: #505b6d;
+
+  --color-surface: #f8f9fb;              /* main background */
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #edeef0;
+  --color-surface-container-high: #e7e8ea;
+  --color-surface-dim: #d9dadc;
+
+  --color-outline: #906f6c;
+  --color-outline-variant: #e2e8f0;      /* card borders — 1px solid */
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  /* Corner radii */
+  --rounded-sm: 4px;
+  --rounded-default: 8px;
+  --rounded-md: 12px;
+  --rounded-lg: 16px;
+  --rounded-full: 9999px;
+
+  /* Spacing Rhythm (8px base) */
+  --spacing-base: 8px;
+  --spacing-xs: 4px;
+  --spacing-sm: 12px;
+  --spacing-md: 24px;
+  --spacing-lg: 48px;
+  --spacing-xl: 80px;
+
+  /* Grid Layouts */
+  --container-max: 1280px;
+  --gutter: 24px;
+  --margin-desktop: 48px;
+  --margin-mobile: 16px;
+}

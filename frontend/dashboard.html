@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Customer Portal | SunPlus Power</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="assets/css/variables.css"/>
+    <link rel="stylesheet" href="assets/css/base.css"/>
+    <link rel="stylesheet" href="assets/css/components.css"/>
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-industrial-grid {
+            background-color: #f8f9fb;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .sidebar-active {
+            background-color: #ffdad6;
+            color: #b5111a;
+            font-weight: 700;
+        }
+    </style>
+
+    <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/dashboard.js" defer></script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col bg-industrial-grid">
+
+    <!-- ========================================== -->
+    <!-- VIEW A: CUSTOMER AUTHENTICATION SHIELD      -->
+    <!-- ========================================== -->
+    <div id="customer-auth-view" class="flex-grow flex items-center justify-center py-20 px-margin-mobile">
+        <div class="bg-white rounded-lg border border-surface-container max-w-md w-full p-8 shadow-xl space-y-6">
+            <!-- Brand Logo -->
+            <div class="text-center space-y-2">
+                <img alt="SunPlus Power Logo" class="h-12 mx-auto" src="assets/images/logo.svg"/>
+                <h2 class="text-headline-md font-bold text-on-surface">Customer Portal Login</h2>
+                <p class="text-xs text-secondary">Manage saved models, survey requests, and engineering plans.</p>
+            </div>
+
+            <div id="auth-feedback"></div>
+
+            <form id="customer-login-form" class="space-y-4" onsubmit="handleCustomerLogin(event)">
+                <div>
+                    <label class="block text-label-sm font-bold text-on-surface mb-2">Email Address</label>
+                    <input id="auth-email" type="email" placeholder="customer@email.com" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none" required/>
+                </div>
+                <div>
+                    <label class="block text-label-sm font-bold text-on-surface mb-2">Password</label>
+                    <input id="auth-password" type="password" placeholder="••••••••" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none" required/>
+                </div>
+                <button type="submit" id="auth-btn" class="w-full btn-primary py-3.5 flex justify-center items-center gap-2">
+                    Sign In <span class="material-symbols-outlined text-sm">login</span>
+                </button>
+            </form>
+
+            <div class="text-center text-xs space-y-2">
+                <button onclick="toggleAuthMode()" class="text-primary hover:underline font-bold">Don't have an account? Sign Up</button>
+                <div class="text-secondary">Official Credentials Demo: any email and password will login.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW B: AUTHENTICATED CUSTOMER PORTAL       -->
+    <!-- ========================================== -->
+    <div id="customer-dashboard-view" class="hidden flex-grow flex flex-col min-h-screen">
+        <!-- Dashboard Header -->
+        <header class="bg-white border-b border-surface-container sticky top-0 z-50 shadow-sm w-full">
+            <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="assets/images/logo.svg"/>
+                    </a>
+                    <span class="text-label-md font-bold tracking-widest text-secondary border-l border-surface-container pl-3 uppercase hidden sm:inline">Customer Portal</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="user-email-badge" class="text-xs text-on-surface font-semibold bg-surface-container-low px-3 py-1.5 rounded border border-surface-container">-</span>
+                    <button onclick="handleCustomerLogout()" class="text-secondary hover:text-primary font-bold text-sm flex items-center gap-1 border border-surface-container px-3 py-1.5 rounded transition-colors bg-white">
+                        <span class="material-symbols-outlined text-sm">logout</span> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main workspace grid -->
+        <main class="flex-grow w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+                
+                <!-- Left Nav Navigation Sidebar -->
+                <aside class="lg:col-span-3 space-y-2 bg-white p-4 rounded border border-surface-container shadow-sm">
+                    <button onclick="navigateDashboard('/dashboard')" id="side-nav-overview" class="w-full text-left px-4 py-3 rounded text-sm font-semibold text-secondary hover:bg-surface-container-low transition-colors flex items-center gap-3">
+                        <span class="material-symbols-outlined">dashboard</span> Overview
+                    </button>
+                    <button onclick="navigateDashboard('/dashboard/calculations')" id="side-nav-calculations" class="w-full text-left px-4 py-3 rounded text-sm font-semibold text-secondary hover:bg-surface-container-low transition-colors flex items-center gap-3">
+                        <span class="material-symbols-outlined">calculate</span> Sizing runs & Drafts
+                    </button>
+                    <button onclick="navigateDashboard('/dashboard/scenarios')" id="side-nav-scenarios" class="w-full text-left px-4 py-3 rounded text-sm font-semibold text-secondary hover:bg-surface-container-low transition-colors flex items-center gap-3">
+                        <span class="material-symbols-outlined">compare</span> Saved Scenarios
+                    </button>
+                    <button onclick="navigateDashboard('/dashboard/requests')" id="side-nav-requests" class="w-full text-left px-4 py-3 rounded text-sm font-semibold text-secondary hover:bg-surface-container-low transition-colors flex items-center gap-3">
+                        <span class="material-symbols-outlined">timeline</span> Site Surveys & Tickets
+                    </button>
+                    <button onclick="navigateDashboard('/dashboard/profile')" id="side-nav-profile" class="w-full text-left px-4 py-3 rounded text-sm font-semibold text-secondary hover:bg-surface-container-low transition-colors flex items-center gap-3">
+                        <span class="material-symbols-outlined">person</span> Profile Settings
+                    </button>
+                </aside>
+
+                <!-- Dynamic Right Workspace Content Panels -->
+                <section class="lg:col-span-9 bg-white rounded border border-surface-container shadow-sm p-8 min-h-[500px]">
+                    
+                    <!-- Panel 1: Overview -->
+                    <div id="panel-overview" class="dashboard-panel space-y-6">
+                        <h2 class="text-headline-lg font-bold text-on-surface">Welcome back!</h2>
+                        <p class="text-body-md text-secondary">Monitor your modeling runs, survey dates, and engineering blueprints from your dashboard.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="p-6 bg-surface-container-low rounded border border-surface-container-highest">
+                                <span class="text-xs text-secondary block font-bold">SIZING RUNS RUN</span>
+                                <span id="stat-calcs" class="text-headline-lg font-bold mt-2 block">-</span>
+                            </div>
+                            <div class="p-6 bg-surface-container-low rounded border border-surface-container-highest">
+                                <span class="text-xs text-secondary block font-bold">COMPLETED SURVEYS</span>
+                                <span id="stat-surveys" class="text-headline-lg font-bold mt-2 block">-</span>
+                            </div>
+                            <div class="p-6 bg-surface-container-low rounded border border-surface-container-highest">
+                                <span class="text-xs text-secondary block font-bold">PENDING REQUESTS</span>
+                                <span id="stat-requests" class="text-headline-lg font-bold mt-2 block">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Sizing Runs & Drafts -->
+                    <div id="panel-calculations" class="dashboard-panel hidden space-y-6">
+                        <div class="flex justify-between items-center border-b border-surface-container pb-4">
+                            <h2 class="text-headline-md font-bold text-on-surface">Saved Sizing Models</h2>
+                            <a href="calculator.html" class="btn-primary text-xs font-bold">+ Run New Calculator</a>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-surface-container-low text-on-surface font-bold border-b border-surface-container">
+                                        <th class="p-4">Reference</th>
+                                        <th class="p-4">Client/Site</th>
+                                        <th class="p-4">Date</th>
+                                        <th class="p-4">System Size</th>
+                                        <th class="p-4">Status</th>
+                                        <th class="p-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calculations-history-rows" class="divide-y divide-surface-container">
+                                    <!-- Dynamic rows will render here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Saved Scenarios -->
+                    <div id="panel-scenarios" class="dashboard-panel hidden space-y-6">
+                        <h2 class="text-headline-md font-bold text-on-surface">Compared Solar Configurations</h2>
+                        <p class="text-body-md text-secondary">Review compared hardware capacities and investment metrics.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="saved-scenarios-cards">
+                            <!-- Dynamic scenario cards will render here -->
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: Site Surveys & Timeline -->
+                    <div id="panel-requests" class="dashboard-panel hidden space-y-6">
+                        <h2 class="text-headline-md font-bold text-on-surface">Engineering Site Survey Tracking</h2>
+                        <p class="text-body-md text-secondary">Track the installation surveyor steps and milestone timelines.</p>
+                        
+                        <!-- Timeline representation -->
+                        <div class="bg-surface-container-low p-6 rounded border border-surface-container-highest space-y-8">
+                            <div class="flex items-center justify-between border-b border-surface-container pb-4">
+                                <span class="text-sm font-bold" id="survey-title">Rooftop Structural Assessment</span>
+                                <span class="text-xs bg-primary text-white px-2 py-0.5 rounded font-bold" id="survey-status">In Progress</span>
+                            </div>
+                            
+                            <div class="relative pl-8 space-y-8 border-l-2 border-primary/20">
+                                <div class="relative">
+                                    <div class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-green-600 border-4 border-white flex items-center justify-center text-white text-[10px]">✓</div>
+                                    <h4 class="text-sm font-bold text-on-surface">Feasibility Run Submitted</h4>
+                                    <p class="text-xs text-secondary mt-1">Calculations registered in the platform database.</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-primary border-4 border-white flex items-center justify-center text-white text-[10px]">➔</div>
+                                    <h4 class="text-sm font-bold text-on-surface">Surveyor Assigned</h4>
+                                    <p class="text-xs text-secondary mt-1">Lead engineer assigned for site structures validation.</p>
+                                    <p class="text-xs text-primary font-bold mt-1">Engineer: Raghuveer Prasad (Gomti Nagar HQ)</p>
+                                </div>
+                                <div class="relative">
+                                    <div class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-surface-container border-4 border-white flex items-center justify-center text-[10px]">3</div>
+                                    <h4 class="text-sm font-bold text-secondary">Substation Sizing Audit</h4>
+                                    <p class="text-xs text-secondary mt-1">Substation grids synchronization clearance certification.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 5: Profile settings -->
+                    <div id="panel-profile" class="dashboard-panel hidden space-y-6">
+                        <h2 class="text-headline-md font-bold text-on-surface">Profile Settings</h2>
+                        <div id="profile-feedback"></div>
+                        <form id="profile-update-form" class="space-y-4" onsubmit="saveCustomerProfile(event)">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Company / Customer Name</label>
+                                    <input id="profile-name" type="text" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded outline-none" required/>
+                                </div>
+                                <div>
+                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Contact Phone</label>
+                                    <input id="profile-phone" type="tel" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded outline-none" required/>
+                                </div>
+                                <div>
+                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Authorized PAN / Tax ID</label>
+                                    <input id="profile-pan" type="text" placeholder="LKNM16523D" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded outline-none"/>
+                                </div>
+                                <div>
+                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Service ZIP / PIN</label>
+                                    <input id="profile-zip" type="text" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded outline-none"/>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary py-3 px-6 mt-4">Save Changes</button>
+                        </form>
+                    </div>
+
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

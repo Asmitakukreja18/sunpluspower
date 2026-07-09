@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Project Details | SunPlus Power India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="assets/css/variables.css"/>
+  <link rel="stylesheet" href="assets/css/base.css"/>
+  <link rel="stylesheet" href="assets/css/components.css"/>
+  <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+  
+  <script src="assets/js/api.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+  <!-- Header / Navigation -->
+    <!-- Header / Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-charcoal border-b border-white/10 shadow-sm transition-all duration-300">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="assets/images/logo.svg"/></a>
+      </div>
+      <nav class="hidden md:flex items-center gap-gutter">
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="index.html">Home</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="about.html">About Us</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="services.html">Services</a>
+        <a class="text-primary font-label-bold border-b-2 border-primary pb-1" href="projects.html">Projects</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="products.html">Products</a>
+        <a class="text-white/70 font-label-bold hover:text-white transition-colors" href="careers.html">Careers</a>
+      </nav>
+      <a href="calculator.html" class="btn-primary text-sm font-bold">
+        Solar Calculator
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="pt-24 min-h-screen container max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+    <!-- Back Button -->
+    <div class="mb-8">
+      <a href="projects.html" class="inline-flex items-center gap-2 text-secondary hover:text-primary font-bold text-sm">
+        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Portfolio
+      </a>
+    </div>
+
+    <!-- Error container -->
+    <div id="error-container" class="hidden alert-banner error"></div>
+
+    <!-- Loading skeleton -->
+    <div id="skeleton-loader" class="space-y-8 animate-pulse">
+      <div class="h-10 bg-surface-container rounded w-1/3"></div>
+      <div class="h-96 bg-surface-container rounded-lg w-full"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="h-20 bg-surface-container rounded col-span-1"></div>
+        <div class="h-20 bg-surface-container rounded col-span-1"></div>
+        <div class="h-20 bg-surface-container rounded col-span-1"></div>
+      </div>
+      <div class="h-40 bg-surface-container rounded w-full"></div>
+    </div>
+
+    <!-- Project details container -->
+    <div id="project-detail-content" class="hidden space-y-12">
+      <!-- Title & Header info -->
+      <div>
+        <h1 id="proj-name" class="text-headline-xl font-bold text-on-surface mb-2">Project Name</h1>
+        <p id="proj-location" class="text-body-lg text-secondary">Location, State</p>
+      </div>
+
+      <!-- Main Image -->
+      <div class="relative rounded-xl overflow-hidden shadow-lg border border-surface-container h-[480px]">
+        <img id="proj-image" class="w-full h-full object-cover" src="" alt="Project Image"/>
+      </div>
+
+      <!-- Specific stats grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card flex flex-col justify-between p-6">
+          <span class="text-label-sm text-tertiary font-bold">Capacity</span>
+          <div class="mt-2 flex items-baseline gap-1">
+            <span id="proj-capacity" class="text-headline-lg font-bold text-primary">-</span>
+            <span class="text-label-md text-secondary font-bold">MW DC</span>
+          </div>
+        </div>
+        <div class="card flex flex-col justify-between p-6">
+          <span class="text-label-sm text-tertiary font-bold">Commissioning Date</span>
+          <div class="mt-2">
+            <span id="proj-date" class="text-headline-md font-bold text-on-surface">-</span>
+          </div>
+        </div>
+        <div class="card flex flex-col justify-between p-6">
+          <span class="text-label-sm text-tertiary font-bold">Project Status</span>
+          <div class="mt-2 flex items-center gap-2">
+            <span id="proj-status-dot" class="status-dot"></span>
+            <span id="proj-status-text" class="text-label-md font-bold text-on-surface capitalize">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description narrative -->
+      <div class="space-y-4">
+        <h3 class="text-headline-md font-bold text-on-surface">Engineering Analysis & Case Study</h3>
+        <p id="proj-description" class="text-body-lg text-secondary leading-relaxed whitespace-pre-wrap">Project description and summary details will load here...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+    <!-- Footer -->
+  <footer class="bg-on-surface text-white mt-20">
+    <div class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between gap-gutter max-w-container-max mx-auto">
+      <div class="space-y-4 max-w-xs">
+        <div class="flex items-center gap-2">
+          <div class="bg-white p-1 rounded">
+            <img alt="SunPlus Power Logo" class="h-8 w-auto" src="assets/images/logo.svg"/>
+          </div>
+          <span class="text-headline-md font-bold">SunPlus Power</span>
+        </div>
+        <p class="text-body-md text-surface-variant">Providing mission-critical solar infrastructure to the world's most demanding projects.</p>
+      </div>
+      <div class="flex flex-wrap gap-x-12 gap-y-8">
+        <div class="flex flex-col gap-2">
+          <h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Navigation</h4>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="index.html">Sitemap</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Contact</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="media.html">Media Hub</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="text-label-sm text-surface-variant/50 uppercase font-bold">Legal</h4>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Privacy Policy</a>
+          <a class="text-surface-variant hover:text-white transition-colors text-body-md" href="connect.html">Terms of Service</a>
+        </div>
+      </div>
+      <div class="flex flex-col justify-end">
+        <div class="text-label-sm text-surface-variant/50">© 2024 SunPlus Power. Engineering Excellence in Solar.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Parse ID from URL
+      const params = new URLSearchParams(window.location.search);
+      const projId = params.get("id");
+
+      if (!projId) {
+        showDetailsError("No valid project ID specified in URL.");
+        return;
+      }
+
+      try {
+        const proj = await api.get(`/projects/${projId}`);
+        
+        // Hide loader
+        document.getElementById("skeleton-loader").classList.add("hidden");
+        
+        // Bind fields
+        document.getElementById("proj-name").innerText = proj.name;
+        document.getElementById("proj-location").innerText = `${proj.location}, ${proj.state}`;
+        document.getElementById("proj-image").src = proj.image_url;
+        document.getElementById("proj-image").alt = proj.name;
+        document.getElementById("proj-capacity").innerText = proj.capacity_mw;
+        document.getElementById("proj-date").innerText = new Date(proj.commissioning_date).toLocaleDateString("en-IN", {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        
+        const dot = document.getElementById("proj-status-dot");
+        const txt = document.getElementById("proj-status-text");
+        txt.innerText = proj.status.replace("_", " ");
+        dot.className = "status-dot " + (proj.status === "operational" ? "active" : "critical");
+
+        document.getElementById("proj-description").innerText = proj.description;
+
+        // Show details container
+        document.getElementById("project-detail-content").classList.remove("hidden");
+        
+        // Document title adjustment
+        document.title = `${proj.name} | SunPlus Portfolio`;
+
+      } catch (err) {
+        showDetailsError(err.message || "Failed to load project details. ID does not exist.");
+      }
+    });
+
+    function showDetailsError(msg) {
+      document.getElementById("skeleton-loader").classList.add("hidden");
+      const errBox = document.getElementById("error-container");
+      errBox.innerText = msg;
+      errBox.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

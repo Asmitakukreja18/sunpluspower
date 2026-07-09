@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Manage Blogs | SunPlus Power Control Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="../assets/css/variables.css"/>
+  <link rel="stylesheet" href="../assets/css/base.css"/>
+  <link rel="stylesheet" href="../assets/css/components.css"/>
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css"/>
+  
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/admin.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body class="bg-surface text-on-background antialiased flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full bg-charcoal border-b border-white/10 py-4 shadow-md sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="flex items-center gap-3">
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="../assets/images/logo.svg"/>
+        </a>
+        <span class="text-headline-md font-bold text-white tracking-wide">Control Panel</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <button onclick="adminLogout()" class="text-white/80 hover:text-white font-label-bold text-sm flex items-center gap-1.5 border border-white/20 px-4 py-2 rounded hover:bg-white/10 transition-all">
+          <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content grid -->
+  <div class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-8 gap-8">
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 space-y-2">
+      <div class="p-4 bg-charcoal text-white rounded-lg mb-4">
+        <h4 class="font-bold text-sm uppercase tracking-wider">Console Directory</h4>
+        <p class="text-xs text-white/60">System Operator Active</p>
+      </div>
+      
+      <a href="dashboard.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard Overview
+      </a>
+      <a href="submissions.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">inbox</span> Submissions inbox
+      </a>
+      <a href="projects.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">solar_power</span> Projects Manager
+      </a>
+      <a href="blogs.html" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container text-primary font-bold transition-all">
+        <span class="material-symbols-outlined text-[20px]">article</span> Insights & Blogs
+      </a>
+      <a href="careers.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">work</span> Careers & Jobs
+      </a>
+    </aside>
+
+    <!-- Main View Section -->
+    <main id="blogs-crud-view" class="flex-grow space-y-8">
+      <div class="flex justify-between items-center flex-wrap gap-4">
+        <div>
+          <h1 class="text-headline-xl font-bold text-on-surface">Insights & Blogs Manager</h1>
+          <p class="text-body-lg text-secondary mt-1">Compose newsletters, publish solar engineering announcements, and manage press releases.</p>
+        </div>
+        <button onclick="toggleCRUDModal('blogs', true)" class="btn-primary flex items-center gap-1.5 shadow-md">
+          <span class="material-symbols-outlined">add</span> Write Article
+        </button>
+      </div>
+
+      <!-- Blogs Table -->
+      <div class="overflow-x-auto bg-white border border-outline-variant rounded-lg">
+        <table class="w-full text-left border-collapse min-w-[700px]">
+          <thead>
+            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
+              <th class="p-4">Title</th>
+              <th class="p-4">Slug Identifier</th>
+              <th class="p-4">Author</th>
+              <th class="p-4">Status</th>
+              <th class="p-4 text-center">Published Date</th>
+              <th class="p-4 text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="blogs-crud-table-body">
+            <!-- Dynamic rows loaded via admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- CRUD Modal Form -->
+  <div id="blogs-modal" class="hidden fixed inset-0 z-50 bg-charcoal/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="max-w-2xl w-full bg-white rounded-lg shadow-2xl border border-outline-variant flex flex-col max-h-[90vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-6 border-b border-surface-container">
+        <h3 id="modal-blogs-title" class="text-headline-md font-bold text-on-surface">Write Article</h3>
+        <button onclick="toggleCRUDModal('blogs', false)" class="text-secondary hover:text-on-surface">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body (Form) -->
+      <form id="blog-form" class="p-6 overflow-y-auto space-y-4 flex-grow">
+        <!-- Hidden Item ID -->
+        <input type="hidden" id="blog-id" name="blog-id" value=""/>
+        
+        <div class="form-group">
+          <label class="form-label">Article Title</label>
+          <input type="text" name="title" class="form-input" placeholder="SunPlus Power Achieves 500MW Installed Capacity" required oninput="document.getElementById('blog-slug').value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-group">
+            <label class="form-label">Slug (Unique URL Path)</label>
+            <input type="text" id="blog-slug" name="slug" class="form-input" placeholder="sunplus-power-achieves-500mw" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Author Name</label>
+            <input type="text" name="author" class="form-input" placeholder="Dr. R. K. Prasad (Chief Engineer)" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Cover Image URL</label>
+          <input type="url" name="cover_image_url" class="form-input" placeholder="https://images.unsplash.com/..." required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Brief Excerpt</label>
+          <textarea name="excerpt" class="form-textarea" rows="2" placeholder="Summary snippet displayed on media directory..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Article Contents (HTML or narrative text)</label>
+          <textarea name="content" class="form-textarea" rows="8" placeholder="Complete article content..." required></textarea>
+        </div>
+
+        <div class="p-4 bg-surface-container rounded border border-surface-container-high">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" name="published" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" />
+            <span class="text-label-md font-bold text-on-surface">Publish immediately (will be visible on dynamic blog feeds)</span>
+          </label>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="flex justify-end gap-4 pt-4 border-t border-surface-container mt-6">
+          <button type="button" onclick="toggleCRUDModal('blogs', false)" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Save Article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-white py-6 mt-auto">
+    <div class="max-w-[1440px] mx-auto px-margin-desktop text-center text-label-sm text-white/40">
+      © 2026 SunPlus Power System Operator Dashboard. All changes sync directly to DB.
+    </div>
+  </footer>
+
+</body>
+</html>

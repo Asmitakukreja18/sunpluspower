@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solar ROI Calculator | SunPlus Power</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f8f9fb",
+                        "secondary-container": "#e2dfde",
+                        "tertiary": "#505b6d",
+                        "inverse-primary": "#ffb4ac",
+                        "on-primary-fixed": "#410003",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#e5e2e1",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-fixed-variant": "#474746",
+                        "primary-container": "#d9302f",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2e3132",
+                        "surface-variant": "#e1e2e4",
+                        "outline-variant": "#e4beb9",
+                        "surface-tint": "#bb171d",
+                        "on-tertiary-container": "#f9f9ff",
+                        "surface": "#f8f9fb",
+                        "on-secondary-container": "#636262",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#697386",
+                        "primary": "#b5111a",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#5b403d",
+                        "tertiary-fixed-dim": "#bdc7dc",
+                        "surface-container": "#edeef0",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-tertiary-fixed-variant": "#3d4759",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed-variant": "#93000e",
+                        "background": "#f8f9fb",
+                        "surface-dim": "#d9dadc",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d9e3f9",
+                        "on-tertiary-fixed": "#121c2c",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#fff8f7",
+                        "outline": "#906f6c",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e7e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-xl-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-fill { transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .bg-industrial-grid {
+            background-color: #f8f9fb;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col bg-industrial-grid">
+<nav class="bg-white border-b border-surface-container sticky top-0 z-50 shadow-sm w-full">
+<div class="flex justify-between items-center w-full px-margin-desktop py-3 max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqEjgTM3AhNTqTfhjF7WJmU_v4ntv9vwppG3PZeKTg-ET9ZwXVziNc6jIs_davJ-FaVbrebtdzOvm3U0JrZTJjX0o_eifBo8Iu3XlSXtIxNaDUWwq8Ea6tY1J08CuwpAKYnw4pbTslS3FH7C_xeVewzIl2WGmO22NH7fqm6CayeF46qYyYqN_zmI1cDlUPiYwkPt2MXRniD--4dyQ1hxGPYNU0NH5v3yY9ZDvOrAqrzWHiBobgjhjON8X1798C-8KRoLw"/>
+<span class="text-headline-md font-bold text-on-background hidden sm:block">SunPlus Power</span>
+</div>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">About</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="#">Products</a>
+</div>
+<button class="bg-primary text-white px-6 py-2 rounded font-label-md hover:opacity-90 transition-opacity active:scale-95 duration-150">
+            Solar Calculator
+        </button>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<header class="mb-12">
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-on-surface mb-4">Investment Analysis Tool</h1>
+<p class="text-body-lg text-tertiary max-w-2xl">Precision modeling for energy independence. Calculate your financial returns with engineering-grade data.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Progress Stepper -->
+<div class="bg-white p-6 rounded border border-surface-container shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<span class="text-label-md font-bold text-on-surface">Assessment Progress</span>
+<span class="text-label-sm text-secondary font-bold" id="step-label">Step 1 of 3</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="progress-fill bg-primary h-full w-1/3" id="progress-bar"></div>
+</div>
+</div>
+<!-- Form Card -->
+<div class="bg-white rounded border border-surface-container shadow-sm overflow-hidden">
+<!-- Step 1 -->
+<section class="p-8" id="form-step-1">
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-surface-container p-3 rounded text-on-surface">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h3 class="text-headline-md font-bold text-on-surface">Energy Profile</h3>
+<p class="text-body-md text-tertiary">Analyze your current monthly utility consumption.</p>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-label-md font-bold text-on-surface mb-2">Average Monthly Bill ($)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-tertiary">$</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="250" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-bold text-on-surface mb-2">Energy Provider</label>
+<select class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+<option>Select utility company</option>
+<option>Pacific Grid &amp; Power</option>
+<option>Standard Electric Co.</option>
+<option>Municipal Utility Dist.</option>
+</select>
+</div>
+</div>
+<div class="mt-12 flex justify-end">
+<button class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all" onclick="nextStep(2)">
+                            Continue to Location
+                            <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Step 2 -->
+<section class="p-8 hidden" id="form-step-2">
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-surface-container p-3 rounded text-on-surface">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h3 class="text-headline-md font-bold text-on-surface">Installation Site</h3>
+<p class="text-body-md text-tertiary">Irradiance data for local efficiency modeling.</p>
+</div>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-label-md font-bold text-on-surface mb-2">Zip Code</label>
+<input class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="90210" type="text"/>
+</div>
+<div>
+<label class="block text-label-md font-bold text-on-surface mb-2">Property Type</label>
+<select class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+<option>Residential</option>
+<option>Commercial</option>
+<option>Industrial</option>
+</select>
+</div>
+</div>
+<div class="w-full h-48 rounded bg-surface-container relative overflow-hidden border border-surface-container-highest">
+<img alt="Map View" class="w-full h-full object-cover grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBzwjZFWLl7lAZZ4DPJnArCNJxbOmWJLMJes3ExXPQGBCU_BkJvjUU_6uaCeNessvJHCNe5pcC2NLHy9uGdm4fHckpaMLmDM4QFU21_syJ9FTnnfmjJx8GYq0uwh54spUzILobetbyOuwcJ9S_EP-CcfqGP1914fwB29qZzpnLIMAl8UX7lrpvJfwMwnJR93H2x8naRQE1hn1IS902Hcwpmn-LlIjvNtM_BOZtvGUOGteenMnVOptANg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-on-surface text-white px-4 py-2 rounded text-label-sm">
+                                    Analyzing Solar Exposure...
+                                </div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-between">
+<button class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors" onclick="nextStep(1)">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                            Back
+                        </button>
+<button class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all" onclick="nextStep(3)">
+                            Continue to System Type
+                            <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Step 3 -->
+<section class="p-8 hidden" id="form-step-3">
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-surface-container p-3 rounded text-on-surface">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+<div>
+<h3 class="text-headline-md font-bold text-on-surface">System Specs</h3>
+<p class="text-body-md text-tertiary">Hardware selection and component preference.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+<button class="p-6 border-2 border-primary bg-surface-container-lowest rounded text-left transition-all ring-1 ring-primary/10">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="solar_power">solar_power</span>
+<span class="text-[10px] uppercase font-bold bg-primary text-white px-2 py-0.5 rounded">Standard</span>
+</div>
+<h4 class="text-label-md font-bold text-on-surface">High Efficiency Plus</h4>
+<p class="text-label-sm text-tertiary mt-1">Monocrystalline panels optimized for yield.</p>
+</button>
+<button class="p-6 border border-surface-container-highest hover:border-on-surface bg-white rounded text-left transition-all">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="factory">factory</span>
+</div>
+<h4 class="text-label-md font-bold text-on-surface">Base Grid</h4>
+<p class="text-label-sm text-tertiary mt-1">Cost-effective utility-grade engineering.</p>
+</button>
+</div>
+<div>
+<label class="flex items-center gap-3 p-4 bg-surface-container-low rounded cursor-pointer hover:bg-surface-container transition-colors border border-surface-container-highest">
+<input class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" type="checkbox"/>
+<span class="text-label-md font-bold text-on-surface">Add Energy Storage (Smart Backup)</span>
+</label>
+</div>
+<div class="mt-12 flex justify-between">
+<button class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors" onclick="nextStep(2)">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                            Back
+                        </button>
+<button class="bg-primary text-white px-10 py-4 rounded font-label-md flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all" onclick="showResults()">
+                            Calculate ROI
+                            <span class="material-symbols-outlined text-[20px]" data-icon="calculate">calculate</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Results Section -->
+<div class="hidden space-y-gutter animate-in fade-in slide-in-from-bottom-4 duration-700" id="results-area">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+<span class="text-label-md font-bold text-tertiary uppercase tracking-wider">System Size</span>
+<div class="mt-4">
+<span class="text-headline-lg font-bold text-on-surface">8.4</span>
+<span class="text-label-md text-tertiary">kW DC</span>
+</div>
+</div>
+<div class="bg-primary p-6 rounded shadow-lg flex flex-col justify-between">
+<span class="text-label-md font-bold text-white/80 uppercase tracking-wider">Projected Savings</span>
+<div class="mt-4">
+<span class="text-headline-lg font-bold text-white">$42,850</span>
+<span class="text-label-sm text-white/60 block">25-Year Outlook</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+<span class="text-label-md font-bold text-tertiary uppercase tracking-wider">Payback Period</span>
+<div class="mt-4">
+<span class="text-headline-lg font-bold text-on-surface">6.2</span>
+<span class="text-label-md text-tertiary">Years</span>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded border border-surface-container shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-headline-md font-bold text-on-surface">Financial Projection</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-label-sm text-tertiary">Solar</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-container-high"></span>
+<span class="text-label-sm text-tertiary">Traditional Utility</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 w-full flex items-end justify-between gap-2 border-b border-l border-surface-container-highest p-4 bg-surface-container-lowest">
+<div class="w-full flex items-end justify-between px-2 gap-1 h-full">
+<div class="flex flex-col items-center flex-1 gap-1">
+<div class="w-full bg-surface-container-high rounded-t h-1/5"></div>
+<div class="w-full bg-primary rounded-t h-[10%]"></div>
+<span class="text-[10px] font-bold mt-2 text-tertiary">Y1</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-1">
+<div class="w-full bg-surface-container-high rounded-t h-2/5"></div>
+<div class="w-full bg-primary rounded-t h-[12%]"></div>
+<span class="text-[10px] font-bold mt-2 text-tertiary">Y5</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-1">
+<div class="w-full bg-surface-container-high rounded-t h-3/5"></div>
+<div class="w-full bg-primary rounded-t h-[15%]"></div>
+<span class="text-[10px] font-bold mt-2 text-tertiary">Y10</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-1">
+<div class="w-full bg-surface-container-high rounded-t h-4/5"></div>
+<div class="w-full bg-primary rounded-t h-[18%]"></div>
+<span class="text-[10px] font-bold mt-2 text-tertiary">Y20</span>
+</div>
+<div class="flex flex-col items-center flex-1 gap-1">
+<div class="w-full bg-surface-container-high rounded-t h-full"></div>
+<div class="w-full bg-primary rounded-t h-[20%]"></div>
+<span class="text-[10px] font-bold mt-2 text-tertiary">Y25</span>
+</div>
+</div>
+</div>
+<p class="text-label-sm text-tertiary mt-6 italic border-l-2 border-primary pl-4">Simulation based on 4% annual utility rate escalation and location-specific irradiance.</p>
+</div>
+</div>
+</div>
+<!-- Right Column Sidebar -->
+<aside class="lg:col-span-4 sticky top-28">
+<div class="bg-white p-8 rounded border border-surface-container shadow-sm">
+<h3 class="text-label-md font-bold text-on-surface mb-6 border-b border-surface-container pb-4 uppercase tracking-widest">Configuration Summary</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="history_edu">history_edu</span>
+<div>
+<p class="text-label-sm text-tertiary">Energy Baseline</p>
+<p class="text-label-md font-bold text-on-surface" id="summary-bill">$250 / month</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="map">map</span>
+<div>
+<p class="text-label-sm text-tertiary">Service Location</p>
+<p class="text-label-md font-bold text-on-surface" id="summary-location">90210 (Residential)</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="hardware">hardware</span>
+<div>
+<p class="text-label-sm text-tertiary">Hardware Tier</p>
+<p class="text-label-md font-bold text-on-surface" id="summary-type">High Efficiency Plus</p>
+</div>
+</div>
+</div>
+<div class="mt-12 p-4 bg-surface-container-low rounded border border-surface-container-highest">
+<p class="text-label-sm mb-2 font-bold text-on-surface uppercase tracking-tighter">Data Reliability Index</p>
+<div class="flex gap-1 h-1.5">
+<div class="flex-1 bg-on-surface rounded-full"></div>
+<div class="flex-1 bg-on-surface rounded-full"></div>
+<div class="flex-1 bg-surface-container-highest rounded-full"></div>
+</div>
+<p class="text-[10px] mt-2 text-tertiary">Subject to technical roof inspection.</p>
+</div>
+<button class="w-full mt-8 bg-on-surface text-white py-3 rounded font-label-md hover:bg-tertiary transition-all flex items-center justify-center gap-2">
+                    Download Full Report
+                    <span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+</button>
+</div>
+<div class="mt-6 flex items-center gap-4 p-4 rounded border border-surface-container bg-white shadow-sm">
+<img alt="Certification Badge" class="w-12 h-12 grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVWyhl_O_GO5AGBhkYRazm73jwuPajltl7Z8V0w7e7uI6T38RvK--4tUatGBi5T5oiNHXykH70wxFhbrF9xussdzSjeJQerEn_kKih8FaHJQ3I9hL94b6mp_AvFDLVl2Gj_CMewO15zbqC9L4d7T3PMvgk_39S8n3SipYtjN3Zl0stB-UoB2BXDrZW4ha7-TOgHUNt_B_OBjz1AZygAVTkuV-Pz4P3wrOj-q34lbLbcvj528ri1ylwog"/>
+<div>
+<p class="text-label-md font-bold text-on-surface">Certified Engineering</p>
+<p class="text-label-sm text-tertiary">Precision modeling by SunPlus Labs.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<footer class="bg-white border-t border-surface-container w-full mt-24">
+<div class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between gap-gutter max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<img alt="SunPlus Power Logo" class="h-8 w-auto grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOIj9L4c5O9vMvtpq2M2_tYuKP7d7rPz5RwRZmgxvWXJVWjfVYKCp_8XX5CdJ99HSWVmEgbwfRDTdvPRYgJwQnvJ1FZpQVECJxPkNdxqfdzqgvHqWgB_ylnLIqLdTmJz964vfWbwnKrskNBMY2yxF8dvV1AdOHxgTmmHur8Faf6DTkEqihwWOyXvrSmMT3vL3CIugdr7bGQJVMey2-kp_mYaNlAuY-ZfsbAwh_2XHFWkfH2YJbrT_1hLBHKJQuoUCq-Ng"/>
+<span class="text-headline-md font-bold text-on-background">SunPlus Power</span>
+</div>
+<p class="text-body-md text-tertiary max-w-xs">© 2024 SunPlus Power. Engineering Excellence in Renewable Solutions.</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-6">
+<div class="flex flex-col gap-2">
+<span class="text-label-sm text-on-surface uppercase tracking-widest font-bold">Resources</span>
+<a class="text-tertiary hover:text-primary transition-colors text-body-md" href="#">Sitemap</a>
+<a class="text-tertiary hover:text-primary transition-colors text-body-md" href="#">Media</a>
+<a class="text-tertiary hover:text-primary transition-colors text-body-md" href="#">Projects</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-label-sm text-on-surface uppercase tracking-widest font-bold">Support</span>
+<a class="text-tertiary hover:text-primary transition-colors text-body-md" href="#">Contact</a>
+<a class="text-tertiary hover:text-primary transition-colors text-body-md" href="#">Privacy Policy</a>
+<a class="text-tertiary hover:text-primary transition-colors text-body-md" href="#">Terms</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    function nextStep(step) {
+        document.querySelectorAll('section[id^="form-step-"]').forEach(s => s.classList.add('hidden'));
+        const target = document.getElementById(`form-step-${step}`);
+        if(target) target.classList.remove('hidden');
+        
+        const bar = document.getElementById('progress-bar');
+        const label = document.getElementById('step-label');
+        const widths = { 1: '33.33%', 2: '66.66%', 3: '100%' };
+        
+        if(bar) bar.style.width = widths[step];
+        if(label) label.innerText = `Step ${step} of 3`;
+
+        if (step < 4) {
+            const results = document.getElementById('results-area');
+            if(results) results.classList.add('hidden');
+        }
+        
+        if (window.innerWidth < 1024) {
+            const element = document.getElementById(`form-step-${step}`);
+            if(element) element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function showResults() {
+        const btn = event.currentTarget;
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="autorenew">autorenew</span> Analyzing...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            const results = document.getElementById('results-area');
+            if(results) {
+                results.classList.remove('hidden');
+                results.scrollIntoView({ behavior: 'smooth' });
+            }
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+            
+            const label = document.getElementById('step-label');
+            if(label) label.innerText = 'Analysis Complete';
+        }, 1200);
+    }
+
+    document.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('change', (e) => {
+            if (e.target.type === 'number') {
+                const display = document.getElementById('summary-bill');
+                if(display) display.innerText = `$${e.target.value} / month`;
+            }
+        });
+    });
+</script>
+</body></html>

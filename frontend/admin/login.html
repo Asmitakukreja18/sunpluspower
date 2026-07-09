@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Admin Login | SunPlus Power Control Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="../assets/css/variables.css"/>
+  <link rel="stylesheet" href="../assets/css/base.css"/>
+  <link rel="stylesheet" href="../assets/css/components.css"/>
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css"/>
+  
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/admin.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body class="bg-background text-on-background antialiased flex flex-col min-h-screen justify-between">
+
+  <!-- Header -->
+  <header class="w-full bg-charcoal border-b border-white/10 py-4 shadow-md">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="flex items-center gap-3">
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="../assets/images/logo.svg"/>
+        </a>
+        <span class="text-headline-md font-bold text-white tracking-wide">Control Panel</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Block -->
+  <main class="flex-grow flex items-center justify-center py-16 px-margin-mobile">
+    <div class="max-w-md w-full bg-white p-8 border border-outline-variant rounded-lg shadow-md">
+      <div class="text-center mb-8">
+        <div class="inline-flex p-4 bg-surface-container text-navy-grey rounded-full mb-4">
+          <span class="material-symbols-outlined text-[36px]">lock</span>
+        </div>
+        <h2 class="text-headline-md font-bold text-on-surface">Secure Console</h2>
+        <p class="text-body-md text-secondary mt-1">Authorized engineering personnel only</p>
+      </div>
+
+      <!-- Feedbacks box -->
+      <div id="login-error-container"></div>
+
+      <form id="admin-login-form" class="space-y-6">
+        <div class="form-group">
+          <label class="form-label">Administrator Email</label>
+          <input id="login-email" type="email" class="form-input" placeholder="admin@sunpluspower.in" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Console Password</label>
+          <input id="login-password" type="password" class="form-input" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="w-full btn-primary py-4">
+          Authenticate Console <span class="material-symbols-outlined text-sm">vpn_key</span>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-on-surface text-white py-6">
+    <div class="max-w-[1440px] mx-auto px-margin-desktop text-center text-label-sm text-surface-variant/50">
+      © 2026 SunPlus Power Control Console. All sessions are logged under standard audit protocols.
+    </div>
+  </footer>
+
+</body>
+</html>

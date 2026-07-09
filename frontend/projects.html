@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Projects Portfolio | SunPlus Power</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-filter {
+            background-color: #2e3132;
+            color: #ffffff;
+        }
+        .lightning-watermark {
+            position: fixed;
+            bottom: -10%;
+            right: -5%;
+            font-size: 40rem;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            color: #505b6d;
+            font-family: 'Material Symbols Outlined';
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid #e1e2e4;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f8f9fb",
+                        "secondary-container": "#e2dfde",
+                        "tertiary": "#505b6d",
+                        "inverse-primary": "#ffb4ac",
+                        "on-primary-fixed": "#410003",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#e5e2e1",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-fixed-variant": "#474746",
+                        "primary-container": "#d9302f",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2e3132",
+                        "surface-variant": "#e1e2e4",
+                        "outline-variant": "#e4beb9",
+                        "surface-tint": "#bb171d",
+                        "on-tertiary-container": "#f9f9ff",
+                        "surface": "#f8f9fb",
+                        "on-secondary-container": "#636262",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#697386",
+                        "primary": "#b5111a",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#5b403d",
+                        "tertiary-fixed-dim": "#bdc7dc",
+                        "surface-container": "#edeef0",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-tertiary-fixed-variant": "#3d4759",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed-variant": "#93000e",
+                        "background": "#f8f9fb",
+                        "surface-dim": "#d9dadc",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d9e3f9",
+                        "on-tertiary-fixed": "#121c2c",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#fff8f7",
+                        "outline": "#906f6c",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e7e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-xl-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+
+    <link rel="stylesheet" href="assets/css/variables.css"/>
+    <link rel="stylesheet" href="assets/css/base.css"/>
+    <link rel="stylesheet" href="assets/css/components.css"/>
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+    
+
+    <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<div class="lightning-watermark">bolt</div>
+<!-- TopNavBar -->
+<header class="bg-white sticky top-0 z-50 shadow-sm border-b border-surface-container">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="assets/images/logo.svg"/></a>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="about.html">About Us</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="services.html">Services</a>
+<a class="text-primary font-label-md border-b-2 border-primary pb-1" href="projects.html">Projects</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="products.html">Products</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="careers.html">Careers</a>
+<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="dashboard.html">Portal</a>
+</nav>
+<a href="calculator.html" class="btn-primary text-sm font-bold">
+            Solar Calculator
+        </a>
+</div>
+</header>
+<main class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-surface-container-highest pb-8">
+<div class="max-w-2xl">
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-4">Infrastructure Portfolio</h1>
+<p class="font-body-lg text-on-surface-variant">Exploring our global footprint of high-performance utility-scale and industrial solar installations delivering sustainable energy solutions.</p>
+</div>
+<!-- View Toggle -->
+<div class="flex p-1 bg-surface-container rounded border border-surface-container-highest">
+<button class="flex items-center gap-2 px-4 py-2 rounded transition-all font-label-md active-filter" id="gridViewBtn" onclick="toggleView('grid')">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+                Grid
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded transition-all font-label-md text-on-surface-variant hover:text-inverse-surface" id="mapViewBtn" onclick="toggleView('map')">
+<span class="material-symbols-outlined text-[20px]">map</span>
+                Map
+            </button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="mb-10 p-8 glass-card rounded shadow-sm flex flex-wrap gap-gutter items-center">
+<div class="flex-1 min-w-[200px]">
+<label class="block text-label-md text-on-surface-variant mb-2">Search Projects</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded border border-surface-container-highest bg-white focus:ring-1 focus:ring-inverse-surface focus:border-inverse-surface outline-none transition-all" placeholder="Search by name or location..." type="text"/>
+</div>
+</div>
+<div class="w-full md:w-auto">
+<label class="block text-label-md text-on-surface-variant mb-2">Capacity</label>
+<select class="w-full md:w-48 px-4 py-2.5 rounded border border-surface-container-highest bg-white focus:ring-1 focus:ring-inverse-surface outline-none appearance-none cursor-pointer">
+<option>All Capacities</option>
+<option>Utility (&gt;100 MW)</option>
+<option>Commercial (10-100 MW)</option>
+<option>Industrial (&lt;10 MW)</option>
+</select>
+</div>
+<div class="w-full md:w-auto">
+<label class="block text-label-md text-on-surface-variant mb-2">Status</label>
+<select class="w-full md:w-48 px-4 py-2.5 rounded border border-surface-container-highest bg-white focus:ring-1 focus:ring-inverse-surface outline-none appearance-none cursor-pointer">
+<option>All Status</option>
+<option>Operational</option>
+<option>Under Construction</option>
+<option>Planned</option>
+</select>
+</div>
+<div class="w-full md:w-auto flex items-end">
+<button class="w-full md:w-auto px-6 py-2.5 rounded border border-inverse-surface text-inverse-surface font-label-md hover:bg-inverse-surface hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                Reset
+            </button>
+</div>
+</div>
+<!-- Grid View -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="projectsGrid">
+<!-- Project 1: Thar Solar -->
+<div class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+<div class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0Z6By4rdaCCMO23TcC4u5NW8G8i8cJf2fLwr8aQfSQMNFGiTaNSh2MctmUOqDk6fBbE382N_fwgqYQedTyGpcMwuQ1fcNnfK68GNEdnBKHfAerhppimPG78pBNrkC9IJAaG9SPQ09xFrgYdFVsQDccy1G-2HLqYzg_yWjYb-cLdEAy9sh3mj3nayYr9ngebEzSL-r1_KSlf8SPQQ3YA939iKJxGBpGM3aQIEbg6H-7P5iyP3gbiVicw')"></div>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded font-label-md text-label-sm shadow-md">
+                    150 MW
+                </div>
+<div class="absolute bottom-4 right-4 bg-inverse-surface/90 backdrop-blur-sm text-white px-3 py-1 rounded font-label-md text-label-sm">
+                    Operational
+                </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Thar Solar Complex</h3>
+<span class="material-symbols-outlined text-inverse-surface group-hover:text-primary transition-colors">north_east</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Rajasthan, India</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Annual Yield</p>
+<p class="font-label-md text-inverse-surface">320 GWh</p>
+</div>
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Panels</p>
+<p class="font-label-md text-inverse-surface">450k+ Mono-PERC</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 2: Tech Park Zenith -->
+<div class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+<div class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyVaIditkpwqACJmNhbjpz5usWjzUtk6Ks5Od_1Pxot50b1-yM73glkxd406MohsyR0Z5ef-bEBwI9eAl_Upp-o9ThM8V1Ugwj8-fQ2STcD990vlt_fZXCdiMoogZyTi08YGlwniPgYJTdJoLuPw7bvsyb9zOKadOeO78NeBGgCHHZnZZnk2guFp0AqZxw70_RZbvCFFMlJ0YkyhQ3WDYYU-Eqol13rdMggltjAcKMaXE2nafko3__-w')"></div>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded font-label-md text-label-sm shadow-md">
+                    12.5 MW
+                </div>
+<div class="absolute bottom-4 right-4 bg-inverse-surface/90 backdrop-blur-sm text-white px-3 py-1 rounded font-label-md text-label-sm">
+                    Operational
+                </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Tech Park Zenith</h3>
+<span class="material-symbols-outlined text-inverse-surface group-hover:text-primary transition-colors">north_east</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Silicon Valley, CA</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Annual Yield</p>
+<p class="font-label-md text-inverse-surface">18.2 GWh</p>
+</div>
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Storage</p>
+<p class="font-label-md text-inverse-surface">5 MWh BESS</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 3: Northern Winds Solar -->
+<div class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+<div class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvJp60ObXPqtbZfX02Ae_ZJXfAmJfIxIRWX-LGtmxTanVz4WCxFeUCoOc5rfK1Apqc9U3lhHGDfHbXtGcSE696uZHAErjMWizYjWkavUx2io4QopCKJnzKZPm3jxQKwEWJWKuaUcWho-AX0-ve6o3NIHLlbXVR4sCcESsvGHUfHnzlV07I9b5rerm-9oVew9wqTmkD8oHaDa3dhJFR5oHS9bbI-TSCJsdyJzQS_i0FIkhJ6HBP0OH0YA')"></div>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded font-label-md text-label-sm shadow-md">
+                    200 MW
+                </div>
+<div class="absolute bottom-4 right-4 bg-tertiary text-white px-3 py-1 rounded font-label-md text-label-sm">
+                    Construction
+                </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Northern Winds Hybrid</h3>
+<span class="material-symbols-outlined text-inverse-surface group-hover:text-primary transition-colors">north_east</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Nordic Plains, SE</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Completion</p>
+<p class="font-label-md text-inverse-surface">Q4 2024</p>
+</div>
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">CO2 Saved</p>
+<p class="font-label-md text-inverse-surface">120k Tons/yr</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 4: Azure Floating PV -->
+<div class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+<div class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2odSXLyJlal2rt6MQStUq7OUnlWFio1z3ztcJ7L3WeXVEssQL6pgFQ9J9_LaPl3904sJesTKtf-8g-ZWpXX0ZjVTXhWIMDqr10b8WcUKiV4G4ymjeB-w1lLaztBLrXfJyuQS-kof0-Yths9AY1eIEVdM6LJ9nZvdjr5FkxaY5Vid4EdOEmtMZTNbnx2Qd4vzNpyf4bdxckMfp_MmJn0Wzch9SHbzEC8UJDUsRA6Fa1G7PTqL6hAAvIw')"></div>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded font-label-md text-label-sm shadow-md">
+                    45 MW
+                </div>
+<div class="absolute bottom-4 right-4 bg-inverse-surface/90 backdrop-blur-sm text-white px-3 py-1 rounded font-label-md text-label-sm">
+                    Operational
+                </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Azure Reservoir PV</h3>
+<span class="material-symbols-outlined text-inverse-surface group-hover:text-primary transition-colors">north_east</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Victoria, AU</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Water Saved</p>
+<p class="font-label-md text-inverse-surface">30% Evap Red.</p>
+</div>
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Efficiency</p>
+<p class="font-label-md text-inverse-surface">+12% Cooling</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 5: Mega-Factory Roof -->
+<div class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+<div class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACQWFdB9ywEeXxXyTl1Djve5q6mCL-J-225fSfeAMYfgMxElSvOxrboxi1BxTG3u91M34pzNqPNOFt3X9TseX6j9ydd34Ud5YuPP07PRKN_lQ6iQe3F_d2nqgJdhV07zPVkmv_xEFhopFkxgrGrRG56Zls-_X6GyRnmk-TntWHybzR77Jg4uuHoODu6zr9pdun9YcpibRbid8ZcFmq6tu-LpST3X2xzb25omqtdN_zsqlinXgOTaY_LQ')"></div>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded font-label-md text-label-sm shadow-md">
+                    25 MW
+                </div>
+<div class="absolute bottom-4 right-4 bg-inverse-surface/90 backdrop-blur-sm text-white px-3 py-1 rounded font-label-md text-label-sm">
+                    Operational
+                </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Giga-Factory Alpha</h3>
+<span class="material-symbols-outlined text-inverse-surface group-hover:text-primary transition-colors">north_east</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Munich, DE</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Self-Sufficiency</p>
+<p class="font-label-md text-inverse-surface">68%</p>
+</div>
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Payback</p>
+<p class="font-label-md text-inverse-surface">4.2 Years</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 6: Desert Oasis -->
+<div class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+<div class="relative h-72 overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrgqX58CYUlAefUaWLxoZZLF4Iy-FW70AohCOCUAVdsoE8fUMVbxt7k2TJVWgguJ6d9xJsYPaeCiF0JUfnw6vaBmXx2KlrkB0zTjg-xKXn3rjLu5zgASx92ZRJRuOH9JJyKmqN36a2w5RBtxG57oa9nqVoiyVc9kvnspQZO0wmF01ZClFXOizuNY9-ZsFPQ1mXb-RALxmAWo9AzoZg0xbTi41vcsSH6IoHs_8ENznMqHNdVrBOcq3jiA')"></div>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded font-label-md text-label-sm shadow-md">
+                    300 MW
+                </div>
+<div class="absolute bottom-4 right-4 bg-tertiary text-white px-3 py-1 rounded font-label-md text-label-sm">
+                    Planned
+                </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Atacama Sun-Tracker</h3>
+<span class="material-symbols-outlined text-inverse-surface group-hover:text-primary transition-colors">north_east</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6">Antofagasta, CL</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-surface-container-highest">
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Tracking</p>
+<p class="font-label-md text-inverse-surface">Dual-Axis</p>
+</div>
+<div>
+<p class="text-[11px] text-tertiary uppercase tracking-widest font-bold mb-1">Target Date</p>
+<p class="font-label-md text-inverse-surface">2026</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Map View (Hidden by default) -->
+<div class="hidden h-[700px] w-full rounded overflow-hidden border border-surface-container-highest shadow-lg relative bg-surface-container" id="projectsMap">
+<div class="absolute inset-0 z-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTNzbDHtV0o-4sn_UHiG6Hhh7e8KO5FzSFnSRa52WqlQwDLS0I5uiivpBUGYxVsQZNorqu60_vZmpuQwaJTTB5jAlHCjgvccVtmICi2QoJjl2csEEnmsGVFCVX4Y2SpNrB5NeYd3Z2E94M_zgIUbxi0pnr4oGIURgvYq_B3pGAx-4e6LpCdinrVcRLD2Jz3LoIbxSmLQiIqVooJ1ZCeb3MJvqihplEx5emu7rVtiFsWp4e_pVxadtqvA')"></div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="bg-white/95 backdrop-blur-md px-8 py-4 rounded shadow-xl border border-inverse-surface/10 pointer-events-auto">
+<p class="font-label-md text-inverse-surface mb-1">Interactive Global View</p>
+<p class="text-body-md text-on-surface-variant">Active infrastructure projects in 24 countries.</p>
+</div>
+</div>
+<div class="absolute top-1/4 left-1/3 w-10 h-10 -ml-5 -mt-5 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-primary text-[40px] drop-shadow-lg" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div class="absolute top-1/2 right-1/4 w-10 h-10 -ml-5 -mt-5 flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-primary text-[40px] drop-shadow-lg" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="mt-20 p-16 bg-inverse-surface rounded-lg flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left overflow-hidden relative shadow-2xl">
+<div class="relative z-10">
+<h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-md text-white mb-4">Start Your Project Journey</h2>
+<p class="text-body-lg text-surface-container-highest max-w-xl">Consult with our lead engineering team for a customized feasibility study and ROI projection for your commercial or utility-scale project.</p>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row gap-4">
+<button class="px-8 py-4 bg-white text-inverse-surface font-label-md rounded hover:bg-surface-variant transition-all shadow-lg">Request Proposal</button>
+<button class="px-8 py-4 border-2 border-white/30 text-white font-label-md rounded hover:bg-white/10 transition-all">Download Portfolio</button>
+</div>
+<!-- Decorative bolt -->
+<span class="material-symbols-outlined absolute -right-10 top-1/2 -translate-y-1/2 text-[300px] text-white/5 pointer-events-none">bolt</span>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background text-white mt-20">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 flex flex-col md:flex-row justify-between gap-gutter">
+<div class="max-w-sm">
+<div class="flex items-center gap-2 mb-8">
+<img alt="SunPlus Power" class="h-10 w-auto invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVoYzgw_hRhlNOyrA0tKhlpv-6JwncVP-1Hc56EJuMFtaU_VbjwV90XfasNCGSZraynrq5Sgnl2hPwWCakxqr0eIhUEeupfA7FTROv_iCwdnm9hrZqJVPCCYqfQt50f2IcgtMbuGj8KeufpcJSyMzoPdsjp1if6m-OV8hCVobHU6Htf21Hh92Wqok4Hj48ESdokHz8hOm99xuwv10IWfmlmOIMNJ2fNWxIA--abw90lB0lQSU9Q4iFapHVUPmRfBKI00A"/>
+</div>
+<p class="text-surface-variant text-body-md mb-8">Engineering excellence in solar infrastructure. Delivering high-precision energy assets globally.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-all" href="index.html">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-all" href="index.html">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div>
+<h4 class="text-white font-label-md mb-6 uppercase tracking-widest text-xs border-b border-white/10 pb-2">Explore</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-surface-variant hover:text-white text-label-md" href="index.html">Sitemap</a></li>
+<li><a class="text-surface-variant hover:text-white text-label-md" href="projects.html">Projects</a></li>
+<li><a class="text-surface-variant hover:text-white text-label-md" href="media.html">Media Hub</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-label-md mb-6 uppercase tracking-widest text-xs border-b border-white/10 pb-2">Legal</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-surface-variant hover:text-white text-label-md" href="connect.html">Privacy Policy</a></li>
+<li><a class="text-surface-variant hover:text-white text-label-md" href="connect.html">Terms of Service</a></li>
+</ul>
+</div>
+<div class="col-span-2 md:col-span-1">
+<h4 class="text-white font-label-md mb-6 uppercase tracking-widest text-xs border-b border-white/10 pb-2">Headquarters</h4>
+<p class="text-surface-variant text-label-md leading-relaxed">
+                    100 Solar Way, Industrial Zone<br/>
+                    Tech District, CA 94025<br/>
+                    contact@sunplus.power
+                </p>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-white/5 text-center md:text-left">
+<p class="text-white/30 text-label-sm">© 2024 SunPlus Power. Engineering Excellence in Solar.</p>
+</div>
+</footer>
+<script>
+    function toggleView(view) {
+        const gridView = document.getElementById('projectsGrid');
+        const mapView = document.getElementById('projectsMap');
+        const gridBtn = document.getElementById('gridViewBtn');
+        const mapBtn = document.getElementById('mapViewBtn');
+
+        if (view === 'grid') {
+            gridView.classList.remove('hidden');
+            mapView.classList.add('hidden');
+            gridBtn.classList.add('active-filter');
+            gridBtn.classList.remove('text-on-surface-variant', 'hover:text-inverse-surface');
+            mapBtn.classList.remove('active-filter');
+            mapBtn.classList.add('text-on-surface-variant', 'hover:text-inverse-surface');
+        } else {
+            gridView.classList.add('hidden');
+            mapView.classList.remove('hidden');
+            mapBtn.classList.add('active-filter');
+            mapBtn.classList.remove('text-on-surface-variant', 'hover:text-inverse-surface');
+            gridBtn.classList.remove('active-filter');
+            gridBtn.classList.add('text-on-surface-variant', 'hover:text-inverse-surface');
+        }
+    }
+</script>
+</body></html>
