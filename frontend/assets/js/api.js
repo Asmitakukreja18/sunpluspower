@@ -2,7 +2,7 @@
  * SunPlus Power API Client Helper
  */
 
-const API_BASE = "/api";
+const API_BASE = "https://sunplus-backend.onrender.com/api";
 
 class ApiClient {
   constructor() {
