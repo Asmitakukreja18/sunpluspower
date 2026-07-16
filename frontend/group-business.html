@@ -7,98 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "surface-bright": "#f8f9fb",
-                "secondary-container": "#e2dfde",
-                "tertiary": "#505b6d",
-                "inverse-primary": "#ffb4ac",
-                "on-primary-fixed": "#410003",
-                "on-primary": "#ffffff",
-                "error-container": "#ffdad6",
-                "secondary-fixed": "#e5e2e1",
-                "secondary": "#5f5e5e",
-                "on-secondary-fixed-variant": "#474746",
-                "primary-container": "#d9302f",
-                "inverse-on-surface": "#f0f1f3",
-                "on-background": "#191c1e",
-                "inverse-surface": "#2e3132",
-                "surface-variant": "#e1e2e4",
-                "outline-variant": "#e4beb9",
-                "surface-tint": "#bb171d",
-                "on-tertiary-container": "#f9f9ff",
-                "surface": "#f8f9fb",
-                "on-secondary-container": "#636262",
-                "secondary-fixed-dim": "#c8c6c5",
-                "primary-fixed-dim": "#ffb4ac",
-                "surface-container-low": "#f2f4f6",
-                "on-error": "#ffffff",
-                "surface-container-lowest": "#ffffff",
-                "tertiary-container": "#697386",
-                "primary": "#b5111a",
-                "error": "#ba1a1a",
-                "on-surface-variant": "#5b403d",
-                "tertiary-fixed-dim": "#bdc7dc",
-                "surface-container": "#edeef0",
-                "on-secondary-fixed": "#1c1b1b",
-                "on-secondary": "#ffffff",
-                "surface-container-highest": "#e1e2e4",
-                "on-tertiary-fixed-variant": "#3d4759",
-                "on-surface": "#191c1e",
-                "on-primary-fixed-variant": "#93000e",
-                "background": "#f8f9fb",
-                "surface-dim": "#d9dadc",
-                "on-tertiary": "#ffffff",
-                "tertiary-fixed": "#d9e3f9",
-                "on-tertiary-fixed": "#121c2c",
-                "primary-fixed": "#ffdad6",
-                "on-primary-container": "#fff8f7",
-                "outline": "#906f6c",
-                "on-error-container": "#93000a",
-                "surface-container-high": "#e7e8ea",
-                "brand-red": "#b5111a"
-            },
-            "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-            },
-            "spacing": {
-                "base": "8px",
-                "container-max": "1280px",
-                "margin-desktop": "48px",
-                "margin-mobile": "16px",
-                "gutter": "24px"
-            },
-            "fontFamily": {
-                "body-lg": ["Inter"],
-                "label-sm": ["Inter"],
-                "headline-lg": ["Inter"],
-                "label-md": ["Inter"],
-                "body-md": ["Inter"],
-                "headline-md": ["Inter"],
-                "headline-xl": ["Inter"],
-                "headline-xl-mobile": ["Inter"]
-            },
-            "fontSize": {
-                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
-                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-            }
-          },
-        },
-      }
-    </script>
+
 <style>
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -117,33 +26,47 @@
       }
     </style>
 
-    <link rel="stylesheet" href="assets/css/variables.css"/>
-    <link rel="stylesheet" href="assets/css/base.css"/>
-    <link rel="stylesheet" href="assets/css/components.css"/>
-    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
+    <link rel="stylesheet" href="assets/css/variables.css?v=5"/>
+    <link rel="stylesheet" href="assets/css/base.css?v=5"/>
+    <link rel="stylesheet" href="assets/css/components.css?v=5"/>
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=5"/>
     
 
-    <script src="assets/js/api.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/api.js?v=5" defer></script>
+    <script src="assets/js/main.js?v=5" defer></script>
     
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
 <!-- TopNavBar -->
-<nav class="bg-surface-container-lowest/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-surface-container">
-<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
-<div class="flex items-center gap-3">
-<a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="assets/images/logo.svg"/></a>
+<nav class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
+<a href="index.html" class="flex items-center shrink-0">
+                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain" style="max-width:200px;"/>
+            </a>
+<div class="hidden lg:flex items-center space-x-8">
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="index.html">Home</a>
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="about.html">Company</a>
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="services.html">Services</a>
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="projects.html">Projects</a>
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="products.html">Products</a>
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="media.html">Solar Intelligence</a>
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors" href="careers.html">Careers</a>
+<div class="relative group">
+<a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer" href="connect.html">
+Connect
+<span class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+</a>
+<div class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+<div class="py-1" role="menu">
+<a href="connect.html?tab=distributor" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors" role="menuitem">Apply for Distributor</a>
+<a href="connect.html?tab=warranty" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors" role="menuitem">Warranty Registration</a>
+<a href="connect.html?tab=complaint" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors" role="menuitem">Complaint / Support</a>
 </div>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-brand-red font-semibold border-b-2 border-brand-red pb-1" href="index.html">Home</a>
-<a class="text-on-surface/80 font-semibold hover:text-brand-red transition-colors" href="about.html">About Us</a>
-<a class="text-on-surface/80 font-semibold hover:text-brand-red transition-colors" href="services.html">Services</a>
-<a class="text-on-surface/80 font-semibold hover:text-brand-red transition-colors" href="projects.html">Projects</a>
-<a class="text-on-surface/80 font-semibold hover:text-brand-red transition-colors" href="products.html">Products</a>
-<a class="text-on-surface/80 font-semibold hover:text-brand-red transition-colors" href="careers.html">Careers</a>
 </div>
-<a href="calculator.html" class="btn-primary text-sm font-bold">
-                Solar Calculator
+</div>
+</div>
+<a href="calculator.html" class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
+                SOLAR CALCULATOR
             </a>
 </div>
 </nav>
@@ -325,54 +248,53 @@
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-surface-container-lowest text-on-surface border-t border-surface-container">
-<div class="w-full px-margin-desktop py-20 flex flex-col md:flex-row justify-between gap-24 max-w-container-max mx-auto">
-<div class="space-y-8 max-w-md">
-<div class="flex items-center gap-3">
-<img alt="SunPlus Power" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCoodsDtvThilSrjE4r4mQcz49OKEV3yqKMmudk_bYmndoi2Vcel7k5hx-6HnpdRtkMdlzsO60HNkiLSPix8Ciz4l5NlTQfv8P5Fd6qApqj2TF0OWxOdlBjEma9rzSFEr0UkqUtAm-VKd0p6X9Ad7qX--8TwJteZEkaoWYzzgBhhmAgJdG6VJTeug5fa1yx3YP-vMEnQSvU89TBS960s4mI_BmNJjN9Cef6rKmG4h0phh634KW5-Dbko_cDmkLjcJVmA0"/>
-</div>
-<p class="text-body-md text-on-surface-variant leading-relaxed">Leading the global transition to renewable infrastructure through precision engineering and industrial scale solutions. Delivering performance-driven results for a cleaner future.</p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full border border-surface-container flex items-center justify-center hover:bg-on-surface hover:text-white transition-colors" href="index.html">
-<span class="material-symbols-outlined text-sm">public</span>
+<footer class="bg-surface-dim text-white border-t border-white/10 w-full mt-24">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-gutter px-margin-desktop py-20 w-full max-w-container-max mx-auto">
+<div class="md:col-span-2 space-y-6">
+<a href="index.html" class="flex items-center">
+  <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-12 w-auto brightness-0 invert" style="max-width:220px;"/>
 </a>
-<a class="w-10 h-10 rounded-full border border-surface-container flex items-center justify-center hover:bg-on-surface hover:text-white transition-colors" href="index.html">
-<span class="material-symbols-outlined text-sm">share</span>
-</a>
+<p class="text-white/60 max-w-sm font-body-md leading-relaxed">Engineering the global energy transition through rigorous technical modeling and industrial-scale solar deployment.</p>
 </div>
-</div>
-<div class="grid grid-cols-2 sm:grid-cols-3 gap-16">
-<div class="space-y-6">
-<p class="text-on-surface font-bold uppercase text-label-sm tracking-widest">Company</p>
-<ul class="space-y-4 text-body-md text-on-surface-variant">
-<li><a class="hover:text-brand-red transition-colors" href="index.html">About Us</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Portfolio</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="careers.html">Careers</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Newsroom</a></li>
+<div>
+<h4 class="font-label-technical text-label-technical uppercase text-white mb-8 tracking-widest">Quick Links</h4>
+<ul class="space-y-4 font-body-md">
+<li><a class="text-white/60 hover:text-primary transition-colors" href="about.html">Company</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="services.html">Services</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="projects.html">Projects</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="products.html">Products</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="media.html">Solar Intelligence</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="careers.html">Careers</a></li>
 </ul>
 </div>
-<div class="space-y-6">
-<p class="text-on-surface font-bold uppercase text-label-sm tracking-widest">Resources</p>
-<ul class="space-y-4 text-body-md text-on-surface-variant">
-<li><a class="hover:text-brand-red transition-colors" href="connect.html">Privacy Policy</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Terms of Use</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Engineering Hub</a></li>
+<div>
+<h4 class="font-label-technical text-label-technical uppercase text-white mb-8 tracking-widest">Connect</h4>
+<ul class="space-y-4 font-body-md">
+<li><a class="text-white/60 hover:text-primary transition-colors" href="connect.html?tab=distributor">Apply for Distributor</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="connect.html?tab=warranty">Warranty Registration</a></li>
+<li><a class="text-white/60 hover:text-primary transition-colors" href="connect.html?tab=complaint">Complaint / Support</a></li>
 </ul>
 </div>
-<div class="space-y-6">
-<p class="text-on-surface font-bold uppercase text-label-sm tracking-widest">Contact</p>
-<ul class="space-y-4 text-body-md text-on-surface-variant">
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Contact Form</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Global Offices</a></li>
-<li><a class="hover:text-brand-red transition-colors" href="index.html">Investor Relations</a></li>
-</ul>
+<div>
+<h4 class="font-label-technical text-label-technical uppercase text-white mb-8 tracking-widest">Contact</h4>
+<p class="text-white/60 font-body-md mb-4 leading-relaxed">
+    <b>Corporate Address:</b><br/>
+    1st Floor, D134, Vibhuti Khand<br/>
+    Gomti Nagar, Lucknow<br/>
+    Uttar Pradesh, India - 226010
+</p>
+<p class="text-white/60 font-body-md leading-relaxed">
+    <b>Sales Help:</b> <a class="hover:text-primary" href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br/>
+    <b>Technical Support:</b> <a class="hover:text-primary" href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br/>
+    <b>Official Phone:</b> +91-9153832222
+</p>
 </div>
 </div>
-</div>
-<div class="max-w-container-max mx-auto px-margin-desktop py-8 border-t border-surface-container">
-<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-label-sm text-on-surface-variant font-medium">
-<p>© 2024 SunPlus Power Group. All Rights Reserved.</p>
-<p>Engineering Excellence for Industrial Scale Solar.</p>
+<div class="px-margin-desktop py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 max-w-container-max mx-auto">
+<div class="font-body-md text-body-md text-white/40">© 2026 SUNPLUS POWER. ALL RIGHTS RESERVED.</div>
+<div class="flex gap-8">
+<a class="text-white/40 hover:text-white text-label-technical uppercase font-label-technical tracking-widest" href="connect.html">Privacy Policy</a>
+<a class="text-white/40 hover:text-white text-label-technical uppercase font-label-technical tracking-widest" href="connect.html">Terms of Use</a>
 </div>
 </div>
 </footer>

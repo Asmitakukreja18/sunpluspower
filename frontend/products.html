@@ -1,471 +1,502 @@
 <!DOCTYPE html>
 
-<html class="scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>SunPlus Power | Industrial Equipment Catalog</title>
+<html class="scroll-smooth" lang="en">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-bright": "#f8f9fb",
-                        "secondary-container": "#e2dfde",
-                        "tertiary": "#505b6d",
-                        "inverse-primary": "#ffb4ac",
-                        "on-primary-fixed": "#410003",
-                        "on-primary": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed": "#e5e2e1",
-                        "secondary": "#5f5e5e",
-                        "on-secondary-fixed-variant": "#474746",
-                        "primary-container": "#d9302f",
-                        "inverse-on-surface": "#f0f1f3",
-                        "on-background": "#191c1e",
-                        "inverse-surface": "#2e3132",
-                        "surface-variant": "#e1e2e4",
-                        "outline-variant": "#e4beb9",
-                        "surface-tint": "#bb171d",
-                        "on-tertiary-container": "#f9f9ff",
-                        "surface": "#f8f9fb",
-                        "on-secondary-container": "#636262",
-                        "secondary-fixed-dim": "#c8c6c5",
-                        "primary-fixed-dim": "#ffb4ac",
-                        "surface-container-low": "#f2f4f6",
-                        "on-error": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "tertiary-container": "#697386",
-                        "primary": "#b5111a",
-                        "error": "#ba1a1a",
-                        "on-surface-variant": "#5b403d",
-                        "tertiary-fixed-dim": "#bdc7dc",
-                        "surface-container": "#edeef0",
-                        "on-secondary-fixed": "#1c1b1b",
-                        "on-secondary": "#ffffff",
-                        "surface-container-highest": "#e1e2e4",
-                        "on-tertiary-fixed-variant": "#3d4759",
-                        "on-surface": "#191c1e",
-                        "on-primary-fixed-variant": "#93000e",
-                        "background": "#f8f9fb",
-                        "surface-dim": "#d9dadc",
-                        "on-tertiary": "#ffffff",
-                        "tertiary-fixed": "#d9e3f9",
-                        "on-tertiary-fixed": "#121c2c",
-                        "primary-fixed": "#ffdad6",
-                        "on-primary-container": "#fff8f7",
-                        "outline": "#906f6c",
-                        "on-error-container": "#93000a",
-                        "surface-container-high": "#e7e8ea"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "base": "8px",
-                        "container-max": "1280px",
-                        "margin-desktop": "48px",
-                        "margin-mobile": "16px",
-                        "gutter": "24px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "label-md": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "headline-xl": ["Inter"],
-                        "headline-xl-mobile": ["Inter"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-                    }
-                },
-            },
-        }
-    </script>
-<style>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SunPlus Power | Industrial Equipment Catalog</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .industrial-grid {
             background-image: linear-gradient(to right, #edeef0 1px, transparent 1px), linear-gradient(to bottom, #edeef0 1px, transparent 1px);
             background-size: 40px 40px;
         }
+
         .product-card-hover:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
     </style>
 
-    <link rel="stylesheet" href="assets/css/variables.css"/>
-    <link rel="stylesheet" href="assets/css/base.css"/>
-    <link rel="stylesheet" href="assets/css/components.css"/>
-    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
-    
+    <link rel="stylesheet" href="assets/css/variables.css?v=5" />
+    <link rel="stylesheet" href="assets/css/base.css?v=5" />
+    <link rel="stylesheet" href="assets/css/components.css?v=5" />
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=5" />
 
-    <script src="assets/js/api.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    
+
+    <script src="assets/js/api.js?v=5" defer></script>
+    <script src="assets/js/main.js?v=5" defer></script>
+
 </head>
+
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
-<!-- TopNavBar -->
-<header class="bg-white sticky top-0 z-50 border-b border-outline-variant">
-<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-container-max mx-auto">
-<div class="flex items-center">
-<img alt="SunPlus Power Logo" class="h-10 md:h-14 w-auto object-contain" src="assets/images/logo.svg"/>
-</div>
-<nav class="hidden md:flex gap-8 items-center">
-<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="index.html">Home</a>
-<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="about.html">About Us</a>
-<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="services.html">Services</a>
-<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="projects.html">Projects</a>
-<a class="text-on-surface font-label-md border-b-2 border-on-surface pb-1" href="products.html">Products</a>
-<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="careers.html">Careers</a>
-<a class="text-on-surface font-label-md hover:text-primary transition-colors" href="dashboard.html">Portal</a>
-</nav>
-<div class="flex items-center gap-4">
-<a href="calculator.html" class="btn-primary text-sm font-bold">
-                    Solar Calculator
-                </a>
-<div class="md:hidden text-on-surface cursor-pointer">
-<span class="material-symbols-outlined">menu</span>
-</div>
-</div>
-</div>
-</header>
-<main class="min-h-screen relative industrial-grid">
-<!-- Hero / Header Section -->
-<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-16 pb-12">
-<div class="flex flex-col md:flex-row justify-between items-end gap-gutter">
-<div class="max-w-3xl">
-<span class="text-tertiary-container font-label-md tracking-widest uppercase mb-4 block">Precision Engineered Infrastructure</span>
-<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-6 leading-tight">Industrial Equipment Catalog</h1>
-<p class="text-on-surface-variant text-body-lg max-w-2xl">
-                        Explore our comprehensive suite of utility-scale solar components. Engineered for maximum durability, grid stability, and energy yield in the most demanding environments.
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+        <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
+            <a href="index.html" class="flex items-center shrink-0">
+                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+                    style="max-width:200px;" />
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="index.html">Home</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="about.html">Company</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="services.html">Services</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="projects.html">Projects</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-secondary-container nav-active pb-1 relative"
+                    href="products.html">Products</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="media.html">Solar Intelligence</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="careers.html">Careers</a>
+                <div class="relative group">
+                    <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
+                        href="connect.html">
+                        Connect
+                        <span
+                            class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+                    </a>
+                    <div
+                        class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div class="py-1" role="menu">
+                            <a href="connect.html?tab=distributor"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Apply for Distributor</a>
+                            <a href="connect.html?tab=warranty"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Warranty Registration</a>
+                            <a href="connect.html?tab=complaint"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Complaint / Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="calculator.html"
+                class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
+                SOLAR CALCULATOR
+            </a>
+        </div>
+    </nav>
+    <main class="min-h-screen relative industrial-grid">
+        <!-- Hero / Header Section -->
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-12">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-gutter">
+                <div class="max-w-3xl">
+                    <span class="text-tertiary-container font-label-md tracking-widest uppercase mb-4 block">Precision
+                        Engineered Infrastructure</span>
+                    <h1
+                        class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-6 leading-tight">
+                        Industrial Equipment Catalog</h1>
+                    <p class="text-on-surface-variant text-body-lg max-w-2xl">
+                        Explore our comprehensive suite of utility-scale solar components. Engineered for maximum
+                        durability, grid stability, and energy yield in the most demanding environments.
                     </p>
-</div>
-<div class="flex gap-4 w-full md:w-auto">
-<div class="flex-1 md:w-80 relative">
-<input class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3.5 focus:ring-1 focus:ring-on-surface focus:border-on-surface transition-all text-body-md" placeholder="Search product serials or names..." type="text"/>
-<span class="material-symbols-outlined absolute right-3 top-3.5 text-outline">search</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Product Categories Filter -->
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-12">
-<div class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
-<button class="whitespace-nowrap bg-on-surface text-white px-8 py-2 rounded-full font-label-md text-label-md">All Components</button>
-<button class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">PV Panels</button>
-<button class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">String Inverters</button>
-<button class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Mounting</button>
-<button class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Cloud Monitoring</button>
-<button class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">BOS</button>
-</div>
-</div>
-<!-- Catalog Bento Grid -->
-<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter pb-24">
-<!-- PV Panel Product -->
-<div class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
-<div class="h-64 relative overflow-hidden bg-surface-container">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4mSfiWDi5j7H-xVQQmAxLqeJPgoDrYlpMdowbN3p8ULnqM6uogFWrODH1ENTPcRxdSTKYF0kpjlVxgnnyY2ptwi7HYO_1kTqFcUCzN_aZ6VFlm-McYeb98o8f9bY2ouG-HAFOYlH9xqCJCnFUDTVFT6gGt9T_SoSRC4Awx0gwvGn-TIZcNL_EeHbwCvz1nF6lGfEY5Er-QtYNhUpPufcWMmEcZnkJIk6mHI7ezzjWZE0tpmZB-tUJyQ"/>
-<div class="absolute top-4 left-4 bg-tertiary text-white text-[10px] tracking-widest font-bold px-2 py-1 rounded-sm uppercase">Active Generation</div>
-</div>
-<div class="p-6 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-4">
-<div>
-<h3 class="text-headline-md font-headline-md text-on-surface">SunPlus Alpha 650W</h3>
-<p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Bifacial Monocrystalline</p>
-</div>
-<span class="text-tertiary-container material-symbols-outlined">bolt</span>
-</div>
-<div class="space-y-3 mb-8">
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Efficiency</span>
-<span class="text-on-surface font-label-md">22.8%</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Snow/Wind Load</span>
-<span class="text-on-surface font-label-md">5400/2400 Pa</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Degradation</span>
-<span class="text-on-surface font-label-md">&lt;0.45% Annually</span>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
-<span class="material-symbols-outlined text-[20px]">file_download</span>
+                </div>
+                <div class="flex gap-4 w-full md:w-auto">
+                    <div class="flex-1 md:w-80 relative">
+                        <input
+                            class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3.5 focus:ring-1 focus:ring-on-surface focus:border-on-surface transition-all text-body-md"
+                            placeholder="Search product serials or names..." type="text" />
+                        <span class="material-symbols-outlined absolute right-3 top-3.5 text-outline">search</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Product Categories Filter -->
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-12">
+            <div class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
+                <button
+                    class="whitespace-nowrap bg-on-surface text-white px-8 py-2 rounded-full font-label-md text-label-md">All
+                    Components</button>
+                <button
+                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">PV
+                    Panels</button>
+                <button
+                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">String
+                    Inverters</button>
+                <button
+                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Mounting</button>
+                <button
+                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Cloud
+                    Monitoring</button>
+                <button
+                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">BOS</button>
+            </div>
+        </div>
+        <!-- Catalog Bento Grid -->
+        <section
+            class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter pb-24">
+            <!-- PV Panel Product -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4mSfiWDi5j7H-xVQQmAxLqeJPgoDrYlpMdowbN3p8ULnqM6uogFWrODH1ENTPcRxdSTKYF0kpjlVxgnnyY2ptwi7HYO_1kTqFcUCzN_aZ6VFlm-McYeb98o8f9bY2ouG-HAFOYlH9xqCJCnFUDTVFT6gGt9T_SoSRC4Awx0gwvGn-TIZcNL_EeHbwCvz1nF6lGfEY5Er-QtYNhUpPufcWMmEcZnkJIk6mHI7ezzjWZE0tpmZB-tUJyQ" />
+                    <div
+                        class="absolute top-4 left-4 bg-tertiary text-white text-[10px] tracking-widest font-bold px-2 py-1 rounded-sm uppercase">
+                        Active Generation</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">SunPlus Alpha 650W</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Bifacial
+                                Monocrystalline</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">bolt</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Efficiency</span>
+                            <span class="text-on-surface font-label-md">22.8%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Snow/Wind Load</span>
+                            <span class="text-on-surface font-label-md">5400/2400 Pa</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Degradation</span>
+                            <span class="text-on-surface font-label-md">&lt;0.45% Annually</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
                         Request Datasheet
                     </button>
-</div>
-</div>
-<!-- Inverter Product -->
-<div class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
-<div class="h-64 relative overflow-hidden bg-surface-container">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKm16hicGcfwsC06-Bpv7f9WMLMnyf9no2mDkQd0fUldTZAjPGObctHuxG56Pkpi0Gd9vgcNACIMdL8HopYhfZflMYOalm8ThxkxI9s40Nxoz_uQ_zza427nCrU79k4eMXMNQAvmaCYnI74mHurJ0bdbMVkVuRSh3r8-xARefzHRXJBHzEle8L2iEskpv0L6IOZl3Az9NTNFUGKdYaKV_3fqITp_7LPp8TrRkpvuZbpRq4yBKMHAcWTQ"/>
-<div class="absolute top-4 left-4 bg-tertiary text-white text-[10px] tracking-widest font-bold px-2 py-1 rounded-sm uppercase">Grid Ready</div>
-</div>
-<div class="p-6 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-4">
-<div>
-<h3 class="text-headline-md font-headline-md text-on-surface">SunLink Pro 250kW</h3>
-<p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Three-Phase String Inverter</p>
-</div>
-<span class="text-tertiary-container material-symbols-outlined">settings_input_component</span>
-</div>
-<div class="space-y-3 mb-8">
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Max Efficiency</span>
-<span class="text-on-surface font-label-md">99.1%</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">MPPT Trackers</span>
-<span class="text-on-surface font-label-md">12 Independent</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Protection</span>
-<span class="text-on-surface font-label-md">IP66 / C5</span>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
-<span class="material-symbols-outlined text-[20px]">file_download</span>
+                </div>
+            </div>
+            <!-- Inverter Product -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKm16hicGcfwsC06-Bpv7f9WMLMnyf9no2mDkQd0fUldTZAjPGObctHuxG56Pkpi0Gd9vgcNACIMdL8HopYhfZflMYOalm8ThxkxI9s40Nxoz_uQ_zza427nCrU79k4eMXMNQAvmaCYnI74mHurJ0bdbMVkVuRSh3r8-xARefzHRXJBHzEle8L2iEskpv0L6IOZl3Az9NTNFUGKdYaKV_3fqITp_7LPp8TrRkpvuZbpRq4yBKMHAcWTQ" />
+                    <div
+                        class="absolute top-4 left-4 bg-tertiary text-white text-[10px] tracking-widest font-bold px-2 py-1 rounded-sm uppercase">
+                        Grid Ready</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">SunLink Pro 250kW</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Three-Phase String
+                                Inverter</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">settings_input_component</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Max Efficiency</span>
+                            <span class="text-on-surface font-label-md">99.1%</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">MPPT Trackers</span>
+                            <span class="text-on-surface font-label-md">12 Independent</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Protection</span>
+                            <span class="text-on-surface font-label-md">IP66 / C5</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
                         Request Datasheet
                     </button>
-</div>
-</div>
-<!-- Monitoring Product -->
-<div class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
-<div class="h-64 relative overflow-hidden bg-surface-container">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD09Ry86lKXtVUrDZCix1gvYq3MdcXIvrqF-M2DUMmkWw3q7ZrDIUuhusDPHoljHOMwtmrwjF-Cxpnl9FYsF4C8kQV6Xo8YxZxVyG0YdzalY_mQqJZukR3CJq5ssm-4NyYTTByV1SbmTnxpEOd5nQM8Fy6rOiuaB_hS3ZQzcXdCW-krYl4_-sJwmVmURKQt4sN7jwPnhJ2Oif9YCN1kGBZBPyVYGij-MVThs-jj3ruTGSphfeAQif0zVw"/>
-<div class="absolute top-4 left-4 bg-tertiary text-white text-[10px] tracking-widest font-bold px-2 py-1 rounded-sm uppercase">New Release</div>
-</div>
-<div class="p-6 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-4">
-<div>
-<h3 class="text-headline-md font-headline-md text-on-surface">SunCloud OS 4.0</h3>
-<p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Enterprise Monitoring System</p>
-</div>
-<span class="text-tertiary-container material-symbols-outlined">cloud</span>
-</div>
-<div class="space-y-3 mb-8">
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Latency</span>
-<span class="text-on-surface font-label-md">&lt;1s Real-time</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Compatibility</span>
-<span class="text-on-surface font-label-md">Universal SCADA</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Security</span>
-<span class="text-on-surface font-label-md">AES-256</span>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
-<span class="material-symbols-outlined text-[20px]">file_download</span>
+                </div>
+            </div>
+            <!-- Monitoring Product -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD09Ry86lKXtVUrDZCix1gvYq3MdcXIvrqF-M2DUMmkWw3q7ZrDIUuhusDPHoljHOMwtmrwjF-Cxpnl9FYsF4C8kQV6Xo8YxZxVyG0YdzalY_mQqJZukR3CJq5ssm-4NyYTTByV1SbmTnxpEOd5nQM8Fy6rOiuaB_hS3ZQzcXdCW-krYl4_-sJwmVmURKQt4sN7jwPnhJ2Oif9YCN1kGBZBPyVYGij-MVThs-jj3ruTGSphfeAQif0zVw" />
+                    <div
+                        class="absolute top-4 left-4 bg-tertiary text-white text-[10px] tracking-widest font-bold px-2 py-1 rounded-sm uppercase">
+                        New Release</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">SunCloud OS 4.0</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Enterprise Monitoring
+                                System</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">cloud</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Latency</span>
+                            <span class="text-on-surface font-label-md">&lt;1s Real-time</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Compatibility</span>
+                            <span class="text-on-surface font-label-md">Universal SCADA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Security</span>
+                            <span class="text-on-surface font-label-md">AES-256</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
                         Request Datasheet
                     </button>
-</div>
-</div>
-<!-- Mounting Structure -->
-<div class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
-<div class="h-64 relative overflow-hidden bg-surface-container">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbWXQQn-N6ovA8r5nY-7KtFzi3g1jlfwfxxmhxBFBDFUo2d8QjeNTk9XRcxgDWI3ThLRKM0CBcIi5GlKIxSQesjTODdI09Aj1G5Ac-hxeNzI1KOhCSDeCcv5nDTDBccmQiM5_l6CSQVHuBtaLMA5DceEFEpGcXZnqJwrIzHO0e8Sdhg2IOtoIzgn2FGw_lThfD6olVkrtgcechtO-jfbTd8YL4mv2CUlTJyosen5H0F_I8taUldPpgGQ"/>
-</div>
-<div class="p-6 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-4">
-<div>
-<h3 class="text-headline-md font-headline-md text-on-surface">TerraRail G3</h3>
-<p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Ground Mount Structure</p>
-</div>
-<span class="text-tertiary-container material-symbols-outlined">architecture</span>
-</div>
-<div class="space-y-3 mb-8">
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Material</span>
-<span class="text-on-surface font-label-md">Hot-Dip Galv Steel</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Tilt Range</span>
-<span class="text-on-surface font-label-md">10° to 45° Fixed</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Warranty</span>
-<span class="text-on-surface font-label-md">25 Years</span>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
-<span class="material-symbols-outlined text-[20px]">file_download</span>
+                </div>
+            </div>
+            <!-- Mounting Structure -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbWXQQn-N6ovA8r5nY-7KtFzi3g1jlfwfxxmhxBFBDFUo2d8QjeNTk9XRcxgDWI3ThLRKM0CBcIi5GlKIxSQesjTODdI09Aj1G5Ac-hxeNzI1KOhCSDeCcv5nDTDBccmQiM5_l6CSQVHuBtaLMA5DceEFEpGcXZnqJwrIzHO0e8Sdhg2IOtoIzgn2FGw_lThfD6olVkrtgcechtO-jfbTd8YL4mv2CUlTJyosen5H0F_I8taUldPpgGQ" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">TerraRail G3</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Ground Mount Structure
+                            </p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">architecture</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Material</span>
+                            <span class="text-on-surface font-label-md">Hot-Dip Galv Steel</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Tilt Range</span>
+                            <span class="text-on-surface font-label-md">10° to 45° Fixed</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Warranty</span>
+                            <span class="text-on-surface font-label-md">25 Years</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
                         Request Datasheet
                     </button>
-</div>
-</div>
-<!-- Balance of System -->
-<div class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
-<div class="h-64 relative overflow-hidden bg-surface-container">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1lp53C7c9ydy3uQpHtTuActs57utPhJZF5pcYB4OYUU8mUHTBCekpAZw4mT5Wvgix4Wn5ipllXRJZiVKLhmFEJqdAOf9NGwjpEsmNSrVaCiWgPY56nhNeyi0LHvNeS5iu2PAjNNpIyLJY4j-oDVD-Ybs-11hjWI_m0O-fiWekzterx4UeG5R9iU5yWogELWDtAF7okqSGDMRS9B1uoPNQCJ-ji-c2SFbKAqn-YityQTLE4TRcv-r2pA"/>
-</div>
-<div class="p-6 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-4">
-<div>
-<h3 class="text-headline-md font-headline-md text-on-surface">BOS Cluster X</h3>
-<p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Combiner &amp; Cable Solutions</p>
-</div>
-<span class="text-tertiary-container material-symbols-outlined">cable</span>
-</div>
-<div class="space-y-3 mb-8">
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Voltage Rating</span>
-<span class="text-on-surface font-label-md">1500V DC</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Fuse Capacity</span>
-<span class="text-on-surface font-label-md">32 Strings</span>
-</div>
-<div class="flex justify-between border-b border-surface-container-low pb-2">
-<span class="text-on-surface-variant text-label-sm">Standards</span>
-<span class="text-on-surface font-label-md">UL / IEC</span>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
-<span class="material-symbols-outlined text-[20px]">file_download</span>
+                </div>
+            </div>
+            <!-- Balance of System -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1lp53C7c9ydy3uQpHtTuActs57utPhJZF5pcYB4OYUU8mUHTBCekpAZw4mT5Wvgix4Wn5ipllXRJZiVKLhmFEJqdAOf9NGwjpEsmNSrVaCiWgPY56nhNeyi0LHvNeS5iu2PAjNNpIyLJY4j-oDVD-Ybs-11hjWI_m0O-fiWekzterx4UeG5R9iU5yWogELWDtAF7okqSGDMRS9B1uoPNQCJ-ji-c2SFbKAqn-YityQTLE4TRcv-r2pA" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">BOS Cluster X</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Combiner &amp; Cable
+                                Solutions</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">cable</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Voltage Rating</span>
+                            <span class="text-on-surface font-label-md">1500V DC</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Fuse Capacity</span>
+                            <span class="text-on-surface font-label-md">32 Strings</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Standards</span>
+                            <span class="text-on-surface font-label-md">UL / IEC</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
                         Request Datasheet
                     </button>
-</div>
-</div>
-<!-- Custom Engineering CTA Card -->
-<div class="bg-on-surface text-white border border-on-surface rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col relative group">
-<div class="p-8 flex flex-col h-full relative z-10">
-<div class="mb-8">
-<span class="text-white material-symbols-outlined text-[48px]">engineering</span>
-<h3 class="text-headline-md font-headline-md mt-6">Custom Solutions</h3>
-<p class="text-surface-variant text-body-md mt-4 opacity-80">
-                            Don't see exactly what your project requires? Our engineering team designs custom BOS and mounting solutions for non-standard utility terrains.
+                </div>
+            </div>
+            <!-- Custom Engineering CTA Card -->
+            <div
+                class="bg-on-surface text-white border border-on-surface rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col relative group">
+                <div class="p-8 flex flex-col h-full relative z-10">
+                    <div class="mb-8">
+                        <span class="text-white material-symbols-outlined text-[48px]">engineering</span>
+                        <h3 class="text-headline-md font-headline-md mt-6">Custom Solutions</h3>
+                        <p class="text-surface-variant text-body-md mt-4 opacity-80">
+                            Don't see exactly what your project requires? Our engineering team designs custom BOS and
+                            mounting solutions for non-standard utility terrains.
                         </p>
-</div>
-<ul class="space-y-4 mb-8">
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-white text-sm">check_circle</span>
-<span class="text-white font-label-md">Site-Specific Analysis</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-white text-sm">check_circle</span>
-<span class="text-white font-label-md">CAD &amp; SLD Services</span>
-</li>
-</ul>
-<button class="w-full bg-white text-on-surface py-3.5 rounded font-label-md hover:bg-surface-variant transition-all mt-auto">
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-white text-sm">check_circle</span>
+                            <span class="text-white font-label-md">Site-Specific Analysis</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-white text-sm">check_circle</span>
+                            <span class="text-white font-label-md">CAD &amp; SLD Services</span>
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-white text-on-surface py-3.5 rounded font-label-md hover:bg-surface-variant transition-all mt-auto">
                         Consult with Engineers
                     </button>
-</div>
-</div>
-</section>
-<!-- Technical Specification Detail Modal -->
-<div class="fixed inset-0 z-[60] bg-on-surface/60 backdrop-blur-sm hidden items-center justify-center p-4" id="datasheet-modal">
-<div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl">
-<div class="bg-on-surface p-6 flex justify-between items-center">
-<h2 class="text-headline-md font-headline-md text-white">Technical Inquiry</h2>
-<button class="text-white hover:opacity-70 transition-opacity" onclick="toggleModal()">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<form class="p-8 space-y-6">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="text-label-md text-on-surface font-semibold">Full Name</label>
-<input class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none" placeholder="Enter name" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="text-label-md text-on-surface font-semibold">Work Email</label>
-<input class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none" placeholder="email@company.com" type="email"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="text-label-md text-on-surface font-semibold">Project Scale</label>
-<select class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none">
-<option>Commercial (&lt; 1MW)</option>
-<option>Industrial (1MW - 10MW)</option>
-<option>Utility Scale (&gt; 10MW)</option>
-</select>
-</div>
-<button class="w-full bg-primary text-on-primary font-label-md py-4 rounded hover:opacity-90 transition-opacity" type="submit">
+                </div>
+            </div>
+        </section>
+        <!-- Technical Specification Detail Modal -->
+        <div class="fixed inset-0 z-[60] bg-on-surface/60 backdrop-blur-sm hidden items-center justify-center p-4"
+            id="datasheet-modal">
+            <div class="bg-white rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl">
+                <div class="bg-on-surface p-6 flex justify-between items-center">
+                    <h2 class="text-headline-md font-headline-md text-white">Technical Inquiry</h2>
+                    <button class="text-white hover:opacity-70 transition-opacity" onclick="toggleModal()">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <form class="p-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-label-md text-on-surface font-semibold">Full Name</label>
+                            <input
+                                class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none"
+                                placeholder="Enter name" type="text" />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-label-md text-on-surface font-semibold">Work Email</label>
+                            <input
+                                class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none"
+                                placeholder="email@company.com" type="email" />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-label-md text-on-surface font-semibold">Project Scale</label>
+                        <select
+                            class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none">
+                            <option>Commercial (&lt; 1MW)</option>
+                            <option>Industrial (1MW - 10MW)</option>
+                            <option>Utility Scale (&gt; 10MW)</option>
+                        </select>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary font-label-md py-4 rounded hover:opacity-90 transition-opacity"
+                        type="submit">
                         Send PDF to Email
                     </button>
-</form>
-</div>
-</div>
-</main>
-<!-- Footer -->
-<footer class="bg-on-surface">
-<div class="w-full px-margin-mobile md:px-margin-desktop py-16 flex flex-col md:flex-row justify-between gap-xl max-w-container-max mx-auto">
-<div class="space-y-8 max-w-md">
-<div class="flex items-center">
-<img alt="SunPlus Power Logo" class="h-14 w-auto object-contain brightness-0 invert" src="assets/images/logo.svg"/>
-</div>
-<p class="text-surface-variant text-body-md leading-relaxed opacity-70">
-                    Leading the transition to sustainable industrial infrastructure through precision engineering and high-performance solar technology.
+                </form>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
+            <div class=" space-y-6">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+                        style="max-width:200px;" />
+                </a>
+                <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
+                    transition
+                    through rigorous technical modeling and industrial-scale solar deployment.</p>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Quick
+                    Links</h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="about.html">Company</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="services.html">Services</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="projects.html">Projects</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="products.html">Products</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
+                            Intelligence</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="careers.html">Careers</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Connect
+                </h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=distributor">Apply for Distributor</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=warranty">Warranty Registration</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=complaint">Complaint / Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Contact
+                </h4>
+                <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+                    <b>Corporate Address:</b><br />
+                    1st Floor, D134, Vibhuti Khand<br />
+                    Gomti Nagar, Lucknow<br />
+                    Uttar Pradesh, India - 226010
                 </p>
-<div class="flex gap-6">
-<a class="text-surface-variant hover:text-white transition-colors" href="index.html"><span class="material-symbols-outlined">public</span></a>
-<a class="text-surface-variant hover:text-white transition-colors" href="index.html"><span class="material-symbols-outlined">mail</span></a>
-<a class="text-surface-variant hover:text-white transition-colors" href="index.html"><span class="material-symbols-outlined">shield</span></a>
-</div>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
-<div>
-<h4 class="text-white font-bold mb-6 text-sm tracking-widest uppercase">Resources</h4>
-<ul class="space-y-4">
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="index.html">Sitemap</a></li>
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="index.html">Case Studies</a></li>
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="index.html">Technical Blog</a></li>
-</ul>
-</div>
-<div>
-<h4 class="text-white font-bold mb-6 text-sm tracking-widest uppercase">Support</h4>
-<ul class="space-y-4">
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="connect.html">Contact</a></li>
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="index.html">Warranty Claims</a></li>
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="index.html">Media Kit</a></li>
-</ul>
-</div>
-<div class="col-span-2 md:col-span-1">
-<h4 class="text-white font-bold mb-6 text-sm tracking-widest uppercase">Legal</h4>
-<ul class="space-y-4">
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="connect.html">Privacy Policy</a></li>
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="connect.html">Terms of Service</a></li>
-<li><a class="text-surface-variant hover:text-white text-label-sm" href="index.html">Compliance</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-white/10">
-<p class="text-surface-variant text-label-sm text-center md:text-left opacity-40">
-                © 2024 SunPlus Power. Engineering Excellence in Solar.
-            </p>
-</div>
-</footer>
-<script>
+                <p class="text-on-surface-variant font-body-md leading-relaxed">
+                    <b>Sales Help:</b> <a class="hover:text-primary"
+                        href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
+                    <b>Technical Support:</b> <a class="hover:text-primary"
+                        href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
+                    <b>Official Phone:</b> +91-9153832222
+                </p>
+            </div>
+        </div>
+        <div
+            class="px-margin-desktop py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 max-w-container-max mx-auto">
+            <div class="font-body-md text-body-md text-on-surface-variant">© 2026 SUNPLUS POWER. ALL RIGHTS RESERVED.
+            </div>
+            <div class="flex gap-8">
+                <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+                    href="connect.html">Privacy Policy</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+                    href="connect.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+    <script>
         function toggleModal() {
             const modal = document.getElementById('datasheet-modal');
             if (modal.classList.contains('hidden')) {
@@ -497,4 +528,6 @@
             }
         });
     </script>
-</body></html>
+</body>
+
+</html>

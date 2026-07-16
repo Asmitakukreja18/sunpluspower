@@ -1,759 +1,1029 @@
 <!DOCTYPE html>
+
 <html class="scroll-smooth" lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Energy Modeling Studio | SunPlus Power</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    
-    <link rel="stylesheet" href="assets/css/variables.css"/>
-    <link rel="stylesheet" href="assets/css/base.css"/>
-    <link rel="stylesheet" href="assets/css/components.css"/>
-    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .progress-fill { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .bg-industrial-grid {
-            background-color: #f8f9fb;
-            background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-        /* Custom styles for workspace tabs */
-        .tab-active {
-            border-bottom: 2px solid #b5111a;
-            color: #b5111a;
-            font-weight: 700;
-        }
-        .step-node.active {
-            border-color: #b5111a;
-            background-color: #b5111a;
-            color: #ffffff;
-        }
-        .step-node.completed {
-            border-color: #b5111a;
-            background-color: #ffdad6;
-            color: #b5111a;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Solar ROI Calculator | SunPlus Power</title>
 
-    <script src="assets/js/api.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/calculator.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .progress-fill {
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bg-industrial-grid {
+      background-color: #f9fafb;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(181, 17, 26, 0.04) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(181, 17, 26, 0.03) 0%, transparent 25%),
+        linear-gradient(to right, rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      background-position: center, center, 0 0, 0 0;
+    }
+
+    #map {
+      height: 300px;
+      width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets/css/variables.css?v=7" />
+  <link rel="stylesheet" href="assets/css/base.css?v=7" />
+  <link rel="stylesheet" href="assets/css/components.css?v=7" />
+  <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=7" />
+
+
+  <script src="assets/js/api.js?v=7" defer></script>
+  <script src="assets/js/main.js?v=7" defer></script>
+  <script src="assets/js/calculator.js?v=7" defer></script>
+
 </head>
+
 <body class="bg-background text-on-background min-h-screen flex flex-col bg-industrial-grid">
-
-    <!-- ========================================== -->
-    <!-- VIEW A: CALCULATOR PROGRESSIVE WIZARD      -->
-    <!-- ========================================== -->
-    <div id="calculator-wizard-view" class="flex flex-col min-h-screen">
-        <!-- Dedicated Calculator Application Header -->
-        <header class="bg-white border-b border-surface-container sticky top-0 z-50 shadow-sm w-full">
-            <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
-                <div class="flex items-center gap-3">
-                    <a href="index.html" class="flex items-center gap-3">
-                        <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="assets/images/logo.svg"/>
-                    </a>
-                    <span class="text-label-md font-bold tracking-widest text-secondary border-l border-surface-container pl-3 uppercase hidden sm:inline">Energy Modeling Studio</span>
-                </div>
-                <div class="flex items-center gap-4">
-                    <span id="draft-status" class="text-xs text-secondary font-semibold italic hidden sm:inline">Draft saved locally</span>
-                    <button onclick="saveCalculatorDraft()" class="text-secondary hover:text-primary font-bold text-sm flex items-center gap-1 border border-surface-container px-3 py-1.5 rounded bg-surface-container-low transition-colors">
-                        <span class="material-symbols-outlined text-sm">save</span> Save Draft
-                    </button>
-                    <a href="index.html" class="btn-primary text-sm font-bold bg-secondary hover:bg-tertiary">Exit Studio</a>
-                </div>
+  <!-- TopNavBar -->
+  <nav
+    class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+    <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
+      <a href="index.html" class="flex items-center shrink-0">
+        <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+          style="max-width:200px;" />
+      </a>
+      <div class="hidden lg:flex items-center space-x-8">
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="index.html">Home</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="about.html">Company</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="services.html">Services</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="projects.html">Projects</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="products.html">Products</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="media.html">Solar Intelligence</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="careers.html">Careers</a>
+        <div class="relative group">
+          <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
+            href="connect.html">
+            Connect
+            <span
+              class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+          </a>
+          <div
+            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-1" role="menu">
+              <a href="connect.html?tab=distributor"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                role="menuitem">Apply for Distributor</a>
+              <a href="connect.html?tab=warranty"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                role="menuitem">Warranty Registration</a>
+              <a href="connect.html?tab=complaint"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                role="menuitem">Complaint / Support</a>
             </div>
-        </header>
-
-        <main class="flex-grow w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-                
-                <!-- Stepper Progress Sidebar (Left Column) -->
-                <div class="lg:col-span-3 space-y-4 bg-white p-6 rounded border border-surface-container shadow-sm">
-                    <h3 class="text-label-sm font-bold text-on-surface uppercase tracking-wider mb-4">Modeling Steps</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3" id="step-nav-1">
-                            <div class="step-node active w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm">1</div>
-                            <span class="text-sm font-bold text-on-surface">Customer Profile</span>
-                        </div>
-                        <div class="flex items-center gap-3" id="step-nav-2">
-                            <div class="step-node w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm">2</div>
-                            <span class="text-sm font-semibold text-secondary">Energy Profile</span>
-                        </div>
-                        <div class="flex items-center gap-3" id="step-nav-3">
-                            <div class="step-node w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm">3</div>
-                            <span class="text-sm font-semibold text-secondary">Property & Site</span>
-                        </div>
-                        <div class="flex items-center gap-3" id="step-nav-4">
-                            <div class="step-node w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm">4</div>
-                            <span class="text-sm font-semibold text-secondary">Solar System</span>
-                        </div>
-                        <div class="flex items-center gap-3" id="step-nav-5">
-                            <div class="step-node w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm">5</div>
-                            <span class="text-sm font-semibold text-secondary">Financial Model</span>
-                        </div>
-                        <div class="flex items-center gap-3" id="step-nav-6">
-                            <div class="step-node w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm">6</div>
-                            <span class="text-sm font-semibold text-secondary">Review & Run</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form Wizard container (Middle Column) -->
-                <div class="lg:col-span-6 bg-white rounded border border-surface-container shadow-sm overflow-hidden p-8">
-                    <form id="wizard-form" onsubmit="event.preventDefault();">
-                        
-                        <!-- Step 1: Customer Profile -->
-                        <div id="step-card-1" class="step-card space-y-6">
-                            <h2 class="text-headline-md font-bold text-on-surface">1. Customer Profile</h2>
-                            <p class="text-body-md text-secondary">Configure ownership parameters for localized state tariff rules.</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Customer / Org Name</label>
-                                    <input id="calc-name" name="name" type="text" placeholder="John Doe or Enterprise Name" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Customer Type</label>
-                                    <select id="calc-customer-type" name="customer_type" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="residential">Residential</option>
-                                        <option value="commercial">Commercial</option>
-                                        <option value="industrial">Industrial</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Email Address</label>
-                                    <input id="calc-email" name="email" type="email" placeholder="john@company.com" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Phone Number</label>
-                                    <input id="calc-phone" name="phone" type="tel" placeholder="+91 98765 43210" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Installation State</label>
-                                    <select id="calc-state" name="location" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="uttar pradesh">Uttar Pradesh</option>
-                                        <option value="maharashtra">Maharashtra</option>
-                                        <option value="gujarat">Gujarat</option>
-                                        <option value="rajasthan">Rajasthan</option>
-                                        <option value="karnataka">Karnataka</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">PIN Code</label>
-                                    <input id="calc-zip" name="zipcode" type="text" placeholder="226001" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 2: Energy Profile -->
-                        <div id="step-card-2" class="step-card hidden space-y-6">
-                            <h2 class="text-headline-md font-bold text-on-surface">2. Energy Consumption</h2>
-                            <p class="text-body-md text-secondary">Adjust sliders to define average electricity expenditures.</p>
-                            <div class="space-y-6">
-                                <div>
-                                    <div class="flex justify-between items-center mb-2">
-                                        <label class="text-label-sm font-bold text-on-surface">Average Monthly Bill (Rs.)</label>
-                                        <span id="val-bill" class="text-primary font-bold">Rs.15,000</span>
-                                    </div>
-                                    <input id="input-bill" type="range" min="1000" max="250000" step="500" value="15000" class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary"/>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between items-center mb-2">
-                                        <label class="text-label-sm font-bold text-on-surface">Estimated Monthly Units (kWh)</label>
-                                        <span id="val-units" class="text-primary font-bold">2,143 units</span>
-                                    </div>
-                                    <input id="input-units" type="range" min="100" max="35000" step="50" value="2143" class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary"/>
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-label-sm font-bold text-on-surface mb-2">Sanctioned Load (kW)</label>
-                                        <input id="calc-load" name="sanctioned_load" type="number" value="15" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                    </div>
-                                    <div>
-                                        <label class="block text-label-sm font-bold text-on-surface mb-2">Daytime Demand (%)</label>
-                                        <input id="calc-daytime" name="daytime_pct" type="number" value="70" min="0" max="100" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 3: Property & Site -->
-                        <div id="step-card-3" class="step-card hidden space-y-6">
-                            <h2 class="text-headline-md font-bold text-on-surface">3. Property & Site Details</h2>
-                            <p class="text-body-md text-secondary">Define available spatial limits to calculate structural sizes.</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Available Area (Sq. Ft.)</label>
-                                    <input id="input-roof" name="available_area" type="number" value="2000" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Roof Type</label>
-                                    <select id="input-roof-type" name="roof_type" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="flat">Concrete Flat Roof</option>
-                                        <option value="inclined">Metal Sheet Inclined</option>
-                                        <option value="ground">Ground Level Facility</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Orientations</label>
-                                    <select id="input-orientation" name="orientation" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="south">True South (Recommended)</option>
-                                        <option value="east-west">East-West Array</option>
-                                        <option value="flat">Flat Horizontal</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Shading Level</label>
-                                    <select id="input-shading" name="shading_level" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="none">Zero Shading</option>
-                                        <option value="low">Low (Minor nearby objects)</option>
-                                        <option value="medium">Medium Shading</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 4: Solar System Specs -->
-                        <div id="step-card-4" class="step-card hidden space-y-6">
-                            <h2 class="text-headline-md font-bold text-on-surface">4. Solar Hardware Configuration</h2>
-                            <p class="text-body-md text-secondary">Choose integration layout and equipment tier specifications.</p>
-                            <div class="space-y-6">
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">System Type / Grid Mode</label>
-                                    <select id="input-grid" name="grid_mode" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="rooftop">On-Grid Rooftop System</option>
-                                        <option value="hybrid">Smart Hybrid (Battery Backup)</option>
-                                        <option value="off-grid">Off-Grid Independent Micro-Grid</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <label id="tier-label-std" class="p-4 border border-outline rounded cursor-pointer text-left block hover:border-primary">
-                                        <input type="radio" name="panel-tier" value="standard" checked class="hidden"/>
-                                        <span class="block font-bold text-sm text-on-surface">Standard Tier</span>
-                                        <span class="block text-xs text-secondary mt-1">Mono-PERC efficiency (20.5%)</span>
-                                    </label>
-                                    <label id="tier-label-high" class="p-4 border border-outline rounded cursor-pointer text-left block hover:border-primary">
-                                        <input type="radio" name="panel-tier" value="high" class="hidden"/>
-                                        <span class="block font-bold text-sm text-on-surface">High efficiency</span>
-                                        <span class="block text-xs text-secondary mt-1">TOPCon modules (22.3%)</span>
-                                    </label>
-                                    <label id="tier-label-bifacial" class="p-4 border border-outline rounded cursor-pointer text-left block hover:border-primary">
-                                        <input type="radio" name="panel-tier" value="bifacial" class="hidden"/>
-                                        <span class="block font-bold text-sm text-on-surface">Bifacial Tracker</span>
-                                        <span class="block text-xs text-secondary mt-1">Double sided cell arrays (+15%)</span>
-                                    </label>
-                                </div>
-
-                                <div id="storage-container" class="hidden space-y-2">
-                                    <div class="flex justify-between items-center">
-                                        <label class="text-label-sm font-bold text-on-surface">Battery storage capacity</label>
-                                        <span id="val-storage" class="text-primary font-bold">10 kWh</span>
-                                    </div>
-                                    <input id="input-storage" type="range" min="5" max="100" step="5" value="10" class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 5: Financial settings -->
-                        <div id="step-card-5" class="step-card hidden space-y-6">
-                            <h2 class="text-headline-md font-bold text-on-surface">5. Financial & Financing Model</h2>
-                            <p class="text-body-md text-secondary">Tweak parameters to align with capital structures.</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Financing Mode</label>
-                                    <select id="calc-finance-mode" name="finance_mode" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                                        <option value="cash">100% Cash / CAPEX upfront</option>
-                                        <option value="loan">Bank Financing (Solar Loan)</option>
-                                    </select>
-                                </div>
-                                <div class="loan-field hidden">
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Interest Rate (%)</label>
-                                    <input id="calc-interest" type="number" value="8.5" step="0.1" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                </div>
-                                <div class="loan-field hidden">
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Loan Tenure (Years)</label>
-                                    <input id="calc-loan-tenure" type="number" value="7" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Utility Tariff Escalation (% / year)</label>
-                                    <input id="calc-tariff-escalation" type="number" value="4.0" step="0.5" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">O&M Cost Escalation (% / year)</label>
-                                    <input id="calc-om-escalation" type="number" value="3.5" step="0.5" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                </div>
-                                <div>
-                                    <label class="block text-label-sm font-bold text-on-surface mb-2">Discount Rate (%)</label>
-                                    <input id="calc-discount-rate" type="number" value="8.0" step="0.5" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 6: Review Summary -->
-                        <div id="step-card-6" class="step-card hidden space-y-6">
-                            <h2 class="text-headline-md font-bold text-on-surface">6. Review Specification</h2>
-                            <p class="text-body-md text-secondary">Verify baseline values before triggering calculations.</p>
-                            <div class="bg-surface-container-low p-6 rounded border border-surface-container-highest space-y-4 text-sm">
-                                <div class="flex justify-between border-b border-surface-container pb-2">
-                                    <span>Client Name:</span>
-                                    <span id="review-name" class="font-bold">-</span>
-                                </div>
-                                <div class="flex justify-between border-b border-surface-container pb-2">
-                                    <span>State Location:</span>
-                                    <span id="review-location" class="font-bold">-</span>
-                                </div>
-                                <div class="flex justify-between border-b border-surface-container pb-2">
-                                    <span>Monthly Consumption:</span>
-                                    <span id="review-units" class="font-bold">-</span>
-                                </div>
-                                <div class="flex justify-between border-b border-surface-container pb-2">
-                                    <span>Usable roof size:</span>
-                                    <span id="review-area" class="font-bold">-</span>
-                                </div>
-                                <div class="flex justify-between border-b border-surface-container pb-2">
-                                    <span>Hardware Level:</span>
-                                    <span id="review-tier" class="font-bold">-</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>CAPEX Method:</span>
-                                    <span id="review-finance" class="font-bold">-</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Stepper navigation triggers -->
-                        <div class="mt-8 pt-6 border-t border-surface-container flex justify-between">
-                            <button id="btn-prev" type="button" onclick="wizardPrev()" class="text-on-surface font-label-md flex items-center gap-2 px-4 py-2 border border-surface-container rounded hover:bg-surface-container-low transition-colors hidden">
-                                <span class="material-symbols-outlined text-[20px]">arrow_back</span> Back
-                            </button>
-                            <div class="flex-grow"></div>
-                            <button id="btn-next" type="button" onclick="wizardNext()" class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all">
-                                Continue <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                            </button>
-                            <button id="btn-run" type="button" onclick="runAnalysisWorkflow()" class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all hidden">
-                                Run Studio Simulation <span class="material-symbols-outlined text-[20px]">play_arrow</span>
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-
-                <!-- Live Model Preview (Right Column Sidebar) -->
-                <aside class="lg:col-span-3 space-y-6">
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
-                        <h3 class="text-label-sm font-bold text-on-surface mb-4 uppercase tracking-widest pb-2 border-b border-surface-container">Live Sizing Preview</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <span class="text-xs text-secondary block">System Capacity</span>
-                                <span id="preview-system-size" class="text-headline-md font-bold text-on-surface">- kW</span>
-                            </div>
-                            <div>
-                                <span class="text-xs text-secondary block">Estimated Cost</span>
-                                <span id="preview-gross-cost" class="text-headline-md font-bold text-on-surface">Rs.-</span>
-                            </div>
-                            <div>
-                                <span class="text-xs text-secondary block">State Subsidy</span>
-                                <span id="preview-subsidy" class="text-headline-sm font-bold text-green-600">Rs.-</span>
-                            </div>
-                            <div class="pt-2 border-t border-surface-container">
-                                <span class="text-xs text-secondary block">Net Investment</span>
-                                <span id="preview-net-cost" class="text-headline-md font-bold text-on-surface">Rs.-</span>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
-            </div>
-        </main>
+          </div>
+        </div>
+      </div>
+      <a href="calculator.html"
+        class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
+        SOLAR CALCULATOR
+      </a>
     </div>
-
-    <!-- ========================================== -->
-    <!-- VIEW B: CINEMATIC LOADER SCREEN           -->
-    <!-- ========================================== -->
-    <div id="calculator-processing-view" class="hidden bg-[#121518] text-white min-h-screen flex flex-col justify-between p-12">
-        <header class="max-w-[1440px] w-full mx-auto flex justify-between items-center">
-            <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="assets/images/logo.svg"/>
-            <span class="text-xs tracking-widest font-mono text-white/50">ENGINEERING SIMULATOR V1.2</span>
-        </header>
-
-        <main class="max-w-xl mx-auto w-full text-center space-y-8 flex-grow flex flex-col justify-center">
-            <!-- Simulated Loading Status -->
-            <div class="relative w-28 h-28 mx-auto flex items-center justify-center">
-                <span class="material-symbols-outlined text-[64px] text-primary animate-spin">autorenew</span>
-            </div>
-            
-            <div class="space-y-3">
-                <h2 id="processing-title" class="text-headline-lg font-bold">Initializing Engine</h2>
-                <p id="processing-sub" class="text-sm font-mono text-white/50">READING SITE SPECS...</p>
-            </div>
-
-            <!-- Terminal steps log output -->
-            <div class="bg-black/40 border border-white/10 rounded-lg p-6 text-left font-mono text-xs text-green-400 space-y-2 h-48 overflow-y-auto" id="terminal-logs">
-                <div class="text-white/40">&gt;&gt; SunPlus Power Simulation engine started.</div>
-            </div>
-        </main>
-
-        <footer class="max-w-[1440px] w-full mx-auto text-center text-xs font-mono text-white/30">
-            PROCESSING SOLAR DATA ACROSS REGIONAL METEOROLOGICAL GRID MAPS.
-        </footer>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- VIEW C: ANALYSIS STUDIO WORKSPACE          -->
-    <!-- ========================================== -->
-    <div id="analysis-workspace-view" class="hidden flex flex-col min-h-screen">
-        <!-- Workspace Header -->
-        <header class="bg-white border-b border-surface-container sticky top-0 z-50 shadow-sm w-full">
-            <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
-                <div class="flex items-center gap-3">
-                    <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="assets/images/logo.svg"/>
-                    <div class="border-l border-surface-container pl-3">
-                        <span id="analysis-id-badge" class="text-[10px] font-mono text-secondary block font-semibold">MODEL RUN: #CS-8947A</span>
-                        <span id="analysis-site-name" class="text-sm font-bold text-on-surface block">Customer Site Analysis</span>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="switchView('wizard')" class="text-secondary hover:text-primary font-bold text-sm flex items-center gap-1 border border-surface-container px-3 py-1.5 rounded bg-surface-container-low transition-colors">
-                        <span class="material-symbols-outlined text-sm">edit</span> Edit Inputs
-                    </button>
-                    <button onclick="requestQuoteFlow()" class="btn-primary text-sm font-bold">Request Quotation</button>
-                    <a href="index.html" class="text-secondary hover:text-primary font-bold text-sm flex items-center gap-1 border border-surface-container px-3 py-1.5 rounded transition-colors bg-white">Return to Web</a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Sub-tabs bar -->
-        <div class="bg-white border-b border-surface-container sticky top-[67px] z-40 w-full">
-            <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop overflow-x-auto">
-                <nav class="flex gap-8 py-3 text-sm font-medium whitespace-nowrap justify-start" id="analysis-nav-tabs">
-                    <button onclick="switchTab('overview')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all tab-active" id="tab-overview">Overview</button>
-                    <button onclick="switchTab('before-after')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-before-after">Before vs After</button>
-                    <button onclick="switchTab('energy')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-energy">Energy Performance</button>
-                    <button onclick="switchTab('financial')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-financial">Financial Cashflows</button>
-                    <button onclick="switchTab('environmental')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-environmental">Environmental Offset</button>
-                    <button onclick="switchTab('sensitivity')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-sensitivity">Sensitivity Analysis</button>
-                    <button onclick="switchTab('compare')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-compare">Compare Scenarios</button>
-                    <button onclick="switchTab('report')" class="tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all" id="tab-report">Feasibility Report</button>
-                </nav>
-            </div>
+  </nav>
+  <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-12">
+    <header class="mb-12">
+      <h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-on-surface mb-4">Investment Analysis
+        Tool</h1>
+      <p class="text-body-lg text-tertiary max-w-2xl">Precision modeling for energy independence. Calculate your
+        financial returns with engineering-grade data.</p>
+    </header>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+      <!-- Left Column - Step Navigation & Form -->
+      <div class="lg:col-span-8 space-y-gutter">
+        <!-- Progress Stepper -->
+        <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-label-md font-bold text-on-surface">Assessment Progress</span>
+            <span class="text-label-sm text-secondary font-bold" id="step-label">Step 1 of 6</span>
+          </div>
+          <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+            <div class="progress-fill bg-primary h-full w-[16.66%]" id="progress-bar"></div>
+          </div>
         </div>
 
-        <main class="flex-grow w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-8">
-            <!-- ================= OVERVIEW TAB ================= -->
-            <div id="tab-pane-overview" class="tab-pane space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
-                        <span class="text-xs text-secondary font-bold block uppercase">PAYBACK PERIOD</span>
-                        <span id="ov-payback" class="text-headline-lg font-bold text-primary block mt-2">- Years</span>
-                    </div>
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
-                        <span class="text-xs text-secondary font-bold block uppercase">INTERNAL RETURN (IRR)</span>
-                        <span id="ov-irr" class="text-headline-lg font-bold text-on-surface block mt-2">- %</span>
-                    </div>
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
-                        <span class="text-xs text-secondary font-bold block uppercase">NET SAVINGS (25 YR)</span>
-                        <span id="ov-savings" class="text-headline-lg font-bold text-on-surface block mt-2">Rs.-</span>
-                    </div>
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
-                        <span class="text-xs text-secondary font-bold block uppercase">NET PRESENT VALUE (NPV)</span>
-                        <span id="ov-npv" class="text-headline-lg font-bold text-on-surface block mt-2">Rs.-</span>
-                    </div>
+        <!-- Form Card -->
+        <div class="bg-white rounded border border-surface-container shadow-sm overflow-hidden">
+          <!-- Step 1: Customer Profile -->
+          <section class="p-8" id="form-step-1">
+            <form id="solar-calculator-form">
+              <div class="flex items-center gap-4 mb-8">
+                <div class="bg-surface-container p-3 rounded text-on-surface">
+                  <span class="material-symbols-outlined" data-icon="person">person</span>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-                    <!-- Recommendation Card -->
-                    <div class="lg:col-span-2 bg-white p-8 rounded border border-surface-container shadow-sm space-y-6">
-                        <div class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-green-600 text-3xl">verified</span>
-                            <h3 class="text-headline-md font-bold text-on-surface">Recommended Solar Sizing</h3>
-                        </div>
-                        <p class="text-body-md text-secondary leading-relaxed">Based on your utility consumption and structural site limits, the engine recommends a high-performance rooftop array optimized for max internal returns and reduced transmission losses.</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface-container-low p-6 rounded border border-surface-container-highest">
-                            <div>
-                                <span class="text-xs text-secondary block">Optimal capacity size</span>
-                                <span id="ov-capacity" class="text-headline-md font-bold text-on-surface">- kW DC</span>
-                            </div>
-                            <div>
-                                <span class="text-xs text-secondary block">Required Installation space</span>
-                                <span id="ov-area-req" class="text-headline-md font-bold text-on-surface">- Sq. Ft.</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick stats sidebar -->
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm space-y-6">
-                        <h3 class="text-label-sm font-bold text-on-surface uppercase tracking-wider pb-2 border-b border-surface-container">Confidence Indicators</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <span>Solar Yield confidence</span>
-                                    <span class="font-bold">95%</span>
-                                </div>
-                                <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-green-600 h-full w-[95%]"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-xs mb-1">
-                                    <span>Data Quality rating</span>
-                                    <span class="font-bold text-primary">High reliability</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= BEFORE VS AFTER TAB ================= -->
-            <div id="tab-pane-before-after" class="tab-pane hidden space-y-6">
-                <h3 class="text-headline-md font-bold text-on-surface">Transformation Analysis</h3>
-                <p class="text-body-md text-secondary">Compare your current utility expenditures with post-solar outcomes.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm space-y-3">
-                        <span class="text-xs text-secondary font-bold block uppercase">Electricity bill</span>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-xs text-secondary">Before:</span>
-                            <span id="ba-bill-before" class="text-body-lg font-bold text-secondary line-through">Rs.-</span>
-                        </div>
-                        <div class="flex items-baseline gap-2 border-t border-surface-container pt-2">
-                            <span class="text-xs text-on-surface font-semibold">After:</span>
-                            <span id="ba-bill-after" class="text-headline-md font-bold text-primary">Rs.-</span>
-                        </div>
-                        <span id="ba-bill-diff" class="text-xs text-green-600 font-bold block">Saving -%</span>
-                    </div>
-
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm space-y-3">
-                        <span class="text-xs text-secondary font-bold block uppercase">Grid reliance</span>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-xs text-secondary">Before:</span>
-                            <span class="text-body-lg font-bold">100%</span>
-                        </div>
-                        <div class="flex items-baseline gap-2 border-t border-surface-container pt-2">
-                            <span class="text-xs text-on-surface font-semibold">After:</span>
-                            <span id="ba-grid-after" class="text-headline-md font-bold text-on-surface">30%</span>
-                        </div>
-                        <span id="ba-grid-diff" class="text-xs text-green-600 font-bold block">Reduced dependency</span>
-                    </div>
-
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm space-y-3">
-                        <span class="text-xs text-secondary font-bold block uppercase">Clean energy offset</span>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-xs text-secondary">Before:</span>
-                            <span class="text-body-lg font-bold">0%</span>
-                        </div>
-                        <div class="flex items-baseline gap-2 border-t border-surface-container pt-2">
-                            <span class="text-xs text-on-surface font-semibold">After:</span>
-                            <span id="ba-offset-after" class="text-headline-md font-bold text-green-600">70%</span>
-                        </div>
-                        <span class="text-xs text-green-600 font-bold block">Carbon free supplies</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= ENERGY ANALYSIS TAB ================= -->
-            <div id="tab-pane-energy" class="tab-pane hidden space-y-6">
-                <h3 class="text-headline-md font-bold text-on-surface">Generation vs Demand Profile</h3>
-                <p class="text-body-md text-secondary">Check monthly solar yield compared to your consumption needs.</p>
-                <div class="bg-white p-6 rounded border border-surface-container shadow-sm">
-                    <!-- Chart Bars Container -->
-                    <div class="relative h-64 w-full flex items-end justify-between gap-2 border-b border-l border-surface-container-highest p-4" id="energy-chart-container">
-                        <div class="w-full flex items-end justify-between px-2 gap-1 h-full">
-                            <!-- Bars will render dynamically -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= FINANCIAL TAB ================= -->
-            <div id="tab-pane-financial" class="tab-pane hidden space-y-6">
-                <h3 class="text-headline-md font-bold text-on-surface">25-Year Cashflow Amortization</h3>
-                <p class="text-body-md text-secondary">Detailed view of capital investments, savings escalation, and net returns.</p>
-                
-                <div class="overflow-x-auto bg-white rounded border border-surface-container shadow-sm">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-surface-container-low text-on-surface font-bold border-b border-surface-container">
-                                <th class="p-4">Year</th>
-                                <th class="p-4">Generation (kWh)</th>
-                                <th class="p-4">Utility Cost (Without Solar)</th>
-                                <th class="p-4">Utility Cost (With Solar)</th>
-                                <th class="p-4">Annual Savings</th>
-                                <th class="p-4">Cumulative Net Savings</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cashflow-table-body" class="divide-y divide-surface-container">
-                            <!-- Dynamic rows will render here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ================= ENVIRONMENTAL TAB ================= -->
-            <div id="tab-pane-environmental" class="tab-pane hidden space-y-6">
-                <h3 class="text-headline-md font-bold text-on-surface">Clean Offset Metrics</h3>
-                <p class="text-body-md text-secondary">Estimated metrics computed utilizing national average electricity grid parameters.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-                    <div class="bg-white p-8 rounded border border-surface-container shadow-sm text-center">
-                        <span class="material-symbols-outlined text-[64px] text-green-600 mb-4">forest</span>
-                        <h4 class="text-headline-md font-bold" id="env-trees">- Trees</h4>
-                        <p class="text-xs text-secondary mt-1">Equivalent Trees planted per year</p>
-                    </div>
-                    <div class="bg-white p-8 rounded border border-surface-container shadow-sm text-center">
-                        <span class="material-symbols-outlined text-[64px] text-primary mb-4">co2</span>
-                        <h4 class="text-headline-md font-bold" id="env-co2">- kg</h4>
-                        <p class="text-xs text-secondary mt-1">CO2 Emissions Avoided per year</p>
-                    </div>
-                    <div class="bg-white p-8 rounded border border-surface-container shadow-sm text-center">
-                        <span class="material-symbols-outlined text-[64px] text-tertiary mb-4">oil_barrel</span>
-                        <h4 class="text-headline-md font-bold" id="env-coal">- Tons</h4>
-                        <p class="text-xs text-secondary mt-1">Equivalent Coal Saved from burning</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= SENSITIVITY TAB ================= -->
-            <div id="tab-pane-sensitivity" class="tab-pane hidden space-y-6">
-                <h3 class="text-headline-md font-bold text-on-surface">Interactive Sensitivity Model</h3>
-                <p class="text-body-md text-secondary">Adjust sliders to watch payback and internal returns change instantly.</p>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-                    <div class="bg-white p-6 rounded border border-surface-container shadow-sm space-y-6">
-                        <h4 class="font-bold text-on-surface uppercase text-xs">Adjust Variables</h4>
-                        <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span>CAPEX Surcharges / Rebates</span>
-                                <span id="sens-val-capex" class="font-bold">100%</span>
-                            </div>
-                            <input id="sens-slider-capex" type="range" min="80" max="120" step="5" value="100" class="w-full h-1.5 bg-surface-container rounded cursor-pointer accent-primary"/>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-sm mb-1">
-                                <span>Tariff Growth rate</span>
-                                <span id="sens-val-tariff" class="font-bold">4.0%</span>
-                            </div>
-                            <input id="sens-slider-tariff" type="range" min="1" max="10" step="0.5" value="4" class="w-full h-1.5 bg-surface-container rounded cursor-pointer accent-primary"/>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-2 bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-center space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="p-4 bg-surface-container-low rounded text-center">
-                                <span class="text-xs text-secondary block">Recalculated Payback</span>
-                                <span id="sens-res-payback" class="text-headline-md font-bold text-primary mt-1">- Years</span>
-                            </div>
-                            <div class="p-4 bg-surface-container-low rounded text-center">
-                                <span class="text-xs text-secondary block">Recalculated IRR</span>
-                                <span id="sens-res-irr" class="text-headline-md font-bold text-on-surface mt-1">- %</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================= COMPARE TAB ================= -->
-            <div id="tab-pane-compare" class="tab-pane hidden space-y-6">
-                <h3 class="text-headline-md font-bold text-on-surface">Configuration Comparisons</h3>
-                <p class="text-body-md text-secondary">Compare standard, balanced, and high efficiency tracker configurations.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter" id="scenarios-compare-grid">
-                    <!-- Dynamic scenario panels will render here -->
-                </div>
-            </div>
-
-            <!-- ================= REPORT TAB ================= -->
-            <div id="tab-pane-report" class="tab-pane hidden space-y-6">
-                <div class="flex justify-between items-center border-b border-surface-container pb-4">
-                    <h3 class="text-headline-md font-bold text-on-surface">Technical Feasibility Report</h3>
-                    <button onclick="window.print()" class="btn-primary text-sm font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">print</span> Print Report
-                    </button>
-                </div>
-                
-                <div class="bg-white p-12 rounded border border-surface-container shadow-sm space-y-8 max-w-4xl mx-auto" id="printable-report">
-                    <!-- Report Header -->
-                    <div class="flex justify-between items-start border-b border-surface-container-highest pb-6">
-                        <div>
-                            <h2 class="text-headline-md font-bold text-on-surface">SunPlus Power India Pvt. Ltd.</h2>
-                            <p class="text-xs text-secondary font-mono">CIN: U35105UP2026PTC242161 | Gomti Nagar, Lucknow</p>
-                        </div>
-                        <img alt="Logo" class="h-10 w-auto" src="assets/images/logo.svg"/>
-                    </div>
-                    
-                    <h3 class="text-headline-md font-bold text-center uppercase tracking-wider text-on-surface">Solar Feasibility Assessment</h3>
-                    
-                    <div class="grid grid-cols-2 gap-8 text-sm">
-                        <div>
-                            <h4 class="font-bold border-b border-surface-container pb-1 mb-2 text-primary uppercase text-xs">Customer Profile</h4>
-                            <p><strong>Name:</strong> <span id="rep-name">-</span></p>
-                            <p><strong>Location:</strong> <span id="rep-state">-</span></p>
-                            <p><strong>PIN Code:</strong> <span id="rep-zip">-</span></p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold border-b border-surface-container pb-1 mb-2 text-primary uppercase text-xs">Assessment ID</h4>
-                            <p><strong>Report Reference:</strong> #SP-ASSESSMENT-2026</p>
-                            <p><strong>Date Generated:</strong> <span id="rep-date">-</span></p>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <h4 class="font-bold border-b border-surface-container pb-1 text-primary uppercase text-xs">Recommended Configuration</h4>
-                        <div class="grid grid-cols-3 gap-4 text-center">
-                            <div class="p-3 bg-surface-container-low rounded border border-surface-container-highest">
-                                <span class="text-xs text-secondary block">System Size</span>
-                                <span id="rep-size" class="text-headline-sm font-bold text-on-surface">- kW</span>
-                            </div>
-                            <div class="p-3 bg-surface-container-low rounded border border-surface-container-highest">
-                                <span class="text-xs text-secondary block">Annual Savings</span>
-                                <span id="rep-savings" class="text-headline-sm font-bold text-on-surface">Rs.-</span>
-                            </div>
-                            <div class="p-3 bg-surface-container-low rounded border border-surface-container-highest">
-                                <span class="text-xs text-secondary block">Payback Duration</span>
-                                <span id="rep-payback" class="text-headline-sm font-bold text-primary">- Years</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- MODAL: REQUEST QUOTE FORM                  -->
-    <!-- ========================================== -->
-    <div id="quote-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-white rounded-lg max-w-md w-full p-8 space-y-6 shadow-xl border border-surface-container relative animate-in fade-in zoom-in-95 duration-300">
-            <button onclick="closeQuoteModal()" class="absolute right-4 top-4 text-secondary hover:text-on-surface">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            
-            <h3 class="text-headline-md font-bold text-on-surface">Request Quote / Site Survey</h3>
-            <p class="text-body-md text-secondary">Submit your feasibility run to our engineering desk in Lucknow.</p>
-            
-            <div id="quote-form-feedback"></div>
-            
-            <form id="quote-submission-form" class="space-y-4" onsubmit="submitQuoteRequest(event)">
                 <div>
-                    <label class="block text-label-sm font-bold text-on-surface mb-2">Subject</label>
-                    <select id="quote-intent" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded outline-none" required>
-                        <option value="Quotation Request">Request Detailed Quotation</option>
-                        <option value="Site Survey">Request Technical Site Survey</option>
+                  <h3 class="text-headline-md font-bold text-on-surface">Customer Profile</h3>
+                  <p class="text-body-md text-tertiary">Tell us about yourself and your location.</p>
+                </div>
+              </div>
+              <div class="space-y-6">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Customer Type</label>
+                  <select id="calc-customer-type" name="customer_type"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="industrial">Industrial</option>
+                  </select>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">Full Name</label>
+                    <input id="calc-name" name="name"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="John Doe" type="text" required />
+                  </div>
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">Organization Name</label>
+                    <input id="calc-organization" name="organization"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="Acme Corp" type="text" />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">Email Address</label>
+                    <input id="calc-email" name="email"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="john@example.com" type="email" required />
+                  </div>
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">Mobile Number</label>
+                    <input id="calc-phone" name="phone"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="+91 98765 43210" type="tel" />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">PIN Code</label>
+                    <input id="calc-pin" name="pin_code"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="226001" type="text" required />
+                  </div>
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">City</label>
+                    <input id="calc-city" name="city"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="Lucknow" type="text" required />
+                  </div>
+                  <div>
+                    <label class="block text-label-md font-bold text-on-surface mb-2">State</label>
+                    <select id="calc-state" name="state"
+                      class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                      <option value="Uttar Pradesh">Uttar Pradesh</option>
+                      <option value="Madhya Pradesh">Madhya Pradesh</option>
+                      <option value="Punjab">Punjab</option>
+                      <option value="Maharashtra">Maharashtra</option>
+                      <option value="Gujarat">Gujarat</option>
+                      <option value="Rajasthan">Rajasthan</option>
+                      <option value="Karnataka">Karnataka</option>
+                      <option value="Tamil Nadu">Tamil Nadu</option>
+                      <option value="Telangana">Telangana</option>
+                      <option value="Delhi">Delhi</option>
                     </select>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-12 flex justify-end">
+                <button type="button"
+                  class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all"
+                  onclick="nextStep(2)">
+                  Next
+                  <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Step 2: Energy Profile -->
+          <section class="p-8 hidden" id="form-step-2">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="bg-surface-container p-3 rounded text-on-surface">
+                <span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+              </div>
+              <div>
+                <h3 class="text-headline-md font-bold text-on-surface">Energy Profile</h3>
+                <p class="text-body-md text-tertiary">Analyze your current monthly utility consumption.</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div>
+                <label class="block text-label-md font-bold text-on-surface mb-2">Input Method</label>
+                <div class="flex gap-4">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="input-method" id="input-method-bill" value="bill" checked
+                      class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" />
+                    <span class="text-body-md text-on-surface">Monthly Bill</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="input-method" id="input-method-consumption" value="consumption"
+                      class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" />
+                    <span class="text-body-md text-on-surface">Monthly Consumption</span>
+                  </label>
+                </div>
+              </div>
+              <div id="bill-input-container">
+                <label class="block text-label-md font-bold text-on-surface mb-2">Monthly Bill (₹)</label>
+                <div class="relative">
+                  <span class="absolute left-4 top-1/2 -translate-y-1/2 text-tertiary">₹</span>
+                  <input id="calc-bill" name="monthly_bill"
+                    class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="5000" type="number" />
+                </div>
+              </div>
+              <div id="consumption-input-container" class="hidden">
+                <label class="block text-label-md font-bold text-on-surface mb-2">Monthly Consumption (kWh)</label>
+                <input id="calc-consumption" name="monthly_consumption"
+                  class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  placeholder="500" type="number" />
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Electricity Tariff (₹/kWh)</label>
+                  <input id="calc-tariff" name="tariff"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="7.0" type="number" step="0.01" />
                 </div>
                 <div>
-                    <label class="block text-label-sm font-bold text-on-surface mb-2">Comments / Shading Notes</label>
-                    <textarea id="quote-comments" class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded outline-none" rows="3" placeholder="Any shading notes or specialized structure requests..."></textarea>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Connection Type</label>
+                  <select id="calc-connection-type" name="connection_type"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                    <option value="domestic">Domestic</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="industrial">Industrial</option>
+                  </select>
                 </div>
-                <button type="submit" id="quote-submit-btn" class="w-full btn-primary py-3.5 mt-2 flex justify-center items-center gap-2">
-                    Submit Request <span class="material-symbols-outlined text-sm">send</span>
+              </div>
+              <div>
+                <label class="block text-label-md font-bold text-on-surface mb-2">Sanctioned Load (kW)</label>
+                <input id="calc-sanctioned-load" name="sanctioned_load"
+                  class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  placeholder="5.0" type="number" step="0.1" />
+              </div>
+            </div>
+            <div class="mt-12 flex justify-between">
+              <button type="button"
+                class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors"
+                onclick="nextStep(1)">
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                Back
+              </button>
+              <button type="button"
+                class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all"
+                onclick="nextStep(3)">
+                Next
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Step 3: Property & Site -->
+          <section class="p-8 hidden" id="form-step-3">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="bg-surface-container p-3 rounded text-on-surface">
+                <span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+              </div>
+              <div>
+                <h3 class="text-headline-md font-bold text-on-surface">Property & Site</h3>
+                <p class="text-body-md text-tertiary">Tell us about your property and select your site on the map.</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Property Type</label>
+                  <select id="calc-property-type" name="property_type"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="industrial">Industrial</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Roof Type</label>
+                  <select id="calc-roof-type" name="roof_type"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                    <option value="rcc">RCC</option>
+                    <option value="metal">Metal Sheet</option>
+                    <option value="tiled">Tiled</option>
+                    <option value="ground">Ground Mount</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Available Area (sq. ft.)</label>
+                  <input id="calc-area" name="available_area"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="1000" type="number" required />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Site Address</label>
+                  <input id="calc-site-address" name="site_address"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="Site Address" type="text" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Site PIN Code</label>
+                  <input id="calc-site-pin" name="site_pin_code"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="226001" type="text" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Site City</label>
+                  <input id="calc-site-city" name="site_city"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="Lucknow" type="text" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Site State</label>
+                  <select id="calc-site-state" name="site_state"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Delhi">Delhi</option>
+                  </select>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <label class="block text-label-md font-bold text-on-surface mb-2">Site Location</label>
+                <div id="map" style="height: 300px; border-radius: 8px; border: 1px solid #e5e7eb;"></div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-label-sm text-tertiary">Latitude</label>
+                    <input id="calc-lat"
+                      class="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-highest rounded text-sm"
+                      readonly type="text" />
+                  </div>
+                  <div>
+                    <label class="text-label-sm text-tertiary">Longitude</label>
+                    <input id="calc-lng"
+                      class="w-full px-3 py-2 bg-surface-container-lowest border border-surface-container-highest rounded text-sm"
+                      readonly type="text" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-12 flex justify-between">
+              <button type="button"
+                class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors"
+                onclick="nextStep(2)">
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                Back
+              </button>
+              <button type="button"
+                class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all"
+                onclick="nextStep(4)">
+                Next
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Step 4: Solar System -->
+          <section class="p-8 hidden" id="form-step-4">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="bg-surface-container p-3 rounded text-on-surface">
+                <span class="material-symbols-outlined" data-icon="solar_power">solar_power</span>
+              </div>
+              <div>
+                <h3 class="text-headline-md font-bold text-on-surface">Solar System</h3>
+                <p class="text-body-md text-tertiary">Configure your solar system components.</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div>
+                <label class="block text-label-md font-bold text-on-surface mb-2">System Type</label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <label
+                    class="p-4 border-2 border-primary bg-surface-container-lowest rounded text-left transition-all cursor-pointer">
+                    <input type="radio" name="system-type" id="system-type-grid" value="grid" checked class="sr-only" />
+                    <div class="flex items-center gap-3">
+                      <span class="material-symbols-outlined text-primary">power</span>
+                      <span class="text-label-md font-bold text-on-surface">On-Grid</span>
+                    </div>
+                  </label>
+                  <label
+                    class="p-4 border border-surface-container-highest hover:border-on-surface bg-white rounded text-left transition-all cursor-pointer">
+                    <input type="radio" name="system-type" id="system-type-off-grid" value="off-grid" class="sr-only" />
+                    <div class="flex items-center gap-3">
+                      <span class="material-symbols-outlined text-tertiary">battery_charging_full</span>
+                      <span class="text-label-md font-bold text-on-surface">Off-Grid</span>
+                    </div>
+                  </label>
+                  <label
+                    class="p-4 border border-surface-container-highest hover:border-on-surface bg-white rounded text-left transition-all cursor-pointer">
+                    <input type="radio" name="system-type" id="system-type-hybrid" value="hybrid" class="sr-only" />
+                    <div class="flex items-center gap-3">
+                      <span class="material-symbols-outlined text-tertiary">swap_horiz</span>
+                      <span class="text-label-md font-bold text-on-surface">Hybrid</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Panel Technology</label>
+                  <select id="calc-panel-tech" name="panel_tech"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                    <option value="monocrystalline">Monocrystalline</option>
+                    <option value="polycrystalline">Polycrystalline</option>
+                    <option value="perc">PERC</option>
+                    <option value="topcon">TOPCon</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">System Loss (%)</label>
+                  <input id="calc-loss" name="system_loss_percent"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="15" type="number" step="0.1" value="15" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Inverter Efficiency (%)</label>
+                  <input id="calc-inverter-efficiency" name="inverter_efficiency"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="97" type="number" step="0.1" value="97" />
+                </div>
+              </div>
+              <div>
+                <label
+                  class="flex items-center gap-3 p-4 bg-surface-container-low rounded cursor-pointer hover:bg-surface-container transition-colors border border-surface-container-highest">
+                  <input id="calc-battery" name="battery_storage"
+                    class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary"
+                    type="checkbox" />
+                  <span class="text-label-md font-bold text-on-surface">Add Battery Storage</span>
+                </label>
+              </div>
+              <div>
+                <label class="block text-label-md font-bold text-on-surface mb-2">Capacity Configuration</label>
+                <div class="flex gap-4 items-center">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="capacity-mode" id="capacity-auto" value="auto" checked
+                      class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" />
+                    <span class="text-body-md text-on-surface">Auto Recommend</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="capacity-mode" id="capacity-manual" value="manual"
+                      class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" />
+                    <span class="text-body-md text-on-surface">Manual</span>
+                  </label>
+                </div>
+              </div>
+              <div id="manual-capacity-container" class="hidden">
+                <label class="block text-label-md font-bold text-on-surface mb-2">Preferred Capacity (kW)</label>
+                <input id="calc-capacity" name="user_preferred_capacity"
+                  class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  placeholder="5.0" type="number" step="0.1" />
+              </div>
+              <div class="bg-surface-container-lowest p-6 rounded border border-surface-container">
+                <h4 class="text-label-md font-bold text-on-surface mb-4">Live Sizing Preview</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div>
+                    <p class="text-label-sm text-tertiary">Recommended Capacity</p>
+                    <p class="text-label-lg font-bold text-primary" id="preview-capacity">- kW</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Annual Generation</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="preview-generation">- kWh</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Area Required</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="preview-area">- sq. ft.</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Feasibility</p>
+                    <p class="text-label-lg font-bold text-green-600" id="preview-feasibility">-</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-12 flex justify-between">
+              <button type="button"
+                class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors"
+                onclick="nextStep(3)">
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                Back
+              </button>
+              <button type="button"
+                class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all"
+                onclick="nextStep(5)">
+                Next
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Step 5: Financial Model -->
+          <section class="p-8 hidden" id="form-step-5">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="bg-surface-container p-3 rounded text-on-surface">
+                <span class="material-symbols-outlined" data-icon="payments">payments</span>
+              </div>
+              <div>
+                <h3 class="text-headline-md font-bold text-on-surface">Financial Model</h3>
+                <p class="text-body-md text-tertiary">Configure financial parameters for ROI calculation.</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Project Cost (₹/kW)</label>
+                  <input id="calc-cost-per-kw" name="cost_per_kw"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="55000" type="number" value="55000" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Annual Tariff Escalation (%)</label>
+                  <input id="calc-tariff-escalation" name="annual_tariff_escalation"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="4" type="number" step="0.1" value="4" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Annual O&M Cost (₹/kW)</label>
+                  <input id="calc-om-cost" name="om_cost"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="1000" type="number" value="1000" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Annual O&M Escalation (%)</label>
+                  <input id="calc-om-escalation" name="annual_om_escalation"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="3" type="number" step="0.1" value="3" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Panel Degradation Rate (%)</label>
+                  <input id="calc-degradation" name="panel_degradation"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="0.5" type="number" step="0.01" value="0.5" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Project Life (Years)</label>
+                  <input id="calc-project-life" name="project_life"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="25" type="number" value="25" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-label-md font-bold text-on-surface mb-2">Discount Rate (%)</label>
+                <input id="calc-discount-rate" name="discount_rate"
+                  class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  placeholder="8" type="number" step="0.1" value="8" />
+              </div>
+              <div>
+                <label class="block text-label-md font-bold text-on-surface mb-2">Financing Type</label>
+                <div class="flex gap-4">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="financing-type" id="financing-cash" value="cash" checked
+                      class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" />
+                    <span class="text-body-md text-on-surface">Cash</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" name="financing-type" id="financing-loan" value="loan"
+                      class="w-5 h-5 text-primary border-surface-container-highest rounded focus:ring-primary" />
+                    <span class="text-body-md text-on-surface">Loan</span>
+                  </label>
+                </div>
+              </div>
+              <div id="loan-fields" class="grid grid-cols-1 md:grid-cols-3 gap-4 hidden">
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Down Payment (%)</label>
+                  <input id="calc-down-payment" name="down_payment"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="20" type="number" step="0.1" value="20" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Interest Rate (%)</label>
+                  <input id="calc-interest-rate" name="interest_rate"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="9" type="number" step="0.1" value="9" />
+                </div>
+                <div>
+                  <label class="block text-label-md font-bold text-on-surface mb-2">Loan Tenure (Years)</label>
+                  <input id="calc-loan-tenure" name="loan_tenure"
+                    class="w-full px-4 py-3 bg-surface-container-lowest border border-surface-container-highest rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="10" type="number" value="10" />
+                </div>
+              </div>
+            </div>
+            <div class="mt-12 flex justify-between">
+              <button type="button"
+                class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors"
+                onclick="nextStep(4)">
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                Back
+              </button>
+              <button type="button"
+                class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:opacity-90 transition-all"
+                onclick="nextStep(6)">
+                Next
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Step 6: Review & Run Analysis -->
+          <section class="p-8 hidden" id="form-step-6">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="bg-surface-container p-3 rounded text-on-surface">
+                <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+              </div>
+              <div>
+                <h3 class="text-headline-md font-bold text-on-surface">Review & Run Analysis</h3>
+                <p class="text-body-md text-tertiary">Review your inputs and run the solar analysis.</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-surface-container-lowest p-6 rounded border border-surface-container">
+                  <h4 class="text-label-md font-bold text-on-surface mb-4">Customer Profile</h4>
+                  <div class="space-y-2">
+                    <p class="text-body-md"><span class="text-tertiary">Name:</span> <span id="review-name">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Email:</span> <span id="review-email">-</span>
+                    </p>
+                    <p class="text-body-md"><span class="text-tertiary">Phone:</span> <span id="review-phone">-</span>
+                    </p>
+                    <p class="text-body-md"><span class="text-tertiary">Location:</span> <span
+                        id="review-location">-</span></p>
+                  </div>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded border border-surface-container">
+                  <h4 class="text-label-md font-bold text-on-surface mb-4">Energy Profile</h4>
+                  <div class="space-y-2">
+                    <p class="text-body-md"><span class="text-tertiary">Monthly Bill:</span> <span
+                        id="review-bill">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Monthly Consumption:</span> <span
+                        id="review-consumption">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Tariff:</span> <span id="review-tariff">-</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded border border-surface-container">
+                  <h4 class="text-label-md font-bold text-on-surface mb-4">Site Details</h4>
+                  <div class="space-y-2">
+                    <p class="text-body-md"><span class="text-tertiary">Property Type:</span> <span
+                        id="review-property">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Available Area:</span> <span
+                        id="review-area">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Coordinates:</span> <span
+                        id="review-coords">-</span></p>
+                  </div>
+                </div>
+                <div class="bg-surface-container-lowest p-6 rounded border border-surface-container">
+                  <h4 class="text-label-md font-bold text-on-surface mb-4">System Configuration</h4>
+                  <div class="space-y-2">
+                    <p class="text-body-md"><span class="text-tertiary">System Type:</span> <span
+                        id="review-system-type">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Capacity:</span> <span
+                        id="review-capacity">-</span></p>
+                    <p class="text-body-md"><span class="text-tertiary">Panel Tech:</span> <span
+                        id="review-panel-tech">-</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-12 flex flex-wrap justify-between gap-4">
+              <button type="button"
+                class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors"
+                onclick="nextStep(5)">
+                <span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+                Back
+              </button>
+              <div class="flex gap-4">
+                <button type="button" id="btn-save-draft"
+                  class="bg-surface-container border border-surface-container-highest text-on-surface px-6 py-3 rounded font-label-md flex items-center gap-2 hover:bg-surface-container-highest transition-all">
+                  <span class="material-symbols-outlined text-[20px]">save</span>
+                  Save Draft
                 </button>
-            </form>
+                <button type="button" id="btn-run-analysis"
+                  class="bg-primary text-white px-8 py-3 rounded font-label-md flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+                  onclick="runAnalysis()">
+                  <span class="material-symbols-outlined text-[20px]">calculate</span>
+                  Run Solar Analysis
+                </button>
+              </div>
+            </div>
+          </section>
         </div>
+
+        <!-- Results Section -->
+        <div class="hidden space-y-gutter animate-in fade-in slide-in-from-bottom-4 duration-700" id="results-area">
+          <!-- Two Column Layout: Left (Analysis), Right (Results) -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+            <!-- LEFT COLUMN: Analysis (Charts, Details) -->
+            <div class="space-y-gutter">
+              <div class="bg-white p-8 rounded border border-surface-container shadow-sm">
+                <div class="flex justify-between items-center mb-8">
+                  <h3 class="text-headline-md font-bold text-on-surface">Energy Profile</h3>
+                </div>
+                <div class="relative w-full" style="height: 260px;">
+                  <canvas id="energy-chart"></canvas>
+                </div>
+              </div>
+              <div class="bg-white p-8 rounded border border-surface-container shadow-sm">
+                <div class="flex justify-between items-center mb-8">
+                  <h3 class="text-headline-md font-bold text-on-surface">Financial Projection</h3>
+                  <div class="flex gap-4">
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-3 rounded-full bg-primary"></span>
+                      <span class="text-label-sm text-tertiary">Solar</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-3 rounded-full bg-surface-container-high"></span>
+                      <span class="text-label-sm text-tertiary">Traditional Utility</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative w-full" style="height: 260px;">
+                  <canvas id="financial-chart"></canvas>
+                </div>
+                <p class="text-label-sm text-tertiary mt-6 italic border-l-2 border-primary pl-4">Simulation based on
+                  tariff escalation and location-specific irradiance.</p>
+              </div>
+            </div>
+            <!-- RIGHT COLUMN: Results (KPI Cards) -->
+            <div class="space-y-gutter">
+              <div class="grid grid-cols-1 gap-gutter">
+                <div
+                  class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+                  <span class="text-label-md font-bold text-tertiary uppercase tracking-wider">System Size</span>
+                  <div class="mt-4">
+                    <span id="res-system-size" class="text-headline-md font-bold text-on-surface">-</span>
+                    <span class="text-label-md text-tertiary">kW DC</span>
+                  </div>
+                </div>
+                <div class="bg-primary p-6 rounded shadow-lg flex flex-col justify-between">
+                  <span class="text-label-md font-bold text-white/80 uppercase tracking-wider">Projected Savings</span>
+                  <div class="mt-4">
+                    <span id="res-savings-lifetime" class="text-headline-md font-bold text-white">-</span>
+                    <span class="text-label-sm text-white/60 block">25-Year Outlook</span>
+                  </div>
+                </div>
+                <div
+                  class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+                  <span class="text-label-md font-bold text-tertiary uppercase tracking-wider">Payback Period</span>
+                  <div class="mt-4">
+                    <span id="res-payback" class="text-headline-md font-bold text-on-surface">-</span>
+                    <span class="text-label-md text-tertiary">Years</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 gap-gutter">
+                  <div
+                    class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+                    <span class="text-label-md font-bold text-tertiary uppercase tracking-wider">Annual
+                      Generation</span>
+                    <div class="mt-4">
+                      <span id="res-annual-generation" class="text-headline-md font-bold text-on-surface">-</span>
+                      <span class="text-label-md text-tertiary">kWh</span>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+                    <span class="text-label-md font-bold text-tertiary uppercase tracking-wider">Net Investment</span>
+                    <div class="mt-4">
+                      <span id="res-net-investment" class="text-headline-md font-bold text-on-surface">-</span>
+                      <span class="text-label-md text-tertiary">₹</span>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-white p-6 rounded border border-surface-container shadow-sm flex flex-col justify-between">
+                    <span class="text-label-md font-bold text-tertiary uppercase tracking-wider">ROI</span>
+                    <div class="mt-4">
+                      <span id="res-roi" class="text-headline-md font-bold text-on-surface">-</span>
+                      <span class="text-label-md text-tertiary">%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Comparison Section: Below -->
+          <div class="bg-white p-8 rounded border border-surface-container shadow-sm">
+            <h3 class="text-headline-md font-bold text-on-surface mb-8">Before vs After Comparison</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+              <div class="p-6 rounded border border-surface-container-highest bg-surface-container-low">
+                <h4 class="text-label-md font-bold text-on-surface mb-6 uppercase tracking-wider">Before Solar</h4>
+                <div class="space-y-4">
+                  <div>
+                    <p class="text-label-sm text-tertiary">Annual Grid Consumption</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="comp-before-consumption">-</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Annual Electricity Cost</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="comp-before-cost">-</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Average Monthly Bill</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="comp-before-monthly">-</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-6 rounded border border-primary bg-primary/5">
+                <h4 class="text-label-md font-bold text-on-surface mb-6 uppercase tracking-wider">After Solar</h4>
+                <div class="space-y-4">
+                  <div>
+                    <p class="text-label-sm text-tertiary">Solar Generation</p>
+                    <p class="text-label-lg font-bold text-primary" id="comp-after-generation">-</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Remaining Grid Import</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="comp-after-grid">-</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-tertiary">Annual Electricity Cost</p>
+                    <p class="text-label-lg font-bold text-on-surface" id="comp-after-cost">-</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-6 rounded border border-green-600 bg-green-50">
+                <h4 class="text-label-md font-bold text-green-700 mb-6 uppercase tracking-wider">Difference</h4>
+                <div class="space-y-4">
+                  <div>
+                    <p class="text-label-sm text-green-600">Annual Savings</p>
+                    <p class="text-label-lg font-bold text-green-700" id="comp-savings">-</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-green-600">CO2 Offset</p>
+                    <p class="text-label-lg font-bold text-green-700" id="comp-co2">- kg CO2</p>
+                  </div>
+                  <div>
+                    <p class="text-label-sm text-green-600">Trees Planted Equivalent</p>
+                    <p class="text-label-lg font-bold text-green-700" id="comp-trees">- trees/yr</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between gap-4">
+            <button type="button"
+              class="text-on-surface font-label-md flex items-center gap-2 px-4 py-3 hover:text-primary transition-colors"
+              onclick="resetCalculator()">
+              <span class="material-symbols-outlined text-[20px]">refresh</span>
+              Start New Calculation
+            </button>
+            <button type="button" id="btn-download-report"
+              class="bg-on-surface text-white px-8 py-3 rounded font-label-md flex items-center gap-2 hover:bg-tertiary transition-all">
+              <span class="material-symbols-outlined text-[20px]">download</span>
+              Download Report
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column Sidebar -->
+      <aside class="lg:col-span-4 sticky top-28">
+        <div class="bg-white p-8 rounded border border-surface-container shadow-sm">
+          <h3
+            class="text-label-md font-bold text-on-surface mb-6 border-b border-surface-container pb-4 uppercase tracking-widest">
+            Configuration Summary</h3>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-tertiary" data-icon="person">person</span>
+              <div>
+                <p class="text-label-sm text-tertiary">Customer</p>
+                <p class="text-label-md font-bold text-on-surface" id="sidebar-name">-</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-tertiary" data-icon="bolt">bolt</span>
+              <div>
+                <p class="text-label-sm text-tertiary">Energy Baseline</p>
+                <p class="text-label-md font-bold text-on-surface" id="sidebar-bill">-</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-tertiary" data-icon="map">map</span>
+              <div>
+                <p class="text-label-sm text-tertiary">Location</p>
+                <p class="text-label-md font-bold text-on-surface" id="sidebar-location">-</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-tertiary" data-icon="solar_power">solar_power</span>
+              <div>
+                <p class="text-label-sm text-tertiary">System</p>
+                <p class="text-label-md font-bold text-on-surface" id="sidebar-system">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
+      <div class=" space-y-6">
+        <a href="index.html" class="flex items-center">
+          <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+            style="max-width:200px;" />
+        </a>
+        <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
+          transition through rigorous technical modeling and industrial-scale solar deployment.</p>
+      </div>
+      <div>
+        <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">Quick Links
+        </h4>
+        <ul class="space-y-4 font-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">Company</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="services.html">Services</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="projects.html">Projects</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="products.html">Products</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
+              Intelligence</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="careers.html">Careers</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">Connect
+        </h4>
+        <ul class="space-y-4 font-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+              href="connect.html?tab=distributor">Apply for Distributor</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+              href="connect.html?tab=warranty">Warranty Registration</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+              href="connect.html?tab=complaint">Complaint / Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">Contact
+        </h4>
+        <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+          <b>Corporate Address:</b><br />
+          1st Floor, D134, Vibhuti Khand<br />
+          Gomti Nagar, Lucknow<br />
+          Uttar Pradesh, India - 226010
+        </p>
+        <p class="text-on-surface-variant font-body-md leading-relaxed">
+          <b>Sales Help:</b> <a class="hover:text-primary"
+            href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
+          <b>Technical Support:</b> <a class="hover:text-primary"
+            href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
+          <b>Official Phone:</b> +91-9153832222
+        </p>
+      </div>
+    </div>
+    <div
+      class="px-margin-desktop py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 max-w-container-max mx-auto">
+      <div class="font-body-md text-body-md text-on-surface-variant">© 2026 SUNPLUS POWER. ALL RIGHTS RESERVED.</div>
+      <div class="flex gap-8">
+        <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+          href="connect.html">Privacy Policy</a>
+        <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+          href="connect.html">Terms of Use</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
+
 </html>

@@ -1,411 +1,464 @@
 <!DOCTYPE html>
 
-<html class="scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Media Hub | SunPlus Power</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<html class="scroll-smooth" lang="en">
 
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "surface-bright": "#f8f9fb",
-                "secondary-container": "#e2dfde",
-                "tertiary": "#505b6d",
-                "inverse-primary": "#ffb4ac",
-                "on-primary-fixed": "#410003",
-                "on-primary": "#ffffff",
-                "error-container": "#ffdad6",
-                "secondary-fixed": "#e5e2e1",
-                "secondary": "#5f5e5e",
-                "on-secondary-fixed-variant": "#474746",
-                "primary-container": "#d9302f",
-                "inverse-on-surface": "#f0f1f3",
-                "on-background": "#191c1e",
-                "inverse-surface": "#2e3132",
-                "surface-variant": "#e1e2e4",
-                "outline-variant": "#e4beb9",
-                "surface-tint": "#bb171d",
-                "on-tertiary-container": "#f9f9ff",
-                "surface": "#f8f9fb",
-                "on-secondary-container": "#636262",
-                "secondary-fixed-dim": "#c8c6c5",
-                "primary-fixed-dim": "#ffb4ac",
-                "surface-container-low": "#f2f4f6",
-                "on-error": "#ffffff",
-                "surface-container-lowest": "#ffffff",
-                "tertiary-container": "#697386",
-                "primary": "#b5111a",
-                "error": "#ba1a1a",
-                "on-surface-variant": "#5b403d",
-                "tertiary-fixed-dim": "#bdc7dc",
-                "surface-container": "#edeef0",
-                "on-secondary-fixed": "#1c1b1b",
-                "on-secondary": "#ffffff",
-                "surface-container-highest": "#e1e2e4",
-                "on-tertiary-fixed-variant": "#3d4759",
-                "on-surface": "#191c1e",
-                "on-primary-fixed-variant": "#93000e",
-                "background": "#f8f9fb",
-                "surface-dim": "#d9dadc",
-                "on-tertiary": "#ffffff",
-                "tertiary-fixed": "#d9e3f9",
-                "on-tertiary-fixed": "#121c2c",
-                "primary-fixed": "#ffdad6",
-                "on-primary-container": "#fff8f7",
-                "outline": "#906f6c",
-                "on-error-container": "#93000a",
-                "surface-container-high": "#e7e8ea"
-            },
-            "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-            },
-            "spacing": {
-                "base": "8px",
-                "container-max": "1280px",
-                "margin-desktop": "48px",
-                "margin-mobile": "16px",
-                "gutter": "24px"
-            },
-            "fontFamily": {
-                "body-lg": ["Inter"],
-                "label-sm": ["Inter"],
-                "headline-lg": ["Inter"],
-                "label-md": ["Inter"],
-                "body-md": ["Inter"],
-                "headline-md": ["Inter"],
-                "headline-xl": ["Inter"],
-                "headline-xl-mobile": ["Inter"],
-                "display-lg": ["Inter"],
-                "display-lg-mobile": ["Inter"]
-            },
-            "fontSize": {
-                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
-                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-            }
-          },
-        },
-      }
-    </script>
-<style>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Media Hub | SunPlus Power</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+
+
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             display: inline-block;
             line-height: 1;
         }
+
         .lightning-pattern {
             background-color: transparent;
-            background-image:  linear-gradient(135deg, #191c1e 25%, transparent 25%), linear-gradient(225deg, #191c1e 25%, transparent 25%), linear-gradient(45deg, #191c1e 25%, transparent 25%), linear-gradient(315deg, #191c1e 25%, transparent 25%);
-            background-position:  10px 0, 10px 0, 0 0, 0 0;
+            background-image: linear-gradient(135deg, #191c1e 25%, transparent 25%), linear-gradient(225deg, #191c1e 25%, transparent 25%), linear-gradient(45deg, #191c1e 25%, transparent 25%), linear-gradient(315deg, #191c1e 25%, transparent 25%);
+            background-position: 10px 0, 10px 0, 0 0, 0 0;
             background-size: 20px 20px;
             background-repeat: repeat;
             opacity: 0.02;
         }
+
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
     </style>
 
-    <link rel="stylesheet" href="assets/css/variables.css"/>
-    <link rel="stylesheet" href="assets/css/base.css"/>
-    <link rel="stylesheet" href="assets/css/components.css"/>
-    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
-    
+    <link rel="stylesheet" href="assets/css/variables.css?v=5" />
+    <link rel="stylesheet" href="assets/css/base.css?v=5" />
+    <link rel="stylesheet" href="assets/css/components.css?v=5" />
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=5" />
 
-    <script src="assets/js/api.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    
+
+    <script src="assets/js/api.js?v=5" defer></script>
+    <script src="assets/js/main.js?v=5" defer></script>
+
 </head>
-<body class="bg-surface text-on-surface font-body-md">
-<!-- TopNavBar -->
-<header class="bg-white sticky top-0 z-50 border-b border-surface-container-highest">
-<nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
-<div class="flex items-center gap-2">
-<a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto" src="assets/images/logo.svg"/></a>
-</div>
-<div class="hidden lg:flex items-center gap-8">
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="about.html">About Us</a>
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="services.html">Services</a>
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="projects.html">Projects</a>
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="products.html">Products</a>
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="careers.html">Careers</a>
-<a class="text-on-surface font-medium hover:text-primary transition-colors" href="dashboard.html">Portal</a>
-<a class="text-on-surface font-bold border-b-2 border-primary pb-1" href="media.html">Media Hub</a>
-</div>
-<a href="calculator.html" class="btn-primary text-sm font-bold">
-            Solar Calculator
-        </a>
-</nav>
-</header>
-<main class="relative">
-<!-- Background Decor -->
-<div class="absolute inset-0 lightning-pattern pointer-events-none"></div>
-<!-- Hero Section -->
-<section class="relative pt-20 pb-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="flex flex-col gap-6">
-<div class="flex items-center gap-3">
-<span class="w-8 h-[2px] bg-primary"></span>
-<span class="text-label-md text-primary font-bold uppercase tracking-widest">Newsroom</span>
-</div>
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface max-w-3xl leading-tight">
-                Engineering Insights &amp; Global Energy Impact
-            </h1>
-<p class="text-body-lg text-on-surface-variant max-w-2xl">
-                Stay updated with the latest in sustainable infrastructure, corporate milestones, and the future of industrial-scale solar power.
-            </p>
-</div>
-</section>
-<!-- Tabbed Interface -->
-<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-20">
-<div class="flex flex-wrap items-center justify-between gap-gutter border-b border-surface-container-highest mb-10">
-<div class="flex gap-10 overflow-x-auto no-scrollbar" id="media-tabs">
-<button class="tab-btn py-4 font-bold text-primary border-b-4 border-primary transition-all" data-tab="blogs" onclick="switchTab('blogs')">
-                    Blogs
-                </button>
-<button class="tab-btn py-4 font-bold text-on-surface-variant hover:text-primary transition-all border-b-4 border-transparent" data-tab="events" onclick="switchTab('events')">
-                    Events
-                </button>
-<button class="tab-btn py-4 font-bold text-on-surface-variant hover:text-primary transition-all border-b-4 border-transparent" data-tab="gallery" onclick="switchTab('gallery')">
-                    Gallery
-                </button>
-</div>
-<div class="flex items-center gap-4 pb-2">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="pl-10 pr-4 py-2 border border-surface-container-highest rounded-lg bg-white focus:ring-2 focus:ring-primary focus:border-primary text-body-md w-64 outline-none transition-all" placeholder="Search news..." type="text"/>
-</div>
-</div>
-</div>
-<!-- Tab Content: Blogs (Default) -->
-<div class="tab-pane grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogs-content">
-<!-- Featured Card (Large) -->
-<div class="md:col-span-2 group relative overflow-hidden rounded-xl border border-surface-container-highest bg-white shadow-sm hover:shadow-md transition-all">
-<div class="flex flex-col md:flex-row h-full">
-<div class="md:w-1/2 overflow-hidden h-64 md:h-full">
-<img alt="Aerial solar farm" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3K_vnH8Gsu43ZQwOw9X9qUYbF3XJngFTIbSDPkvmDTVYJ6ukRrPe68phKK9TYPJMLToa0TcxZZzIBHlTtHhiBb1L7pxHEv49DwiyndGYY9fOLzjmegcZk2REJnLMFxjaY9t_b4qivSTvQb5HSIPP_P14DC31XvaWzBpyl_UTGaS39G5gSKZ5THbJAVjUKuyvdYAQjW5wGnSOou8ut6cYN0SHLUh1VRjBS_ZCSskGohAOxkomEJfM9JQ"/>
-</div>
-<div class="md:w-1/2 p-10 flex flex-col justify-between">
-<div>
-<div class="flex gap-4 mb-6">
-<span class="bg-primary text-on-primary px-3 py-0.5 text-label-sm rounded uppercase tracking-wider">Innovation</span>
-<span class="text-label-sm text-on-surface-variant/70 font-medium">March 24, 2024</span>
-</div>
-<h3 class="text-headline-md text-on-surface mb-4 leading-tight">Scaling New Heights: The 500MW Desert Horizon Project</h3>
-<p class="text-body-md text-on-surface-variant mb-8 leading-relaxed">
-                                Our latest infrastructure milestone in the Mojave Desert redefines what's possible for utility-scale solar arrays...
-                            </p>
-</div>
-<button class="flex items-center gap-2 text-primary font-bold group-hover:gap-4 transition-all w-fit">
-                            Read Full Report <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Regular Blog Cards -->
-<div class="flex flex-col rounded-xl border border-surface-container-highest bg-white overflow-hidden group hover:shadow-md transition-all">
-<div class="h-60 overflow-hidden relative">
-<img alt="Solar inverter system" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-o4sQyuely2BDhfDbkYoas8Z_4wEwxVrhNTOTAh1X-1OwBuFteyraw2A7RNWmi7Q3s_6MUepmgEi1tswg9DYf1-hChcanq0Tc_BNnxWxQ5zP-k5HHgtvtxgLtWK0Ix_mXqhtc21EkFY-X2z3jeJfyCTdq62EbCYthtkdMCTWHCrtSf5BvJD4meXLSQK0Cw0bPxwE-AnkBRWiz7Ur9oqdIra9VopTjQDfb4dYOFh543eGQ0q4HmB_zFQ"/>
-<div class="absolute top-4 left-4">
-<span class="bg-primary text-on-primary px-2 py-0.5 text-[10px] rounded uppercase tracking-wider font-bold">Tech Specs</span>
-</div>
-</div>
-<div class="p-8">
-<h4 class="text-headline-sm text-on-surface mb-4 leading-snug">Maximizing Inverter Efficiency in Extreme Heat</h4>
-<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Technical breakdown of our thermal cooling patents designed for harsh arid environments...
-                    </p>
-<div class="flex justify-between items-center mt-auto border-t border-surface-container-high pt-4">
-<span class="text-label-sm text-on-surface-variant/60 font-medium">7 min read</span>
-<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">east</span>
-</div>
-</div>
-</div>
-<div class="flex flex-col rounded-xl border border-surface-container-highest bg-white overflow-hidden group hover:shadow-md transition-all">
-<div class="h-60 overflow-hidden relative">
-<img alt="Female lead engineer" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC28H5-mZswvbIHd-xAJoiOdwES9ay1R-hrCdxOifQMMB_g41yv5CWffx82hQJJuLSG7agZJMCHDFZRhV7TAo9tWgc0mAI5rryG4XRy0DucE6tR8Ba0OTu2dTvRHnl0oOTCNEyprZZ_0QKz-9UReokIdQmLX5OFRIs-927XGXBl9nxuDloWgyRYrQ0c-yyutTNLjEjkFZAQWKOJ1j_SqpuozlXrLC6E8Fsfon-L95ZsXVn6SCPObOYSFQ"/>
-<div class="absolute top-4 left-4">
-<span class="bg-primary text-on-primary px-2 py-0.5 text-[10px] rounded uppercase tracking-wider font-bold">Corporate</span>
-</div>
-</div>
-<div class="p-8">
-<h4 class="text-headline-sm text-on-surface mb-4 leading-snug">The Faces Behind the Energy: Meet Our Engineering Team</h4>
-<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        A deep dive into the culture of precision and the people who make SunPlus Power an industry leader...
-                    </p>
-<div class="flex justify-between items-center mt-auto border-t border-surface-container-high pt-4">
-<span class="text-label-sm text-on-surface-variant/60 font-medium">5 min read</span>
-<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">east</span>
-</div>
-</div>
-</div>
-<div class="flex flex-col rounded-xl border border-surface-container-highest bg-white overflow-hidden group hover:shadow-md transition-all">
-<div class="h-60 overflow-hidden relative">
-<img alt="Sustainable city rendering" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGZ1iamhvtpRD_FK_QIttJz6VozR_w_FRX_8JGp89xfmptbga-dfhuIQseND3eBBhu1_yuMVGRKQtcD7DHXPHDcfFWrTFFEKrw1NR2Vr92_LAd1J0C598korqGq0PVOItKohj2rlJfdsVd7ZxdXXGZzn7zAo6BTOy_94Jf4FRPkgsC_nuC6DWAWYBy42ue39GCl0Ja5ZhRLPop1VlMICJKQPBGAkTzcibCl-6W8jALMrFvChpMAv9a5A"/>
-<div class="absolute top-4 left-4">
-<span class="bg-primary text-on-primary px-2 py-0.5 text-[10px] rounded uppercase tracking-wider font-bold">Sustainability</span>
-</div>
-</div>
-<div class="p-8">
-<h4 class="text-headline-sm text-on-surface mb-4 leading-snug">Net Zero 2030: Our Roadmap to Grid Independence</h4>
-<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        SunPlus Power outlines the strategic initiatives helping our B2B partners reach decarbonization goals...
-                    </p>
-<div class="flex justify-between items-center mt-auto border-t border-surface-container-high pt-4">
-<span class="text-label-sm text-on-surface-variant/60 font-medium">10 min read</span>
-<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">east</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Content for other tabs (hidden initially) -->
-<div class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-content">
-<div class="p-16 text-center col-span-full border border-surface-container-highest rounded-xl bg-white shadow-sm">
-<span class="material-symbols-outlined text-5xl text-on-surface-variant/30">event_note</span>
-<p class="text-headline-sm mt-4 text-on-surface font-bold">Upcoming Global Trade Shows &amp; Summits</p>
-<p class="text-body-md text-on-surface-variant mt-2">Scheduled events for Q3 and Q4 2024 will appear here soon.</p>
-</div>
-</div>
-<div class="tab-pane hidden grid grid-cols-2 lg:grid-cols-4 gap-6" id="gallery-content">
-<!-- Gallery Grid -->
-<div class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
-<img alt="Crystalline solar cell" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2MuoaKR2Oht1Z5FtTXlAhghjrsBXw9SCUGYsSNRcTGO-J5XB6TgMEMwZ16NFi8uZuyB728IewIHETUBK3KjYSU4OsxMRKkrz1pxiLYut1Wu6ZmDFo-0aooLKU9WY3fcPnCPvcCvQGOxek2LmN1V_AaFkB0nvYtzvNCwjhcqTzheZHSzMX0G6du2O8HOJGDZ58Aiuar7v3HF-kJR-nGSxyvlt8rAKZV3xvRtPxJPBrllT7T_f1DIMZQ"/>
-<div class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-</div>
-</div>
-<div class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
-<img alt="Corporate solar installation" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmVeuMSUUuzNkogmwyCpcW4cxB9ycfv-H_EigCWPZUdLz2AWOXbfkxjRl6ZPl2s3fUSujRkyhliFHw-hUQzifmf2OSza1fa1_R5-B4VOFWzeujIoFrrDO92wIjhX9GqprLesEBE0Ctlg36uaAsPyce2eemyPlk2gGhsEapJKzvzHCtFPW4dJkn9la8JcsG4J6EDQk7EBySdiIRXyI6AHOzyfCI8mFWiwfM-EJbu7jSL9snbMZ901oDJw"/>
-<div class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-</div>
-</div>
-<div class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
-<img alt="Engineering Detail" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-o4sQyuely2BDhfDbkYoas8Z_4wEwxVrhNTOTAh1X-1OwBuFteyraw2A7RNWmi7Q3s_6MUepmgEi1tswg9DYf1-hChcanq0Tc_BNnxWxQ5zP-k5HHgtvtxgLtWK0Ix_mXqhtc21EkFY-X2z3jeJfyCTdq62EbCYthtkdMCTWHCrtSf5BvJD4meXLSQK0Cw0bPxwE-AnkBRWiz7Ur9oqdIra9VopTjQDfb4dYOFh543eGQ0q4HmB_zFQ"/>
-<div class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-</div>
-</div>
-<div class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
-<img alt="Innovation Site" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3K_vnH8Gsu43ZQwOw9X9qUYbF3XJngFTIbSDPkvmDTVYJ6ukRrPe68phKK9TYPJMLToa0TcxZZzIBHlTtHhiBb1L7pxHEv49DwiyndGYY9fOLzjmegcZk2REJnLMFxjaY9t_b4qivSTvQb5HSIPP_P14DC31XvaWzBpyl_UTGaS39G5gSKZ5THbJAVjUKuyvdYAQjW5wGnSOou8ut6cYN0SHLUh1VRjBS_ZCSskGohAOxkomEJfM9JQ"/>
-<div class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Newsletter CTA -->
-<section class="bg-surface-container py-24 px-margin-mobile md:px-margin-desktop relative overflow-hidden border-t border-surface-container-highest">
-<div class="max-w-container-max mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-<div class="max-w-xl text-center md:text-left">
-<h2 class="text-headline-xl text-on-surface mb-4">Stay Powered with the SunPlus Digest</h2>
-<p class="text-on-surface-variant text-body-lg">
-                    Get the latest engineering white papers and infrastructure news delivered to your inbox monthly.
-                </p>
-</div>
-<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto mt-8 md:mt-0">
-<input class="px-6 py-4 rounded-lg bg-white border border-surface-container-highest text-on-surface placeholder:text-on-surface-variant/50 w-full sm:w-80 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Corporate email address" type="email"/>
-<button class="bg-primary text-on-primary px-10 py-4 rounded-lg font-bold hover:bg-surface-tint transition-all whitespace-nowrap active:scale-95 shadow-sm">
-                    Subscribe Now
-                </button>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-white border-t border-surface-container-highest">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 flex flex-col md:flex-row justify-between gap-16">
-<div class="flex flex-col gap-8 max-w-sm">
-<img alt="SunPlus Power" class="h-12 w-auto self-start" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjB2xtYcs_rWGTvtzdJG5d3khohBKV-YlbJ_khYfrH9fZ_yJZ5GcAoRXzVXvuIzYdYMQtQh5dvqjzs1Rjf77BOCwBTRtatlT6MRQNtRBjLyVIMHsaSxD1Oyci7tU6Z0Z5LFPOmbFiMTs3pxPyIeA9Y-3J9Bz4TiGEiCr5I3WS28xedrTEhx0dSM0lbYXLWE7wKSxu-7YatxdNyxVNycUcK-etouT0WQIvXYS4zYgaaqq3ozNbSduA6F7iZThGNJo9NeZ0"/>
-<p class="text-on-surface-variant text-body-md leading-relaxed">
-                Leading the global transition to sustainable industrial infrastructure through engineering excellence and technical precision.
-            </p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full border border-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white hover:border-primary transition-all" href="index.html">
-<span class="material-symbols-outlined">public</span>
-</a>
-<a class="w-10 h-10 rounded-full border border-surface-container-highest flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white hover:border-primary transition-all" href="index.html">
-<span class="material-symbols-outlined">mail</span>
-</a>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-16 lg:gap-32">
-<div class="flex flex-col gap-6">
-<h5 class="text-on-surface font-bold text-label-md uppercase tracking-widest">Resources</h5>
-<nav class="flex flex-col gap-4">
-<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="index.html">Sitemap</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="connect.html">Contact</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="index.html">Media Hub</a>
-</nav>
-</div>
-<div class="flex flex-col gap-6">
-<h5 class="text-on-surface font-bold text-label-md uppercase tracking-widest">Legal</h5>
-<nav class="flex flex-col gap-4">
-<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="connect.html">Privacy Policy</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="connect.html">Terms of Service</a>
-</nav>
-</div>
-</div>
-</div>
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-surface-container-low">
-<p class="text-on-surface-variant/60 text-label-sm font-medium">
-            © 2024 SunPlus Power. Engineering Excellence in Solar. All Rights Reserved.
-        </p>
-</div>
-</footer>
-<script>
-    function switchTab(tabId) {
-        // Hide all panes
-        document.querySelectorAll('.tab-pane').forEach(pane => {
-            pane.classList.add('hidden');
-        });
-        
-        // Show target pane
-        document.getElementById(tabId + '-content').classList.remove('hidden');
-        
-        // Update button styles
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('text-primary', 'border-primary');
-            btn.classList.add('text-on-surface-variant', 'border-transparent');
-        });
-        
-        const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
-        activeBtn.classList.add('text-primary', 'border-primary');
-        activeBtn.classList.remove('text-on-surface-variant', 'border-transparent');
-    }
 
-    // Initialize micro-interactions
-    document.querySelectorAll('button, a').forEach(el => {
-        if (!el.classList.contains('active:scale-95')) {
-            el.addEventListener('mousedown', () => {
-                el.classList.add('scale-95');
+<body class="bg-surface text-on-surface font-body-md">
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+        <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
+            <a href="index.html" class="flex items-center shrink-0">
+                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+                    style="max-width:200px;" />
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="index.html">Home</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="about.html">Company</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="services.html">Services</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="projects.html">Projects</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="products.html">Products</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-secondary-container nav-active pb-1 relative"
+                    href="media.html">Solar Intelligence</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="careers.html">Careers</a>
+                <div class="relative group">
+                    <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
+                        href="connect.html">
+                        Connect
+                        <span
+                            class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+                    </a>
+                    <div
+                        class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div class="py-1" role="menu">
+                            <a href="connect.html?tab=distributor"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Apply for Distributor</a>
+                            <a href="connect.html?tab=warranty"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Warranty Registration</a>
+                            <a href="connect.html?tab=complaint"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Complaint / Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="calculator.html"
+                class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
+                SOLAR CALCULATOR
+            </a>
+        </div>
+    </nav>
+    <main class="relative">
+        <!-- Background Decor -->
+        <div class="absolute inset-0 lightning-pattern pointer-events-none"></div>
+        <!-- Hero Section -->
+        <section class="relative pt-28 pb-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="flex flex-col gap-6">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-[2px] bg-primary"></span>
+                    <span class="text-label-md text-primary font-bold uppercase tracking-widest">Newsroom</span>
+                </div>
+                <h1
+                    class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface max-w-3xl leading-tight">
+                    Engineering Insights &amp; Global Energy Impact
+                </h1>
+                <p class="text-body-lg text-on-surface-variant max-w-2xl">
+                    Stay updated with the latest in sustainable infrastructure, corporate milestones, and the future of
+                    industrial-scale solar power.
+                </p>
+            </div>
+        </section>
+        <!-- Tabbed Interface -->
+        <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-20">
+            <div
+                class="flex flex-wrap items-center justify-between gap-gutter border-b border-surface-container-highest mb-10">
+                <div class="flex gap-10 overflow-x-auto no-scrollbar" id="media-tabs">
+                    <button class="tab-btn py-4 font-bold text-primary border-b-4 border-primary transition-all"
+                        data-tab="blogs" onclick="switchTab('blogs')">
+                        Blogs
+                    </button>
+                    <button
+                        class="tab-btn py-4 font-bold text-on-surface-variant hover:text-primary transition-all border-b-4 border-transparent"
+                        data-tab="events" onclick="switchTab('events')">
+                        Events
+                    </button>
+                    <button
+                        class="tab-btn py-4 font-bold text-on-surface-variant hover:text-primary transition-all border-b-4 border-transparent"
+                        data-tab="gallery" onclick="switchTab('gallery')">
+                        Gallery
+                    </button>
+                </div>
+                <div class="flex items-center gap-4 pb-2">
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+                        <input
+                            class="pl-10 pr-4 py-2 border border-surface-container-highest rounded-lg bg-white focus:ring-2 focus:ring-primary focus:border-primary text-body-md w-64 outline-none transition-all"
+                            placeholder="Search news..." type="text" />
+                    </div>
+                </div>
+            </div>
+            <!-- Tab Content: Blogs (Default) -->
+            <div class="tab-pane grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogs-content">
+                <!-- Featured Card (Large) -->
+                <div
+                    class=" group relative overflow-hidden rounded-xl border border-surface-container-highest bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="flex flex-col md:flex-row h-full">
+                        <div class="md:w-1/2 overflow-hidden h-64 md:h-full">
+                            <img alt="Aerial solar farm"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3K_vnH8Gsu43ZQwOw9X9qUYbF3XJngFTIbSDPkvmDTVYJ6ukRrPe68phKK9TYPJMLToa0TcxZZzIBHlTtHhiBb1L7pxHEv49DwiyndGYY9fOLzjmegcZk2REJnLMFxjaY9t_b4qivSTvQb5HSIPP_P14DC31XvaWzBpyl_UTGaS39G5gSKZ5THbJAVjUKuyvdYAQjW5wGnSOou8ut6cYN0SHLUh1VRjBS_ZCSskGohAOxkomEJfM9JQ" />
+                        </div>
+                        <div class="md:w-1/2 p-10 flex flex-col justify-between">
+                            <div>
+                                <div class="flex gap-4 mb-6">
+                                    <span
+                                        class="bg-primary text-on-primary px-3 py-0.5 text-label-sm rounded uppercase tracking-wider">Innovation</span>
+                                    <span class="text-label-sm text-on-surface-variant/70 font-medium">March 24,
+                                        2024</span>
+                                </div>
+                                <h3 class="text-headline-md text-on-surface mb-4 leading-tight">Scaling New Heights: The
+                                    500MW Desert Horizon Project</h3>
+                                <p class="text-body-md text-on-surface-variant mb-8 leading-relaxed">
+                                    Our latest infrastructure milestone in the Mojave Desert redefines what's possible
+                                    for utility-scale solar arrays...
+                                </p>
+                            </div>
+                            <button
+                                class="flex items-center gap-2 text-primary font-bold group-hover:gap-4 transition-all w-fit">
+                                Read Full Report <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Regular Blog Cards -->
+                <div
+                    class="flex flex-col rounded-xl border border-surface-container-highest bg-white overflow-hidden group hover:shadow-md transition-all">
+                    <div class="h-60 overflow-hidden relative">
+                        <img alt="Solar inverter system"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-o4sQyuely2BDhfDbkYoas8Z_4wEwxVrhNTOTAh1X-1OwBuFteyraw2A7RNWmi7Q3s_6MUepmgEi1tswg9DYf1-hChcanq0Tc_BNnxWxQ5zP-k5HHgtvtxgLtWK0Ix_mXqhtc21EkFY-X2z3jeJfyCTdq62EbCYthtkdMCTWHCrtSf5BvJD4meXLSQK0Cw0bPxwE-AnkBRWiz7Ur9oqdIra9VopTjQDfb4dYOFh543eGQ0q4HmB_zFQ" />
+                        <div class="absolute top-4 left-4">
+                            <span
+                                class="bg-primary text-on-primary px-2 py-0.5 text-[10px] rounded uppercase tracking-wider font-bold">Tech
+                                Specs</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-headline-sm text-on-surface mb-4 leading-snug">Maximizing Inverter Efficiency in
+                            Extreme Heat</h4>
+                        <p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                            Technical breakdown of our thermal cooling patents designed for harsh arid environments...
+                        </p>
+                        <div
+                            class="flex justify-between items-center mt-auto border-t border-surface-container-high pt-4">
+                            <span class="text-label-sm text-on-surface-variant/60 font-medium">7 min read</span>
+                            <span
+                                class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">east</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col rounded-xl border border-surface-container-highest bg-white overflow-hidden group hover:shadow-md transition-all">
+                    <div class="h-60 overflow-hidden relative">
+                        <img alt="Female lead engineer"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC28H5-mZswvbIHd-xAJoiOdwES9ay1R-hrCdxOifQMMB_g41yv5CWffx82hQJJuLSG7agZJMCHDFZRhV7TAo9tWgc0mAI5rryG4XRy0DucE6tR8Ba0OTu2dTvRHnl0oOTCNEyprZZ_0QKz-9UReokIdQmLX5OFRIs-927XGXBl9nxuDloWgyRYrQ0c-yyutTNLjEjkFZAQWKOJ1j_SqpuozlXrLC6E8Fsfon-L95ZsXVn6SCPObOYSFQ" />
+                        <div class="absolute top-4 left-4">
+                            <span
+                                class="bg-primary text-on-primary px-2 py-0.5 text-[10px] rounded uppercase tracking-wider font-bold">Corporate</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-headline-sm text-on-surface mb-4 leading-snug">The Faces Behind the Energy: Meet
+                            Our Engineering Team</h4>
+                        <p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                            A deep dive into the culture of precision and the people who make SunPlus Power an industry
+                            leader...
+                        </p>
+                        <div
+                            class="flex justify-between items-center mt-auto border-t border-surface-container-high pt-4">
+                            <span class="text-label-sm text-on-surface-variant/60 font-medium">5 min read</span>
+                            <span
+                                class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">east</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col rounded-xl border border-surface-container-highest bg-white overflow-hidden group hover:shadow-md transition-all">
+                    <div class="h-60 overflow-hidden relative">
+                        <img alt="Sustainable city rendering"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGZ1iamhvtpRD_FK_QIttJz6VozR_w_FRX_8JGp89xfmptbga-dfhuIQseND3eBBhu1_yuMVGRKQtcD7DHXPHDcfFWrTFFEKrw1NR2Vr92_LAd1J0C598korqGq0PVOItKohj2rlJfdsVd7ZxdXXGZzn7zAo6BTOy_94Jf4FRPkgsC_nuC6DWAWYBy42ue39GCl0Ja5ZhRLPop1VlMICJKQPBGAkTzcibCl-6W8jALMrFvChpMAv9a5A" />
+                        <div class="absolute top-4 left-4">
+                            <span
+                                class="bg-primary text-on-primary px-2 py-0.5 text-[10px] rounded uppercase tracking-wider font-bold">Sustainability</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-headline-sm text-on-surface mb-4 leading-snug">Net Zero 2030: Our Roadmap to
+                            Grid Independence</h4>
+                        <p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                            SunPlus Power outlines the strategic initiatives helping our B2B partners reach
+                            decarbonization goals...
+                        </p>
+                        <div
+                            class="flex justify-between items-center mt-auto border-t border-surface-container-high pt-4">
+                            <span class="text-label-sm text-on-surface-variant/60 font-medium">10 min read</span>
+                            <span
+                                class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">east</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content for other tabs (hidden initially) -->
+            <div class="tab-pane hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-content">
+                <div
+                    class="p-16 text-center col-span-full border border-surface-container-highest rounded-xl bg-white shadow-sm">
+                    <span class="material-symbols-outlined text-5xl text-on-surface-variant/30">event_note</span>
+                    <p class="text-headline-sm mt-4 text-on-surface font-bold">Upcoming Global Trade Shows &amp; Summits
+                    </p>
+                    <p class="text-body-md text-on-surface-variant mt-2">Scheduled events for Q3 and Q4 2024 will appear
+                        here soon.</p>
+                </div>
+            </div>
+            <div class="tab-pane hidden grid grid-cols-2 lg:grid-cols-4 gap-6" id="gallery-content">
+                <!-- Gallery Grid -->
+                <div
+                    class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
+                    <img alt="Crystalline solar cell"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2MuoaKR2Oht1Z5FtTXlAhghjrsBXw9SCUGYsSNRcTGO-J5XB6TgMEMwZ16NFi8uZuyB728IewIHETUBK3KjYSU4OsxMRKkrz1pxiLYut1Wu6ZmDFo-0aooLKU9WY3fcPnCPvcCvQGOxek2LmN1V_AaFkB0nvYtzvNCwjhcqTzheZHSzMX0G6du2O8HOJGDZ58Aiuar7v3HF-kJR-nGSxyvlt8rAKZV3xvRtPxJPBrllT7T_f1DIMZQ" />
+                    <div
+                        class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+                <div
+                    class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
+                    <img alt="Corporate solar installation"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmVeuMSUUuzNkogmwyCpcW4cxB9ycfv-H_EigCWPZUdLz2AWOXbfkxjRl6ZPl2s3fUSujRkyhliFHw-hUQzifmf2OSza1fa1_R5-B4VOFWzeujIoFrrDO92wIjhX9GqprLesEBE0Ctlg36uaAsPyce2eemyPlk2gGhsEapJKzvzHCtFPW4dJkn9la8JcsG4J6EDQk7EBySdiIRXyI6AHOzyfCI8mFWiwfM-EJbu7jSL9snbMZ901oDJw" />
+                    <div
+                        class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+                <div
+                    class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
+                    <img alt="Engineering Detail"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-o4sQyuely2BDhfDbkYoas8Z_4wEwxVrhNTOTAh1X-1OwBuFteyraw2A7RNWmi7Q3s_6MUepmgEi1tswg9DYf1-hChcanq0Tc_BNnxWxQ5zP-k5HHgtvtxgLtWK0Ix_mXqhtc21EkFY-X2z3jeJfyCTdq62EbCYthtkdMCTWHCrtSf5BvJD4meXLSQK0Cw0bPxwE-AnkBRWiz7Ur9oqdIra9VopTjQDfb4dYOFh543eGQ0q4HmB_zFQ" />
+                    <div
+                        class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+                <div
+                    class="aspect-square bg-surface-container rounded-xl overflow-hidden relative group cursor-pointer border border-surface-container-highest">
+                    <img alt="Innovation Site"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3K_vnH8Gsu43ZQwOw9X9qUYbF3XJngFTIbSDPkvmDTVYJ6ukRrPe68phKK9TYPJMLToa0TcxZZzIBHlTtHhiBb1L7pxHEv49DwiyndGYY9fOLzjmegcZk2REJnLMFxjaY9t_b4qivSTvQb5HSIPP_P14DC31XvaWzBpyl_UTGaS39G5gSKZ5THbJAVjUKuyvdYAQjW5wGnSOou8ut6cYN0SHLUh1VRjBS_ZCSskGohAOxkomEJfM9JQ" />
+                    <div
+                        class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Newsletter CTA -->
+        <section
+            class="bg-surface-container py-24 px-margin-mobile md:px-margin-desktop relative overflow-hidden border-t border-surface-container-highest">
+            <div
+                class="max-w-container-max mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="max-w-xl text-center md:text-left">
+                    <h2 class="text-headline-xl text-on-surface mb-4">Stay Powered with the SunPlus Digest</h2>
+                    <p class="text-on-surface-variant text-body-lg">
+                        Get the latest engineering white papers and infrastructure news delivered to your inbox monthly.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto mt-8 md:mt-0">
+                    <input
+                        class="px-6 py-4 rounded-lg bg-white border border-surface-container-highest text-on-surface placeholder:text-on-surface-variant/50 w-full sm:w-80 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                        placeholder="Corporate email address" type="email" />
+                    <button
+                        class="bg-primary text-on-primary px-10 py-4 rounded-lg font-bold hover:bg-surface-tint transition-all whitespace-nowrap active:scale-95 shadow-sm">
+                        Subscribe Now
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
+            <div class=" space-y-6">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+                        style="max-width:200px;" />
+                </a>
+                <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
+                    transition
+                    through rigorous technical modeling and industrial-scale solar deployment.</p>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Quick
+                    Links</h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="about.html">Company</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="services.html">Services</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="projects.html">Projects</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="products.html">Products</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
+                            Intelligence</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="careers.html">Careers</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Connect
+                </h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=distributor">Apply for Distributor</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=warranty">Warranty Registration</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=complaint">Complaint / Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Contact
+                </h4>
+                <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+                    <b>Corporate Address:</b><br />
+                    1st Floor, D134, Vibhuti Khand<br />
+                    Gomti Nagar, Lucknow<br />
+                    Uttar Pradesh, India - 226010
+                </p>
+                <p class="text-on-surface-variant font-body-md leading-relaxed">
+                    <b>Sales Help:</b> <a class="hover:text-primary"
+                        href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
+                    <b>Technical Support:</b> <a class="hover:text-primary"
+                        href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
+                    <b>Official Phone:</b> +91-9153832222
+                </p>
+            </div>
+        </div>
+        <div
+            class="px-margin-desktop py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 max-w-container-max mx-auto">
+            <div class="font-body-md text-body-md text-on-surface-variant">© 2026 SUNPLUS POWER. ALL RIGHTS RESERVED.
+            </div>
+            <div class="flex gap-8">
+                <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+                    href="connect.html">Privacy Policy</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+                    href="connect.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function switchTab(tabId) {
+            // Hide all panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.add('hidden');
             });
-            el.addEventListener('mouseup', () => {
-                el.classList.remove('scale-95');
+
+            // Show target pane
+            document.getElementById(tabId + '-content').classList.remove('hidden');
+
+            // Update button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('text-primary', 'border-primary');
+                btn.classList.add('text-on-surface-variant', 'border-transparent');
             });
-            el.addEventListener('mouseleave', () => {
-                el.classList.remove('scale-95');
-            });
+
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            activeBtn.classList.add('text-primary', 'border-primary');
+            activeBtn.classList.remove('text-on-surface-variant', 'border-transparent');
         }
-    });
-</script>
-</body></html>
+
+        // Initialize micro-interactions
+        document.querySelectorAll('button, a').forEach(el => {
+            if (!el.classList.contains('active:scale-95')) {
+                el.addEventListener('mousedown', () => {
+                    el.classList.add('scale-95');
+                });
+                el.addEventListener('mouseup', () => {
+                    el.classList.remove('scale-95');
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.classList.remove('scale-95');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

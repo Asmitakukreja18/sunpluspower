@@ -1,566 +1,476 @@
 <!DOCTYPE html>
+<html class="light" lang="en">
 
-<html class="scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>SunPlus Power | Engineering India's Solar Future</title>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SUNPLUS POWER | Engineering Solar Excellence</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-bright": "#f8f9fb",
-                        "secondary-container": "#e2dfde",
-                        "tertiary": "#505b6d",
-                        "inverse-primary": "#ffb4ac",
-                        "on-primary-fixed": "#410003",
-                        "on-primary": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed": "#e5e2e1",
-                        "secondary": "#5f5e5e",
-                        "on-secondary-fixed-variant": "#474746",
-                        "primary-container": "#d9302f",
-                        "inverse-on-surface": "#f0f1f3",
-                        "on-background": "#191c1e",
-                        "inverse-surface": "#2e3132",
-                        "surface-variant": "#e1e2e4",
-                        "outline-variant": "#e4beb9",
-                        "surface-tint": "#bb171d",
-                        "on-tertiary-container": "#f9f9ff",
-                        "surface": "#f8f9fb",
-                        "on-secondary-container": "#636262",
-                        "secondary-fixed-dim": "#c8c6c5",
-                        "primary-fixed-dim": "#ffb4ac",
-                        "surface-container-low": "#f2f4f6",
-                        "on-error": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "tertiary-container": "#697386",
-                        "primary": "#d9302f",
-                        "error": "#ba1a1a",
-                        "on-surface-variant": "#5b403d",
-                        "tertiary-fixed-dim": "#bdc7dc",
-                        "surface-container": "#edeef0",
-                        "on-secondary-fixed": "#1c1b1b",
-                        "on-secondary": "#ffffff",
-                        "surface-container-highest": "#e1e2e4",
-                        "on-tertiary-fixed-variant": "#3d4759",
-                        "on-surface": "#191c1e",
-                        "on-primary-fixed-variant": "#93000e",
-                        "background": "#f8f9fb",
-                        "surface-dim": "#d9dadc",
-                        "on-tertiary": "#ffffff",
-                        "tertiary-fixed": "#d9e3f9",
-                        "on-tertiary-fixed": "#121c2c",
-                        "primary-fixed": "#ffdad6",
-                        "on-primary-container": "#fff8f7",
-                        "outline": "#906f6c",
-                        "on-error-container": "#93000a",
-                        "surface-container-high": "#e7e8ea",
-                        "charcoal": "#1a1c1c"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "sm": "12px",
-                        "lg": "48px",
-                        "margin-desktop": "64px",
-                        "md": "24px",
-                        "margin-mobile": "16px",
-                        "base": "8px",
-                        "xs": "4px",
-                        "xl": "80px",
-                        "gutter": "24px"
-                    },
-                    "fontFamily": {
-                        "label-bold": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "body-md": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "label-sm": ["Inter"]
-                    },
-                    "fontSize": {
-                        "label-bold": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
-                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
-                    }
-                },
-            },
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
         }
-    </script>
-<style>
-        .lightning-pattern {
-            background-color: transparent;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l-5 25h10l-15 35 5-25h-10z' fill='%23d9302f' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+
+        .technical-line {
+            height: 1px;
+            background: currentColor;
+            position: relative;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(225, 226, 228, 0.5);
+
+        .technical-line::before,
+        .technical-line::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 8px;
+            background: currentColor;
+            top: -4px;
         }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+
+        .technical-line::before {
+            left: 0;
         }
-        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        .technical-line::after {
+            right: 0;
+        }
+
         .hero-gradient {
-            background: linear-gradient(135deg, #1a1c1c 0%, #2e3132 100%);
+            background: linear-gradient(to right, rgba(19, 19, 20, 0.95) 30%, rgba(19, 19, 20, 0.4) 100%);
         }
-        .cta-gradient {
-            background: linear-gradient(135deg, #d9302f 0%, #93000e 100%);
+
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #a40213;
         }
     </style>
 
-    <link rel="stylesheet" href="assets/css/variables.css"/>
-    <link rel="stylesheet" href="assets/css/base.css"/>
-    <link rel="stylesheet" href="assets/css/components.css"/>
-    <link rel="stylesheet" href="assets/css/tailwind-compiled.css"/>
-    
+    <link rel="stylesheet" href="assets/css/variables.css?v=5" />
+    <link rel="stylesheet" href="assets/css/base.css?v=5" />
+    <link rel="stylesheet" href="assets/css/components.css?v=5" />
+    <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=5" />
 
-    <script src="assets/js/api.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    
+
+    <script src="assets/js/api.js?v=5" defer></script>
+    <script src="assets/js/main.js?v=5" defer></script>
+
 </head>
-<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-fixed selection:text-primary">
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-charcoal border-b border-white/10 shadow-sm transition-all duration-300">
-<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-3 max-w-[1440px] mx-auto">
-<div class="flex items-center gap-3">
-<a href="index.html" class="flex items-center gap-3"><img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="assets/images/logo.svg"/></a>
-</div>
-<nav class="hidden md:flex items-center gap-gutter">
-<a class="text-primary font-label-bold border-b-2 border-primary pb-1" href="index.html">Home</a>
-<a class="text-white/70 font-label-bold hover:text-white transition-colors" href="about.html">About Us</a>
-<a class="text-white/70 font-label-bold hover:text-white transition-colors" href="services.html">Services</a>
-<a class="text-white/70 font-label-bold hover:text-white transition-colors" href="projects.html">Projects</a>
-<a class="text-white/70 font-label-bold hover:text-white transition-colors" href="products.html">Products</a>
-<a class="text-white/70 font-label-bold hover:text-white transition-colors" href="careers.html">Careers</a>
-<a class="text-white/70 font-label-bold hover:text-white transition-colors" href="dashboard.html">Portal</a>
-</nav>
-<a href="calculator.html" class="btn-primary text-sm font-bold">
-            Solar Calculator
-        </a>
-</div>
-</header>
-<main class="pt-16">
-<!-- Hero Section -->
-<section class="relative hero-gradient overflow-hidden min-h-[700px] flex items-center">
-<!-- Background Decoration -->
-<div class="absolute inset-0">
-<div class="lightning-pattern h-full w-full opacity-10"></div>
-<div class="absolute inset-0 bg-black/20"></div>
-</div>
-<div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto grid md:grid-cols-2 gap-16 items-center py-20">
-<div class="space-y-8 animate-in fade-in slide-in-from-left duration-700">
-<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white font-label-bold text-label-sm uppercase tracking-widest backdrop-blur-sm">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    Industrial Scale Excellence
+
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container selection:text-white">
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+        <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
+            <a href="index.html" class="flex items-center shrink-0">
+                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+                    style="max-width:200px;" />
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-secondary-container nav-active pb-1 relative"
+                    href="index.html">Home</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="about.html">Company</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="services.html">Services</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="projects.html">Projects</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="products.html">Products</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="media.html">Solar Intelligence</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="careers.html">Careers</a>
+                <div class="relative group">
+                    <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
+                        href="connect.html">
+                        Connect
+                        <span
+                            class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+                    </a>
+                    <div
+                        class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div class="py-1" role="menu">
+                            <a href="connect.html?tab=distributor"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Apply for Distributor</a>
+                            <a href="connect.html?tab=warranty"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Warranty Registration</a>
+                            <a href="connect.html?tab=complaint"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                                role="menuitem">Complaint / Support</a>
+                        </div>
+                    </div>
                 </div>
-<h1 class="text-display-lg text-white font-display-lg leading-[1.1] md:text-6xl">
-                    Engineering India's <br/><span class="text-primary">Solar Future</span>
-</h1>
-<p class="text-white/80 text-body-lg max-w-lg leading-relaxed">
-                    Leading the transition to sustainable energy with utility-scale infrastructure. We provide end-to-end solar engineering solutions designed for maximum efficiency and industrial durability.
-                </p>
-<div class="flex flex-wrap gap-5 pt-4">
-<button class="bg-primary text-white px-8 py-4 rounded-lg font-label-bold text-body-md hover:bg-primary/90 transition-all shadow-xl hover:-translate-y-1">
-                        Get a Quote
-                    </button>
-<button class="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-label-bold text-body-md hover:bg-white/10 transition-all backdrop-blur-sm">
-                        View Projects
-                    </button>
-</div>
-</div>
-<div class="relative hidden md:block group animate-in fade-in slide-in-from-right duration-1000">
-<div class="absolute -inset-4 bg-primary/20 rounded-2xl blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700"></div>
-<div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-<img alt="Industrial Solar Farm" class="w-full h-[500px] object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeSCK54qqEnWsRvWvwTcNG_Arjq9xdbTvgm_RHVReeT77qfto_FJQJe7ny649ysKY3Oxjb_eqHtR6Ud-j4zJdXI8qVfGCLhDPzVUhxVA5pv16vCp76T_vPGukrC0u5V2y5SA8dn-AgVcTa8XAm64Ny2asyftKVmoksceo4iTNvAu3ZT-MKDh3PzqxlfN6ZkLDEOecEmogJX2_saTUwhJrSfnKy3LXWz5lpQkh9iVJyEjoBIoCQgXb21Q"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-</div>
-<!-- Data Chip Overlay -->
-<div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-2xl border border-outline-variant flex items-center gap-4 animate-float">
-<div class="p-3 rounded-lg bg-primary text-white">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
-</div>
-<div>
-<div class="text-charcoal font-bold text-headline-md">99.8%</div>
-<div class="text-secondary font-label-bold text-label-sm">System Uptime</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Stats Bar -->
-<section class="relative z-20 -mt-12 mx-margin-mobile md:mx-margin-desktop max-w-[1440px] md:mx-auto">
-<div class="bg-white py-12 rounded-2xl shadow-xl border border-surface-variant/50">
-<div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-outline-variant">
-<div class="text-center px-4">
-<div class="text-headline-md font-bold text-charcoal">57.2 MW+</div>
-<div class="text-secondary font-label-bold uppercase text-[10px] tracking-widest mt-1">Installed Capacity</div>
-</div>
-<div class="text-center px-4">
-<div class="text-headline-md font-bold text-charcoal">9+</div>
-<div class="text-secondary font-label-bold uppercase text-[10px] tracking-widest mt-1">Major Projects</div>
-</div>
-<div class="text-center px-4">
-<div class="text-headline-md font-bold text-charcoal">15+</div>
-<div class="text-secondary font-label-bold uppercase text-[10px] tracking-widest mt-1">States Covered</div>
-</div>
-<div class="text-center px-4">
-<div class="text-headline-md font-bold text-charcoal">200k+</div>
-<div class="text-secondary font-label-bold uppercase text-[10px] tracking-widest mt-1">Tons CO2 Offset</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Services Grid -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
-<div class="text-center mb-20 space-y-4">
-<h2 class="text-headline-lg text-charcoal font-bold">End-to-End Solar Solutions</h2>
-<div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-<p class="text-secondary max-w-2xl mx-auto text-body-lg">Comprehensive engineering and management services tailored for complex industrial energy requirements.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<!-- EPC -->
-<div class="glass-card p-8 rounded-xl hover:shadow-2xl transition-all border-t-4 border-t-primary group">
-<div class="bg-surface-container w-16 h-16 rounded-xl flex items-center justify-center text-charcoal mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">engineering</span>
-</div>
-<h3 class="text-headline-sm text-on-surface font-bold mb-4">EPC</h3>
-<p class="text-secondary text-body-md mb-8 leading-relaxed">Full Engineering, Procurement, and Construction services for turnkey industrial solar installations.</p>
-<a class="text-primary font-label-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="index.html">
-                    Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<!-- O&M -->
-<div class="glass-card p-8 rounded-xl hover:shadow-2xl transition-all border-t-4 border-t-primary group">
-<div class="bg-surface-container w-16 h-16 rounded-xl flex items-center justify-center text-charcoal mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
-</div>
-<h3 class="text-headline-sm text-on-surface font-bold mb-4">O&amp;M</h3>
-<p class="text-secondary text-body-md mb-8 leading-relaxed">Comprehensive Operations and Maintenance ensuring maximum yield and minimal downtime.</p>
-<a class="text-primary font-label-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="index.html">
-                    Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<!-- I&C -->
-<div class="glass-card p-8 rounded-xl hover:shadow-2xl transition-all border-t-4 border-t-primary group">
-<div class="bg-surface-container w-16 h-16 rounded-xl flex items-center justify-center text-charcoal mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">construction</span>
-</div>
-<h3 class="text-headline-sm text-on-surface font-bold mb-4">I&amp;C</h3>
-<p class="text-secondary text-body-md mb-8 leading-relaxed">Expert Installation and Commissioning services backed by rigorous safety protocols.</p>
-<a class="text-primary font-label-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="index.html">
-                    Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<!-- PMC -->
-<div class="glass-card p-8 rounded-xl hover:shadow-2xl transition-all border-t-4 border-t-primary group">
-<div class="bg-surface-container w-16 h-16 rounded-xl flex items-center justify-center text-charcoal mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">assignment</span>
-</div>
-<h3 class="text-headline-sm text-on-surface font-bold mb-4">PMC</h3>
-<p class="text-secondary text-body-md mb-8 leading-relaxed">Project Management Consultancy for oversight, risk mitigation, and strategic execution.</p>
-<a class="text-primary font-label-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="index.html">
-                    Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<!-- Design -->
-<div class="glass-card p-8 rounded-xl hover:shadow-2xl transition-all border-t-4 border-t-primary group">
-<div class="bg-surface-container w-16 h-16 rounded-xl flex items-center justify-center text-charcoal mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
-</div>
-<h3 class="text-headline-sm text-on-surface font-bold mb-4">Design</h3>
-<p class="text-secondary text-body-md mb-8 leading-relaxed">Custom photovoltaic system design utilizing cutting-edge simulation software and site analysis.</p>
-<a class="text-primary font-label-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="index.html">
-                    Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<!-- BOS -->
-<div class="glass-card p-8 rounded-xl hover:shadow-2xl transition-all border-t-4 border-t-primary group">
-<div class="bg-surface-container w-16 h-16 rounded-xl flex items-center justify-center text-charcoal mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">layers</span>
-</div>
-<h3 class="text-headline-sm text-on-surface font-bold mb-4">BOS</h3>
-<p class="text-secondary text-body-md mb-8 leading-relaxed">Optimized Balance of System components ensuring structural integrity and safety.</p>
-<a class="text-primary font-label-bold flex items-center gap-2 group-hover:gap-4 transition-all" href="index.html">
-                    Learn More <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-</div>
-</section>
-<!-- Featured Projects -->
-<section class="bg-surface-container-low py-24">
-<div class="px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
-<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-<div class="space-y-4">
-<div class="text-primary font-label-bold uppercase tracking-widest text-label-sm">Portfolio</div>
-<h2 class="text-headline-lg text-charcoal font-bold">Featured Projects</h2>
-<p class="text-secondary max-w-lg">Showcasing our recent large-scale industrial implementations across the subcontinent.</p>
-</div>
-<div class="flex gap-4">
-<button class="w-12 h-12 rounded-full border border-charcoal/20 flex items-center justify-center hover:bg-charcoal hover:text-white transition-all">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="w-12 h-12 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-charcoal/80 transition-all shadow-lg">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-<!-- Project 1 -->
-<div class="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500">
-<div class="h-64 overflow-hidden relative">
-<img alt="Textile Hub Mega Plant" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJJ5rnPXmA4CmfHWQne-7X6tLDwjD7CGV5fR5MmSW_DAbWgYJqt1w2a-ELTCFKsWRTwj46BsxwqR10wfVzqp_ZjzRloMzN4lpozYC7e0XIopXZA7Vs609yInF1CSEuoXSUHf7oMdrn5j3KpbCm7fvCVNg08XC-JpW-0Wg4oXAnkADxYyn9nal0dRqK6bviNbs3n_qRz6FH_GAmRvQyrv995JAL5V-evSgIVvyX-S5qz3rt1y25fVieFg"/>
-<div class="absolute top-4 left-4 flex gap-2">
-<span class="bg-charcoal text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase shadow-lg">Industrial</span>
-</div>
-</div>
-<div class="p-8">
-<div class="flex items-center gap-1 text-secondary text-label-sm font-medium mb-3">
-<span class="material-symbols-outlined text-xs">location_on</span> Gujarat, India
-                        </div>
-<h4 class="text-headline-sm font-bold text-charcoal mb-3">Textile Hub Mega Plant</h4>
-<p class="text-secondary text-body-md mb-6 line-clamp-2">12.5 MW Rooftop Installation providing 60% of factory power requirements.</p>
-<div class="flex justify-between items-center pt-6 border-t border-outline-variant">
-<div class="text-charcoal font-bold text-lg">12.5 MW</div>
-<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined text-sm">open_in_new</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500">
-<div class="h-64 overflow-hidden relative">
-<img alt="Desert Sun Utility Park" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWGKw0BuC9QPBhOBkmbS2PORYP0caAI2Us35x1SrcbxPgoX4LaqxA3mQ6EP1EX-YGuNfPBsfeIbZeMZrsHEEarGZYHSz_BJcaqxGFA1y6yUEFzVLeK6HJ_UKsQux1RUa-Wu4Di7Y_SoGH_Bx-T-Iox3HaqqclGgIXRM8ZrJz2Qe8yV2VJwk9MNMNr547V3FbTF6o6RymyRQfPWR5Ki_yd6V0qCZ3IUNC7t2GTvsSbzWBO_olLjvqmoDg"/>
-<div class="absolute top-4 left-4 flex gap-2">
-<span class="bg-charcoal text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase shadow-lg">Utility-Scale</span>
-</div>
-</div>
-<div class="p-8">
-<div class="flex items-center gap-1 text-secondary text-label-sm font-medium mb-3">
-<span class="material-symbols-outlined text-xs">location_on</span> Rajasthan, India
-                        </div>
-<h4 class="text-headline-sm font-bold text-charcoal mb-3">Desert Sun Utility Park</h4>
-<p class="text-secondary text-body-md mb-6 line-clamp-2">A vast ground-mounted array supplying power to the state grid infrastructure.</p>
-<div class="flex justify-between items-center pt-6 border-t border-outline-variant">
-<div class="text-charcoal font-bold text-lg">25.0 MW</div>
-<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined text-sm">open_in_new</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500">
-<div class="h-64 overflow-hidden relative">
-<img alt="Eco-Auto Manufacturing" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVbG33GWN7MY3ocDCP8q8w2fcx73YhPwVdtcSu3Opc4BYKN29f7vi-g_ecH4OcgTu4j6p5mmGZUG_suVAM2FTseZ-i0FF_m1jn4QscgyigHHPT47af0adJRfWb_q4mGYIVg0FvkW6-T3D1RvyNwhOoym_s8HREUSM5rvDn95hsC7_ugiS2FfIIxgg8EV9B83zIPlmR0P9qg2UbrEgzLBFYpRAXnFDsQ1t0ye9Mxp14XljIgYjEnCvpTg"/>
-<div class="absolute top-4 left-4 flex gap-2">
-<span class="bg-charcoal text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase shadow-lg">BIPV</span>
-</div>
-</div>
-<div class="p-8">
-<div class="flex items-center gap-1 text-secondary text-label-sm font-medium mb-3">
-<span class="material-symbols-outlined text-xs">location_on</span> Maharashtra, India
-                        </div>
-<h4 class="text-headline-sm font-bold text-charcoal mb-3">Eco-Auto Manufacturing</h4>
-<p class="text-secondary text-body-md mb-6 line-clamp-2">Integrated solar facade and rooftop solution for an automotive assembly line.</p>
-<div class="flex justify-between items-center pt-6 border-t border-outline-variant">
-<div class="text-charcoal font-bold text-lg">8.2 MW</div>
-<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined text-sm">open_in_new</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Calculator CTA Banner -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop">
-<div class="max-w-[1440px] mx-auto cta-gradient rounded-[2rem] p-12 md:p-24 relative overflow-hidden flex flex-col md:flex-row items-center gap-16 group shadow-2xl">
-<!-- Lighting Bolt Motif -->
-<div class="absolute inset-0 lightning-pattern opacity-10 pointer-events-none"></div>
-<div class="absolute -right-20 -bottom-20 text-white opacity-5 transform rotate-12 scale-150">
-<span class="material-symbols-outlined text-[400px]">bolt</span>
-</div>
-<div class="relative z-10 space-y-8 md:w-3/5">
-<h2 class="text-headline-lg-mobile md:text-5xl text-white font-bold leading-tight">
-                    Calculate Your <br/><span class="text-secondary-container">Solar ROI Potential</span>
-</h2>
-<p class="text-white/80 text-body-lg max-w-lg">Get a professional, detailed ROI analysis and technical feasibility report for your industrial facility in minutes.</p>
-<div class="pt-4">
-<button class="bg-white text-primary px-12 py-5 rounded-xl font-label-bold text-body-lg hover:bg-secondary-container transition-all flex items-center gap-3 group-hover:shadow-2xl active:scale-95">
-                        Start Solar Audit <span class="material-symbols-outlined">calculate</span>
-</button>
-</div>
-</div>
-<div class="relative z-10 md:w-2/5 flex justify-center">
-<div class="relative">
-<div class="absolute inset-0 bg-white/20 rounded-full blur-3xl animate-pulse"></div>
-<div class="relative bg-white/10 p-12 rounded-full border border-white/20 backdrop-blur-xl shadow-2xl group-hover:scale-110 transition-transform duration-700">
-<span class="material-symbols-outlined text-white text-9xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Testimonials -->
-<section class="py-24 bg-white">
-<div class="px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
-<div class="flex flex-col items-center text-center mb-20">
-<span class="text-primary font-label-bold uppercase tracking-widest mb-4">Success Stories</span>
-<h2 class="text-headline-lg text-charcoal font-bold">Trusted by Industry Leaders</h2>
-<div class="w-16 h-1 bg-primary mt-6 rounded-full"></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-<div class="p-12 rounded-3xl bg-surface-container-low border border-surface-variant relative hover:bg-white transition-colors duration-300">
-<span class="material-symbols-outlined text-primary text-6xl absolute top-8 right-12 opacity-10">format_quote</span>
-<p class="text-charcoal text-body-lg mb-10 relative z-10 italic leading-relaxed">"SunPlus Power's engineering team exceeded our expectations for the 15MW plant. Their attention to detail in the BOS design significantly reduced our installation time and cost."</p>
-<div class="flex items-center gap-5">
-<div class="w-16 h-16 rounded-full border-2 border-primary/20 overflow-hidden shadow-md">
-<img alt="Rajesh Khanna" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOJl8G1qmFn76Ff082BNafjfayfjvgUgKiKqvNwDD4ZuDZjns_N1XP1M3Eg7hCmjeRouMcklVjLgJFWsXuAFcEL42PsHTHpkchk6dgRYoYePLIF9ZR8KuKLVf_aa3q2MH6vjEv39p1ZkGjvS9wLoqJLVgwRpeLJkIrYUEr_S1b2PLCdNzVRRSlqV4bgYqiNGNOIeZbC3j8XTmQ6ZDoiBqaVKtsmuDMZwH3gf4pAz_lIKvB-16DhVtcA"/>
-</div>
-<div>
-<div class="text-charcoal font-bold text-lg">Rajesh Khanna</div>
-<div class="text-primary font-label-bold text-label-sm uppercase tracking-wider">Operations Director, Indotex</div>
-</div>
-</div>
-</div>
-<div class="p-12 rounded-3xl bg-surface-container-low border border-surface-variant relative hover:bg-white transition-colors duration-300">
-<span class="material-symbols-outlined text-primary text-6xl absolute top-8 right-12 opacity-10">format_quote</span>
-<p class="text-charcoal text-body-lg mb-10 relative z-10 italic leading-relaxed">"The real-time monitoring and O&amp;M services provided by SunPlus have maintained our solar yield at 99.5% for three consecutive years. They are truly partners in our green journey."</p>
-<div class="flex items-center gap-5">
-<div class="w-16 h-16 rounded-full border-2 border-primary/20 overflow-hidden shadow-md">
-<img alt="Ananya Sharma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6YDsjGn2jhmptll0_kOU3ADqryTDzBkQsHjgG1k-UzBpwzqI0eRsEw0IXJl1aFxm-UimHb7d_VIA2b6YiW-rgJFe6Jb8VAK6XRSBqAmigm3nn0_zspoHWyUWpehtnBZ3M-BT7685eJGX3IbmZcyEoQqQMWBits5N7zd0D9hB4tNcq7nF8jeGNrVYU6qoiC_DhiA2n-pydTVTOZpi3otokLSOirqm62p-cHzxLvagOK3EzbJnKb5dbaQ"/>
-</div>
-<div>
-<div class="text-charcoal font-bold text-lg">Ananya Sharma</div>
-<div class="text-primary font-label-bold text-label-sm uppercase tracking-wider">Chief Energy Officer, SolarGrid</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Industrial Footer -->
-<footer class="bg-charcoal text-white pt-24 pb-12">
-<div class="w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-<div class="space-y-8">
-<div class="flex items-center gap-4">
-<div class="p-2 bg-white rounded-lg">
-<img alt="SunPlus Power Logo" class="h-8 w-auto" src="assets/images/logo.svg"/>
-</div>
-<span class="text-headline-sm font-display-lg font-bold">SunPlus Power</span>
-</div>
-<p class="text-white/60 text-body-md leading-relaxed">
-                    Pioneering industrial-grade solar engineering solutions across India. Reliable, durable, and efficient energy for the next generation of industry.
-                </p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300" href="index.html">
-<span class="material-symbols-outlined text-xl">public</span>
-</a>
-<a class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300" href="index.html">
-<span class="material-symbols-outlined text-xl">alternate_email</span>
-</a>
-<a class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300" href="index.html">
-<span class="material-symbols-outlined text-xl">call</span>
-</a>
-</div>
-</div>
-<div>
-<h5 class="text-primary font-bold mb-8 uppercase tracking-widest text-label-sm">Quick Links</h5>
-<ul class="space-y-4">
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Sitemap</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Careers</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Media Center</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Projects Portfolio</a></li>
-</ul>
-</div>
-<div>
-<h5 class="text-primary font-bold mb-8 uppercase tracking-widest text-label-sm">Technical Support</h5>
-<ul class="space-y-4">
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Contact Support</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Documentation</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> O&amp;M Dashboard</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Service Request</a></li>
-</ul>
-</div>
-<div>
-<h5 class="text-primary font-bold mb-8 uppercase tracking-widest text-label-sm">Company Legal</h5>
-<ul class="space-y-4">
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Privacy Policy</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Terms of Service</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Compliance</a></li>
-<li><a class="text-white/60 hover:text-white transition-all flex items-center gap-2" href="index.html"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> CSR Initiatives</a></li>
-</ul>
-</div>
-</div>
-<div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-white/10">
-<p class="text-white/40 text-label-sm">
-                © 2024 SunPlus Power. Engineering Industrial Excellence in Solar.
-            </p>
-<div class="flex gap-8 mt-6 md:mt-0">
-<span class="text-white/40 text-[11px] flex items-center gap-2 font-medium tracking-wide">
-<span class="material-symbols-outlined text-[14px] text-primary">verified</span> ISO 9001:2015 CERTIFIED
-                </span>
-<span class="text-white/40 text-[11px] flex items-center gap-2 font-medium tracking-wide">
-<span class="material-symbols-outlined text-[14px] text-primary">shield</span> MNRE APPROVED
-                </span>
-</div>
-</div>
-</div>
-</footer>
-<script>
-    // Simple scroll effect for TopNavBar
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('py-2', 'bg-charcoal/95', 'backdrop-blur-md');
-            header.classList.remove('py-3', 'bg-charcoal');
-        } else {
-            header.classList.remove('py-2', 'bg-charcoal/95', 'backdrop-blur-md');
-            header.classList.add('py-3', 'bg-charcoal');
-        }
-    });
+            </div>
+            <a href="calculator.html"
+                class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
+                SOLAR CALCULATOR
+            </a>
+        </div>
+    </nav>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[520px] md:min-h-[90vh] flex items-center overflow-hidden bg-surface-dim pt-20">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 hero-gradient z-10"></div>
+                <div class="w-full h-full bg-cover bg-center"
+                    data-alt="A high-resolution wide shot of a massive industrial solar farm at dusk."
+                    style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop')">
+                </div>
+            </div>
+            <div class="relative z-20 px-margin-desktop w-full max-w-5xl">
+                <div class="mb-6 flex items-center gap-4 text-secondary">
+                    <div class="w-12 h-[1px] bg-secondary-container"></div>
+                    <span
+                        class="font-label-technical text-label-technical uppercase tracking-[0.2em] text-white/80">Engineering
+                        Excellence Since 2012</span>
+                </div>
+                <h1 class="font-display-lg text-display-lg mb-8 leading-tight text-white">
+                    ENGINEERING SOLAR.<br />
+                    MODELING ENERGY.<br />
+                    CREATING <span class="text-secondary-container">LONG-TERM VALUE.</span>
+                </h1>
+                <div class="flex flex-col sm:flex-row gap-6">
+                    <a href="calculator.html"
+                        class="bg-secondary-container text-white px-10 py-5 font-label-technical text-label-technical uppercase tracking-widest transition-all hover:brightness-110 group flex items-center justify-center gap-3">
+                        ANALYZE SOLAR POTENTIAL
+                        <span class="material-symbols-outlined text-[18px]">analytics</span>
+                    </a>
+                    <a href="projects.html"
+                        class="border border-white/30 text-white px-10 py-5 font-label-technical text-label-technical uppercase tracking-widest hover:bg-white hover:text-surface-dim transition-all text-center">
+                        VIEW PROJECTS
+                    </a>
+                </div>
+            </div>
+            <!-- Technical Coordinate Markers -->
+            <div class="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-32 pointer-events-none opacity-40">
+                <div class="rotate-90 origin-center">
+                    <span class="font-measurement-sm text-measurement-sm text-on-surface-variant whitespace-nowrap">LAT:
+                        28.6139°
+                        N | LONG: 77.2090° E</span>
+                </div>
+                <div class="rotate-90 origin-center">
+                    <span
+                        class="font-measurement-sm text-measurement-sm text-on-surface-variant whitespace-nowrap">SYSTEM_UPTIME:
+                        99.982%</span>
+                </div>
+            </div>
+        </section>
 
-    // Basic animation triggers on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-10');
+        <!-- Solutions Section -->
+        <section class="py-section-padding bg-white text-on-surface px-margin-desktop">
+            <div class="max-w-4xl mx-auto text-center mb-24">
+                <h2 class="font-display-lg text-headline-lg mb-4 uppercase text-on-surface">End-to-End Solar Solutions
+                </h2>
+                <div class="w-24 h-1.5 bg-secondary-container mx-auto"></div>
+                <p class="mt-8 font-body-lg text-body-lg text-on-surface-variant">From initial feasibility modeling to
+                    long-term asset optimization, we provide a mathematically rigorous approach to industrial energy
+                    transition.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <!-- EPC Card -->
+                <div class="group border border-outline-variant p-10 hover:border-secondary-container hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    onclick="location.href='services.html'">
+                    <span class="material-symbols-outlined text-[48px] text-secondary-container mb-8">engineering</span>
+                    <h3 class="font-display-lg text-headline-md mb-4 uppercase text-on-surface">EPC</h3>
+                    <p class="text-on-surface-variant font-body-md mb-8">Turnkey engineering, procurement, and
+                        construction services for utility-scale solar installations with precision execution.</p>
+                    <div
+                        class="flex items-center gap-2 font-label-technical text-label-technical uppercase tracking-widest text-secondary-container">
+                        <span>Technical Specs</span>
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </div>
+                </div>
+                <!-- O&M Card -->
+                <div class="group border border-outline-variant p-10 hover:border-secondary-container hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    onclick="location.href='services.html'">
+                    <span
+                        class="material-symbols-outlined text-[48px] text-secondary-container mb-8">settings_suggest</span>
+                    <h3 class="font-display-lg text-headline-md mb-4 uppercase text-on-surface">O&amp;M</h3>
+                    <p class="text-on-surface-variant font-body-md mb-8">Advanced operations and maintenance utilizing
+                        predictive analytics to ensure maximum uptime and generation efficiency.</p>
+                    <div
+                        class="flex items-center gap-2 font-label-technical text-label-technical uppercase tracking-widest text-secondary-container">
+                        <span>Maintenance Framework</span>
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </div>
+                </div>
+                <!-- Design Card -->
+                <div class="group border border-outline-variant p-10 hover:border-secondary-container hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    onclick="location.href='services.html'">
+                    <span
+                        class="material-symbols-outlined text-[48px] text-secondary-container mb-8">architecture</span>
+                    <h3 class="font-display-lg text-headline-md mb-4 uppercase text-on-surface">Design &amp; Engineering
+                    </h3>
+                    <p class="text-on-surface-variant font-body-md mb-8">Custom structural and electrical engineering
+                        blueprints designed for terrain-specific challenges and long-term durability.</p>
+                    <div
+                        class="flex items-center gap-2 font-label-technical text-label-technical uppercase tracking-widest text-secondary-container">
+                        <span>Engineering Standards</span>
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Projects Section -->
+        <section class="py-section-padding bg-surface-container-lowest">
+            <div class="px-margin-desktop flex justify-between items-end mb-16">
+                <div>
+                    <span
+                        class="font-label-technical text-label-technical text-secondary-container uppercase tracking-widest">The
+                        Portfolio</span>
+                    <h2 class="font-display-lg text-display-lg uppercase mt-2 text-on-surface">Projects</h2>
+                </div>
+                <a href="projects.html"
+                    class="font-label-technical text-label-technical uppercase tracking-widest border-b border-on-surface pb-2 text-on-surface-variant hover:text-on-surface transition-colors">View
+                    Portfolio Index</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-margin-desktop">
+                <div class="relative h-[600px] group overflow-hidden cursor-pointer"
+                    onclick="location.href='projects.html'">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                        data-alt="A wide aerial photo of a completed 50MW solar project."
+                        style="background-image: url('https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?w=1200&q=80&auto=format&fit=crop')">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface-dim/80 to-transparent"></div>
+                    <div class="absolute bottom-12 left-12">
+                        <span
+                            class="font-label-technical text-label-technical text-white bg-secondary-container px-3 py-1 mb-4 inline-block">UTILITY-SCALE</span>
+                        <h4 class="font-display-lg text-headline-lg text-white uppercase">Desert Sun One</h4>
+                        <p class="text-white/70 mt-2 font-label-technical">LOCATION: RAJASTHAN, IN | CAP: 120MW</p>
+                    </div>
+                </div>
+                <div class="grid grid-rows-2 gap-4">
+                    <div class="relative group overflow-hidden cursor-pointer" onclick="location.href='projects.html'">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Industrial rooftop solar installation."
+                            style="background-image: url('https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=800&q=80&auto=format&fit=crop')">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim/80 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8">
+                            <h4 class="font-display-lg text-headline-md text-white uppercase">Logistics Hub</h4>
+                            <p class="text-white/70 font-label-technical">COMMERCIAL ROOFTOP | 15MW</p>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden cursor-pointer" onclick="location.href='projects.html'">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Solar tracker system view."
+                            style="background-image: url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80&auto=format&fit=crop')">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface-dim/80 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8">
+                            <h4 class="font-display-lg text-headline-md text-white uppercase">Agri-Solar Hybrid</h4>
+                            <p class="text-white/70 font-label-technical">MULTI-USE LAND | 40MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Solar Intelligence Section -->
+        <section class="py-section-padding bg-white text-on-surface overflow-hidden">
+            <div class="px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="relative">
+                    <span
+                        class="font-label-technical text-label-technical text-secondary-container uppercase tracking-widest block mb-4">Proprietary
+                        Platform</span>
+                    <h2 class="font-display-lg text-headline-lg uppercase mb-8 text-on-surface">Solar Intelligence</h2>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">Our digital twin modeling engine
+                        simulates 25 years of generation data against 100+ climate variables to provide unshakeable IRR
+                        projections.</p>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-secondary-container mt-1">monitoring</span>
+                            <div>
+                                <h4 class="font-display-lg text-body-lg font-bold uppercase text-on-surface">Real-time
+                                    Telemetry</h4>
+                                <p class="text-on-surface-variant font-body-md">Precision monitoring down to the
+                                    individual string level with sub-minute latency.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-secondary-container mt-1">query_stats</span>
+                            <div>
+                                <h4 class="font-display-lg text-body-lg font-bold uppercase text-on-surface">Degradation
+                                    Modeling</h4>
+                                <p class="text-on-surface-variant font-body-md">AI-driven forecasts that account for
+                                    local environmental stressors and component wear.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="media.html"
+                        class="inline-block mt-12 border-2 border-secondary-container text-secondary-container px-8 py-4 font-label-technical text-label-technical uppercase tracking-widest hover:bg-secondary-container hover:text-on-surface transition-all text-center">
+                        REQUEST DEMO ACCESS
+                    </a>
+                </div>
+                <div
+                    class="relative bg-surface-container-high border border-outline-variant p-4 aspect-video shadow-2xl">
+                    <div class="flex items-center justify-between mb-4 px-4 py-2 border-b border-outline-technical">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-error-container"></div>
+                            <div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+                            <div class="w-3 h-3 rounded-full bg-outline-variant/30"></div>
+                        </div>
+                        <span
+                            class="font-label-technical text-measurement-sm text-on-surface-variant">SECURE_DASHBOARD_LIVE</span>
+                    </div>
+                    <div class="w-full h-full relative overflow-hidden bg-background">
+                        <div class="w-full h-full bg-cover bg-center" data-alt="Solar energy monitoring interface."
+                            style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Connect Action Panels -->
+        <section class="py-section-padding bg-surface-container-low px-margin-desktop">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div
+                    class="bg-white border border-outline-variant p-12 hover:border-secondary-container transition-all duration-300 relative group shadow-sm">
+                    <span
+                        class="font-label-technical text-measurement-sm text-on-surface-variant absolute top-8 right-8">PARTNER_01</span>
+                    <h3 class="font-display-lg text-headline-md uppercase mb-6 text-on-surface">Distributorship</h3>
+                    <p class="text-on-surface-variant mb-10 min-h-[80px]">Expand your footprint with our tier-one solar
+                        infrastructure and institutional support framework.</p>
+                    <a href="connect.html"
+                        class="block bg-surface-container-highest text-on-surface w-full py-4 font-label-technical text-label-technical uppercase tracking-widest group-hover:bg-secondary-container group-hover:text-on-surface transition-colors text-center">Apply
+                        Now</a>
+                </div>
+                <div
+                    class="bg-white border border-outline-variant p-12 hover:border-secondary-container transition-all duration-300 relative group shadow-sm">
+                    <span
+                        class="font-label-technical text-measurement-sm text-on-surface-variant absolute top-8 right-8">ASSET_02</span>
+                    <h3 class="font-display-lg text-headline-md uppercase mb-6 text-on-surface">Warranty</h3>
+                    <p class="text-on-surface-variant mb-10 min-h-[80px]">Access comprehensive technical documentation
+                        and claim management for your installed components.</p>
+                    <a href="connect.html"
+                        class="block bg-surface-container-highest text-on-surface w-full py-4 font-label-technical text-label-technical uppercase tracking-widest group-hover:bg-secondary-container group-hover:text-on-surface transition-colors text-center">Check
+                        Status</a>
+                </div>
+                <div
+                    class="bg-white border border-outline-variant p-12 hover:border-secondary-container transition-all duration-300 relative group shadow-sm">
+                    <span
+                        class="font-label-technical text-measurement-sm text-on-surface-variant absolute top-8 right-8">SYSTEM_03</span>
+                    <h3 class="font-display-lg text-headline-md uppercase mb-6 text-on-surface">Complaints</h3>
+                    <p class="text-on-surface-variant mb-10 min-h-[80px]">Escalate technical issues or operational
+                        discrepancies directly to our engineering response unit.</p>
+                    <a href="connect.html"
+                        class="block bg-surface-container-highest text-on-surface w-full py-4 font-label-technical text-label-technical uppercase tracking-widest group-hover:bg-secondary-container group-hover:text-on-surface transition-colors text-center">File
+                        Report</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
+            <div class="space-y-6">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
+                        style="max-width:200px;" />
+                </a>
+                <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
+                    transition
+                    through rigorous technical modeling and industrial-scale solar deployment.</p>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Quick
+                    Links</h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="about.html">Company</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="services.html">Services</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="projects.html">Projects</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="products.html">Products</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
+                            Intelligence</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="careers.html">Careers</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Connect
+                </h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=distributor">Apply for Distributor</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=warranty">Warranty Registration</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                            href="connect.html?tab=complaint">Complaint / Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">
+                    Contact
+                </h4>
+                <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+                    <b>Corporate Address:</b><br />
+                    1st Floor, D134, Vibhuti Khand<br />
+                    Gomti Nagar, Lucknow<br />
+                    Uttar Pradesh, India - 226010
+                </p>
+                <p class="text-on-surface-variant font-body-md leading-relaxed">
+                    <b>Sales Help:</b> <a class="hover:text-primary"
+                        href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
+                    <b>Technical Support:</b> <a class="hover:text-primary"
+                        href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
+                    <b>Official Phone:</b> +91-9153832222
+                </p>
+            </div>
+        </div>
+        <div
+            class="px-margin-desktop py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 max-w-container-max mx-auto">
+            <div class="font-body-md text-body-md text-on-surface-variant">© 2026 SUNPLUS POWER. ALL RIGHTS RESERVED.
+            </div>
+            <div class="flex gap-8">
+                <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+                    href="connect.html">Privacy Policy</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+                    href="connect.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Scroll interaction for nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow-md');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('py-2', 'shadow-md');
+                nav.classList.add('py-4');
             }
         });
-    }, observerOptions);
 
-    document.querySelectorAll('.glass-card, .group.relative, section > div > div.grid > div').forEach(el => {
-        el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
-        observer.observe(el);
-    });
-</script>
-</body></html>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Sunplus Power Clean Interface Active.');
+        });
+    </script>
+</body>
+
+</html>

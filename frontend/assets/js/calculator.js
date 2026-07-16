@@ -1,827 +1,846 @@
-/**
- * SunPlus Power Advanced Solar ROI & Financial Sizing Engine
- */
-
-let currentStep = 1;
-let currentTab = "overview";
-let systemData = {}; // Stores calculated variables globally for sensitivity recalculations
-
-const STATE_IRRADIANCE = {
-  "uttar pradesh": 120.0,
-  "maharashtra": 125.0,
-  "gujarat": 128.0,
-  "rajasthan": 132.0,
-  "karnataka": 120.0
+// Global state
+let state = {
+  currentStep: 1,
+  customer: {
+    type: 'residential',
+    name: '',
+    organization: '',
+    email: '',
+    phone: '',
+    pin: '',
+    city: '',
+    state: 'Uttar Pradesh'
+  },
+  energy: {
+    inputMethod: 'bill',
+    monthlyBill: 0,
+    monthlyConsumption: 0,
+    tariff: 7,
+    connectionType: 'domestic',
+    sanctionedLoad: 0
+  },
+  site: {
+    propertyType: 'residential',
+    roofType: 'rcc',
+    availableArea: 0,
+    address: '',
+    pin: '',
+    city: '',
+    state: 'Uttar Pradesh',
+    lat: 26.8467,
+    lng: 80.9462
+  },
+  system: {
+    type: 'grid',
+    panelTech: 'monocrystalline',
+    systemLoss: 15,
+    inverterEfficiency: 97,
+    battery: false,
+    capacityMode: 'auto',
+    preferredCapacity: 0,
+    recommendedCapacity: 0,
+    annualGeneration: 0,
+    areaRequired: 0,
+    feasible: true
+  },
+  financial: {
+    costPerKw: 55000,
+    tariffEscalation: 4,
+    omCost: 1000,
+    omEscalation: 3,
+    degradation: 0.5,
+    projectLife: 25,
+    discountRate: 8,
+    financingType: 'cash',
+    downPayment: 20,
+    interestRate: 9,
+    loanTenure: 10
+  }
 };
 
-const BASE_TARIFF = 7.5; // Rs. per kWh
+// State-wise solar irradiance (kWh/kW/day)
+const STATE_IRRADIANCE = {
+  'Andhra Pradesh': 5.5,
+  'Arunachal Pradesh': 4.5,
+  'Assam': 4.5,
+  'Bihar': 5.0,
+  'Chhattisgarh': 5.2,
+  'Goa': 5.3,
+  'Gujarat': 5.8,
+  'Haryana': 5.3,
+  'Himachal Pradesh': 5.0,
+  'Jharkhand': 5.1,
+  'Karnataka': 5.4,
+  'Kerala': 5.0,
+  'Madhya Pradesh': 5.5,
+  'Maharashtra': 5.3,
+  'Manipur': 4.8,
+  'Meghalaya': 4.6,
+  'Mizoram': 4.7,
+  'Nagaland': 4.6,
+  'Odisha': 5.2,
+  'Punjab': 5.2,
+  'Rajasthan': 5.8,
+  'Sikkim': 4.7,
+  'Tamil Nadu': 5.3,
+  'Telangana': 5.4,
+  'Tripura': 4.7,
+  'Uttar Pradesh': 5.1,
+  'Uttarakhand': 5.0,
+  'West Bengal': 4.9,
+  'Andaman and Nicobar Islands': 5.2,
+  'Chandigarh': 5.2,
+  'Dadra and Nagar Haveli': 5.4,
+  'Daman and Diu': 5.5,
+  'Delhi': 5.1,
+  'Lakshadweep': 5.3,
+  'Puducherry': 5.3
+};
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Bind input listeners for Live Preview
-  const previewInputs = [
-    "input-bill", "input-units", "calc-state", "input-grid", "input-roof", "input-storage", "calc-finance-mode"
-  ];
-  
-  previewInputs.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener("input", updateLivePreview);
-      el.addEventListener("change", updateLivePreview);
+let map = null;
+let marker = null;
+let energyChart = null;
+let financialChart = null;
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+  initEventListeners();
+  updateSidebar();
+
+  // Add download report button listener
+  const downloadBtn = document.getElementById('btn-download-report');
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', downloadReport);
+  }
+});
+
+function initEventListeners() {
+  // Step 1: Customer Profile
+  document.getElementById('calc-customer-type').addEventListener('change', (e) => {
+    state.customer.type = e.target.value;
+    updateSidebar();
+  });
+  document.getElementById('calc-name').addEventListener('input', (e) => {
+    state.customer.name = e.target.value;
+    updateSidebar();
+  });
+  document.getElementById('calc-organization').addEventListener('input', (e) => {
+    state.customer.organization = e.target.value;
+  });
+  document.getElementById('calc-email').addEventListener('input', (e) => {
+    state.customer.email = e.target.value;
+  });
+  document.getElementById('calc-phone').addEventListener('input', (e) => {
+    state.customer.phone = e.target.value;
+  });
+  document.getElementById('calc-pin').addEventListener('input', (e) => {
+    state.customer.pin = e.target.value;
+  });
+  document.getElementById('calc-city').addEventListener('input', (e) => {
+    state.customer.city = e.target.value;
+  });
+  document.getElementById('calc-state').addEventListener('change', (e) => {
+    state.customer.state = e.target.value;
+    state.site.state = e.target.value;
+    updateSidebar();
+  });
+
+  // Step 2: Energy Profile
+  document.getElementById('input-method-bill').addEventListener('change', () => {
+    state.energy.inputMethod = 'bill';
+    document.getElementById('bill-input-container').classList.remove('hidden');
+    document.getElementById('consumption-input-container').classList.add('hidden');
+  });
+  document.getElementById('input-method-consumption').addEventListener('change', () => {
+    state.energy.inputMethod = 'consumption';
+    document.getElementById('bill-input-container').classList.add('hidden');
+    document.getElementById('consumption-input-container').classList.remove('hidden');
+  });
+  document.getElementById('calc-bill').addEventListener('input', (e) => {
+    state.energy.monthlyBill = parseFloat(e.target.value) || 0;
+    updateSidebar();
+    updatePreview();
+  });
+  document.getElementById('calc-consumption').addEventListener('input', (e) => {
+    state.energy.monthlyConsumption = parseFloat(e.target.value) || 0;
+    updateSidebar();
+    updatePreview();
+  });
+  document.getElementById('calc-tariff').addEventListener('input', (e) => {
+    state.energy.tariff = parseFloat(e.target.value) || 7;
+    updatePreview();
+  });
+  document.getElementById('calc-connection-type').addEventListener('change', (e) => {
+    state.energy.connectionType = e.target.value;
+  });
+  document.getElementById('calc-sanctioned-load').addEventListener('input', (e) => {
+    state.energy.sanctionedLoad = parseFloat(e.target.value) || 0;
+  });
+
+  // Step 3: Property & Site
+  document.getElementById('calc-property-type').addEventListener('change', (e) => {
+    state.site.propertyType = e.target.value;
+  });
+  document.getElementById('calc-roof-type').addEventListener('change', (e) => {
+    state.site.roofType = e.target.value;
+  });
+  document.getElementById('calc-area').addEventListener('input', (e) => {
+    state.site.availableArea = parseFloat(e.target.value) || 0;
+    updatePreview();
+  });
+  document.getElementById('calc-site-address').addEventListener('input', (e) => {
+    state.site.address = e.target.value;
+  });
+  document.getElementById('calc-site-pin').addEventListener('input', (e) => {
+    state.site.pin = e.target.value;
+    updateMapFromSite();
+  });
+  document.getElementById('calc-site-city').addEventListener('input', (e) => {
+    state.site.city = e.target.value;
+    updateMapFromSite();
+  });
+  document.getElementById('calc-site-state').addEventListener('change', (e) => {
+    state.site.state = e.target.value;
+    updatePreview();
+    updateMapFromSite();
+  });
+
+  // Step 4: Solar System
+  document.querySelectorAll('input[name="system-type"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      state.system.type = e.target.value;
+      updateSystemTypeUI();
+      updatePreview();
+    });
+  });
+  document.getElementById('calc-panel-tech').addEventListener('change', (e) => {
+    state.system.panelTech = e.target.value;
+  });
+  document.getElementById('calc-loss').addEventListener('input', (e) => {
+    state.system.systemLoss = parseFloat(e.target.value) || 15;
+    updatePreview();
+  });
+  document.getElementById('calc-inverter-efficiency').addEventListener('input', (e) => {
+    state.system.inverterEfficiency = parseFloat(e.target.value) || 97;
+    updatePreview();
+  });
+  document.getElementById('calc-battery').addEventListener('change', (e) => {
+    state.system.battery = e.target.checked;
+  });
+  document.getElementById('capacity-auto').addEventListener('change', () => {
+    state.system.capacityMode = 'auto';
+    document.getElementById('manual-capacity-container').classList.add('hidden');
+    updatePreview();
+  });
+  document.getElementById('capacity-manual').addEventListener('change', () => {
+    state.system.capacityMode = 'manual';
+    document.getElementById('manual-capacity-container').classList.remove('hidden');
+  });
+  document.getElementById('calc-capacity').addEventListener('input', (e) => {
+    state.system.preferredCapacity = parseFloat(e.target.value) || 0;
+    updatePreview();
+  });
+
+  // Step 5: Financial Model
+  document.getElementById('calc-cost-per-kw').addEventListener('input', (e) => {
+    state.financial.costPerKw = parseFloat(e.target.value) || 55000;
+  });
+  document.getElementById('calc-tariff-escalation').addEventListener('input', (e) => {
+    state.financial.tariffEscalation = parseFloat(e.target.value) || 4;
+  });
+  document.getElementById('calc-om-cost').addEventListener('input', (e) => {
+    state.financial.omCost = parseFloat(e.target.value) || 1000;
+  });
+  document.getElementById('calc-om-escalation').addEventListener('input', (e) => {
+    state.financial.omEscalation = parseFloat(e.target.value) || 3;
+  });
+  document.getElementById('calc-degradation').addEventListener('input', (e) => {
+    state.financial.degradation = parseFloat(e.target.value) || 0.5;
+  });
+  document.getElementById('calc-project-life').addEventListener('input', (e) => {
+    state.financial.projectLife = parseInt(e.target.value) || 25;
+  });
+  document.getElementById('calc-discount-rate').addEventListener('input', (e) => {
+    state.financial.discountRate = parseFloat(e.target.value) || 8;
+  });
+  document.getElementById('financing-cash').addEventListener('change', () => {
+    state.financial.financingType = 'cash';
+    document.getElementById('loan-fields').classList.add('hidden');
+  });
+  document.getElementById('financing-loan').addEventListener('change', () => {
+    state.financial.financingType = 'loan';
+    document.getElementById('loan-fields').classList.remove('hidden');
+  });
+  document.getElementById('calc-down-payment').addEventListener('input', (e) => {
+    state.financial.downPayment = parseFloat(e.target.value) || 20;
+  });
+  document.getElementById('calc-interest-rate').addEventListener('input', (e) => {
+    state.financial.interestRate = parseFloat(e.target.value) || 9;
+  });
+  document.getElementById('calc-loan-tenure').addEventListener('input', (e) => {
+    state.financial.loanTenure = parseInt(e.target.value) || 10;
+  });
+}
+
+function updateSystemTypeUI() {
+  const labels = ['grid', 'off-grid', 'hybrid'];
+  labels.forEach(type => {
+    const radio = document.getElementById(`system-type-${type}`);
+    const parent = radio.closest('label');
+    if (radio.checked) {
+      parent.classList.remove('border-surface-container-highest', 'hover:border-on-surface', 'bg-white');
+      parent.classList.add('border-2', 'border-primary', 'bg-surface-container-lowest');
+    } else {
+      parent.classList.add('border', 'border-surface-container-highest', 'hover:border-on-surface', 'bg-white');
+      parent.classList.remove('border-2', 'border-primary', 'bg-surface-container-lowest');
     }
   });
+}
 
-  // Radios input listeners
-  const panelRadios = document.querySelectorAll('input[name="panel-tier"]');
-  panelRadios.forEach(radio => {
-    radio.addEventListener("change", () => {
-      highlightTierCard(radio.value);
-      updateLivePreview();
-    });
+function initMap() {
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) return;
+
+  map = L.map('map').setView([state.site.lat, state.site.lng], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  marker = L.marker([state.site.lat, state.site.lng], { draggable: true }).addTo(map);
+  marker.on('dragend', (e) => {
+    const newPos = e.target.getLatLng();
+    updateLocationInputs(newPos.lat, newPos.lng);
+  });
+  map.on('click', (e) => {
+    marker.setLatLng(e.latlng);
+    updateLocationInputs(e.latlng.lat, e.latlng.lng);
   });
 
-  // Sync bill <-> units bidirectionally
-  const inputBill = document.getElementById("input-bill");
-  const inputUnits = document.getElementById("input-units");
-  if (inputBill && inputUnits) {
-    inputBill.addEventListener("input", () => {
-      inputUnits.value = Math.round(parseFloat(inputBill.value) / BASE_TARIFF);
-      document.getElementById("val-units").textContent = `${parseFloat(inputUnits.value).toLocaleString("en-IN")} units`;
-    });
-    inputUnits.addEventListener("input", () => {
-      inputBill.value = Math.round(parseFloat(inputUnits.value) * BASE_TARIFF);
-      document.getElementById("val-bill").textContent = `Rs.${parseFloat(inputBill.value).toLocaleString("en-IN")}`;
-    });
+  updateLocationInputs(state.site.lat, state.site.lng);
+}
+
+function updateLocationInputs(lat, lng) {
+  state.site.lat = lat;
+  state.site.lng = lng;
+  document.getElementById('calc-lat').value = lat.toFixed(6);
+  document.getElementById('calc-lng').value = lng.toFixed(6);
+}
+
+async function updateMapFromSite() {
+  // Create query string based on what info we have
+  let queryParts = [];
+  if (state.site.city) queryParts.push(state.site.city);
+  if (state.site.state) queryParts.push(state.site.state);
+  if (state.site.pin) queryParts.push(state.site.pin);
+  queryParts.push('India');
+
+  const query = queryParts.join(', ');
+  if (!state.site.city && !state.site.pin) return;
+
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
+    );
+    const data = await response.json();
+    if (data && data.length > 0) {
+      const firstResult = data[0];
+      const lat = parseFloat(firstResult.lat);
+      const lng = parseFloat(firstResult.lon);
+      if (map && marker) {
+        map.setView([lat, lng], 13);
+        marker.setLatLng([lat, lng]);
+        updateLocationInputs(lat, lng);
+      }
+    }
+  } catch (error) {
+    console.error('Error updating map from site:', error);
+  }
+}
+
+function nextStep(step) {
+  if (step > state.currentStep) {
+    const valid = validateStep(state.currentStep);
+    if (!valid) return;
   }
 
-  // Show/hide battery storage battery capacity slider
-  const inputGrid = document.getElementById("input-grid");
-  if (inputGrid) {
-    inputGrid.addEventListener("change", () => {
-      const val = inputGrid.value;
-      const storageContainer = document.getElementById("storage-container");
-      if (storageContainer) {
-        if (val === "hybrid" || val === "off-grid") {
-          storageContainer.classList.remove("hidden");
-        } else {
-          storageContainer.classList.add("hidden");
-        }
+  state.currentStep = step;
+
+  // Update UI
+  document.querySelectorAll('section[id^="form-step-"]').forEach(s => s.classList.add('hidden'));
+  const target = document.getElementById(`form-step-${step}`);
+  if (target) target.classList.remove('hidden');
+
+  // Update progress
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('step-label');
+  const progress = ((step - 1) / 5) * 100;
+  if (progressBar) progressBar.style.width = `${progress}%`;
+  if (progressLabel) progressLabel.textContent = `Step ${step} of 6`;
+
+  if (step === 6) {
+    updateReviewSection();
+  }
+
+  if (step === 4) {
+    updatePreview();
+  }
+
+  if (step === 3) {
+    if (!map) {
+      initMap();
+    }
+    setTimeout(() => {
+      if (map) {
+        map.invalidateSize(); // Fix grey tiles by invalidating size
+      }
+    }, 100);
+    updateMapFromSite();
+  }
+}
+
+function downloadReport() {
+  // Calculate results first
+  const results = calculateFinancials();
+  
+  // Create report content
+  let report = `
+SUNPLUS POWER SOLAR CALCULATION REPORT
+=====================================
+Date: ${new Date().toLocaleDateString()}
+
+CUSTOMER DETAILS
+-----------------
+Name: ${state.customer.name || '-'}
+Organization: ${state.customer.organization || '-'}
+Email: ${state.customer.email || '-'}
+Phone: ${state.customer.phone || '-'}
+Location: ${state.customer.city || '-'}, ${state.customer.state}, ${state.customer.pin || '-'}
+
+ENERGY PROFILE
+--------------
+Input Method: ${state.energy.inputMethod === 'bill' ? 'Monthly Bill' : 'Monthly Consumption'}
+Monthly Bill: ${state.energy.inputMethod === 'bill' ? '₹' + state.energy.monthlyBill.toLocaleString('en-IN') : '-'}
+Monthly Consumption: ${state.energy.inputMethod === 'consumption' ? state.energy.monthlyConsumption.toFixed(0) + ' kWh' : (state.energy.monthlyBill / state.energy.tariff).toFixed(0) + ' kWh'}
+Tariff: ₹${state.energy.tariff.toFixed(2)}/kWh
+Connection Type: ${state.energy.connectionType}
+Sanctioned Load: ${state.energy.sanctionedLoad.toFixed(0)} kW
+
+SITE DETAILS
+------------
+Property Type: ${state.site.propertyType}
+Roof Type: ${state.site.roofType}
+Available Area: ${state.site.availableArea.toFixed(0)} sq. ft.
+Address: ${state.site.address || '-'}
+Coordinates: ${state.site.lat.toFixed(6)}, ${state.site.lng.toFixed(6)}
+
+SYSTEM CONFIGURATION
+--------------------
+System Type: ${state.system.type}
+Panel Technology: ${state.system.panelTech}
+System Loss: ${state.system.systemLoss}%
+Inverter Efficiency: ${state.system.inverterEfficiency}%
+Battery: ${state.system.battery ? 'Yes' : 'No'}
+Recommended Capacity: ${results.systemSize.toFixed(2)} kW
+
+FINANCIAL SUMMARY
+-----------------
+Gross Cost: ₹${results.grossCost.toLocaleString('en-IN')}
+Subsidy: ₹${results.subsidy.toLocaleString('en-IN')}
+Net Investment: ₹${results.netInvestment.toLocaleString('en-IN')}
+Payback Period: ${results.paybackYear ? results.paybackYear.toFixed(1) + ' Years' : '-'}
+ROI: ${results.roi.toFixed(1)}%
+Lifetime Savings (25 years): ₹${results.lifetimeSavings.toLocaleString('en-IN')}
+Annual Generation: ${results.annualGeneration.toFixed(0)} kWh
+CO2 Offset: ${results.co2Offset.toFixed(0)} kg CO2/year
+Trees Planted Equivalent: ${results.treesPlanted.toFixed(0)} trees/year
+  `;
+
+  // Create blob and download
+  const blob = new Blob([report], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sunplus-solar-report-${Date.now()}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function validateStep(step) {
+  if (step === 1) {
+    const name = document.getElementById('calc-name').value.trim();
+    const email = document.getElementById('calc-email').value.trim();
+    const pin = document.getElementById('calc-pin').value.trim();
+    const city = document.getElementById('calc-city').value.trim();
+
+    if (!name) {
+      alert('Please enter your name.');
+      return false;
+    }
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email.');
+      return false;
+    }
+    if (!pin) {
+      alert('Please enter your PIN code.');
+      return false;
+    }
+    if (!city) {
+      alert('Please enter your city.');
+      return false;
+    }
+  } else if (step === 3) {
+    const area = parseFloat(document.getElementById('calc-area').value);
+    if (!area || area <= 0) {
+      alert('Please enter available area.');
+      return false;
+    }
+  }
+  return true;
+}
+
+function updateReviewSection() {
+  document.getElementById('review-name').textContent = state.customer.name || '-';
+  document.getElementById('review-email').textContent = state.customer.email || '-';
+  document.getElementById('review-phone').textContent = state.customer.phone || '-';
+  document.getElementById('review-location').textContent = `${state.customer.city}, ${state.customer.state}, ${state.customer.pin}` || '-';
+
+  if (state.energy.inputMethod === 'bill') {
+    document.getElementById('review-bill').textContent = `₹${state.energy.monthlyBill.toLocaleString('en-IN')}`;
+    const consumption = state.energy.monthlyBill / state.energy.tariff;
+    document.getElementById('review-consumption').textContent = `${consumption.toFixed(0)} kWh`;
+  } else {
+    document.getElementById('review-bill').textContent = `₹${(state.energy.monthlyConsumption * state.energy.tariff).toLocaleString('en-IN')}`;
+    document.getElementById('review-consumption').textContent = `${state.energy.monthlyConsumption.toFixed(0)} kWh`;
+  }
+  document.getElementById('review-tariff').textContent = `₹${state.energy.tariff.toFixed(2)}/kWh`;
+
+  document.getElementById('review-property').textContent = state.site.propertyType.charAt(0).toUpperCase() + state.site.propertyType.slice(1);
+  document.getElementById('review-area').textContent = `${state.site.availableArea.toFixed(0)} sq. ft.`;
+  document.getElementById('review-coords').textContent = `${state.site.lat.toFixed(4)}, ${state.site.lng.toFixed(4)}`;
+
+  document.getElementById('review-system-type').textContent = state.system.type.charAt(0).toUpperCase() + state.system.type.slice(1);
+  document.getElementById('review-capacity').textContent = `${state.system.recommendedCapacity.toFixed(2)} kW`;
+  document.getElementById('review-panel-tech').textContent = state.system.panelTech.charAt(0).toUpperCase() + state.system.panelTech.slice(1);
+}
+
+function updatePreview() {
+  calculateSystemSize();
+  document.getElementById('preview-capacity').textContent = `${state.system.recommendedCapacity.toFixed(2)} kW`;
+  document.getElementById('preview-generation').textContent = `${state.system.annualGeneration.toFixed(0)} kWh`;
+  document.getElementById('preview-area').textContent = `${state.system.areaRequired.toFixed(0)} sq. ft.`;
+
+  if (state.system.feasible) {
+    document.getElementById('preview-feasibility').textContent = 'Feasible';
+    document.getElementById('preview-feasibility').classList.remove('text-red-600');
+    document.getElementById('preview-feasibility').classList.add('text-green-600');
+  } else {
+    document.getElementById('preview-feasibility').textContent = 'Area Insufficient';
+    document.getElementById('preview-feasibility').classList.add('text-red-600');
+    document.getElementById('preview-feasibility').classList.remove('text-green-600');
+  }
+}
+
+function calculateSystemSize() {
+  // Get monthly consumption
+  let monthlyConsumption;
+  if (state.energy.inputMethod === 'bill') {
+    monthlyConsumption = state.energy.monthlyBill / state.energy.tariff;
+  } else {
+    monthlyConsumption = state.energy.monthlyConsumption;
+  }
+
+  const dailyConsumption = monthlyConsumption / 30;
+  const irradiance = STATE_IRRADIANCE[state.site.state] || 5.0;
+
+  // Calculate system size (kW)
+  const systemLoss = state.system.systemLoss / 100;
+  const inverterEfficiency = state.system.inverterEfficiency / 100;
+  const systemSize = dailyConsumption / (irradiance * (1 - systemLoss) * inverterEfficiency);
+
+  if (state.system.capacityMode === 'auto') {
+    state.system.recommendedCapacity = systemSize;
+  } else {
+    state.system.recommendedCapacity = state.system.preferredCapacity || systemSize;
+  }
+
+  // Annual generation
+  state.system.annualGeneration = state.system.recommendedCapacity * irradiance * 365 * (1 - systemLoss) * inverterEfficiency;
+
+  // Area required (100 sq ft per kW)
+  state.system.areaRequired = state.system.recommendedCapacity * 100;
+
+  // Feasibility
+  state.system.feasible = state.site.availableArea >= state.system.areaRequired;
+}
+
+function updateSidebar() {
+  document.getElementById('sidebar-name').textContent = state.customer.name || 'Not provided';
+
+  if (state.energy.inputMethod === 'bill') {
+    document.getElementById('sidebar-bill').textContent = `₹${state.energy.monthlyBill.toLocaleString('en-IN')}/mo`;
+  } else {
+    document.getElementById('sidebar-bill').textContent = `${state.energy.monthlyConsumption.toFixed(0)} kWh/mo`;
+  }
+
+  document.getElementById('sidebar-location').textContent = `${state.customer.city || 'Not provided'}, ${state.customer.state}`;
+  document.getElementById('sidebar-system').textContent = `${state.system.recommendedCapacity.toFixed(2)} kW ${state.system.type.charAt(0).toUpperCase() + state.system.type.slice(1)}`;
+}
+
+async function runAnalysis() {
+  const btn = document.getElementById('btn-run-analysis');
+  const originalContent = btn.innerHTML;
+  btn.innerHTML = '<span class="material-symbols-outlined animate-spin">autorenew</span> Analyzing...';
+  btn.disabled = true;
+
+  // Perform calculations
+  const results = calculateFinancials();
+
+  // Show results
+  document.getElementById('results-area').classList.remove('hidden');
+  populateResults(results);
+  drawCharts(results);
+
+  btn.innerHTML = originalContent;
+  btn.disabled = false;
+
+  document.getElementById('results-area').scrollIntoView({ behavior: 'smooth' });
+}
+
+function calculateFinancials() {
+  calculateSystemSize();
+
+  const systemSize = state.system.recommendedCapacity;
+  const costPerKw = state.financial.costPerKw;
+  const tariff = state.energy.tariff;
+  const tariffEscalation = state.financial.tariffEscalation / 100;
+  const omCostPerKw = state.financial.omCost;
+  const omEscalation = state.financial.omEscalation / 100;
+  const degradationRate = state.financial.degradation / 100;
+  const projectLife = state.financial.projectLife;
+  const discountRate = state.financial.discountRate / 100;
+
+  const grossCost = systemSize * costPerKw;
+
+  // Subsidy calculation (only for residential rooftop up to 3 kW)
+  let subsidy = 0;
+  if (state.customer.type === 'residential' && state.site.roofType !== 'ground') {
+    if (systemSize <= 2) {
+      subsidy = systemSize * 30000;
+    } else if (systemSize <= 3) {
+      subsidy = (2 * 30000) + ((systemSize - 2) * 18000);
+    }
+    subsidy = Math.min(subsidy, 78000);
+  }
+
+  const netInvestment = grossCost - subsidy;
+
+  // Calculate annual generation and savings
+  const years = [];
+  const annualSavings = [];
+  const utilityCosts = [];
+  const solarCosts = [];
+  let cumulativeSavings = 0;
+  let cumulativeUtility = 0;
+  let cumulativeSolar = 0;
+
+  let annualGeneration = state.system.annualGeneration;
+
+  let monthlyConsumption;
+  if (state.energy.inputMethod === 'bill') {
+    monthlyConsumption = state.energy.monthlyBill / tariff;
+  } else {
+    monthlyConsumption = state.energy.monthlyConsumption;
+  }
+  const annualConsumption = monthlyConsumption * 12;
+
+  for (let year = 1; year <= projectLife; year++) {
+    const escalationFactor = Math.pow(1 + tariffEscalation, year - 1);
+    const omFactor = Math.pow(1 + omEscalation, year - 1);
+    const degFactor = Math.pow(1 - degradationRate, year - 1);
+
+    const yearGeneration = annualGeneration * degFactor;
+    const yearTariff = tariff * escalationFactor;
+    const yearOMCost = systemSize * omCostPerKw * omFactor;
+
+    const utilityCost = annualConsumption * yearTariff;
+    const solarSaving = yearGeneration * yearTariff;
+    const yearNetSaving = solarSaving - yearOMCost;
+
+    years.push(year);
+    annualSavings.push(yearNetSaving);
+    utilityCosts.push(utilityCost);
+    solarCosts.push(utilityCost - yearNetSaving);
+
+    cumulativeUtility += utilityCost / Math.pow(1 + discountRate, year - 1);
+    cumulativeSolar += (utilityCost - yearNetSaving) / Math.pow(1 + discountRate, year - 1);
+    cumulativeSavings += yearNetSaving / Math.pow(1 + discountRate, year - 1);
+  }
+
+  const roi = ((cumulativeSavings - netInvestment) / netInvestment) * 100;
+
+  // Payback period
+  let paybackYear = null;
+  let cumulative = 0;
+  for (let year = 1; year <= projectLife; year++) {
+    const escalationFactor = Math.pow(1 + tariffEscalation, year - 1);
+    const omFactor = Math.pow(1 + omEscalation, year - 1);
+    const degFactor = Math.pow(1 - degradationRate, year - 1);
+    const yearGeneration = annualGeneration * degFactor;
+    const yearTariff = tariff * escalationFactor;
+    const yearOMCost = systemSize * omCostPerKw * omFactor;
+    const yearNetSaving = (yearGeneration * yearTariff) - yearOMCost;
+
+    cumulative += yearNetSaving;
+    if (cumulative >= netInvestment && paybackYear === null) {
+      // Interpolate
+      const prevCumulative = cumulative - yearNetSaving;
+      const fraction = (netInvestment - prevCumulative) / yearNetSaving;
+      paybackYear = year - 1 + fraction;
+    }
+  }
+
+  const lifetimeSavings = cumulativeSavings;
+  const co2Offset = annualGeneration * 0.82; // kg CO2 per kWh
+  const treesPlanted = co2Offset * 0.045;
+
+  return {
+    systemSize,
+    annualGeneration,
+    grossCost,
+    subsidy,
+    netInvestment,
+    paybackYear,
+    roi,
+    lifetimeSavings,
+    annualSavings,
+    utilityCosts,
+    solarCosts,
+    years,
+    co2Offset,
+    treesPlanted,
+    annualConsumption
+  };
+}
+
+function populateResults(results) {
+  document.getElementById('res-system-size').textContent = results.systemSize.toFixed(2);
+  document.getElementById('res-annual-generation').textContent = results.annualGeneration.toFixed(0);
+  document.getElementById('res-net-investment').textContent = `₹${results.netInvestment.toLocaleString('en-IN')}`;
+  document.getElementById('res-payback').textContent = results.paybackYear ? results.paybackYear.toFixed(1) : '-';
+  document.getElementById('res-roi').textContent = results.roi.toFixed(1);
+  document.getElementById('res-savings-lifetime').textContent = `₹${results.lifetimeSavings.toLocaleString('en-IN')}`;
+
+  // Comparison section
+  document.getElementById('comp-before-consumption').textContent = `${results.annualConsumption.toFixed(0)} kWh`;
+  const annualBill = results.annualConsumption * state.energy.tariff;
+  document.getElementById('comp-before-cost').textContent = `₹${annualBill.toLocaleString('en-IN')}`;
+  document.getElementById('comp-before-monthly').textContent = `₹${(annualBill / 12).toLocaleString('en-IN')}`;
+
+  document.getElementById('comp-after-generation').textContent = `${results.annualGeneration.toFixed(0)} kWh`;
+  const remainingConsumption = Math.max(0, results.annualConsumption - results.annualGeneration);
+  document.getElementById('comp-after-grid').textContent = `${remainingConsumption.toFixed(0)} kWh`;
+  document.getElementById('comp-after-cost').textContent = `₹${(remainingConsumption * state.energy.tariff).toLocaleString('en-IN')}`;
+
+  document.getElementById('comp-savings').textContent = `₹${(annualBill - (remainingConsumption * state.energy.tariff)).toLocaleString('en-IN')}`;
+  document.getElementById('comp-co2').textContent = `${results.co2Offset.toFixed(0)} kg CO2`;
+  document.getElementById('comp-trees').textContent = `${results.treesPlanted.toFixed(0)} trees/yr`;
+}
+
+function drawCharts(results) {
+  // Energy Chart
+  const energyCtx = document.getElementById('energy-chart');
+  if (energyCtx) {
+    if (energyChart) energyChart.destroy();
+    energyChart = new Chart(energyCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Annual Consumption', 'Annual Generation'],
+        datasets: [{
+          label: 'kWh',
+          data: [results.annualConsumption, results.annualGeneration],
+          backgroundColor: ['#9ca3af', '#b5111a'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true } }
       }
     });
   }
 
-  // Show/hide loan configurations
-  const inputFinance = document.getElementById("calc-finance-mode");
-  if (inputFinance) {
-    inputFinance.addEventListener("change", () => {
-      const loanFields = document.querySelectorAll(".loan-field");
-      loanFields.forEach(el => {
-        if (inputFinance.value === "loan") {
-          el.classList.remove("hidden");
-        } else {
-          el.classList.add("hidden");
+  // Financial Chart
+  const financialCtx = document.getElementById('financial-chart');
+  if (financialCtx) {
+    if (financialChart) financialChart.destroy();
+
+    const labels = [];
+    const utilityData = [];
+    const solarData = [];
+    let cumUtility = 0;
+    let cumSolar = results.netInvestment;
+
+    for (let i = 0; i < Math.min(results.years.length, 25); i++) {
+      if (i % 5 === 0 || i === results.years.length - 1) {
+        labels.push(`Year ${results.years[i]}`);
+      } else {
+        labels.push('');
+      }
+      cumUtility += results.utilityCosts[i];
+      cumSolar += results.solarCosts[i];
+      utilityData.push(cumUtility);
+      solarData.push(cumSolar);
+    }
+
+    financialChart = new Chart(financialCtx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Traditional Utility',
+            data: utilityData,
+            borderColor: '#9ca3af',
+            backgroundColor: 'rgba(156, 163, 175, 0.1)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 2
+          },
+          {
+            label: 'Solar',
+            data: solarData,
+            borderColor: '#b5111a',
+            backgroundColor: 'rgba(181, 17, 26, 0.1)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return '₹' + (value / 100000).toFixed(1) + 'L';
+              }
+            }
+          }
         }
-      });
+      }
     });
   }
-
-  // Bind Sensitivity Sliders
-  const sliderCapex = document.getElementById("sens-slider-capex");
-  const sliderTariff = document.getElementById("sens-slider-tariff");
-  if (sliderCapex && sliderTariff) {
-    sliderCapex.addEventListener("input", runSensitivityRecalculations);
-    sliderTariff.addEventListener("input", runSensitivityRecalculations);
-  }
-
-  // Load local draft on startup if available
-  loadCalculatorDraft();
-
-  // Detect routing clean path
-  handleCleanRouting();
-
-  // Listen to browser Back/Forward navigation
-  window.addEventListener("popstate", (e) => {
-    handleCleanRouting();
-  });
-});
-
-/** Form stepper navigation */
-function updateWizardSidebar() {
-  for (let i = 1; i <= 6; i++) {
-    const node = document.querySelector(`#step-nav-${i} .step-node`);
-    const label = document.querySelector(`#step-nav-${i} span`);
-    if (!node) continue;
-    
-    if (i === currentStep) {
-      node.className = "step-node active w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-sm";
-      label.className = "text-sm font-bold text-on-surface";
-    } else if (i < currentStep) {
-      node.className = "step-node completed w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-sm";
-      label.className = "text-sm font-semibold text-primary";
-    } else {
-      node.className = "step-node w-8 h-8 rounded-full border-2 border-outline flex items-center justify-center font-bold text-sm text-secondary";
-      label.className = "text-sm font-semibold text-secondary";
-    }
-  }
 }
 
-function showStep(stepNum) {
-  const cards = document.querySelectorAll(".step-card");
-  cards.forEach((card, idx) => {
-    if (idx + 1 === stepNum) {
-      card.classList.remove("hidden");
-    } else {
-      card.classList.add("hidden");
-    }
-  });
-
-  const btnPrev = document.getElementById("btn-prev");
-  const btnNext = document.getElementById("btn-next");
-  const btnRun = document.getElementById("btn-run");
-
-  if (stepNum === 1) {
-    btnPrev.classList.add("hidden");
-  } else {
-    btnPrev.classList.remove("hidden");
-  }
-
-  if (stepNum === 6) {
-    btnNext.classList.add("hidden");
-    btnRun.classList.remove("hidden");
-    populateWizardReviewSummary();
-  } else {
-    btnNext.classList.remove("hidden");
-    btnRun.classList.add("hidden");
-  }
-
-  currentStep = stepNum;
-  updateWizardSidebar();
+function resetCalculator() {
+  location.reload();
 }
-
-function wizardNext() {
-  const form = document.getElementById("wizard-form");
-  // Simple validations per step
-  const inputs = document.querySelectorAll(`#step-card-${currentStep} input, #step-card-${currentStep} select`);
-  let valid = true;
-  inputs.forEach(el => {
-    if (!el.checkValidity()) {
-      el.reportValidity();
-      valid = false;
-    }
-  });
-
-  if (!valid) return;
-  
-  if (currentStep < 6) {
-    showStep(currentStep + 1);
-    saveCalculatorDraft();
-  }
-}
-
-function wizardPrev() {
-  if (currentStep > 1) {
-    showStep(currentStep - 1);
-  }
-}
-
-function highlightTierCard(selectedValue) {
-  const labelMap = {
-    "standard":  "tier-label-std",
-    "high":       "tier-label-high",
-    "bifacial":   "tier-label-bifacial"
-  };
-  Object.entries(labelMap).forEach(([val, id]) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    if (val === selectedValue) {
-      el.classList.add("border-primary", "bg-primary-container/10", "ring-1", "ring-primary/10");
-      el.classList.remove("border-outline");
-    } else {
-      el.classList.remove("border-primary", "bg-primary-container/10", "ring-1", "ring-primary/10");
-      el.classList.add("border-outline");
-    }
-  });
-}
-
-function populateWizardReviewSummary() {
-  document.getElementById("review-name").textContent = document.getElementById("calc-name").value || "N/A";
-  document.getElementById("review-location").textContent = (document.getElementById("calc-state").value || "N/A").toUpperCase();
-  document.getElementById("review-units").textContent = `${document.getElementById("input-units").value} units / month`;
-  document.getElementById("review-area").textContent = `${document.getElementById("input-roof").value} Sq. Ft.`;
-  
-  const tier = document.querySelector('input[name="panel-tier"]:checked')?.value || "standard";
-  document.getElementById("review-tier").textContent = tier.toUpperCase();
-  
-  const finance = document.getElementById("calc-finance-mode").value;
-  document.getElementById("review-finance").textContent = finance.toUpperCase();
-}
-
-/** Local Draft Persistence */
-function saveCalculatorDraft() {
-  const draft = {
-    name: document.getElementById("calc-name").value,
-    customer_type: document.getElementById("calc-customer-type").value,
-    email: document.getElementById("calc-email").value,
-    phone: document.getElementById("calc-phone").value,
-    location: document.getElementById("calc-state").value,
-    zipcode: document.getElementById("calc-zip").value,
-    monthly_bill: document.getElementById("input-bill").value,
-    monthly_units: document.getElementById("input-units").value,
-    sanctioned_load: document.getElementById("calc-load").value,
-    daytime_pct: document.getElementById("calc-daytime").value,
-    available_area: document.getElementById("input-roof").value,
-    roof_type: document.getElementById("input-roof-type").value,
-    orientation: document.getElementById("input-orientation").value,
-    shading_level: document.getElementById("input-shading").value,
-    grid_mode: document.getElementById("input-grid").value,
-    panel_tier: document.querySelector('input[name="panel-tier"]:checked')?.value || "standard",
-    storage_kwh: document.getElementById("input-storage").value,
-    finance_mode: document.getElementById("calc-finance-mode").value,
-    interest_rate: document.getElementById("calc-interest").value,
-    loan_tenure: document.getElementById("calc-loan-tenure").value,
-    tariff_escalation: document.getElementById("calc-tariff-escalation").value,
-    om_escalation: document.getElementById("calc-om-escalation").value,
-    discount_rate: document.getElementById("calc-discount-rate").value,
-    currentStep
-  };
-  localStorage.setItem("sunplus_calculator_draft", JSON.stringify(draft));
-  
-  const status = document.getElementById("draft-status");
-  if (status) {
-    status.classList.remove("hidden");
-    setTimeout(() => status.classList.add("hidden"), 3000);
-  }
-}
-
-function loadCalculatorDraft() {
-  const raw = localStorage.getItem("sunplus_calculator_draft");
-  if (!raw) return;
-  try {
-    const draft = JSON.parse(raw);
-    document.getElementById("calc-name").value = draft.name || "";
-    document.getElementById("calc-customer-type").value = draft.customer_type || "residential";
-    document.getElementById("calc-email").value = draft.email || "";
-    document.getElementById("calc-phone").value = draft.phone || "";
-    document.getElementById("calc-state").value = draft.location || "uttar pradesh";
-    document.getElementById("calc-zip").value = draft.zipcode || "";
-    document.getElementById("input-bill").value = draft.monthly_bill || 15000;
-    document.getElementById("input-units").value = draft.monthly_units || 2143;
-    document.getElementById("calc-load").value = draft.sanctioned_load || 15;
-    document.getElementById("calc-daytime").value = draft.daytime_pct || 70;
-    document.getElementById("input-roof").value = draft.available_area || 2000;
-    document.getElementById("input-roof-type").value = draft.roof_type || "flat";
-    document.getElementById("input-orientation").value = draft.orientation || "south";
-    document.getElementById("input-shading").value = draft.shading_level || "none";
-    document.getElementById("input-grid").value = draft.grid_mode || "rooftop";
-    document.getElementById("input-storage").value = draft.storage_kwh || 10;
-    document.getElementById("calc-finance-mode").value = draft.finance_mode || "cash";
-    document.getElementById("calc-interest").value = draft.interest_rate || 8.5;
-    document.getElementById("calc-loan-tenure").value = draft.loan_tenure || 7;
-    document.getElementById("calc-tariff-escalation").value = draft.tariff_escalation || 4.0;
-    document.getElementById("calc-om-escalation").value = draft.om_escalation || 3.5;
-    document.getElementById("calc-discount-rate").value = draft.discount_rate || 8.0;
-    
-    // Sync slider labels
-    document.getElementById("val-units").textContent = `${parseInt(draft.monthly_units || 2143).toLocaleString("en-IN")} units`;
-    document.getElementById("val-bill").textContent = `Rs.${parseInt(draft.monthly_bill || 15000).toLocaleString("en-IN")}`;
-    document.getElementById("val-storage").textContent = `${draft.storage_kwh || 10} kWh`;
-
-    if (draft.panel_tier) {
-      const radio = document.querySelector(`input[name="panel-tier"][value="${draft.panel_tier}"]`);
-      if (radio) radio.checked = true;
-      highlightTierCard(draft.panel_tier);
-    }
-    
-    currentStep = draft.currentStep || 1;
-    showStep(currentStep);
-    updateLivePreview();
-  } catch (err) {
-    console.error("Failed to load draft", err);
-  }
-}
-
-/** Sizing Sizer Calculations (Live updates) */
-function updateLivePreview() {
-  const units = parseFloat(document.getElementById("input-units").value) || 0;
-  const state = document.getElementById("calc-state").value;
-  const grid = document.getElementById("input-grid").value;
-  const storage = parseFloat(document.getElementById("input-storage").value) || 0;
-  const panelTier = document.querySelector('input[name="panel-tier"]:checked')?.value || "standard";
-  const property = document.getElementById("calc-customer-type").value;
-
-  const irradiance = STATE_IRRADIANCE[state] || 120.0;
-  let size = units / irradiance;
-  if (size < 1.0) size = 1.0;
-  size = Math.round(size * 10) / 10;
-
-  // Cost estimates
-  let baseCostPerKw = 55000;
-  if (grid === "off-grid") baseCostPerKw = 75000;
-  if (grid === "hybrid") baseCostPerKw = 85000;
-
-  let premium = 0;
-  if (panelTier === "high") premium = 5000;
-  if (panelTier === "bifacial") premium = 12000;
-
-  let gross = size * (baseCostPerKw + premium);
-  if (grid === "hybrid" || grid === "off-grid") {
-    gross += storage * 12000;
-  }
-  gross = Math.round(gross);
-
-  // Subsidy computations
-  let subsidy = 0;
-  if (property === "residential" && (grid === "rooftop" || grid === "hybrid")) {
-    if (size >= 3.0) subsidy = 78000;
-    else if (size >= 2.0) subsidy = 60000;
-    else subsidy = Math.round(size * 30000);
-  }
-
-  const net = Math.max(0, gross - subsidy);
-
-  document.getElementById("preview-system-size").textContent = `${size} kW`;
-  document.getElementById("preview-gross-cost").textContent = `Rs.${gross.toLocaleString("en-IN")}`;
-  document.getElementById("preview-subsidy").textContent = `Rs.${subsidy.toLocaleString("en-IN")}`;
-  document.getElementById("preview-net-cost").textContent = `Rs.${net.toLocaleString("en-IN")}`;
-}
-
-/** Cinematic processing sequence */
-function runAnalysisWorkflow() {
-  switchView("processing");
-
-  const terminal = document.getElementById("terminal-logs");
-  terminal.innerHTML = `<div class="text-white/40">&gt;&gt; SunPlus Power Simulation engine initialized.</div>`;
-
-  const steps = [
-    { text: "VALIDATING FORM INPUT PARAMETERS...", duration: 500 },
-    { text: "FETCHING LOCAL STATE SOLAR IRRADIANCE DATA...", duration: 800 },
-    { text: "SIZING MODULE MATRIX ARRAYS AND BALANCE-OF-SYSTEM (BOS)...", duration: 800 },
-    { text: "SIMULATING 25-YEAR CUMULATIVE INVERTER DEGRADATION...", duration: 600 },
-    { text: "ESTIMATING UTILITY TARIFF SAVINGS ESCALATIONS...", duration: 500 },
-    { text: "NORMALIZING CAPITAL EXPENDITURES AND PAYBACK LIMITS...", duration: 600 }
-  ];
-
-  let currentLogIdx = 0;
-
-  function runNextLog() {
-    if (currentLogIdx < steps.length) {
-      const step = steps[currentLogIdx];
-      const timeStr = new Date().toLocaleTimeString();
-      
-      const logDiv = document.createElement("div");
-      logDiv.innerHTML = `[${timeStr}] <span class="text-white">${step.text}</span> <span class="text-green-500 font-bold">DONE</span>`;
-      terminal.appendChild(logDiv);
-      terminal.scrollTop = terminal.scrollHeight;
-
-      document.getElementById("processing-title").textContent = step.text.replace("...", "");
-      document.getElementById("processing-sub").textContent = `TASK ${currentLogIdx + 1} OF ${steps.length}`;
-
-      currentLogIdx++;
-      setTimeout(runNextLog, step.duration);
-    } else {
-      // Completed, redirect to Analysis overview
-      setTimeout(() => {
-        history.pushState({ view: "analysis", tab: "overview" }, "", "/analysis/overview");
-        handleCleanRouting();
-      }, 500);
-    }
-  }
-
-  setTimeout(runNextLog, 300);
-}
-
-/** Sizing Engine and Financial Amortization */
-function runCalculatorEngine() {
-  const name = document.getElementById("calc-name").value || "Valued Customer";
-  const state = document.getElementById("calc-state").value;
-  const bill = parseFloat(document.getElementById("input-bill").value) || 0;
-  const units = parseFloat(document.getElementById("input-units").value) || 0;
-  const roof = parseFloat(document.getElementById("input-roof").value) || 0;
-  const grid = document.getElementById("input-grid").value;
-  const panelTier = document.querySelector('input[name="panel-tier"]:checked')?.value || "standard";
-  const storage = parseFloat(document.getElementById("input-storage").value) || 0;
-  const property = document.getElementById("calc-customer-type").value;
-  
-  const financeMode = document.getElementById("calc-finance-mode").value;
-  const tariffEsc = (parseFloat(document.getElementById("calc-tariff-escalation").value) || 4.0) / 100;
-  const omEsc = (parseFloat(document.getElementById("calc-om-escalation").value) || 3.5) / 100;
-  const discRate = (parseFloat(document.getElementById("calc-discount-rate").value) || 8.0) / 100;
-
-  // Sizing Size
-  const irradiance = STATE_IRRADIANCE[state] || 120.0;
-  let size = units / irradiance;
-  if (size < 1.0) size = 1.0;
-  size = Math.round(size * 10) / 10;
-
-  // Space required (100 Sq Ft per kW standard)
-  const spaceNeeded = Math.round(size * 100);
-
-  // Capital Costs
-  let baseCostPerKw = 55000;
-  if (grid === "off-grid") baseCostPerKw = 75000;
-  if (grid === "hybrid") baseCostPerKw = 85000;
-
-  let premium = 0;
-  if (panelTier === "high") premium = 5000;
-  if (panelTier === "bifacial") premium = 12000;
-
-  let gross = size * (baseCostPerKw + premium);
-  if (grid === "hybrid" || grid === "off-grid") {
-    gross += storage * 12000;
-  }
-  gross = Math.round(gross);
-
-  let subsidy = 0;
-  if (property === "residential" && (grid === "rooftop" || grid === "hybrid")) {
-    if (size >= 3.0) subsidy = 78000;
-    else if (size >= 2.0) subsidy = 60000;
-    else subsidy = Math.round(size * 30000);
-  }
-
-  const net = Math.max(0, gross - subsidy);
-  const annualGen = size * irradiance * 12;
-  const firstYearSavings = annualGen * BASE_TARIFF;
-
-  // 25-Year Amortization calculations
-  let cumSavings = 0;
-  let tableRowsHtml = "";
-  const yearsData = [];
-
-  for (let yr = 1; yr <= 25; yr++) {
-    const deg = Math.pow(0.995, yr - 1); // 0.5% module degradation per year
-    const hike = Math.pow(1 + tariffEsc, yr - 1);
-    const omHike = Math.pow(1 + omEsc, yr - 1);
-
-    const yrGen = annualGen * deg;
-    const costWithoutSolar = bill * 12 * hike;
-    const costWithSolar = Math.max(0, costWithoutSolar - (yrGen * BASE_TARIFF));
-    const yrSavings = costWithoutSolar - costWithSolar;
-    const yrOm = (size * 1000) * omHike; // Base O&M standard Rs.1000/kW
-    const netYrSavings = yrSavings - yrOm;
-
-    cumSavings += netYrSavings;
-
-    yearsData.push({
-      year: yr,
-      gen: yrGen,
-      costWithout: costWithoutSolar,
-      costWith: costWithSolar,
-      savings: netYrSavings,
-      cumulative: cumSavings
-    });
-
-    tableRowsHtml += `
-      <tr>
-        <td class="p-4 font-bold text-on-surface">Year ${yr}</td>
-        <td class="p-4">${Math.round(yrGen).toLocaleString("en-IN")} kWh</td>
-        <td class="p-4 text-secondary line-through">Rs.${Math.round(costWithoutSolar).toLocaleString("en-IN")}</td>
-        <td class="p-4 font-semibold text-primary">Rs.${Math.round(costWithSolar).toLocaleString("en-IN")}</td>
-        <td class="p-4 text-green-600 font-bold">Rs.${Math.round(netYrSavings).toLocaleString("en-IN")}</td>
-        <td class="p-4 font-bold text-on-surface">Rs.${Math.round(cumSavings).toLocaleString("en-IN")}</td>
-      </tr>
-    `;
-  }
-
-  // Populate Financial Table
-  const tbody = document.getElementById("cashflow-table-body");
-  if (tbody) tbody.innerHTML = tableRowsHtml;
-
-  // Calculate Payback & IRR (simplified approximation for frontend preview)
-  const payback = firstYearSavings > 0 ? net / firstYearSavings : 0;
-  const netLifetimeSavings = cumSavings - net;
-  const irr = payback > 0 ? (120 / payback) - 4 : 0; // Curve-fitted approximation
-  const npv = netLifetimeSavings * 0.45; // Discounted approximation
-
-  // Save values in global object for sliders
-  systemData = {
-    name, state, bill, units, roof, grid, panelTier, storage, property,
-    size, spaceNeeded, gross, subsidy, net, annualGen, firstYearSavings, cumSavings,
-    payback, netLifetimeSavings, irr, npv
-  };
-
-  // Populate Overview elements
-  document.getElementById("analysis-site-name").textContent = `${name}'s Feasibility Run (${state.toUpperCase()})`;
-  document.getElementById("ov-payback").textContent = `${payback.toFixed(1)} Years`;
-  document.getElementById("ov-irr").textContent = `${irr.toFixed(1)}%`;
-  document.getElementById("ov-savings").textContent = `Rs.${Math.round(netLifetimeSavings).toLocaleString("en-IN")}`;
-  document.getElementById("ov-npv").textContent = `Rs.${Math.round(npv).toLocaleString("en-IN")}`;
-  document.getElementById("ov-capacity").textContent = `${size} kW DC`;
-  document.getElementById("ov-area-req").textContent = `${spaceNeeded} Sq. Ft.`;
-
-  // Populate Before/After
-  document.getElementById("ba-bill-before").textContent = `Rs.${Math.round(bill).toLocaleString("en-IN")}`;
-  const afterBill = Math.max(0, bill - (firstYearSavings / 12));
-  document.getElementById("ba-bill-after").textContent = `Rs.${Math.round(afterBill).toLocaleString("en-IN")}`;
-  const savingPct = bill > 0 ? ((bill - afterBill) / bill) * 100 : 0;
-  document.getElementById("ba-bill-diff").textContent = `Savings of ${Math.round(savingPct)}% per month`;
-  
-  const solarContribPct = Math.min(95, Math.round((annualGen / (units * 12)) * 100));
-  document.getElementById("ba-grid-after").textContent = `${100 - solarContribPct}%`;
-  document.getElementById("ba-offset-after").textContent = `${solarContribPct}%`;
-
-  // Populate Eco Offset
-  const co2 = annualGen * 0.82; // 0.82 kg CO2 per kWh baseline
-  const trees = Math.round(co2 / 22);
-  const coal = annualGen * 0.00045; // Tons of coal per kWh
-  document.getElementById("env-trees").textContent = `${trees.toLocaleString("en-IN")} Trees`;
-  document.getElementById("env-co2").textContent = `${Math.round(co2).toLocaleString("en-IN")} kg`;
-  document.getElementById("env-coal").textContent = `${coal.toFixed(2)} Tons`;
-
-  // Render Energy Chart Bars
-  renderMonthlyEnergyChart(annualGen / 12, units);
-
-  // Populate Comparisons
-  renderScenariosCompareGrid(size, net, payback, irr, netLifetimeSavings);
-
-  // Populate Printable Report
-  document.getElementById("rep-name").textContent = name;
-  document.getElementById("rep-state").textContent = state.toUpperCase();
-  document.getElementById("rep-zip").textContent = document.getElementById("calc-zip").value || "N/A";
-  document.getElementById("rep-date").textContent = new Date().toLocaleDateString("en-IN");
-  document.getElementById("rep-size").textContent = `${size} kW`;
-  document.getElementById("rep-savings").textContent = `Rs.${Math.round(netLifetimeSavings).toLocaleString("en-IN")}`;
-  document.getElementById("rep-payback").textContent = `${payback.toFixed(1)} Years`;
-
-  // Submit Submission as Lead (demo mode handles API downtime automatically)
-  api.post("/calculator/submit", {
-    name,
-    email: document.getElementById("calc-email").value,
-    phone: document.getElementById("calc-phone").value,
-    monthly_bill: bill,
-    monthly_units: units,
-    location: state,
-    install_type: grid
-  }).then(res => {
-    // If authenticated customer, save calculation to history
-    const userSession = JSON.parse(localStorage.getItem("sunplus_customer_session") || "null");
-    if (userSession) {
-      const historyKey = `customer_calcs_${userSession.email}`;
-      const calcs = JSON.parse(localStorage.getItem(historyKey) || "[]");
-      calcs.push({
-        id: "CALC-" + Math.floor(100000 + Math.random() * 900000),
-        name: name,
-        date: new Date().toLocaleDateString("en-IN"),
-        size: `${size} kW`,
-        payback: `${payback.toFixed(1)} Years`,
-        status: "Completed",
-        inputs: systemData
-      });
-      localStorage.setItem(historyKey, JSON.stringify(calcs));
-    }
-  }).catch(err => console.error("Auto submission error: ", err));
-
-  // Run initial sensitivity calculations
-  runSensitivityRecalculations();
-}
-
-/** Render Scenarios comparison grid */
-function renderScenariosCompareGrid(cap, net, pb, irr, life) {
-  const container = document.getElementById("scenarios-compare-grid");
-  if (!container) return;
-
-  const scenarios = [
-    {
-      title: "Balanced Scenario",
-      desc: "Optimized sizing for highest rate of return (IRR).",
-      capacity: `${cap} kW`,
-      netCost: `Rs.${Math.round(net).toLocaleString("en-IN")}`,
-      payback: `${pb.toFixed(1)} Years`,
-      irr: `${irr.toFixed(1)}%`,
-      savings: `Rs.${Math.round(life).toLocaleString("en-IN")}`,
-      active: true
-    },
-    {
-      title: "Max Savings Scenario",
-      desc: "Maximum solar footprint sizing to offset 95% of utility grid.",
-      capacity: `${Math.round(cap * 1.3 * 10) / 10} kW`,
-      netCost: `Rs.${Math.round(net * 1.25).toLocaleString("en-IN")}`,
-      payback: `${(pb * 1.1).toFixed(1)} Years`,
-      irr: `${(irr * 0.9).toFixed(1)}%`,
-      savings: `Rs.${Math.round(life * 1.25).toLocaleString("en-IN")}`,
-      active: false
-    },
-    {
-      title: "Balanced Fixed Scenario",
-      desc: "Standard tier fixed rooftop design without trackers.",
-      capacity: `${Math.round(cap * 0.9 * 10) / 10} kW`,
-      netCost: `Rs.${Math.round(net * 0.8).toLocaleString("en-IN")}`,
-      payback: `${(pb * 1.15).toFixed(1)} Years`,
-      irr: `${(irr * 0.85).toFixed(1)}%`,
-      savings: `Rs.${Math.round(life * 0.8).toLocaleString("en-IN")}`,
-      active: false
-    }
-  ];
-
-  container.innerHTML = scenarios.map(sc => `
-    <div class="p-6 bg-white rounded border ${sc.active ? 'border-primary ring-1 ring-primary/10' : 'border-surface-container'} shadow-sm space-y-4">
-      <div class="flex justify-between items-center">
-        <h4 class="font-bold text-on-surface">${sc.title}</h4>
-        ${sc.active ? '<span class="text-[10px] uppercase font-bold bg-primary text-white px-2 py-0.5 rounded">Active</span>' : ''}
-      </div>
-      <p class="text-xs text-secondary">${sc.desc}</p>
-      <div class="space-y-2 border-t border-surface-container pt-3 text-xs">
-        <div class="flex justify-between"><span>Capacity Size:</span><span class="font-bold text-on-surface">${sc.capacity}</span></div>
-        <div class="flex justify-between"><span>Net Investment:</span><span class="font-bold text-on-surface">${sc.netCost}</span></div>
-        <div class="flex justify-between"><span>Payback Period:</span><span class="font-bold text-primary">${sc.payback}</span></div>
-        <div class="flex justify-between"><span>Projected IRR:</span><span class="font-bold text-on-surface">${sc.irr}</span></div>
-        <div class="flex justify-between"><span>25-Year Net Value:</span><span class="font-bold text-green-600">${sc.savings}</span></div>
-      </div>
-    </div>
-  `).join("");
-}
-
-/** Render simple energy bar chart */
-function renderMonthlyEnergyChart(avgSolar, monthlyUnits) {
-  const container = document.getElementById("energy-chart-container");
-  if (!container) return;
-
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  
-  // Simulated solar seasonal variances
-  const variances = [0.85, 0.95, 1.1, 1.2, 1.15, 0.9, 0.7, 0.75, 0.9, 1.05, 1.0, 0.85];
-
-  const html = months.map((mon, idx) => {
-    const sol = avgSolar * variances[idx];
-    const dem = monthlyUnits;
-    const maxVal = Math.max(dem, avgSolar * 1.3);
-
-    const solPct = Math.min(100, Math.round((sol / maxVal) * 100));
-    const demPct = Math.min(100, Math.round((dem / maxVal) * 100));
-
-    return `
-      <div class="flex flex-col items-center flex-1 h-full gap-1">
-        <div class="flex items-end justify-center w-full h-[85%] gap-0.5">
-          <div class="w-3 bg-surface-container-high rounded-t transition-all duration-700" style="height: ${demPct}%" title="Demand: ${Math.round(dem)} kWh"></div>
-          <div class="w-3 bg-primary rounded-t transition-all duration-700" style="height: ${solPct}%" title="Generation: ${Math.round(sol)} kWh"></div>
-        </div>
-        <span class="text-[9px] font-bold text-tertiary mt-2">${mon}</span>
-      </div>
-    `;
-  }).join("");
-
-  container.innerHTML = `<div class="w-full flex items-end justify-between px-2 gap-1 h-full">${html}</div>`;
-}
-
-/** Run sensitivity analysis live updates */
-function runSensitivityRecalculations() {
-  if (!systemData.net) return;
-
-  const capFactor = parseFloat(document.getElementById("sens-slider-capex").value) / 100;
-  const tariffRate = parseFloat(document.getElementById("sens-slider-tariff").value);
-
-  document.getElementById("sens-val-capex").textContent = `${Math.round(capFactor * 100)}%`;
-  document.getElementById("sens-val-tariff").textContent = `${tariffRate.toFixed(1)}%`;
-
-  // Compute sensitivity adjustments
-  const adjNetCost = systemData.net * capFactor;
-  const adjPayback = systemData.firstYearSavings > 0 ? adjNetCost / (systemData.firstYearSavings * (1 + (tariffRate - 4.0)/100)) : 0;
-  const adjIrr = adjPayback > 0 ? (120 / adjPayback) - 4 : 0;
-
-  document.getElementById("sens-res-payback").textContent = `${adjPayback.toFixed(1)} Years`;
-  document.getElementById("sens-res-irr").textContent = `${adjIrr.toFixed(1)}%`;
-}
-
-/** Trigger quote modal flow */
-function requestQuoteFlow() {
-  const modal = document.getElementById("quote-modal");
-  if (modal) modal.classList.remove("hidden");
-  if (modal) modal.classList.add("flex");
-}
-
-function closeQuoteModal() {
-  const modal = document.getElementById("quote-modal");
-  if (modal) modal.classList.add("hidden");
-  if (modal) modal.classList.remove("flex");
-}
-
-async function submitQuoteRequest(event) {
-  event.preventDefault();
-  const btn = document.getElementById("quote-submit-btn");
-  const origText = btn.innerHTML;
-  
-  btn.disabled = true;
-  btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-sm">autorenew</span> Submitting...`;
-
-  const intent = document.getElementById("quote-intent").value;
-  const comments = document.getElementById("quote-comments").value;
-
-  try {
-    const result = await api.post("/leads", {
-      name: systemData.name || "Calculator Customer",
-      email: document.getElementById("calc-email").value,
-      phone: document.getElementById("calc-phone").value,
-      subject: intent,
-      message: `System Capacity: ${systemData.size} kW DC. Net Cost: Rs.${systemData.net}. Zip Code: ${document.getElementById("calc-zip").value}. Notes: ${comments}`,
-      source_page: window.location.pathname
-    });
-
-    const msg = result.demoMode 
-      ? "Demo Mode: Sizing request captured and stored locally for audit."
-      : "Sizing request submitted successfully! We'll contact you.";
-    
-    // Save request in customer requests list if logged in
-    const userSession = JSON.parse(localStorage.getItem("sunplus_customer_session") || "null");
-    if (userSession) {
-      const reqsKey = `customer_reqs_${userSession.email}`;
-      const list = JSON.parse(localStorage.getItem(reqsKey) || "[]");
-      list.push({
-        id: "REQ-" + Math.floor(100000 + Math.random() * 900000),
-        subject: intent,
-        date: new Date().toLocaleDateString("en-IN"),
-        status: "Pending Details",
-        description: comments || "Solar survey request details."
-      });
-      localStorage.setItem(reqsKey, JSON.stringify(list));
-    }
-
-    window.showToast(msg, "success", "quote-form-feedback");
-    setTimeout(() => {
-      closeQuoteModal();
-      document.getElementById("quote-submission-form").reset();
-    }, 2000);
-  } catch (err) {
-    window.showToast(err.message || "Failed to submit request.", "error", "quote-form-feedback");
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = origText;
-  }
-}
-
-/** Routing cleanly helper */
-function switchView(viewName) {
-  const wizard = document.getElementById("calculator-wizard-view");
-  const processing = document.getElementById("calculator-processing-view");
-  const analysis = document.getElementById("analysis-workspace-view");
-
-  if (wizard) wizard.classList.add("hidden");
-  if (processing) processing.classList.add("hidden");
-  if (analysis) analysis.classList.add("hidden");
-
-  if (viewName === "wizard") {
-    if (wizard) wizard.classList.remove("hidden");
-  } else if (viewName === "processing") {
-    if (processing) processing.classList.remove("hidden");
-  } else if (viewName === "analysis") {
-    if (analysis) analysis.classList.remove("hidden");
-  }
-}
-
-function switchTab(tabName) {
-  const tabs = document.querySelectorAll(".tab-pane");
-  tabs.forEach(pane => pane.classList.add("hidden"));
-
-  const targetPane = document.getElementById(`tab-pane-${tabName}`);
-  if (targetPane) targetPane.classList.remove("hidden");
-
-  // Reset tab button highlights
-  const tabBtns = document.querySelectorAll(".tab-btn");
-  tabBtns.forEach(btn => btn.className = "tab-btn pb-2 border-b-2 border-transparent hover:text-primary transition-all");
-
-  const activeBtn = document.getElementById(`tab-${tabName}`);
-  if (activeBtn) activeBtn.className = "tab-btn pb-2 border-b-2 border-primary text-primary font-bold transition-all tab-active";
-
-  currentTab = tabName;
-  history.pushState({ view: "analysis", tab: tabName }, "", `/analysis/${tabName}`);
-}
-
-function handleCleanRouting() {
-  const path = window.location.pathname;
-  if (path === "/solar-calculator") {
-    switchView("wizard");
-    showStep(1);
-  } else if (path === "/calculator/processing") {
-    switchView("processing");
-    runAnalysisWorkflow();
-  } else if (path.startsWith("/analysis")) {
-    switchView("analysis");
-    // Extract tab name from sub-route
-    const tabName = path.split("/").pop() || "overview";
-    
-    // Fallback if calculations haven't been run yet (ensure default mock configurations)
-    if (!systemData.net) {
-      // Simulate defaults
-      document.getElementById("calc-name").value = "SunPlus Partner Demo";
-      document.getElementById("calc-state").value = "uttar pradesh";
-      document.getElementById("input-bill").value = 15000;
-      document.getElementById("input-units").value = 2143;
-      runCalculatorEngine();
-    }
-    
-    const validTabs = ["overview", "before-after", "energy", "financial", "environmental", "sensitivity", "compare", "report"];
-    if (validTabs.includes(tabName)) {
-      switchTab(tabName);
-    } else {
-      switchTab("overview");
-    }
-  }
-}
-
-// Expose globally
-window.wizardNext = wizardNext;
-window.wizardPrev = wizardPrev;
-window.saveCalculatorDraft = saveCalculatorDraft;
-window.runAnalysisWorkflow = runAnalysisWorkflow;
-window.switchTab = switchTab;
-window.switchView = switchView;
-window.closeQuoteModal = closeQuoteModal;
-window.requestQuoteFlow = requestQuoteFlow;
-window.submitQuoteRequest = submitQuoteRequest;
