@@ -20,6 +20,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
+@app.get("/", tags=["Root"])
+def read_root():
+    return {
+        "message": "SunPlus Power Backend is running!",
+        "docs": "/docs",
+        "redoc": "/redoc"
+    }
+
 # Connect slowapi rate-limiter
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
