@@ -58,6 +58,8 @@ let state = {
   }
 };
 
+let lastSubmittedCalculationFingerprint = null;
+
 // State-wise solar irradiance (kWh/kW/day)
 const STATE_IRRADIANCE = {
   'Andhra Pradesh': 5.5,
@@ -402,7 +404,7 @@ function nextStep(step) {
 function downloadReport() {
   // Calculate results first
   const results = calculateFinancials();
-  
+
   // Create report content
   let report = `
 SUNPLUS POWER SOLAR CALCULATION REPORT
@@ -489,6 +491,19 @@ function validateStep(step) {
     }
     if (!city) {
       alert('Please enter your city.');
+      return false;
+    }
+  } else if (step === 2) {
+    const monthlyBill = parseFloat(document.getElementById('calc-bill').value) || 0;
+    const monthlyConsumption = parseFloat(document.getElementById('calc-consumption').value) || 0;
+
+    if (state.energy.inputMethod === 'bill' && monthlyBill <= 0) {
+      alert('Please enter a valid monthly bill amount.');
+      return false;
+    }
+
+    if (state.energy.inputMethod === 'consumption' && monthlyConsumption <= 0) {
+      alert('Please enter a valid monthly consumption value.');
       return false;
     }
   } else if (step === 3) {
@@ -589,24 +604,63 @@ function updateSidebar() {
   document.getElementById('sidebar-system').textContent = `${state.system.recommendedCapacity.toFixed(2)} kW ${state.system.type.charAt(0).toUpperCase() + state.system.type.slice(1)}`;
 }
 
+function buildCalculatorSubmissionPayload() {
+  const monthlyUnits = state.energy.inputMethod === 'consumption'
+    ? state.energy.monthlyConsumption
+    : (state.energy.monthlyBill / state.energy.tariff);
+  const monthlyBill = state.energy.inputMethod === 'bill'
+    ? state.energy.monthlyBill
+    : (state.energy.monthlyConsumption * state.energy.tariff);
+
+  return {
+    name: state.customer.name.trim(),
+    email: state.customer.email.trim(),
+    phone: state.customer.phone.trim() || null,
+    monthly_bill: Number(monthlyBill.toFixed(2)),
+    monthly_units: Number(monthlyUnits.toFixed(2)),
+    location: state.site.state || state.customer.state,
+    install_type: state.site.roofType === 'ground' ? 'ground-mount' : 'rooftop'
+  };
+}
+
+async function persistCalculationSubmission() {
+  const payload = buildCalculatorSubmissionPayload();
+
+  if (!payload.name || !payload.email || payload.monthly_bill <= 0) {
+    throw new Error('Calculator submission is missing required customer or energy details.');
+  }
+
+  const fingerprint = JSON.stringify(payload);
+  if (fingerprint === lastSubmittedCalculationFingerprint) {
+    return;
+  }
+
+  await api.post('/calculator/submit', payload);
+  lastSubmittedCalculationFingerprint = fingerprint;
+}
+
 async function runAnalysis() {
   const btn = document.getElementById('btn-run-analysis');
   const originalContent = btn.innerHTML;
   btn.innerHTML = '<span class="material-symbols-outlined animate-spin">autorenew</span> Analyzing...';
   btn.disabled = true;
 
-  // Perform calculations
-  const results = calculateFinancials();
+  try {
+    const results = calculateFinancials();
+    await persistCalculationSubmission();
 
-  // Show results
-  document.getElementById('results-area').classList.remove('hidden');
-  populateResults(results);
-  drawCharts(results);
-
-  btn.innerHTML = originalContent;
-  btn.disabled = false;
-
-  document.getElementById('results-area').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('results-area').classList.remove('hidden');
+    populateResults(results);
+    drawCharts(results);
+    window.showToast('Calculation saved successfully and is now available in admin submissions.', 'success');
+    document.getElementById('results-area').scrollIntoView({ behavior: 'smooth' });
+  } catch (error) {
+    console.error('Failed to run analysis:', error);
+    window.showToast(error.message || 'Analysis could not be saved to the backend.', 'error');
+  } finally {
+    btn.innerHTML = originalContent;
+    btn.disabled = false;
+  }
 }
 
 function calculateFinancials() {

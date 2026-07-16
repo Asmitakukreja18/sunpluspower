@@ -3,6 +3,7 @@
  */
 
 const API_BASE = "https://sunplus-backend.onrender.com/api";
+const IS_LOCAL_DEMO = ["localhost", "127.0.0.1"].includes(window.location.hostname) || window.location.protocol === "file:";
 
 class ApiClient {
   constructor() {
@@ -52,10 +53,10 @@ class ApiClient {
    */
   async request(endpoint, options = {}) {
     const url = `${API_BASE}${endpoint}`;
-    
+
     // Set headers
     const headers = { ...options.headers };
-    
+
     // Check if sending FormData (don't set Content-Type header manually for FormData)
     const isFormData = options.body instanceof FormData;
     if (!isFormData && !headers["Content-Type"]) {
@@ -77,7 +78,7 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
-      
+
       // Handle unauthorized (expired JWT)
       if (response.status === 401) {
         // Only redirect to login if we are inside the admin dashboard
@@ -95,7 +96,7 @@ class ApiClient {
       }
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || `API Request failed with status ${response.status}`);
       }
@@ -104,14 +105,14 @@ class ApiClient {
       return data;
     } catch (error) {
       this.hideLoader();
-      
-      // Frontend Demo Submission Adapter Fallback
-      if (config.method === "POST") {
+
+      // Only allow local demo fallback during local development.
+      if (config.method === "POST" && IS_LOCAL_DEMO) {
         console.warn(`Backend connection failed for ${endpoint}. Activating frontend demo submission adapter...`, error);
-        
+
         // Simulate network latency
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
+
         // Parse submission data for local storage representation
         let submissionData = {};
         if (options.body instanceof FormData) {
@@ -121,20 +122,20 @@ class ApiClient {
         } else if (typeof options.body === "string") {
           try {
             submissionData = JSON.parse(options.body);
-          } catch(e) {
+          } catch (e) {
             submissionData = { raw: options.body };
           }
         }
-        
+
         submissionData.demoMode = true;
         submissionData.timestamp = new Date().toISOString();
-        
+
         // Persist locally in localStorage
         const demoKey = `demo_submissions_${endpoint.replace(/\//g, '_')}`;
         const list = JSON.parse(localStorage.getItem(demoKey) || "[]");
         list.push(submissionData);
         localStorage.setItem(demoKey, JSON.stringify(list));
-        
+
         return {
           success: true,
           demoMode: true,
@@ -142,7 +143,7 @@ class ApiClient {
           data: submissionData
         };
       }
-      
+
       console.error(`API Error on ${endpoint}:`, error);
       throw error;
     }
