@@ -83,7 +83,6 @@ async function loadDashboardStats() {
   try {
     const stats = await api.get("/admin/dashboard-stats");
     setText("stat-leads", stats.leads_count);
-    setText("stat-calc", stats.calculator_submissions_count);
     setText("stat-dist", stats.distributor_applications_count);
     setText("stat-tickets", stats.complaints_count);
     setText("stat-projects", stats.projects_count);
@@ -99,7 +98,7 @@ let currentSubmissionsTab = "leads";
 
 function switchSubmissionsTab(tabName) {
   currentSubmissionsTab = tabName;
-  
+
   // Toggle tab buttons styles
   document.querySelectorAll(".sub-tab-btn").forEach(btn => {
     btn.classList.remove("border-primary", "text-on-surface");
@@ -122,23 +121,19 @@ async function loadSubmissionsData() {
     const leads = await api.get("/admin/leads");
     renderLeadsTable(leads);
 
-    // 2. Fetch solar calculator entries
-    const calcs = await api.get("/admin/calculator-submissions");
-    renderCalculatorTable(calcs);
-
-    // 3. Fetch distributors
+    // 2. Fetch distributors
     const dists = await api.get("/admin/distributor-applications");
     renderDistributorsTable(dists);
 
-    // 4. Fetch warranties
+    // 3. Fetch warranties
     const warranties = await api.get("/admin/warranty-registrations");
     renderWarrantiesTable(warranties);
 
-    // 5. Fetch complaints
+    // 4. Fetch complaints
     const complaints = await api.get("/admin/complaints");
     renderComplaintsTable(complaints);
 
-    // 6. Fetch job applications
+    // 5. Fetch job applications
     const jobApps = await api.get("/admin/job-applications");
     renderJobAppsTable(jobApps);
 
@@ -379,7 +374,7 @@ async function loadAdminCareers() {
 function toggleCRUDModal(entity, show = true) {
   const modal = document.getElementById(`${entity}-modal`);
   if (!modal) return;
-  
+
   if (show) {
     modal.classList.remove("hidden");
     // Clear forms for new entries using the singular form (e.g., project-form, project-id)
@@ -388,7 +383,7 @@ function toggleCRUDModal(entity, show = true) {
     if (formEl) formEl.reset();
     const idEl = document.getElementById(`${singularEntity}-id`);
     if (idEl) idEl.value = "";
-    
+
     const titleEl = document.getElementById(`modal-${entity}-title`);
     if (titleEl) {
       titleEl.innerText = `New ${entity.charAt(0).toUpperCase() + entity.slice(1, -1)}`;
@@ -406,9 +401,9 @@ function setupCRUDModal(formId, entity) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const itemId = document.getElementById(`${entity.slice(0,-1)}-id`).value;
+    const itemId = document.getElementById(`${entity.slice(0, -1)}-id`).value;
     const formData = new FormData(form);
-    
+
     // Convert to JSON payload
     let payload = {};
     formData.forEach((value, key) => {
@@ -440,9 +435,9 @@ function setupCRUDModal(formId, entity) {
         await api.post(`/admin/${entity}`, payload);
         window.showToast("Item created successfully.", "success");
       }
-      
+
       toggleCRUDModal(entity, false);
-      
+
       // Reload matching dataset
       if (entity === "projects") loadAdminProjects();
       if (entity === "blogs") loadAdminBlogs();
@@ -457,9 +452,9 @@ function setupCRUDModal(formId, entity) {
 function editCRUDItem(entity, id, data) {
   // Show Modal
   toggleCRUDModal(entity, true);
-  
+
   const singularEntity = entity.slice(0, -1);
-  
+
   // Set ID and update header label
   document.getElementById(`${singularEntity}-id`).value = id;
   const titleEl = document.getElementById(`modal-${entity}-title`);
@@ -470,7 +465,7 @@ function editCRUDItem(entity, id, data) {
   // Populate form elements
   const form = document.getElementById(`${singularEntity}-form`);
   if (!form) return;
-  
+
   for (const [key, val] of Object.entries(data)) {
     const input = form.elements[key];
     if (!input) continue;
@@ -495,7 +490,7 @@ async function deleteCRUDItem(entity, id) {
   try {
     await api.delete(`/admin/${entity}/${id}`);
     window.showToast("Item deleted successfully.", "success");
-    
+
     if (entity === "projects") loadAdminProjects();
     if (entity === "blogs") loadAdminBlogs();
     if (entity === "careers") loadAdminCareers();

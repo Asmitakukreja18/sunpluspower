@@ -9,7 +9,7 @@ from slowapi import _rate_limit_exceeded_handler
 
 from app.core.config import settings
 from app.core.limiter import limiter
-from app.core.db import SessionLocal
+from app.core.db import SessionLocal, engine, Base
 from app.core.security import get_password_hash
 from app.models.models import AdminUser
 from app.routers import auth, public, admin
@@ -103,9 +103,15 @@ app.include_router(auth.router, prefix="/api")
 app.include_router(public.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")
 
-# Startup hook to automatically seed admin user
+# Startup hook to automatically create tables and seed admin user
 @app.on_event("startup")
 def startup_db_seeding():
+    # Create all database tables
+    print("Creating database tables...")
+    Base.metadata.create_all(bind=engine)
+    print("Database tables created successfully!")
+    
+    # Seed default admin user if none exists
     db = SessionLocal()
     try:
         admin_count = db.query(AdminUser).count()

@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Submissions Inbox | SunPlus Power Control Console</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  
-  <link rel="stylesheet" href="../assets/css/variables.css"/>
-  <link rel="stylesheet" href="../assets/css/base.css"/>
-  <link rel="stylesheet" href="../assets/css/components.css"/>
-  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css"/>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css" />
+
   <script src="../assets/js/api.js" defer></script>
   <script src="../assets/js/admin.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
 </head>
+
 <body class="bg-surface text-on-background antialiased flex flex-col min-h-screen">
 
   <!-- Header -->
@@ -23,12 +28,14 @@
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
-          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="../assets/images/logo.svg"/>
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert"
+            src="../assets/images/logo.png" />
         </a>
         <span class="text-headline-md font-bold text-white tracking-wide">Control Panel</span>
       </div>
       <div class="flex items-center gap-6">
-        <button onclick="adminLogout()" class="text-white/80 hover:text-white font-label-bold text-sm flex items-center gap-1.5 border border-white/20 px-4 py-2 rounded hover:bg-white/10 transition-all">
+        <button onclick="adminLogout()"
+          class="text-white/80 hover:text-white font-label-bold text-sm flex items-center gap-1.5 border border-white/20 px-4 py-2 rounded hover:bg-white/10 transition-all">
           <span class="material-symbols-outlined text-[18px]">logout</span> Logout
         </button>
       </div>
@@ -36,27 +43,37 @@
   </header>
 
   <!-- Sidebar + Content -->
-  <div class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-8 gap-8">
+  <div
+    class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-8 gap-8">
     <!-- Sidebar Navigation -->
     <aside class="w-full md:w-64 space-y-2">
       <div class="p-4 bg-charcoal text-white rounded-lg mb-4">
         <h4 class="font-bold text-sm uppercase tracking-wider">Console Directory</h4>
         <p class="text-xs text-white/60">System Operator Active</p>
       </div>
-      
-      <a href="dashboard.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+
+      <a href="dashboard.html"
+        class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
         <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard Overview
       </a>
-      <a href="submissions.html" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container text-primary font-bold transition-all">
+      <a href="submissions.html"
+        class="flex items-center gap-3 p-3 rounded-lg bg-surface-container text-primary font-bold transition-all">
         <span class="material-symbols-outlined text-[20px]">inbox</span> Submissions inbox
       </a>
-      <a href="projects.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+      <a href="sales.html"
+        class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+        <span class="material-symbols-outlined text-[20px]">payments</span> Sales Console
+      </a>
+      <a href="projects.html"
+        class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
         <span class="material-symbols-outlined text-[20px]">solar_power</span> Projects Manager
       </a>
-      <a href="blogs.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+      <a href="blogs.html"
+        class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
         <span class="material-symbols-outlined text-[20px]">article</span> Insights & Blogs
       </a>
-      <a href="careers.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
+      <a href="careers.html"
+        class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
         <span class="material-symbols-outlined text-[20px]">work</span> Careers & Jobs
       </a>
     </aside>
@@ -65,26 +82,36 @@
     <main id="submissions-view" class="flex-grow space-y-8 overflow-hidden">
       <div>
         <h1 class="text-headline-xl font-bold text-on-surface">Submissions Inbox</h1>
-        <p class="text-body-lg text-secondary mt-1">Review contact leads, calculator simulations, warranties, support tickets, and HR resumes.</p>
+        <p class="text-body-lg text-secondary mt-1">Review contact leads, distributor applications, warranties, support
+          tickets, and HR resumes.</p>
       </div>
 
       <!-- Tabs Suite Nav -->
       <div class="border-b border-surface-container overflow-x-auto flex whitespace-nowrap gap-6 pb-2">
-        <button onclick="switchSubmissionsTab('leads')" id="tab-leads" class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-primary text-on-surface">General Leads</button>
-        <button onclick="switchSubmissionsTab('calculator')" id="tab-calculator" class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Solar Calculator</button>
-        <button onclick="switchSubmissionsTab('distributor')" id="tab-distributor" class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Distributors</button>
-        <button onclick="switchSubmissionsTab('warranty')" id="tab-warranty" class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Warranty Logs</button>
-        <button onclick="switchSubmissionsTab('complaints')" id="tab-complaints" class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Complaints & Tickets</button>
-        <button onclick="switchSubmissionsTab('job-applications')" id="tab-job-applications" class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Job Applications</button>
+        <button onclick="switchSubmissionsTab('leads')" id="tab-leads"
+          class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-primary text-on-surface">General Leads</button>
+        <button onclick="switchSubmissionsTab('distributor')" id="tab-distributor"
+          class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Distributors</button>
+        <button onclick="switchSubmissionsTab('warranty')" id="tab-warranty"
+          class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Warranty
+          Logs</button>
+        <button onclick="switchSubmissionsTab('complaints')" id="tab-complaints"
+          class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Complaints
+          & Tickets</button>
+        <button onclick="switchSubmissionsTab('job-applications')" id="tab-job-applications"
+          class="sub-tab-btn font-bold text-sm pb-2 border-b-2 border-transparent text-secondary hover:text-on-surface">Job
+          Applications</button>
       </div>
 
       <!-- Tab Content Cards -->
 
       <!-- 1. Leads Table -->
-      <div id="leads-table-container" class="submission-table-container overflow-x-auto bg-white border border-outline-variant rounded-lg">
+      <div id="leads-table-container"
+        class="submission-table-container overflow-x-auto bg-white border border-outline-variant rounded-lg">
         <table class="w-full text-left border-collapse min-w-[700px]">
           <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
+            <tr
+              class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
               <th class="p-4">Name</th>
               <th class="p-4">Contact</th>
               <th class="p-4">Company</th>
@@ -99,31 +126,13 @@
         </table>
       </div>
 
-      <!-- 2. Solar Calculator Table -->
-      <div id="calculator-table-container" class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
-        <table class="w-full text-left border-collapse min-w-[850px]">
-          <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
-              <th class="p-4">Name</th>
-              <th class="p-4">Contact</th>
-              <th class="p-4">Monthly Bill</th>
-              <th class="p-4">Installation Site</th>
-              <th class="p-4">Solar Size</th>
-              <th class="p-4">Financial Specs</th>
-              <th class="p-4">Payback</th>
-            </tr>
-          </thead>
-          <tbody id="calculator-table-body">
-            <!-- Dynamic rows -->
-          </tbody>
-        </table>
-      </div>
-
       <!-- 3. Distributors Table -->
-      <div id="distributor-table-container" class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
+      <div id="distributor-table-container"
+        class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
+            <tr
+              class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
               <th class="p-4">Company</th>
               <th class="p-4">Contact Details</th>
               <th class="p-4">Territory</th>
@@ -139,10 +148,12 @@
       </div>
 
       <!-- 4. Warranty Table -->
-      <div id="warranty-table-container" class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
+      <div id="warranty-table-container"
+        class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
         <table class="w-full text-left border-collapse min-w-[700px]">
           <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
+            <tr
+              class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
               <th class="p-4">Customer</th>
               <th class="p-4">Contact Details</th>
               <th class="p-4">Product Category</th>
@@ -158,10 +169,12 @@
       </div>
 
       <!-- 5. Complaints Table -->
-      <div id="complaints-table-container" class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
+      <div id="complaints-table-container"
+        class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
+            <tr
+              class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
               <th class="p-4">Customer</th>
               <th class="p-4">Contact Details</th>
               <th class="p-4">Reference ID</th>
@@ -178,10 +191,12 @@
       </div>
 
       <!-- 6. Job Applications Table -->
-      <div id="job-applications-table-container" class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
+      <div id="job-applications-table-container"
+        class="submission-table-container hidden overflow-x-auto bg-white border border-outline-variant rounded-lg">
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
+            <tr
+              class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
               <th class="p-4">Candidate</th>
               <th class="p-4">Contact Details</th>
               <th class="p-4">Target Job</th>
@@ -205,4 +220,5 @@
   </footer>
 
 </body>
+
 </html>
