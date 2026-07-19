@@ -40,9 +40,7 @@ Connect
 </div>
 </div>
 </div>
-<a href="calculator.html" class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
-                SOLAR CALCULATOR
-            </a>
+</div>
 </div>
 </nav>"""
 
@@ -88,7 +86,7 @@ def get_footer():
 <p class="text-white/60 font-body-md leading-relaxed">
     <b>Sales Help:</b> <a class="hover:text-primary" href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br/>
     <b>Technical Support:</b> <a class="hover:text-primary" href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br/>
-    <b>Official Phone:</b> +91-9153832222
+    <b>Official Phone:</b> +91-9648045063
 </p>
 </div>
 </div>
@@ -112,6 +110,7 @@ pages_map = {
     "products_decent_theme": "products.html",
     "group_business_decent_theme": "group-business.html",
     "media_hub_decent_theme": "media.html",
+    "faq_decent_theme": "faq.html",
     "careers_decent_theme": "careers.html",
     "let_s_connect_decent_theme": "connect.html"
 }

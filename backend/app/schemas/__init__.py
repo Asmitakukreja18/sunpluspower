@@ -2,8 +2,6 @@ from app.schemas.schemas import (
     LeadCreate,
     LeadStatusUpdate,
     LeadOut,
-    CalculatorSubmissionCreate,
-    CalculatorSubmissionOut,
     DistributorApplicationCreate,
     DistributorApplicationStatusUpdate,
     DistributorApplicationOut,

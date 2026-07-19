@@ -51,14 +51,13 @@
 
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
     <!-- TopNavBar -->
-    <nav
-        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+    <nav class="fixed top-0 w-full z-50 bg-white shadow-sm transition-all duration-300 ease-in-out">
         <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
             <a href="index.html" class="flex items-center shrink-0">
-                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
-                    style="max-width:200px;" />
+                <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                    style="max-width:300px;" />
             </a>
-            <div class="hidden lg:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-5 xl:space-x-7">
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
                     href="index.html">Home</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
@@ -73,6 +72,8 @@
                     href="media.html">Solar Intelligence</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
                     href="careers.html">Careers</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="faq.html">FAQ</a>
                 <div class="relative group">
                     <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
                         href="connect.html">
@@ -96,10 +97,26 @@
                     </div>
                 </div>
             </div>
-            <a href="calculator.html"
-                class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
-                SOLAR CALCULATOR
-            </a>
+                <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-md bg-secondary-container shrink-0" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-white">menu</span>
+                </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-outline-technical shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div class="flex flex-col px-margin-mobile py-4">
+                <a href="index.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Home</a>
+                <a href="about.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Company</a>
+                <a href="services.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Services</a>
+                <a href="projects.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Projects</a>
+                <a href="products.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Products</a>
+                <a href="media.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Solar Intelligence</a>
+                <a href="careers.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Careers</a>
+                <a href="faq.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">FAQ</a>
+                <a href="connect.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Connect</a>
+                <a href="connect.html?tab=distributor" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Apply for Distributor</a>
+                <a href="connect.html?tab=warranty" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Warranty Registration</a>
+                <a href="connect.html?tab=complaint" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant">Complaint / Support</a>
+            </div>
+        </div>
         </div>
     </nav>
     <main class="min-h-screen relative industrial-grid">
@@ -308,34 +325,186 @@
                     </button>
                 </div>
             </div>
-            <!-- Balance of System -->
+            <!-- Earthing Strips -->
             <div
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1lp53C7c9ydy3uQpHtTuActs57utPhJZF5pcYB4OYUU8mUHTBCekpAZw4mT5Wvgix4Wn5ipllXRJZiVKLhmFEJqdAOf9NGwjpEsmNSrVaCiWgPY56nhNeyi0LHvNeS5iu2PAjNNpIyLJY4j-oDVD-Ybs-11hjWI_m0O-fiWekzterx4UeG5R9iU5yWogELWDtAF7okqSGDMRS9B1uoPNQCJ-ji-c2SFbKAqn-YityQTLE4TRcv-r2pA" />
+                        src="https://images.unsplash.com/photo-1581091226033-d9c9760e8f22?w=800&amp;q=80&amp;auto=format&amp;fit=crop"
+                        alt="Earthing Strips" />
                 </div>
                 <div class="p-6 flex-1 flex flex-col">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <h3 class="text-headline-md font-headline-md text-on-surface">BOS Cluster X</h3>
-                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Combiner &amp; Cable
-                                Solutions</p>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">Earthing Strips</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Copper / GI</p>
                         </div>
-                        <span class="text-tertiary-container material-symbols-outlined">cable</span>
+                        <span class="text-tertiary-container material-symbols-outlined">swap_horiz</span>
                     </div>
                     <div class="space-y-3 mb-8">
                         <div class="flex justify-between border-b border-surface-container-low pb-2">
-                            <span class="text-on-surface-variant text-label-sm">Voltage Rating</span>
-                            <span class="text-on-surface font-label-md">1500V DC</span>
+                            <span class="text-on-surface-variant text-label-sm">Sizes</span>
+                            <span class="text-on-surface font-label-md">25×3mm, 25×6mm, 50×6mm</span>
                         </div>
                         <div class="flex justify-between border-b border-surface-container-low pb-2">
-                            <span class="text-on-surface-variant text-label-sm">Fuse Capacity</span>
-                            <span class="text-on-surface font-label-md">32 Strings</span>
+                            <span class="text-on-surface-variant text-label-sm">Material</span>
+                            <span class="text-on-surface font-label-md">High Conductivity</span>
                         </div>
                         <div class="flex justify-between border-b border-surface-container-low pb-2">
                             <span class="text-on-surface-variant text-label-sm">Standards</span>
-                            <span class="text-on-surface font-label-md">UL / IEC</span>
+                            <span class="text-on-surface font-label-md">IS 3043</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
+                        Request Datasheet
+                    </button>
+                </div>
+            </div>
+
+            <!-- Earthing Rod (Copper Bonded) -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&amp;q=80&amp;auto=format&amp;fit=crop"
+                        alt="Earthing Rod" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">Earthing Rod</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Copper Bonded</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">bolt</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Coating Thickness</span>
+                            <span class="text-on-surface font-label-md">100µm (Min)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Lengths</span>
+                            <span class="text-on-surface font-label-md">1m, 2m, 3m</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Corrosion Resistance</span>
+                            <span class="text-on-surface font-label-md">Excellent</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
+                        Request Datasheet
+                    </button>
+                </div>
+            </div>
+
+            <!-- Earthing Chemical Bag -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&amp;q=80&amp;auto=format&amp;fit=crop"
+                        alt="Earthing Chemical" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">Earthing Chemical Bag</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Resistivity Reducer</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">science</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Composition</span>
+                            <span class="text-on-surface font-label-md">Bentonite &amp; Graphite</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Resistivity</span>
+                            <span class="text-on-surface font-label-md">&lt;5 Ω-m</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Packaging</span>
+                            <span class="text-on-surface font-label-md">25kg Bags</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
+                        Request Datasheet
+                    </button>
+                </div>
+            </div>
+
+            <!-- PVC Earthing Chamber -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&amp;q=80&amp;auto=format&amp;fit=crop"
+                        alt="PVC Earthing Chamber" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">PVC Earthing Chamber</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">Inspection Pit</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">storefront</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Material</span>
+                            <span class="text-on-surface font-label-md">Heavy Duty PVC</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Dimensions</span>
+                            <span class="text-on-surface font-label-md">Standard Sizes</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Waterproof</span>
+                            <span class="text-on-surface font-label-md">Yes</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary py-3.5 rounded font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto">
+                        <span class="material-symbols-outlined text-[20px]">file_download</span>
+                        Request Datasheet
+                    </button>
+                </div>
+            </div>
+
+            <!-- Earthing Rod Clamps -->
+            <div
+                class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
+                <div class="h-64 relative overflow-hidden bg-surface-container">
+                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        src="https://images.unsplash.com/photo-1621274790172-c7ee0629bda9?w=800&amp;q=80&amp;auto=format&amp;fit=crop"
+                        alt="Earthing Clamps" />
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-headline-md font-headline-md text-on-surface">Earthing Rod Clamps</h3>
+                            <p class="text-tertiary font-label-sm uppercase tracking-wider mt-1">GI / Copper</p>
+                        </div>
+                        <span class="text-tertiary-container material-symbols-outlined">link</span>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Clamp Sizes</span>
+                            <span class="text-on-surface font-label-md">25×3mm, 25×6mm, 50×6mm</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Finish</span>
+                            <span class="text-on-surface font-label-md">Hot Dip Galvanized</span>
+                        </div>
+                        <div class="flex justify-between border-b border-surface-container-low pb-2">
+                            <span class="text-on-surface-variant text-label-sm">Strength</span>
+                            <span class="text-on-surface font-label-md">High Tensile</span>
                         </div>
                     </div>
                     <button
@@ -418,13 +587,16 @@
         </div>
     </main>
     <!-- Footer -->
-    <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
-            <div class=" space-y-6">
+    <footer class="bg-white border-t border-outline-variant w-full mt-24">
+        <div
+            class="grid grid-cols-1 md:grid-cols-5 gap-gutter px-margin-desktop py-20 w-full max-w-container-max mx-auto">
+            <div class="md:col-span-2 space-y-6">
                 <a href="index.html" class="flex items-center">
-                    <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
-                        style="max-width:200px;" />
+                    <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto"
+                        style="max-width:300px;" />
                 </a>
+                <p class="text-primary font-label-technical uppercase tracking-widest text-sm">Powered by
+                    the Sun. Grounded in Safety.</p>
                 <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
                     transition
                     through rigorous technical modeling and industrial-scale solar deployment.</p>
@@ -448,7 +620,8 @@
                     <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
                             Intelligence</a></li>
                     <li><a class="text-on-surface-variant hover:text-primary transition-colors"
-                            href="careers.html">Careers</a>
+                            href="careers.html">Careers</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="faq.html">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -480,7 +653,7 @@
                         href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
                     <b>Technical Support:</b> <a class="hover:text-primary"
                         href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
-                    <b>Official Phone:</b> +91-9153832222
+                    <b>Official Phone:</b> +91-9648045063
                 </p>
             </div>
         </div>

@@ -13,6 +13,36 @@
   display: block;
 }
 
+/* QA Fixes for components */
+
+/* Button Fixes: Consistent padding, no clipping */
+a,
+button {
+  min-height: 44px; /* Touch-friendly */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card Fixes: Equal height, consistent spacing, padding, border-radius, shadows */
+[class*="grid-cols"] > [class*="border"],
+[class*="grid-cols"] > [class*="card"] {
+  height: 100%;
+}
+
+/* Fix for cards to have consistent spacing and equal heights */
+.group.border,
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.group.border > *:last-child,
+.card > *:last-child {
+  margin-top: auto;
+}
+
 
 /* Primary Button */
 .btn-primary {
@@ -27,7 +57,8 @@
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.01em;
-  padding: 10px 24px;
+  padding: 12px 28px;
+  min-height: 44px;
   border: none;
   border-radius: var(--rounded-default);
   cursor: pointer;
@@ -64,7 +95,8 @@
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.01em;
-  padding: 10px 24px;
+  padding: 12px 28px;
+  min-height: 44px;
   border: 1px solid var(--color-navy-grey);
   border-radius: var(--rounded-default);
   cursor: pointer;

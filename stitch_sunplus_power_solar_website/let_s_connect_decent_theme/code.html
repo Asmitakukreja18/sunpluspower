@@ -111,6 +111,22 @@
         .form-transition {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
+        .tab-background {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .tab-background::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 0;
+        }
+        .tab-background>* {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="bg-background text-on-background selection:bg-primary-fixed selection:text-primary min-h-screen industrial-pattern">
@@ -155,19 +171,19 @@
 <main class="max-w-container-max mx-auto px-margin-desktop py-12 md:py-20">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
 <!-- Forms Canvas (Left/Center) -->
-<div class="lg:col-span-8 bg-white border border-surface-container p-8 md:p-12 rounded-lg shadow-sm">
+<div class="lg:col-span-8 bg-white border border-surface-container rounded-lg shadow-sm overflow-hidden">
 <!-- Contact Us Form -->
-<div class="form-section" id="form-contact">
+<div class="form-section tab-background p-8 md:p-12" id="form-contact" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&amp;q=80&amp;auto=format&amp;fit=crop');">
 <h2 class="text-headline-md font-bold text-on-surface mb-6">General Inquiry</h2>
 <form class="space-y-6">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Full Name</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="John Doe" type="text"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" placeholder="John Doe" type="text"/>
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Corporate Email</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="john@company.com" type="email"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" placeholder="john@company.com" type="email"/>
 </div>
 </div>
 <div class="flex flex-col">
@@ -181,7 +197,7 @@
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Message</label>
-<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Describe your project or inquiry in detail..." rows="5"></textarea>
+<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" placeholder="Describe your project or inquiry in detail..." rows="5"></textarea>
 </div>
 <button class="w-full bg-primary text-white font-label-md py-4 rounded hover:opacity-90 transition-opacity flex justify-center items-center gap-2" type="submit">
                             Send Message <span class="material-symbols-outlined text-sm">send</span>
@@ -189,48 +205,48 @@
 </form>
 </div>
 <!-- Distributor Form (Hidden by default) -->
-<div class="form-section hidden" id="form-distributor">
+<div class="form-section hidden tab-background p-8 md:p-12" id="form-distributor" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1200&amp;q=80&amp;auto=format&amp;fit=crop');">
 <h2 class="text-headline-md font-bold text-on-surface mb-2">Distributor Application</h2>
 <p class="text-body-md text-secondary mb-8 border-b border-surface-container pb-4">Expand your business with the industry-leading solar technology provider.</p>
 <form class="space-y-6">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Company Name</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" type="text"/>
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Annual Revenue (USD)</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" type="text"/>
 </div>
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Territory of Interest</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Country / Region" type="text"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" placeholder="Country / Region" type="text"/>
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Current Product Portfolio</label>
-<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" rows="3"></textarea>
+<textarea class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" rows="3"></textarea>
 </div>
 <button class="w-full bg-on-surface text-white font-label-md py-4 rounded hover:opacity-90 transition-opacity" type="submit">Submit Application</button>
 </form>
 </div>
 <!-- Warranty Form (Hidden by default) -->
-<div class="form-section hidden" id="form-warranty">
+<div class="form-section hidden tab-background p-8 md:p-12" id="form-warranty" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&amp;q=80&amp;auto=format&amp;fit=crop');">
 <h2 class="text-headline-md font-bold text-on-surface mb-6">Product Warranty Registration</h2>
 <form class="space-y-6">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Serial Number</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="SPP-XXXX-XXXX" type="text"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" placeholder="SPP-XXXX-XXXX" type="text"/>
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Installation Date</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="date"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" type="date"/>
 </div>
 </div>
 <div class="flex flex-col">
 <label class="text-label-md text-on-surface mb-2">Authorized Installer Name</label>
-<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text"/>
+<input class="border border-outline rounded p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all bg-white" type="text"/>
 </div>
 <div class="p-4 bg-surface-container rounded border-l-4 border-on-surface">
 <p class="text-label-sm text-on-surface uppercase tracking-wider mb-1">Attachment Required</p>
@@ -241,7 +257,7 @@
 </form>
 </div>
 <!-- Complaint Form (Hidden by default) -->
-<div class="form-section hidden" id="form-complaint">
+<div class="form-section hidden tab-background p-8 md:p-12" id="form-complaint" style="background-image: url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=1200&amp;q=80&amp;auto=format&amp;fit=crop');">
 <h2 class="text-headline-md font-bold text-on-surface mb-2">Resolution Request</h2>
 <p class="text-body-md text-secondary mb-8 border-b border-surface-container pb-4">Our engineering standards are absolute. If your experience has been less than exceptional, please let us fix it.</p>
 <form class="space-y-6">
@@ -283,7 +299,7 @@
 <span class="material-symbols-outlined text-surface-variant">call</span>
 <div>
 <p class="text-label-sm text-surface-variant uppercase">Direct Contact</p>
-<p class="text-body-md font-bold text-white">+91-9153832222</p>
+<p class="text-body-md font-bold text-white">+91-9648045063</p>
 <p class="text-label-sm text-surface-variant/70">SunPlus Corporate Support Line</p>
 </div>
 </div>

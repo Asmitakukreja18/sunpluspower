@@ -7,7 +7,6 @@ from app.routers.auth import get_current_admin
 from app.models.models import (
     AdminUser,
     Lead,
-    CalculatorSubmission,
     DistributorApplication,
     WarrantyRegistration,
     Complaint,
@@ -21,7 +20,6 @@ from app.models.models import (
 from app.schemas.schemas import (
     LeadOut,
     LeadStatusUpdate,
-    CalculatorSubmissionOut,
     DistributorApplicationOut,
     DistributorApplicationStatusUpdate,
     WarrantyRegistrationOut,
@@ -47,7 +45,6 @@ router = APIRouter(prefix="/admin", dependencies=[Depends(get_current_admin)], t
 @router.get("/dashboard-stats", response_model=DashboardStatsOut)
 def get_dashboard_stats(db: Session = Depends(get_db)):
     leads_count = db.query(Lead).count()
-    calc_count = db.query(CalculatorSubmission).count()
     dist_count = db.query(DistributorApplication).count()
     complaints_count = db.query(Complaint).count()
     projects_count = db.query(Project).count()
@@ -55,7 +52,6 @@ def get_dashboard_stats(db: Session = Depends(get_db)):
     
     return {
         "leads_count": leads_count,
-        "calculator_submissions_count": calc_count,
         "distributor_applications_count": dist_count,
         "complaints_count": complaints_count,
         "projects_count": projects_count,
@@ -77,10 +73,6 @@ def update_lead_status(id: int, payload: LeadStatusUpdate, db: Session = Depends
     db.commit()
     db.refresh(lead)
     return lead
-
-@router.get("/calculator-submissions", response_model=List[CalculatorSubmissionOut])
-def get_admin_calculator_submissions(db: Session = Depends(get_db)):
-    return db.query(CalculatorSubmission).order_by(CalculatorSubmission.created_at.desc()).all()
 
 @router.get("/distributor-applications", response_model=List[DistributorApplicationOut])
 def get_admin_distributors(db: Session = Depends(get_db)):

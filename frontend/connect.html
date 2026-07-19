@@ -85,66 +85,103 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-            padding: 40px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            padding: 88px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .form-input,
         .form-select,
         .form-textarea {
             width: 100%;
-            height: 54px;
-            padding: 12px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            color: white;
+            height: 56px;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            color: white !important;
             font-family: 'Inter', sans-serif;
             font-size: 15px;
             outline: none;
+            box-shadow: none;
             transition: all 0.3s ease;
         }
 
         .form-textarea {
-            height: 150px;
-            resize: vertical;
+            height: 170px;
+            resize: none;
             padding-top: 16px;
+            line-height: 1.6;
         }
 
         .form-input::placeholder,
         .form-textarea::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.65) !important;
+        }
+
+        .form-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.65'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 20px 20px;
+            padding-right: 50px;
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background-color: #131314;
+            color: white;
         }
 
         .form-input:focus,
         .form-select:focus,
         .form-textarea:focus {
-            border-color: #a40213;
-            box-shadow: 0 0 0 4px rgba(164, 2, 19, 0.2);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: #a40213 !important;
+            box-shadow: 0 0 0 4px rgba(164, 2, 19, 0.15) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* Prevent Chrome/Safari autofill from forcing black text on our dark glass inputs */
+        .form-input:-webkit-autofill,
+        .form-input:-webkit-autofill:hover,
+        .form-input:-webkit-autofill:focus,
+        .form-textarea:-webkit-autofill,
+        .form-select:-webkit-autofill {
+            -webkit-text-fill-color: white;
+            caret-color: white;
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: 0 0 0px 1000px rgba(40, 40, 42, 0.9) inset;
         }
 
         .form-label {
             font-size: 13px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-bottom: 10px;
             display: block;
             font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
         }
 
         .btn-submit {
             width: 100%;
-            height: 56px;
-            border-radius: 12px;
+            height: 58px;
+            border-radius: 14px;
             background: linear-gradient(135deg, #a40213 0%, #82010e 100%);
             color: white;
             font-family: 'Inter', sans-serif;
@@ -159,15 +196,16 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(164, 2, 19, 0.3);
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(164, 2, 19, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(164, 2, 19, 0.45);
         }
 
         .btn-submit:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .btn-submit .arrow {
@@ -175,7 +213,7 @@
         }
 
         .btn-submit:hover .arrow {
-            transform: translateX(4px);
+            transform: translateX(6px);
         }
 
         .btn-submit.loading {
@@ -202,57 +240,19 @@
             }
         }
 
-        .toast {
-            position: fixed;
-            top: 100px;
-            right: 24px;
-            background: white;
-            padding: 20px 28px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 9999;
-            transform: translateX(120%);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 400px;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast-icon {
-            width: 32px;
-            height: 32px;
-            background: #2e7d32;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .toast-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            color: #131314;
-        }
-
         .contact-info-item {
             display: flex;
             align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 14px;
+            gap: 16px;
+            margin-bottom: 18px;
         }
 
         .contact-icon-wrapper {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -263,22 +263,55 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 10px 16px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: white;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .contact-action-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .divider {
+            width: 1px;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .connect-tab-btn {
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .connect-tab-btn:hover {
+            color: white;
             border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .connect-tab-btn.active {
+            background: linear-gradient(135deg, #a40213 0%, #82010e 100%);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 8px 20px rgba(164, 2, 19, 0.35);
         }
     </style>
 
@@ -299,10 +332,10 @@
         class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out shadow-sm">
         <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
             <a href="index.html" class="flex items-center shrink-0">
-                <img src="assets/images/logo.png" alt="SunPlus Power" class="h-14 w-auto object-contain"
-                    style="max-width:250px;" />
+                <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                    style="max-width:300px;" />
             </a>
-            <div class="hidden lg:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-5 xl:space-x-7">
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
                     href="index.html">Home</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
@@ -342,6 +375,25 @@
                     </div>
                 </div>
             </div>
+                <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-md bg-secondary-container shrink-0" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-white">menu</span>
+                </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-outline-technical shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div class="flex flex-col px-margin-mobile py-4">
+                <a href="index.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Home</a>
+                <a href="about.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Company</a>
+                <a href="services.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Services</a>
+                <a href="projects.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Projects</a>
+                <a href="products.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Products</a>
+                <a href="media.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Solar Intelligence</a>
+                <a href="careers.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Careers</a>
+                <a href="faq.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">FAQ</a>
+                <a href="connect.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Connect</a>
+                <a href="connect.html?tab=distributor" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Apply for Distributor</a>
+                <a href="connect.html?tab=warranty" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Warranty Registration</a>
+                <a href="connect.html?tab=complaint" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant">Complaint / Support</a>
+            </div>
         </div>
     </nav>
 
@@ -357,7 +409,7 @@
         <!-- Main Content -->
         <div class="relative z-10 w-full max-w-6xl mx-auto">
             <!-- Section Header -->
-            <div class="text-center mb-8">
+            <div class="text-center mb-10">
                 <p class="text-white/70 uppercase tracking-[0.3em] text-xs md:text-sm mb-3 font-label-technical">
                     CONNECT WITH US
                 </p>
@@ -369,13 +421,13 @@
                 </p>
             </div>
 
-            <!-- Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-6 lg:gap-8 items-stretch">
-                <!-- Left: Contact Card -->
-                <div>
-                    <div class="glass-card">
+            <!-- One Single Glass Card -->
+            <div class="glass-card">
+                <div class="grid grid-cols-1 lg:grid-cols-[35%_1px_65%] gap-8">
+                    <!-- Left Column -->
+                    <div class="flex flex-col">
                         <!-- Logo Header -->
-                        <div class="flex items-center gap-3 mb-6">
+                        <div class="flex items-center gap-3 mb-8">
                             <div
                                 class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-white text-xl">bolt</span>
@@ -388,7 +440,7 @@
                         </div>
 
                         <!-- Contact Info -->
-                        <div class="mb-auto">
+                        <div class="mb-8">
                             <!-- Address -->
                             <div class="contact-info-item">
                                 <div class="contact-icon-wrapper">
@@ -462,7 +514,7 @@
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="grid grid-cols-2 gap-3 mt-6">
+                        <div class="grid grid-cols-2 gap-3 mt-auto">
                             <a href="https://maps.google.com" target="_blank" class="contact-action-btn">
                                 <span class="material-symbols-outlined text-lg">map</span>
                                 <span>View Map</span>
@@ -481,16 +533,28 @@
                             </a>
                         </div>
                     </div>
-                </div>
 
-                <!-- Right: Form Card -->
-                <div>
-                    <div class="glass-card">
-                        <!-- General Inquiry Form -->
-                        <div>
-                            <h2 class="text-2xl font-bold text-white mb-6 font-display-lg">General Inquiry</h2>
-                            <form id="contact-form" class="space-y-4 flex-1">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Divider -->
+                    <div class="divider hidden lg:block"></div>
+
+                    <!-- Right Column -->
+                    <div class="flex flex-col">
+                        <!-- Form Tabs -->
+                        <div class="flex flex-wrap gap-2 mb-8" role="tablist">
+                            <button type="button" class="connect-tab-btn" data-tab="general">General
+                                Inquiry</button>
+                            <button type="button" class="connect-tab-btn" data-tab="distributor">Apply for
+                                Distributor</button>
+                            <button type="button" class="connect-tab-btn" data-tab="warranty">Warranty
+                                Registration</button>
+                            <button type="button" class="connect-tab-btn" data-tab="complaint">Complaint /
+                                Support</button>
+                        </div>
+
+                        <!-- General Inquiry Panel -->
+                        <div id="tab-panel-general" class="connect-tab-panel flex-1">
+                            <form id="contact-form" class="space-y-5">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div>
                                         <label class="form-label">Full Name *</label>
                                         <input type="text" name="name" class="form-input" required
@@ -502,7 +566,7 @@
                                             placeholder="Enter company name" />
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div>
                                         <label class="form-label">Email *</label>
                                         <input type="email" name="email" class="form-input" required
@@ -533,7 +597,184 @@
                                     <span class="material-symbols-outlined arrow">arrow_forward</span>
                                 </button>
                             </form>
-                            <div id="contact-form-feedback" class="mt-4"></div>
+                            <div id="contact-form-feedback" class="mt-5"></div>
+                        </div>
+
+                        <!-- Distributor Application Panel -->
+                        <div id="tab-panel-distributor" class="connect-tab-panel flex-1 hidden">
+                            <form id="distributor-form" class="space-y-5">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Company Name *</label>
+                                        <input type="text" name="company_name" class="form-input" required
+                                            placeholder="Enter company name" />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Contact Person *</label>
+                                        <input type="text" name="contact_person" class="form-input" required
+                                            placeholder="Enter contact person name" />
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Region *</label>
+                                        <input type="text" name="region" class="form-input" required
+                                            placeholder="Territory you wish to cover" />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Business Type *</label>
+                                        <select name="business_type" class="form-select" required>
+                                            <option value="" disabled selected>Select business type</option>
+                                            <option value="Electrical Distributor">Electrical Distributor</option>
+                                            <option value="Solar EPC Contractor">Solar EPC Contractor</option>
+                                            <option value="Hardware Retailer">Hardware Retailer</option>
+                                            <option value="System Integrator">System Integrator</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Years in Business *</label>
+                                        <input type="number" name="years_in_business" class="form-input" min="0"
+                                            required placeholder="e.g. 5" />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Phone *</label>
+                                        <input type="tel" name="phone" class="form-input" required
+                                            placeholder="Enter phone number" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" name="email" class="form-input" required
+                                        placeholder="Enter email address" />
+                                </div>
+                                <div>
+                                    <label class="form-label">Message *</label>
+                                    <textarea name="message" class="form-textarea" required
+                                        placeholder="Tell us about your distribution network and reach..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-submit">
+                                    <span>Submit Application</span>
+                                    <span class="material-symbols-outlined arrow">arrow_forward</span>
+                                </button>
+                            </form>
+                            <div id="distributor-form-feedback" class="mt-5"></div>
+                        </div>
+
+                        <!-- Warranty Registration Panel -->
+                        <div id="tab-panel-warranty" class="connect-tab-panel flex-1 hidden">
+                            <form id="warranty-form" class="space-y-5">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Product Type *</label>
+                                        <select name="product_type" class="form-select" required>
+                                            <option value="" disabled selected>Select product</option>
+                                            <option value="Earthing Strips">Earthing Strips</option>
+                                            <option value="Earthing Rod">Earthing Rod (Copper Bonded)</option>
+                                            <option value="Earthing Chemical Bag">Earthing Chemical Bag</option>
+                                            <option value="PVC Earthing Chamber">PVC Earthing Chamber</option>
+                                            <option value="Earthing Rod Clamps">Earthing Rod Clamps</option>
+                                            <option value="Solar EPC Installation">Solar EPC Installation</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Serial / Project ID *</label>
+                                        <input type="text" name="serial_or_project_id" class="form-input" required
+                                            placeholder="Enter serial or project ID" />
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Installation Date *</label>
+                                        <input type="date" name="installation_date" class="form-input" required />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Customer Name *</label>
+                                        <input type="text" name="customer_name" class="form-input" required
+                                            placeholder="Enter customer name" />
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Phone *</label>
+                                        <input type="tel" name="phone" class="form-input" required
+                                            placeholder="Enter phone number" />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" name="email" class="form-input" required
+                                            placeholder="Enter email address" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Installer Name *</label>
+                                    <input type="text" name="installer_name" class="form-input" required
+                                        placeholder="Enter installer / dealer name" />
+                                </div>
+                                <button type="submit" class="btn-submit">
+                                    <span>Register Warranty</span>
+                                    <span class="material-symbols-outlined arrow">arrow_forward</span>
+                                </button>
+                            </form>
+                            <div id="warranty-form-feedback" class="mt-5"></div>
+                        </div>
+
+                        <!-- Complaint / Support Panel -->
+                        <div id="tab-panel-complaint" class="connect-tab-panel flex-1 hidden">
+                            <form id="complaint-form" class="space-y-5" enctype="multipart/form-data">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Full Name *</label>
+                                        <input type="text" name="name" class="form-input" required
+                                            placeholder="Enter your full name" />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Phone *</label>
+                                        <input type="tel" name="phone" class="form-input" required
+                                            placeholder="Enter phone number" />
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" name="email" class="form-input" required
+                                            placeholder="Enter email address" />
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Project / Product ID *</label>
+                                        <input type="text" name="project_or_product_id" class="form-input" required
+                                            placeholder="Enter project or product ID" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label">Category *</label>
+                                    <select name="category" class="form-select" required>
+                                        <option value="" disabled selected>Select category</option>
+                                        <option value="installation">Installation</option>
+                                        <option value="om">O&amp;M / Service</option>
+                                        <option value="product">Product Issue</option>
+                                        <option value="billing">Billing</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label">Description *</label>
+                                    <textarea name="description" class="form-textarea" required
+                                        placeholder="Describe the issue in detail..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="form-label">Attach Photo (optional)</label>
+                                    <input type="file" name="photo" accept="image/*" class="form-input" />
+                                </div>
+                                <button type="submit" class="btn-submit">
+                                    <span>File Report</span>
+                                    <span class="material-symbols-outlined arrow">arrow_forward</span>
+                                </button>
+                            </form>
+                            <div id="complaint-form-feedback" class="mt-5"></div>
                         </div>
                     </div>
                 </div>
@@ -541,14 +782,48 @@
         </div>
     </section>
 
+    <script>
+        (function () {
+            var tabButtons = document.querySelectorAll(".connect-tab-btn");
+            var panels = {
+                general: document.getElementById("tab-panel-general"),
+                distributor: document.getElementById("tab-panel-distributor"),
+                warranty: document.getElementById("tab-panel-warranty"),
+                complaint: document.getElementById("tab-panel-complaint")
+            };
+
+            function activateTab(tabName) {
+                if (!panels[tabName]) tabName = "general";
+                tabButtons.forEach(function (btn) {
+                    btn.classList.toggle("active", btn.dataset.tab === tabName);
+                });
+                Object.keys(panels).forEach(function (name) {
+                    panels[name].classList.toggle("hidden", name !== tabName);
+                });
+            }
+
+            tabButtons.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    activateTab(btn.dataset.tab);
+                    var url = new URL(window.location.href);
+                    url.searchParams.set("tab", btn.dataset.tab);
+                    history.replaceState(null, "", url);
+                });
+            });
+
+            var initialTab = new URLSearchParams(window.location.search).get("tab") || "general";
+            activateTab(initialTab);
+        })();
+    </script>
+
     <!-- Footer -->
     <footer class="bg-white border-t border-outline-technical w-full">
         <div
             class="grid grid-cols-1 md:grid-cols-5 gap-gutter px-margin-desktop py-20 w-full max-w-container-max mx-auto">
             <div class="md:col-span-2 space-y-6">
                 <a href="index.html" class="flex items-center">
-                    <img src="assets/images/logo.png" alt="SunPlus Power" class="h-16 w-auto object-contain"
-                        style="max-width:280px;" />
+                    <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain"
+                        style="max-width:320px;" />
                 </a>
                 <p class="text-secondary-container font-label-technical uppercase tracking-widest text-sm">Powered by
                     the Sun. Grounded in Safety.</p>
@@ -627,7 +902,6 @@
             </div>
         </div>
     </footer>
-
 
 </body>
 

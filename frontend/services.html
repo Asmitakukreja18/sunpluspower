@@ -20,6 +20,54 @@
         .lightning-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l-5 25h10l-15 35 5-25h-10z' fill='%23d9302f' fill-opacity='0.02'/%3E%3C/svg%3E");
         }
+
+        /* Scroll animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced card hover effects */
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Icon floating animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Gradient overlay for background images */
+        .img-gradient-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(217, 48, 47, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
     </style>
 
 
@@ -37,13 +85,13 @@
 <body class="bg-background text-on-background font-body-md lightning-pattern">
     <!-- TopNavBar -->
     <nav
-        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out shadow-sm">
         <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
             <a href="index.html" class="flex items-center shrink-0">
-                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
-                    style="max-width:200px;" />
+                <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                    style="max-width:300px;" />
             </a>
-            <div class="hidden lg:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-5 xl:space-x-7">
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
                     href="index.html">Home</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
@@ -58,6 +106,8 @@
                     href="media.html">Solar Intelligence</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
                     href="careers.html">Careers</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="faq.html">FAQ</a>
                 <div class="relative group">
                     <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
                         href="connect.html">
@@ -81,18 +131,34 @@
                     </div>
                 </div>
             </div>
-            <a href="calculator.html"
-                class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
-                SOLAR CALCULATOR
-            </a>
+                <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-md bg-secondary-container shrink-0" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-white">menu</span>
+                </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-outline-technical shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div class="flex flex-col px-margin-mobile py-4">
+                <a href="index.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Home</a>
+                <a href="about.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Company</a>
+                <a href="services.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Services</a>
+                <a href="projects.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Projects</a>
+                <a href="products.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Products</a>
+                <a href="media.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Solar Intelligence</a>
+                <a href="careers.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Careers</a>
+                <a href="faq.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">FAQ</a>
+                <a href="connect.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Connect</a>
+                <a href="connect.html?tab=distributor" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Apply for Distributor</a>
+                <a href="connect.html?tab=warranty" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Warranty Registration</a>
+                <a href="connect.html?tab=complaint" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant">Complaint / Support</a>
+            </div>
+        </div>
         </div>
     </nav>
     <!-- Header Section (Revised to Decent Industrial Dark Charcoal) -->
-    <header class="relative bg-inverse-surface py-24 overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-r from-inverse-surface to-transparent z-10"></div>
-            <div class="w-full h-full bg-cover bg-center grayscale contrast-125"
-                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCAGggd1kvYhYjSpem_sWxqR4wG1_dN7fAClkPgvWXa0qK2W6GNcxHZGwRKU6Kn73YROH_dmtBcEMSNxj4R7etWmM4wjevbYr7agTMdHPZ6IneUDOoZwFkIfZXewEJsoC1347Q-C-1LEd1Uc8f4dS7lVr52o1VpEza4YL9D0xsAxDBNNV6ehDNst3aULluMkf9C9LVI1CqrJGLUS7Xf63leRceg1I4MAjAajNVvK9luJUt-jEr3bkP5zw')">
+    <header class="relative bg-inverse-surface py-24">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-inverse-surface via-inverse-surface/70 to-inverse-surface/30 z-10"></div>
+            <div class="w-full h-full bg-cover bg-center"
+                style="background-image: url('assets/images/projects/rooftop-curved.jpg')">
             </div>
         </div>
         <div class="relative z-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -108,13 +174,14 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
             <!-- 1. EPC -->
             <section
-                class="md:col-span-8 bg-surface-container-lowest rounded-xl border border-surface-container-high overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                class="md:col-span-8 bg-surface-container-lowest rounded-xl border border-surface-container-high shadow-sm service-card fade-in-up"
                 id="epc">
                 <div class="flex flex-col md:flex-row h-full">
                     <div class="w-full md:w-1/2 p-8 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="material-symbols-outlined text-primary font-bold text-4xl">factory</span>
+                                <span
+                                    class="material-symbols-outlined text-primary font-bold text-4xl float-icon">factory</span>
                                 <h2 class="text-headline-md font-headline-md text-on-surface uppercase tracking-wider">
                                     EPC</h2>
                             </div>
@@ -141,22 +208,23 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="w-full md:w-1/2 min-h-[300px] bg-cover bg-center"
+                    <div class="w-full md:w-1/2 min-h-[300px] bg-cover bg-center relative img-gradient-overlay"
                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDbp4y2g-P_OJjyqDwkPCfUqhZ6Tmk-hI79OLhXi1X3683MmZItALjVGYCtUg7G-_LrBY3W858YSGmjI7oMTMDklqax0pBSGDqhdtNzHtPafr9-4Y_95O7Z-Q91juHhxFG0WBETR0C8mj1AUSekzj91oYdlOPjvzUZSZhNiQtoJOfjNXgKf2NNA2C8p8bZRyzlO5sb6eA7ZorF5Scfq4GvOt4aSZyQDbKTMmWYZlauUu8-zsVSJd195uw')">
                     </div>
                 </div>
             </section>
             <!-- 2. O&M -->
             <section
-                class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-surface-container-high overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-surface-container-high shadow-sm service-card fade-in-up"
                 id="om">
                 <div class="h-full flex flex-col">
-                    <div class="h-48 bg-cover bg-center"
+                    <div class="h-48 bg-cover bg-center relative img-gradient-overlay"
                         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAOEivS-bCBAmc4GZirLW46l0UNqi24U8F_OBTuoiBZO9P3FBx3FMHezRhJO0x97A42r2ZIBZpCOTQ9V7orrWA_zu__9MY2WFYjcTOI01bMgUem8ZIcVXzFavlnN1j5E4xoOcDfv5bFzoPzpXXHTcqsYlOq5x_Rjl0lq4F5hvyUn9fFwKJEvIm5-psU3GYk3b9L_3oKl_pFOY54BGf6qQyYVAs_8bbTxsC0o_sZdN5KsNZJmkjiYQ1elA')">
                     </div>
                     <div class="p-8">
                         <div class="flex items-center gap-3 mb-4">
-                            <span class="material-symbols-outlined text-primary font-bold text-4xl">build_circle</span>
+                            <span
+                                class="material-symbols-outlined text-primary font-bold text-4xl float-icon">build_circle</span>
                             <h2 class="text-headline-md font-headline-md text-on-surface uppercase tracking-wider">
                                 O&amp;M</h2>
                         </div>
@@ -180,13 +248,13 @@
             </section>
             <!-- 3. I&C -->
             <section
-                class="md:col-span-4 bg-inverse-surface text-on-primary rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
+                class="md:col-span-4 bg-inverse-surface text-on-primary rounded-xl overflow-hidden shadow-sm group service-card fade-in-up"
                 id="ic">
                 <div class="p-8 h-full flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-3 mb-4">
                             <span
-                                class="material-symbols-outlined text-primary font-bold text-4xl">settings_input_component</span>
+                                class="material-symbols-outlined text-primary font-bold text-4xl float-icon">settings_input_component</span>
                             <h2 class="text-headline-md font-headline-md uppercase tracking-wider">I&amp;C</h2>
                         </div>
                         <div class="w-16 h-1 bg-primary mb-6 transition-all group-hover:w-full"></div>
@@ -210,14 +278,15 @@
             </section>
             <!-- 4. PMC -->
             <section
-                class="md:col-span-8 bg-surface-container-lowest rounded-xl border border-surface-container-high overflow-hidden shadow-sm flex flex-col md:flex-row"
+                class="md:col-span-8 bg-surface-container-lowest rounded-xl border border-surface-container-high overflow-hidden shadow-sm flex flex-col md:flex-row service-card fade-in-up"
                 id="pmc">
-                <div class="w-full md:w-1/2 bg-cover bg-center order-2 md:order-1"
+                <div class="w-full md:w-1/2 bg-cover bg-center order-2 md:order-1 relative img-gradient-overlay"
                     style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBDVDxKUpAV-OYGqk9qHMxS3l3OsIqUDbp2GJkVcy3mnHg6kZBpP5FGu6jsBTarp7RwRaSSaubh1YUPdd62M1jFTL18WedBjp9bTsY7D9CL9FXgRYcl8YiEMbhsUuEXonFZgiSGob1ly-7Stx33qVwhc2akESD_tpu2AW54dsh5FVD9If4bbl0w9VVoYrvDbBi6PAh3X1avTnaHPmshkj8ClZl6n0QqJIOWIVWRa8IdZ3KmfLoviLegXQ')">
                 </div>
                 <div class="w-full md:w-1/2 p-8 order-1 md:order-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="material-symbols-outlined text-primary font-bold text-4xl">business_center</span>
+                        <span
+                            class="material-symbols-outlined text-primary font-bold text-4xl float-icon">business_center</span>
                         <h2 class="text-headline-md font-headline-md text-on-surface uppercase tracking-wider">PMC</h2>
                     </div>
                     <div class="w-16 h-1 bg-primary mb-6 transition-all duration-300"></div>
@@ -245,17 +314,18 @@
             </section>
             <!-- 5. Design & Engineering -->
             <section
-                class="md:col-span-6 bg-surface-container-lowest rounded-xl border border-surface-container-high overflow-hidden shadow-sm"
+                class="md:col-span-6 bg-surface-container-lowest rounded-xl border border-surface-container-high overflow-hidden shadow-sm service-card fade-in-up"
                 id="design">
                 <div class="p-8">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="material-symbols-outlined text-primary font-bold text-4xl">architecture</span>
+                        <span
+                            class="material-symbols-outlined text-primary font-bold text-4xl float-icon">architecture</span>
                         <h2 class="text-headline-md font-headline-md text-on-surface uppercase tracking-wider">Design
                             &amp; Engineering</h2>
                     </div>
                     <div class="w-16 h-1 bg-primary mb-6 transition-all duration-300"></div>
                     <div
-                        class="aspect-video bg-surface-container rounded-lg mb-6 overflow-hidden relative border border-outline-variant">
+                        class="aspect-video bg-surface-container rounded-lg mb-6 overflow-hidden relative border border-outline-variant img-gradient-overlay">
                         <div class="absolute inset-0 bg-cover bg-center"
                             style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6WNJaN83K6l942kNXJDYFeRuToOVbYpFdUcB_0TKQXjZkogoIchNEid_yyV9lO8QcMRdGrtEqisZkMvYJ-dTPcuG2RU665dDPFQlqdnCuyHA2lU_cFgJ_K82MG_HwPI_FBI0DIu-JPYrOo8-dXyenssubRPmAvSWgUO3PhWxIZEpehDMgZHvuppieh3jHy9PMlwFgMJfIHbbL9Ws3DFZ0GI4pI0mjwzneq-4LXylSyOnLLJG05pyxHA')">
                         </div>
@@ -280,7 +350,7 @@
             </section>
             <!-- 6. BOS -->
             <section
-                class="md:col-span-6 bg-surface-container border border-outline-variant/30 rounded-xl overflow-hidden shadow-sm relative"
+                class="md:col-span-6 bg-surface-container border border-outline-variant/30 rounded-xl overflow-hidden shadow-sm relative service-card fade-in-up"
                 id="bos">
                 <div class="absolute right-0 top-0 w-32 h-32 opacity-5 pointer-events-none">
                     <span class="material-symbols-outlined text-[128px] text-primary">electric_bolt</span>
@@ -288,7 +358,8 @@
                 <div class="p-8 flex flex-col h-full justify-between">
                     <div>
                         <div class="flex items-center gap-3 mb-4">
-                            <span class="material-symbols-outlined text-primary font-bold text-4xl">account_tree</span>
+                            <span
+                                class="material-symbols-outlined text-primary font-bold text-4xl float-icon">account_tree</span>
                             <h2 class="text-headline-md font-headline-md text-on-surface uppercase tracking-wider">BOS
                             </h2>
                         </div>
@@ -337,13 +408,16 @@
         </div>
     </section>
     <!-- Footer -->
-    <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
-            <div class=" space-y-6">
+    <footer class="bg-white border-t border-outline-technical w-full mt-24">
+        <div
+            class="grid grid-cols-1 md:grid-cols-5 gap-gutter px-margin-desktop py-20 w-full max-w-container-max mx-auto">
+            <div class="md:col-span-2 space-y-6">
                 <a href="index.html" class="flex items-center">
-                    <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
-                        style="max-width:200px;" />
+                    <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain"
+                        style="max-width:320px;" />
                 </a>
+                <p class="text-secondary-container font-label-technical uppercase tracking-widest text-sm">Powered by
+                    the Sun. Grounded in Safety.</p>
                 <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
                     transition
                     through rigorous technical modeling and industrial-scale solar deployment.</p>
@@ -353,21 +427,25 @@
                     Quick
                     Links</h4>
                 <ul class="space-y-4 font-body-md">
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="about.html">Company</a></li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="services.html">Services</a>
                     </li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="projects.html">Projects</a>
                     </li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="products.html">Products</a>
                     </li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
+                            href="media.html">Solar
                             Intelligence</a></li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="careers.html">Careers</a>
+                    </li>
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
+                            href="faq.html">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -376,11 +454,11 @@
                     Connect
                 </h4>
                 <ul class="space-y-4 font-body-md">
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="connect.html?tab=distributor">Apply for Distributor</a></li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="connect.html?tab=warranty">Warranty Registration</a></li>
-                    <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+                    <li><a class="text-on-surface-variant hover:text-secondary-container transition-colors"
                             href="connect.html?tab=complaint">Complaint / Support</a></li>
                 </ul>
             </div>
@@ -395,11 +473,11 @@
                     Uttar Pradesh, India - 226010
                 </p>
                 <p class="text-on-surface-variant font-body-md leading-relaxed">
-                    <b>Sales Help:</b> <a class="hover:text-primary"
+                    <b>Sales Help:</b> <a class="hover:text-secondary-container"
                         href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
-                    <b>Technical Support:</b> <a class="hover:text-primary"
+                    <b>Technical Support:</b> <a class="hover:text-secondary-container"
                         href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
-                    <b>Official Phone:</b> +91-9153832222
+                    <b>Official Phone:</b> +91-9648045063
                 </p>
             </div>
         </div>
@@ -430,6 +508,25 @@
                     divider.classList.replace('w-24', 'w-16');
                 }
             });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>

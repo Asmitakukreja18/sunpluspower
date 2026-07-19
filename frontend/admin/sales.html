@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Sales Console | SunPlus Power Control Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css" />
+
+  <script src="../assets/js/api.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+
+  <style>
+    tbody tr {
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #f9fafb;
+    }
+
+    .btn-primary {
+      background-color: #e30613;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #c00510;
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-secondary:hover {
+      background-color: #f9fafb;
+    }
+
+    .spinner {
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 2px solid #fff;
+      width: 16px;
+      height: 16px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .status-select {
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+      border-width: 1px;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-on-background antialiased flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/50 py-3.5 shadow-md sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="flex items-center gap-3">
+          <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png" />
+        </a>
+        <span class="text-lg font-bold text-on-surface tracking-wide">Control Panel</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Notifications Bell -->
+        <button
+          class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
+          <span class="material-symbols-outlined text-[24px]">notifications</span>
+          <span
+            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+        </button>
+        <!-- Admin Profile -->
+        <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
+          <div
+            class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">
+            SP
+          </div>
+          <div class="hidden md:block">
+            <p class="text-sm font-semibold text-gray-800">Admin</p>
+            <p class="text-xs text-gray-500">SunPlus Power</p>
+          </div>
+        </div>
+        <!-- Logout -->
+        <button onclick="adminLogout()"
+          class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
+          <span class="material-symbols-outlined text-[20px]">logout</span>
+          <span class="hidden md:inline">Logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar + Main Grid -->
+  <div
+    class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-6 gap-6">
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 bg-[#111111] rounded-2xl p-5 space-y-1.5 shrink-0 shadow-xl">
+      <div class="p-3 mb-4">
+        <h4 class="font-bold text-xs uppercase tracking-widest text-gray-500">Console Directory</h4>
+        <div class="h-px bg-gray-800 mt-2.5"></div>
+      </div>
+
+      <a href="dashboard.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        Dashboard Overview
+      </a>
+      <a href="submissions.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">inbox</span>
+        Submissions inbox
+      </a>
+      <a href="sales.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-semibold transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">payments</span>
+        Sales Console
+      </a>
+      <a href="projects.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">solar_power</span>
+        Projects Manager
+      </a>
+      <a href="blogs.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">article</span>
+        Insights & Blogs
+      </a>
+      <a href="careers.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">work</span>
+        Careers & Jobs
+      </a>
+    </aside>
+
+    <!-- Main View Section -->
+    <main id="sales-dashboard-view" class="flex-grow space-y-5">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Sales Console</h1>
+        <p class="text-gray-500 mt-1">Acquisition pipelines and dealer sign-ups.</p>
+      </div>
+
+      <!-- Sales Stats Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Sales Inquiries -->
+        <div
+          class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total Sales Leads</span>
+            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#e30613] text-2xl">mail</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <h2 id="sales-leads-count" class="text-4xl font-bold text-gray-900">-</h2>
+            <p class="text-xs text-gray-500 mt-2">General inquiries & consultations</p>
+          </div>
+        </div>
+
+        <!-- Distributor Proposals -->
+        <div
+          class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Distributor Proposals</span>
+            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#e30613] text-2xl">handshake</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <h2 id="sales-dists-count" class="text-4xl font-bold text-gray-900">-</h2>
+            <p class="text-xs text-gray-500 mt-2">Partnership proposals submitted</p>
+          </div>
+        </div>
+
+        <!-- Conversion Pipeline -->
+        <div
+          class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Closed Deals</span>
+            <div class="p-2.5 bg-green-50 rounded-xl">
+              <span class="material-symbols-outlined text-green-600 text-2xl">task_alt</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <h2 id="sales-closed-count" class="text-4xl font-bold text-gray-900">-</h2>
+            <p class="text-xs text-gray-500 mt-2">Leads flagged as 'Closed'</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Search -->
+      <div
+        class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- Interactive Category Tabs -->
+        <div class="flex gap-3">
+          <button onclick="switchSalesTab('leads')" id="sales-tab-leads"
+            class="sales-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#e30613] text-white shadow-md transition-all duration-200">
+            Sales Leads (<span id="count-badge-leads">0</span>)
+          </button>
+          <button onclick="switchSalesTab('distributor')" id="sales-tab-distributor"
+            class="sales-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
+            Distributors (<span id="count-badge-distributor">0</span>)
+          </button>
+        </div>
+
+        <!-- Search input -->
+        <div class="relative w-full md:w-80">
+          <span
+            class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-[22px]">search</span>
+          <input onkeyup="filterSalesData(this.value)"
+            class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white text-sm outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200"
+            placeholder="Search by name, company, region..." />
+        </div>
+      </div>
+
+      <!-- Tables Canvas -->
+      <div class="bg-white/80 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg overflow-hidden">
+        <!-- Tab 1: Leads Table -->
+        <div id="sales-leads-container" class="sales-table-container">
+          <table class="w-full text-left border-collapse min-w-[700px]">
+            <thead class="bg-gray-50/80 sticky top-0 z-10">
+              <tr>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Client Name</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Contact Info</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Company</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Message Details</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Source Page</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Pipeline Status</th>
+              </tr>
+            </thead>
+            <tbody id="sales-leads-body" class="font-body-md text-sm">
+              <tr>
+                <td colspan="6" class="p-8 text-center text-gray-500">Loading sales leads...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tab 2: Distributor Table -->
+        <div id="sales-distributor-container" class="sales-table-container hidden">
+          <table class="w-full text-left border-collapse min-w-[700px]">
+            <thead class="bg-gray-50/80 sticky top-0 z-10">
+              <tr>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Company Name</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Contact Person</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Territory</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200 text-center">
+                  In Business</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Proposal Message</th>
+                <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                  Approval Status</th>
+              </tr>
+            </thead>
+            <tbody id="sales-distributor-body" class="font-body-md text-sm">
+              <tr>
+                <td colspan="6" class="p-8 text-center text-gray-500">Loading distributor applications...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 py-4 mt-auto">
+    <div
+      class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-xs text-gray-400">&copy; 2026 SunPlus Power. Control Panel v1.0</div>
+      <div class="text-xs text-gray-400">System Security: Active SSL / JWT</div>
+    </div>
+  </footer>
+
+  <!-- Admin Sales Script -->
+  <script>
+    let rawLeads = [];
+    let rawDistributors = [];
+    let activeTab = "leads";
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Direct Authentication Check
+      if (typeof api === "undefined" || !api.isAuthenticated()) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      await loadSalesData();
+    });
+
+    async function loadSalesData() {
+      try {
+        // Fetch all sales entities concurrently
+        const [leads, dists] = await Promise.all([
+          api.get("/admin/leads"),
+          api.get("/admin/distributor-applications")
+        ]);
+
+        rawLeads = leads;
+        rawDistributors = dists;
+
+        // Update Stats
+        document.getElementById("sales-leads-count").textContent = leads.length;
+        document.getElementById("sales-dists-count").textContent = dists.length;
+
+        const closedCount = leads.filter(l => l.status === "closed").length;
+        document.getElementById("sales-closed-count").textContent = closedCount;
+
+        // Update counts badges in tabs
+        document.getElementById("count-badge-leads").textContent = leads.length;
+        document.getElementById("count-badge-distributor").textContent = dists.length;
+
+        // Render grids
+        renderLeads(rawLeads);
+        renderDistributors(rawDistributors);
+
+      } catch (err) {
+        console.error("Sales data load error:", err);
+        if (window.showToast) {
+          window.showToast("Failed to retrieve pipeline data from the database.", "error");
+        } else {
+          alert("Failed to retrieve pipeline data.");
+        }
+      }
+    }
+
+    function renderLeads(leads) {
+      const tbody = document.getElementById("sales-leads-body");
+      if (!tbody) return;
+
+      if (leads.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500">No matching sales leads found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = leads.map((l, index) => `
+        <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'} border-b border-gray-100 hover:bg-gray-50 transition-colors">
+          <td class="p-4 font-bold text-gray-900">${l.name}</td>
+          <td class="p-4 font-semibold text-gray-500">${l.email}<br><small class="text-xs text-gray-400">${l.phone}</small></td>
+          <td class="p-4 text-gray-600 font-semibold">${l.company || 'N/A'}</td>
+          <td class="p-4"><div class="font-bold text-gray-800">${l.subject}</div><div class="text-gray-500 text-xs mt-1 max-w-sm overflow-hidden text-ellipsis">${l.message}</div></td>
+          <td class="p-4"><span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">${l.source_page}</span></td>
+          <td class="p-4">
+            <select onchange="updateSalesStatus('leads', ${l.id}, this.value)" class="status-select border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] ${l.status === 'closed' ? 'text-green-600 font-bold' : ''}">
+              <option value="new" ${l.status === 'new' ? 'selected' : ''}>New</option>
+              <option value="contacted" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+              <option value="closed" ${l.status === 'closed' ? 'selected' : ''}>Closed</option>
+            </select>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function renderDistributors(dists) {
+      const tbody = document.getElementById("sales-distributor-body");
+      if (!tbody) return;
+
+      if (dists.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500">No matching distributor proposals found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = dists.map((d, index) => `
+        <tr class="${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'} border-b border-gray-100 hover:bg-gray-50 transition-colors">
+          <td class="p-4"><div class="font-bold text-gray-900">${d.company_name}</div><div class="text-xs text-gray-500 font-semibold">${d.email}</div></td>
+          <td class="p-4 font-semibold text-gray-600">${d.contact_person}<br><small class="text-xs text-gray-400">${d.phone}</small></td>
+          <td class="p-4 font-bold text-gray-600">${d.region}</td>
+          <td class="p-4 text-center font-semibold text-gray-800">${d.years_in_business} Yrs</td>
+          <td class="p-4"><div class="text-xs text-gray-500 max-w-sm max-h-16 overflow-y-auto">${d.message}</div></td>
+          <td class="p-4">
+            <select onchange="updateSalesStatus('distributors', ${d.id}, this.value)" class="status-select border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] ${d.status === 'approved' ? 'text-green-600 font-bold' : ''}">
+              <option value="pending" ${d.status === 'pending' ? 'selected' : ''}>Pending</option>
+              <option value="approved" ${d.status === 'approved' ? 'selected' : ''}>Approved</option>
+              <option value="rejected" ${d.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+            </select>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function switchSalesTab(tab) {
+      activeTab = tab;
+
+      // Update Tab Headers
+      document.querySelectorAll(".sales-tab-btn").forEach(btn => {
+        btn.classList.remove("bg-[#e30613]", "text-white", "shadow-md");
+        btn.classList.add("text-gray-600", "hover:text-gray-900", "hover:bg-gray-100");
+      });
+      const activeBtn = document.getElementById("sales-tab-" + tab);
+      activeBtn.classList.add("bg-[#e30613]", "text-white", "shadow-md");
+      activeBtn.classList.remove("text-gray-600", "hover:text-gray-900", "hover:bg-gray-100");
+
+      // Update Tables Display
+      document.querySelectorAll(".sales-table-container").forEach(el => {
+        el.classList.add("hidden");
+      });
+      document.getElementById("sales-" + tab + "-container").classList.remove("hidden");
+    }
+
+    function filterSalesData(keyword) {
+      keyword = keyword.toLowerCase().trim();
+
+      if (activeTab === "leads") {
+        const filtered = rawLeads.filter(l =>
+          l.name.toLowerCase().includes(keyword) ||
+          l.email.toLowerCase().includes(keyword) ||
+          l.phone.toLowerCase().includes(keyword) ||
+          (l.company && l.company.toLowerCase().includes(keyword)) ||
+          l.subject.toLowerCase().includes(keyword) ||
+          l.message.toLowerCase().includes(keyword)
+        );
+        renderLeads(filtered);
+      }
+      else if (activeTab === "distributor") {
+        const filtered = rawDistributors.filter(d =>
+          d.company_name.toLowerCase().includes(keyword) ||
+          d.contact_person.toLowerCase().includes(keyword) ||
+          d.email.toLowerCase().includes(keyword) ||
+          d.phone.toLowerCase().includes(keyword) ||
+          d.region.toLowerCase().includes(keyword) ||
+          d.message.toLowerCase().includes(keyword)
+        );
+        renderDistributors(filtered);
+      }
+    }
+
+    async function updateSalesStatus(entity, id, newStatus) {
+      try {
+        const endpoint = entity === "leads" ? `/admin/leads/${id}/status` : `/admin/distributor-applications/${id}/status`;
+        await api.patch(endpoint, { status: newStatus });
+
+        // Refresh local memory stats
+        if (entity === "leads") {
+          const item = rawLeads.find(l => l.id === id);
+          if (item) item.status = newStatus;
+
+          const closedCount = rawLeads.filter(l => l.status === "closed").length;
+          document.getElementById("sales-closed-count").textContent = closedCount;
+        } else {
+          const item = rawDistributors.find(d => d.id === id);
+          if (item) item.status = newStatus;
+        }
+
+        if (window.showToast) {
+          window.showToast("Status updated successfully.", "success");
+        }
+      } catch (err) {
+        console.error("Status update error:", err);
+        if (window.showToast) {
+          window.showToast("Failed to update status in the database.", "error");
+        } else {
+          alert("Failed to update status.");
+        }
+        // Reload data to reset dropdown select elements
+        await loadSalesData();
+      }
+    }
+
+    function adminLogout() {
+      if (typeof api !== "undefined") {
+        api.clearToken();
+      }
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+
+</html>

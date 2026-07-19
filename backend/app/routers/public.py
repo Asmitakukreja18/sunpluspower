@@ -6,12 +6,10 @@ from sqlalchemy.orm import Session
 from app.core.db import get_db
 from app.core.config import settings
 from app.core.limiter import limiter
-from app.services.calculator_service import calculator_service
 from app.services.email_service import email_service
 from app.services.file_service import FileService
 from app.models.models import (
     Lead,
-    CalculatorSubmission,
     DistributorApplication,
     WarrantyRegistration,
     Complaint,
@@ -25,8 +23,6 @@ from app.models.models import (
 from app.schemas.schemas import (
     LeadCreate,
     LeadOut,
-    CalculatorSubmissionCreate,
-    CalculatorSubmissionOut,
     DistributorApplicationCreate,
     DistributorApplicationOut,
     WarrantyRegistrationCreate,
@@ -75,38 +71,6 @@ def submit_lead(
     background_tasks.add_task(email_service.send_lead_notification, db_lead.__dict__)
     
     return db_lead
-
-@router.post("/calculator/submit", response_model=CalculatorSubmissionOut, status_code=status.HTTP_201_CREATED)
-@limiter.limit(settings.RATE_LIMIT_PUBLIC_POST)
-def submit_calculator(
-    request: Request,
-    payload: CalculatorSubmissionCreate,
-    background_tasks: BackgroundTasks,
-    db: Session = Depends(get_db)
-):
-    # Perform calculations using Service
-    results = calculator_service.calculate(
-        name=payload.name,
-        email=payload.email,
-        phone=payload.phone,
-        monthly_bill=payload.monthly_bill,
-        monthly_units=payload.monthly_units,
-        location=payload.location,
-        install_type=payload.install_type
-    )
-    
-    # Save calculations to db
-    db_data = results.copy()
-    db_data.pop("lifetime_savings_25yr", None)
-    db_sub = CalculatorSubmission(**db_data)
-    db.add(db_sub)
-    db.commit()
-    db.refresh(db_sub)
-    
-    # Send background email alerts
-    background_tasks.add_task(email_service.send_calculator_notification, results)
-    
-    return db_sub
 
 @router.post("/distributor-applications", response_model=DistributorApplicationOut, status_code=status.HTTP_201_CREATED)
 @limiter.limit(settings.RATE_LIMIT_PUBLIC_POST)

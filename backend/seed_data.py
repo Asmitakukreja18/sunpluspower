@@ -63,9 +63,9 @@ def seed():
                 image_url="https://images.unsplash.com/photo-1548613053-22070f317698"
             ),
             Project(
-                name="Ambora Project",
+                name="Ambhora Project",
                 capacity_mw=8.0,
-                location="Ambora",
+                location="Ambhora",
                 state="Maharashtra",
                 status="operational",
                 commissioning_date=date(2022, 9, 5),
@@ -93,9 +93,9 @@ def seed():
                 image_url="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e"
             ),
             Project(
-                name="Asti Project",
+                name="Ashti Project",
                 capacity_mw=3.6,
-                location="Asti, Beed",
+                location="Ashti, Beed",
                 state="Maharashtra",
                 status="operational",
                 commissioning_date=date(2021, 6, 30),

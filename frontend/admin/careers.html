@@ -1,89 +1,173 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Manage Jobs | SunPlus Power Control Console</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  
-  <link rel="stylesheet" href="../assets/css/variables.css"/>
-  <link rel="stylesheet" href="../assets/css/base.css"/>
-  <link rel="stylesheet" href="../assets/css/components.css"/>
-  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css"/>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css" />
+
   <script src="../assets/js/api.js" defer></script>
   <script src="../assets/js/admin.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+
+  <style>
+    tbody tr {
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #f9fafb;
+    }
+
+    .btn-primary {
+      background-color: #e30613;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #c00510;
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-secondary:hover {
+      background-color: #f9fafb;
+    }
+  </style>
 </head>
-<body class="bg-surface text-on-background antialiased flex flex-col min-h-screen">
+
+<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-on-background antialiased flex flex-col min-h-screen">
 
   <!-- Header -->
-  <header class="w-full bg-charcoal border-b border-white/10 py-4 shadow-md sticky top-0 z-50">
+  <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/50 py-3.5 shadow-md sticky top-0 z-50">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
-          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="../assets/images/logo.svg"/>
+          <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png" />
         </a>
-        <span class="text-headline-md font-bold text-white tracking-wide">Control Panel</span>
+        <span class="text-lg font-bold text-on-surface tracking-wide">Control Panel</span>
       </div>
-      <div class="flex items-center gap-6">
-        <button onclick="adminLogout()" class="text-white/80 hover:text-white font-label-bold text-sm flex items-center gap-1.5 border border-white/20 px-4 py-2 rounded hover:bg-white/10 transition-all">
-          <span class="material-symbols-outlined text-[18px]">logout</span> Logout
+      <div class="flex items-center gap-4">
+        <!-- Notifications Bell -->
+        <button
+          class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
+          <span class="material-symbols-outlined text-[24px]">notifications</span>
+          <span
+            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+        </button>
+        <!-- Admin Profile -->
+        <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
+          <div
+            class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">
+            SP
+          </div>
+          <div class="hidden md:block">
+            <p class="text-sm font-semibold text-gray-800">Admin</p>
+            <p class="text-xs text-gray-500">SunPlus Power</p>
+          </div>
+        </div>
+        <!-- Logout -->
+        <button onclick="adminLogout()"
+          class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
+          <span class="material-symbols-outlined text-[20px]">logout</span>
+          <span class="hidden md:inline">Logout</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Content grid -->
-  <div class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-8 gap-8">
+  <!-- Sidebar + Main Grid -->
+  <div
+    class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-6 gap-6">
     <!-- Sidebar Navigation -->
-    <aside class="w-full md:w-64 space-y-2">
-      <div class="p-4 bg-charcoal text-white rounded-lg mb-4">
-        <h4 class="font-bold text-sm uppercase tracking-wider">Console Directory</h4>
-        <p class="text-xs text-white/60">System Operator Active</p>
+    <aside class="w-full md:w-64 bg-[#111111] rounded-2xl p-5 space-y-1.5 shrink-0 shadow-xl">
+      <div class="p-3 mb-4">
+        <h4 class="font-bold text-xs uppercase tracking-widest text-gray-500">Console Directory</h4>
+        <div class="h-px bg-gray-800 mt-2.5"></div>
       </div>
-      
-      <a href="dashboard.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
-        <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard Overview
+
+      <a href="dashboard.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        Dashboard Overview
       </a>
-      <a href="submissions.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
-        <span class="material-symbols-outlined text-[20px]">inbox</span> Submissions inbox
+      <a href="submissions.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">inbox</span>
+        Submissions inbox
       </a>
-      <a href="projects.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
-        <span class="material-symbols-outlined text-[20px]">solar_power</span> Projects Manager
+      <a href="sales.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">payments</span>
+        Sales Console
       </a>
-      <a href="blogs.html" class="flex items-center gap-3 p-3 rounded-lg text-secondary hover:bg-surface-container hover:text-on-surface transition-all">
-        <span class="material-symbols-outlined text-[20px]">article</span> Insights & Blogs
+      <a href="projects.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">solar_power</span>
+        Projects Manager
       </a>
-      <a href="careers.html" class="flex items-center gap-3 p-3 rounded-lg bg-surface-container text-primary font-bold transition-all">
-        <span class="material-symbols-outlined text-[20px]">work</span> Careers & Jobs
+      <a href="blogs.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">article</span>
+        Insights & Blogs
+      </a>
+      <a href="careers.html"
+        class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-semibold transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px]">work</span>
+        Careers & Jobs
       </a>
     </aside>
 
     <!-- Main View Section -->
-    <main id="careers-crud-view" class="flex-grow space-y-8">
+    <main id="careers-crud-view" class="flex-grow space-y-5">
       <div class="flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h1 class="text-headline-xl font-bold text-on-surface">HR & Careers Manager</h1>
-          <p class="text-body-lg text-secondary mt-1">Publish open job listings, update departments details, and track active statuses.</p>
+          <h1 class="text-2xl font-bold text-gray-900">HR & Careers Manager</h1>
+          <p class="text-gray-500 mt-1">Publish open job listings, update departments details, and track active statuses.</p>
         </div>
-        <button onclick="toggleCRUDModal('careers', true)" class="btn-primary flex items-center gap-1.5 shadow-md">
-          <span class="material-symbols-outlined">add</span> Add Job Opening
+        <button onclick="toggleCRUDModal('careers', true)" class="btn-primary flex items-center gap-1.5 px-4 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+          <span class="material-symbols-outlined text-sm">add</span>
+          Add Job Opening
         </button>
       </div>
 
       <!-- Careers Table -->
-      <div class="overflow-x-auto bg-white border border-outline-variant rounded-lg">
+      <div class="overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
         <table class="w-full text-left border-collapse min-w-[700px]">
-          <thead>
-            <tr class="bg-surface-container-low border-b border-surface-container-high text-xs text-tertiary uppercase font-bold">
-              <th class="p-4">Job Title</th>
-              <th class="p-4">Department</th>
-              <th class="p-4">Location</th>
-              <th class="p-4">Experience Required</th>
-              <th class="p-4">Status</th>
-              <th class="p-4 text-center">Actions</th>
+          <thead class="bg-gray-50/80 sticky top-0 z-10">
+            <tr>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                Job Title
+              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                Department
+              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                Location
+              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                Experience Required
+              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
+                Status
+              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200 text-center">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody id="careers-crud-table-body">
@@ -95,12 +179,14 @@
   </div>
 
   <!-- CRUD Modal Form -->
-  <div id="careers-modal" class="hidden fixed inset-0 z-50 bg-charcoal/40 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="max-w-xl w-full bg-white rounded-lg shadow-2xl border border-outline-variant flex flex-col max-h-[90vh] overflow-hidden">
+  <div id="careers-modal"
+    class="hidden fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4">
+    <div
+      class="max-w-xl w-full bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/60 flex flex-col max-h-[90vh] overflow-hidden">
       <!-- Modal Header -->
-      <div class="flex justify-between items-center p-6 border-b border-surface-container">
-        <h3 id="modal-careers-title" class="text-headline-md font-bold text-on-surface">Add Job Opening</h3>
-        <button onclick="toggleCRUDModal('careers', false)" class="text-secondary hover:text-on-surface">
+      <div class="flex justify-between items-center p-6 border-b border-gray-200">
+        <h3 id="modal-careers-title" class="text-lg font-bold text-gray-900">Add Job Opening</h3>
+        <button onclick="toggleCRUDModal('careers', false)" class="text-gray-500 hover:text-gray-800">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
@@ -108,17 +194,17 @@
       <!-- Modal Body (Form) -->
       <form id="career-form" class="p-6 overflow-y-auto space-y-4 flex-grow">
         <!-- Hidden Item ID -->
-        <input type="hidden" id="career-id" name="career-id" value=""/>
-        
+        <input type="hidden" id="career-id" name="career-id" value="" />
+
         <div class="form-group">
-          <label class="form-label">Job Title</label>
-          <input type="text" name="title" class="form-input" placeholder="Senior PV Design Engineer" required />
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Job Title</label>
+          <input type="text" name="title" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="Senior PV Design Engineer" required />
         </div>
 
         <div class="grid grid-cols-3 gap-4">
           <div class="form-group">
-            <label class="form-label">Department</label>
-            <select name="department" class="form-select bg-white">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Department</label>
+            <select name="department" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200">
               <option value="Engineering">Engineering</option>
               <option value="Project Management">Project Management</option>
               <option value="Operations">Operations</option>
@@ -127,42 +213,53 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Location</label>
-            <input type="text" name="location" class="form-input" placeholder="Lucknow (HQ)" required />
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Location</label>
+            <input type="text" name="location" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="Lucknow (HQ)" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Experience Required</label>
-            <input type="text" name="experience_required" class="form-input" placeholder="3-5 Years" required />
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Experience Required</label>
+            <input type="text" name="experience-required" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="3-5 Years" required />
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Full Job Description</label>
-          <textarea name="description" class="form-textarea" rows="6" placeholder="Outline primary responsibilities, hardware tools requirements, structural standards knowledge..." required></textarea>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Full Job Description</label>
+          <textarea name="description" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" rows="6" placeholder="Outline primary responsibilities, hardware tools requirements, structural standards knowledge..." required></textarea>
         </div>
 
-        <div class="p-4 bg-surface-container rounded border border-surface-container-high">
+        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
           <label class="flex items-center gap-3 cursor-pointer">
-            <input type="checkbox" name="is_active" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" checked />
-            <span class="text-label-md font-bold text-on-surface">Mark role active (allows candidates to submit application files)</span>
+            <input type="checkbox" name="is-active" class="w-5 h-5 text-[#e30613] border-gray-300 rounded focus:ring-[#e30613]" checked />
+            <span class="text-sm font-semibold text-gray-900">Mark role active (allows candidates to submit application files)</span>
           </label>
         </div>
 
         <!-- Modal Footer Actions -->
-        <div class="flex justify-end gap-4 pt-4 border-t border-surface-container mt-6">
-          <button type="button" onclick="toggleCRUDModal('careers', false)" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary">Save Opening</button>
+        <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 mt-6">
+          <button type="button" onclick="toggleCRUDModal('careers', false)" class="btn-secondary px-4 py-2.5 rounded-xl transition-all duration-200">Cancel</button>
+          <button type="submit" class="btn-primary px-4 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">Save Opening</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="bg-charcoal text-white py-6 mt-auto">
-    <div class="max-w-[1440px] mx-auto px-margin-desktop text-center text-label-sm text-white/40">
-      © 2026 SunPlus Power System Operator Dashboard. All changes sync directly to DB.
+  <footer class="bg-white border-t border-gray-200 py-4 mt-auto">
+    <div
+      class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-xs text-gray-400">&copy; 2026 SunPlus Power. Control Panel v1.0</div>
+      <div class="text-xs text-gray-400">System Security: Active SSL / JWT</div>
     </div>
   </footer>
 
+  <script>
+    function adminLogout() {
+      if (typeof api !== "undefined") {
+        api.clearToken();
+      }
+      window.location.href = "login.html";
+    }
+  </script>
 </body>
+
 </html>

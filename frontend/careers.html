@@ -42,14 +42,13 @@
 
 <body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
     <!-- TopNavBar -->
-    <nav
-        class="fixed top-0 w-full z-50 bg-white border-b border-outline-technical transition-all duration-300 ease-in-out">
+    <nav class="fixed top-0 w-full z-50 bg-white shadow-sm transition-all duration-300 ease-in-out">
         <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
             <a href="index.html" class="flex items-center shrink-0">
-                <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
-                    style="max-width:200px;" />
+                <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                    style="max-width:300px;" />
             </a>
-            <div class="hidden lg:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-5 xl:space-x-7">
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
                     href="index.html">Home</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
@@ -64,6 +63,8 @@
                     href="media.html">Solar Intelligence</a>
                 <a class="font-label-technical text-label-technical uppercase tracking-widest text-secondary-container nav-active pb-1 relative"
                     href="careers.html">Careers</a>
+                <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+                    href="faq.html">FAQ</a>
                 <div class="relative group">
                     <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
                         href="connect.html">
@@ -87,15 +88,34 @@
                     </div>
                 </div>
             </div>
-            <a href="calculator.html"
-                class="bg-secondary-container text-white px-5 py-2.5 font-label-technical text-[11px] uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 text-center">
-                SOLAR CALCULATOR
-            </a>
+                <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-md bg-secondary-container shrink-0" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-white">menu</span>
+                </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-outline-technical shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div class="flex flex-col px-margin-mobile py-4">
+                <a href="index.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Home</a>
+                <a href="about.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Company</a>
+                <a href="services.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Services</a>
+                <a href="projects.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Projects</a>
+                <a href="products.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Products</a>
+                <a href="media.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Solar Intelligence</a>
+                <a href="careers.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Careers</a>
+                <a href="faq.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">FAQ</a>
+                <a href="connect.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Connect</a>
+                <a href="connect.html?tab=distributor" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Apply for Distributor</a>
+                <a href="connect.html?tab=warranty" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Warranty Registration</a>
+                <a href="connect.html?tab=complaint" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant">Complaint / Support</a>
+            </div>
+        </div>
         </div>
     </nav>
     <main class="pt-[72px]">
         <!-- Hero Section -->
         <section class="relative bg-inverse-surface py-24 md:py-32 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center"
+                style="background-image: url('assets/images/projects/utility-scale-skyline.jpg')"></div>
+            <div class="absolute inset-0 bg-inverse-surface/85"></div>
             <div class="absolute inset-0 opacity-10 industrial-pattern"></div>
             <div class="relative z-10 px-margin-mobile max-w-container-max mx-auto">
                 <div class="max-w-3xl">
@@ -191,63 +211,127 @@
                 </div>
                 <!-- Jobs Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-                    <!-- Job Card 1 -->
+                    <!-- Job Card 1 - Supervisor -->
                     <div
-                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary transition-colors group">
+                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                         <div class="flex justify-between items-start mb-6">
                             <span
-                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Engineering</span>
+                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Operations</span>
                             <span class="text-label-sm text-on-surface-variant">Full-time</span>
                         </div>
-                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Senior PV Design Engineer
+                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Supervisor
                         </h4>
-                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Lead the design of utility-scale
-                            solar projects (50MW+) using PVsyst and AutoCAD Civil 3D.</p>
+                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Oversee daily site operations and
+                            coordinate with field teams for smooth project execution.</p>
                         <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
                             <span class="material-symbols-outlined text-lg">location_on</span>
-                            <span class="text-label-md">Bangalore, India</span>
+                            <span class="text-label-md">Lucknow, India</span>
                         </div>
                         <button
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
                     </div>
-                    <!-- Job Card 2 -->
+                    <!-- Job Card 2 - Assistant Sales Manager (ASM) -->
                     <div
-                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary transition-colors group">
-                        <div class="flex justify-between items-start mb-6">
-                            <span
-                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Project
-                                Management</span>
-                            <span class="text-label-sm text-on-surface-variant">Full-time</span>
-                        </div>
-                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Infrastructure Project Lead
-                        </h4>
-                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Oversee site execution, vendor
-                            coordination, and safety compliance for regional solar clusters.</p>
-                        <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
-                            <span class="material-symbols-outlined text-lg">location_on</span>
-                            <span class="text-label-md">Pune, India</span>
-                        </div>
-                        <button
-                            class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
-                            Apply Now
-                        </button>
-                    </div>
-                    <!-- Job Card 3 -->
-                    <div
-                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary transition-colors group">
+                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                         <div class="flex justify-between items-start mb-6">
                             <span
                                 class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Sales</span>
                             <span class="text-label-sm text-on-surface-variant">Full-time</span>
                         </div>
-                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">B2B Sales Director</h4>
-                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Develop strategic partnerships
-                            with large industrial corporations for long-term PPA agreements.</p>
+                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Assistant Sales Manager (ASM)
+                        </h4>
+                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Manage sales operations and
+                            client relationships with 1-3 years of experience in solar or related industry.</p>
                         <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
                             <span class="material-symbols-outlined text-lg">location_on</span>
-                            <span class="text-label-md">Mumbai, India</span>
+                            <span class="text-label-md">Uttar Pradesh, India</span>
+                        </div>
+                        <button
+                            class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
+                            Apply Now
+                        </button>
+                    </div>
+                    <!-- Job Card 3 - Business Development Manager (BDM) -->
+                    <div
+                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Sales</span>
+                            <span class="text-label-sm text-on-surface-variant">Full-time</span>
+                        </div>
+                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Business Development Manager
+                            (BDM)
+                        </h4>
+                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Drive business growth and
+                            strategic partnerships with 5-6 years of experience in solar EPC or manufacturing.</p>
+                        <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-lg">location_on</span>
+                            <span class="text-label-md">Pan India</span>
+                        </div>
+                        <button
+                            class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
+                            Apply Now
+                        </button>
+                    </div>
+                    <!-- Job Card 4 - Sales & Marketing Executive -->
+                    <div
+                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Marketing</span>
+                            <span class="text-label-sm text-on-surface-variant">Full-time</span>
+                        </div>
+                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Sales & Marketing Executive
+                        </h4>
+                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Execute sales and marketing
+                            initiatives with 0-1 year of experience in the industry.</p>
+                        <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-lg">location_on</span>
+                            <span class="text-label-md">Lucknow, India</span>
+                        </div>
+                        <button
+                            class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
+                            Apply Now
+                        </button>
+                    </div>
+                    <!-- Job Card 5 - Quality Head (Earthing Manufacturing) -->
+                    <div
+                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Quality</span>
+                            <span class="text-label-sm text-on-surface-variant">Full-time</span>
+                        </div>
+                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Quality Head
+                        </h4>
+                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Lead quality assurance and
+                            control for earthing manufacturing with 1-2 years of relevant experience.</p>
+                        <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-lg">location_on</span>
+                            <span class="text-label-md">Lucknow, India</span>
+                        </div>
+                        <button
+                            class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
+                            Apply Now
+                        </button>
+                    </div>
+                    <!-- Job Card 6 - Electrician Head -->
+                    <div
+                        class="bg-white p-8 rounded-xl border border-surface-container-highest flex flex-col h-full hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="bg-surface-container text-on-surface-variant text-[11px] px-2.5 py-1 rounded uppercase font-bold tracking-widest">Operations</span>
+                            <span class="text-label-sm text-on-surface-variant">Full-time</span>
+                        </div>
+                        <h4 class="text-headline-sm font-headline-md mb-3 text-on-surface">Electrician Head
+                        </h4>
+                        <p class="text-body-md text-on-surface-variant mb-8 flex-grow">Lead electrical installations and
+                            maintenance teams with 2-4 years of experience in solar or electrical projects.</p>
+                        <div class="flex items-center gap-2 mb-8 text-on-surface-variant">
+                            <span class="material-symbols-outlined text-lg">location_on</span>
+                            <span class="text-label-md">Uttar Pradesh, India</span>
                         </div>
                         <button
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
@@ -351,13 +435,16 @@
         </section>
     </main>
     <!-- Footer -->
-    <footer class="bg-white text-on-surface border-t border-outline-technical w-full mt-24">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 px-margin-desktop py-16 w-full max-w-container-max mx-auto">
-            <div class=" space-y-6">
+    <footer class="bg-white border-t border-outline-variant w-full mt-24">
+        <div
+            class="grid grid-cols-1 md:grid-cols-5 gap-gutter px-margin-desktop py-20 w-full max-w-container-max mx-auto">
+            <div class="md:col-span-2 space-y-6">
                 <a href="index.html" class="flex items-center">
-                    <img src="assets/images/logo.svg" alt="SunPlus Power" class="h-10 w-auto object-contain"
-                        style="max-width:200px;" />
+                    <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto"
+                        style="max-width:300px;" />
                 </a>
+                <p class="text-primary font-label-technical uppercase tracking-widest text-sm">Powered by
+                    the Sun. Grounded in Safety.</p>
                 <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
                     transition
                     through rigorous technical modeling and industrial-scale solar deployment.</p>
@@ -381,7 +468,8 @@
                     <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
                             Intelligence</a></li>
                     <li><a class="text-on-surface-variant hover:text-primary transition-colors"
-                            href="careers.html">Careers</a>
+                            href="careers.html">Careers</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="faq.html">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -413,7 +501,7 @@
                         href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
                     <b>Technical Support:</b> <a class="hover:text-primary"
                         href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
-                    <b>Official Phone:</b> +91-9153832222
+                    <b>Official Phone:</b> +91-9648045063
                 </p>
             </div>
         </div>

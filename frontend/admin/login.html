@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Admin Login | SunPlus Power Control Console</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  
-  <link rel="stylesheet" href="../assets/css/variables.css"/>
-  <link rel="stylesheet" href="../assets/css/base.css"/>
-  <link rel="stylesheet" href="../assets/css/components.css"/>
-  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css"/>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/tailwind-compiled.css" />
+
   <script src="../assets/js/api.js" defer></script>
   <script src="../assets/js/admin.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
 </head>
-<body class="bg-background text-on-background antialiased flex flex-col min-h-screen justify-between">
+
+<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-gray-800 antialiased flex flex-col min-h-screen justify-between">
 
   <!-- Header -->
-  <header class="w-full bg-charcoal border-b border-white/10 py-4 shadow-md">
+  <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/50 py-3.5 shadow-md">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
-          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain brightness-0 invert" src="../assets/images/logo.svg"/>
+          <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png" />
         </a>
-        <span class="text-headline-md font-bold text-white tracking-wide">Control Panel</span>
+        <span class="text-lg font-bold text-gray-800 tracking-wide">Control Panel</span>
       </div>
     </div>
   </header>
 
   <!-- Login Block -->
-  <main class="flex-grow flex items-center justify-center py-16 px-margin-mobile">
-    <div class="max-w-md w-full bg-white p-8 border border-outline-variant rounded-lg shadow-md">
+  <main class="flex-grow flex items-center justify-center py-12 px-4">
+    <div class="max-w-md w-full bg-white/80 backdrop-blur-2xl p-8 rounded-3xl shadow-2xl border border-white/60">
       <div class="text-center mb-8">
-        <div class="inline-flex p-4 bg-surface-container text-navy-grey rounded-full mb-4">
-          <span class="material-symbols-outlined text-[36px]">lock</span>
+        <div class="inline-flex p-4 bg-gradient-to-br from-[#e30613]/10 to-[#c00510]/10 rounded-2xl mb-5">
+          <span class="material-symbols-outlined text-[32px] text-[#e30613]">lock</span>
         </div>
-        <h2 class="text-headline-md font-bold text-on-surface">Secure Console</h2>
-        <p class="text-body-md text-secondary mt-1">Authorized engineering personnel only</p>
+        <h2 class="text-xl font-bold text-gray-900">Secure Console</h2>
+        <p class="text-sm text-gray-500 mt-2">Authorized personnel only</p>
       </div>
 
-      <!-- Feedbacks box -->
       <div id="login-error-container"></div>
 
-      <form id="admin-login-form" class="space-y-6">
-        <div class="form-group">
-          <label class="form-label">Administrator Email</label>
-          <input id="login-email" type="email" class="form-input" placeholder="admin@sunpluspower.in" required />
+      <form id="admin-login-form" class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+          <input id="login-email" type="email"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200"
+            placeholder="admin@sunpluspower.in" required />
         </div>
-        <div class="form-group">
-          <label class="form-label">Console Password</label>
-          <input id="login-password" type="password" class="form-input" placeholder="••••••••" required />
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+          <input id="login-password" type="password"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200"
+            placeholder="••••••••" required />
         </div>
-        <button type="submit" class="w-full btn-primary py-4">
-          Authenticate Console <span class="material-symbols-outlined text-sm">vpn_key</span>
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-[#e30613] to-[#c00510] hover:from-[#c00510] hover:to-[#a00408] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-sm mt-2">
+          Sign In <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
         </button>
       </form>
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-on-surface text-white py-6">
-    <div class="max-w-[1440px] mx-auto px-margin-desktop text-center text-label-sm text-surface-variant/50">
-      © 2026 SunPlus Power Control Console. All sessions are logged under standard audit protocols.
-    </div>
-  </footer>
-
 </body>
+
 </html>

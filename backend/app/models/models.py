@@ -30,25 +30,6 @@ class Lead(Base, TimestampMixin):
     source_page = Column(String(255), nullable=False)
     status = Column(String(50), default="new", index=True, nullable=False)  # new, contacted, closed
 
-class CalculatorSubmission(Base, TimestampMixin):
-    __tablename__ = "calculator_submissions"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255), nullable=False)
-    email = Column(String(255), nullable=False, index=True)
-    phone = Column(String(50), nullable=True)
-    monthly_bill = Column(Float, nullable=False)
-    monthly_units = Column(Float, nullable=False)
-    location = Column(String(255), nullable=False)
-    install_type = Column(String(100), nullable=False)  # rooftop, ground-mount
-    calculated_system_size_kw = Column(Float, nullable=False)
-    estimated_cost = Column(Float, nullable=False)
-    subsidy_amount = Column(Float, nullable=False)
-    net_cost = Column(Float, nullable=False)
-    annual_savings = Column(Float, nullable=False)
-    payback_years = Column(Float, nullable=False)
-    co2_offset_kg = Column(Float, nullable=False)
-
 class DistributorApplication(Base, TimestampMixin):
     __tablename__ = "distributor_applications"
 

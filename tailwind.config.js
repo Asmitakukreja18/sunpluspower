@@ -73,7 +73,8 @@ module.exports = {
         "base": "8px",
         "xs": "4px",
         "xl": "80px",
-        "gutter": "24px"
+        "gutter": "24px",
+        "section-padding": "96px"
       },
       fontFamily: {
         "label-bold": ["Inter", "sans-serif"],

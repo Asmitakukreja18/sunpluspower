@@ -1,6 +1,5 @@
 from app.models.models import (
     Lead,
-    CalculatorSubmission,
     DistributorApplication,
     WarrantyRegistration,
     Complaint,

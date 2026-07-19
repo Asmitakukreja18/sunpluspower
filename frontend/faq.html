@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>FAQs | SunPlus Power</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+
+  <style>
+    .faq-item {
+      border-bottom: 1px solid var(--outline-variant, #e1e2e4);
+    }
+
+    .faq-question {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      transition: color 0.2s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+
+    .faq-answer.open {
+      max-height: 500px;
+      padding-bottom: 1.25rem;
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-icon.open {
+      transform: rotate(180deg);
+    }
+
+    .industrial-pattern {
+      background-color: #f8f9fb;
+      background-image: radial-gradient(#d9dadc 0.5px, transparent 0.5px);
+      background-size: 20px 20px;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets/css/variables.css?v=5" />
+  <link rel="stylesheet" href="assets/css/base.css?v=5" />
+  <link rel="stylesheet" href="assets/css/components.css?v=5" />
+  <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=5" />
+
+
+  <script src="assets/js/api.js?v=5" defer></script>
+  <script src="assets/js/main.js?v=5" defer></script>
+
+</head>
+
+<body
+  class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-primary min-h-screen industrial-pattern">
+  <!-- TopNavBar -->
+  <nav class="fixed top-0 w-full z-50 bg-white shadow-sm transition-all duration-300 ease-in-out">
+    <div class="flex justify-between items-center px-margin-desktop py-3 w-full max-w-full">
+      <a href="index.html" class="flex items-center shrink-0">
+        <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+          style="max-width:300px;" />
+      </a>
+      <div class="hidden lg:flex items-center space-x-5 xl:space-x-7">
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="index.html">Home</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="about.html">Company</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="services.html">Services</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="projects.html">Projects</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="products.html">Products</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="media.html">Solar Intelligence</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="careers.html">Careers</a>
+        <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors"
+          href="faq.html">FAQ</a>
+        <div class="relative group">
+          <a class="font-label-technical text-label-technical uppercase tracking-widest text-on-surface hover:text-secondary-container transition-colors inline-flex items-center gap-1 cursor-pointer"
+            href="connect.html">
+            Connect
+            <span
+              class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+          </a>
+          <div
+            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-1" role="menu">
+              <a href="connect.html?tab=distributor"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                role="menuitem">Apply for Distributor</a>
+              <a href="connect.html?tab=warranty"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                role="menuitem">Warranty Registration</a>
+              <a href="connect.html?tab=complaint"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
+                role="menuitem">Complaint / Support</a>
+            </div>
+          </div>
+        </div>
+      </div>
+                <button id="mobile-menu-toggle" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-md bg-secondary-container shrink-0" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-white">menu</span>
+                </button>
+    </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-outline-technical shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div class="flex flex-col px-margin-mobile py-4">
+                <a href="index.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Home</a>
+                <a href="about.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Company</a>
+                <a href="services.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Services</a>
+                <a href="projects.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Projects</a>
+                <a href="products.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Products</a>
+                <a href="media.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Solar Intelligence</a>
+                <a href="careers.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Careers</a>
+                <a href="faq.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">FAQ</a>
+                <a href="connect.html" class="mobile-nav-link py-3 font-label-technical text-label-technical uppercase tracking-widest text-on-surface border-b border-surface-container">Connect</a>
+                <a href="connect.html?tab=distributor" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Apply for Distributor</a>
+                <a href="connect.html?tab=warranty" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant border-b border-surface-container">Warranty Registration</a>
+                <a href="connect.html?tab=complaint" class="mobile-nav-link py-2 pl-4 text-sm text-on-surface-variant">Complaint / Support</a>
+            </div>
+        </div>
+    </div>
+  </nav>
+
+  <main class="pt-[72px]">
+    <!-- Hero Section -->
+    <section class="bg-inverse-surface py-16 md:py-24 overflow-hidden relative">
+      <div class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('assets/images/projects/solar-park-sunset-03.jpg')"></div>
+      <div class="absolute inset-0 bg-inverse-surface/85"></div>
+      <div class="absolute inset-0 opacity-10 industrial-pattern"></div>
+      <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center">
+        <div class="max-w-3xl mx-auto">
+          <div class="inline-flex items-center gap-3 text-primary-fixed-dim mb-4">
+            <span class="w-8 h-[2px] bg-primary"></span>
+            <span class="text-label-md uppercase tracking-widest font-bold">Information Desk</span>
+            <span class="w-8 h-[2px] bg-primary"></span>
+          </div>
+          <h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-white mb-6 leading-tight">
+            Frequently Asked Questions
+          </h1>
+          <p class="text-body-lg text-surface-variant max-w-2xl mx-auto opacity-95 leading-relaxed">
+            Get technical explanations and business support details about our Solar EPC services, earthing &amp;
+            lightning protection products, and distributorship models.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Main Canvas -->
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+
+        <!-- Left Sidebar Tabs Navigation -->
+        <aside class="lg:col-span-4 space-y-4 sticky top-[96px] z-30">
+          <div class="bg-white border border-surface-container rounded-xl shadow-sm p-6 space-y-2">
+            <h3
+              class="text-label-sm text-on-surface-variant uppercase tracking-widest font-bold mb-4 border-b border-surface-container pb-2">
+              FAQ Categories</h3>
+
+            <button onclick="switchCategory('solar-epc')" id="tab-solar-epc"
+              class="category-tab w-full text-left font-label-md py-3 px-4 rounded-lg flex items-center justify-between transition-all bg-primary text-white font-bold shadow">
+              <span>Solar EPC</span>
+              <span class="material-symbols-outlined text-[18px]">solar_power</span>
+            </button>
+
+            <button onclick="switchCategory('manufacturing')" id="tab-manufacturing"
+              class="category-tab w-full text-left font-label-md py-3 px-4 rounded-lg flex items-center justify-between transition-all hover:bg-surface-container text-on-surface-variant">
+              <span>Manufacturing &amp; GI</span>
+              <span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+            </button>
+
+            <button onclick="switchCategory('distributor')" id="tab-distributor"
+              class="category-tab w-full text-left font-label-md py-3 px-4 rounded-lg flex items-center justify-between transition-all hover:bg-surface-container text-on-surface-variant">
+              <span>Dealers &amp; Distributors</span>
+              <span class="material-symbols-outlined text-[18px]">partner_exchange</span>
+            </button>
+
+            <button onclick="switchCategory('general')" id="tab-general"
+              class="category-tab w-full text-left font-label-md py-3 px-4 rounded-lg flex items-center justify-between transition-all hover:bg-surface-container text-on-surface-variant">
+              <span>General Questions</span>
+              <span class="material-symbols-outlined text-[18px]">help_center</span>
+            </button>
+          </div>
+
+          <div class="bg-on-surface text-white p-6 rounded-xl shadow-sm space-y-4">
+            <h4 class="font-headline-sm font-bold">Have other questions?</h4>
+            <p class="text-body-md text-surface-variant opacity-80 leading-relaxed">Our design engineering desk is
+              active 24/7 to resolve safety concerns and system layouts.</p>
+            <a href="connect.html"
+              class="inline-flex items-center gap-2 text-primary-fixed-dim hover:underline font-label-md">
+              Submit an Inquiry
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- Right Content Accordion Canvas -->
+        <div
+          class="lg:col-span-8 bg-white border border-surface-container rounded-xl shadow-sm p-6 md:p-10 min-h-[500px]">
+
+          <!-- Category 1: Solar EPC -->
+          <div id="category-solar-epc" class="category-content space-y-2">
+            <h2
+              class="text-headline-md font-headline-md text-on-surface mb-6 border-b border-surface-container pb-3 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-3xl">solar_power</span>
+              Solar EPC Solutions
+            </h2>
+
+            <!-- Q1 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">What is Solar EPC?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Solar EPC stands for Engineering,
+                  Procurement, and Construction. It is a turnkey solution where SunPlus Power handles the complete
+                  lifecyle of a solar power project: engineering feasibility analysis, structural and electrical design,
+                  procurement of tier-1 components, site construction, net-metering validation, and utility grid
+                  commissioning.</p>
+              </div>
+            </div>
+            <!-- Q2 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">What types of solar projects do you undertake?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">We design and construct high-performance
+                  solar infrastructure projects including commercial &amp; industrial (C&amp;I) rooftop systems,
+                  large-scale ground-mounted arrays, residential rooftop net-metering installations, solar micro-grids,
+                  and off-grid high-voltage battery storage systems.</p>
+              </div>
+            </div>
+            <!-- Q3 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you provide turnkey solar solutions?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, we deliver complete, end-to-end
+                  solar solutions. Our scopes cover shadow analysis, structure load calculation, discom approval
+                  documentation, equipment logistics, civil &amp; electrical works, commissioning testing, and
+                  connection to state electricity grids.</p>
+              </div>
+            </div>
+            <!-- Q4 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">How long does a solar installation take?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Project timelines depend on scale:
+                  typical residential rooftop systems are installed and tested within 3 to 7 business days; commercial
+                  &amp; industrial rooftops range from 2 to 6 weeks; while megawatt-scale ground-mounted utility arrays
+                  require 3 to 6 months of construction and grid integration planning.</p>
+              </div>
+            </div>
+            <!-- Q5 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you provide Operation &amp; Maintenance (O&amp;M)
+                  services?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, we provide standard and custom
+                  O&amp;M packages. Our solar maintenance teams handle real-time SCADA performance monitoring, automated
+                  panel cleaning cycles, high-voltage electrical safety audits, thermal imaging analysis, and corrective
+                  component replacements.</p>
+              </div>
+            </div>
+            <!-- Q6 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">How much can I save with solar?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Implementing solar allows commercial and
+                  industrial customers to reduce electricity bills by up to 70% to 90%. The investment usually yields a
+                  payback period of 3 to 5 years, with the system continuing to generate free clean energy for its
+                  25-year lifetime.</p>
+              </div>
+            </div>
+            <!-- Q7 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you assist with government subsidies and
+                  approvals?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, our regulatory division handles the
+                  complete compliance stack. We submit net-metering applications to state Discoms, organize local
+                  structure safety checks, clear electrical inspectorate (CEIG) requirements, and coordinate PM-Surya
+                  Ghar subsidy approvals for residential projects.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2: Manufacturing -->
+          <div id="category-manufacturing" class="category-content space-y-2 hidden">
+            <h2
+              class="text-headline-md font-headline-md text-on-surface mb-6 border-b border-surface-container pb-3 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-3xl">precision_manufacturing</span>
+              Manufacturing &amp; GI Products
+            </h2>
+
+            <!-- Q1 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">What products does SunPlus Power manufacture?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Our state-of-the-art manufacturing
+                  facility produces Copper-Bonded Earthing Rods, Hot-Dip Galvanized (GI) Earthing Strips (sizes
+                  including 25*3mm, 25*6mm, and 50*6mm), Earthing Chemical Bags (earth enhancement material), heavy-duty
+                  PVC Earthing Inspection Chambers, rod clamps, and custom solar structural components.</p>
+              </div>
+            </div>
+            <!-- Q2 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Are your products tested for quality?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, all manufactured lots undergo
+                  strict in-house testing. Our products conform to national safety regulations, including IS 3043 code
+                  of practice for earthing, and undergo tests for coating thickness (minimum 100 microns copper coating
+                  for rods), electrical resistance, and mechanical tensile strength.</p>
+              </div>
+            </div>
+            <!-- Q3 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Can you manufacture customized products?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, we provide build-to-spec
+                  manufacturing. Our engineering facility can manufacture custom cross-sections of GI flats, specialized
+                  multi-pin lightning masts, terminal brackets, and customized structure mounting rails based on
+                  industrial drawing sheets provided by clients.</p>
+              </div>
+            </div>
+            <!-- Q4 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you supply products across India?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, SunPlus Power operates a national
+                  logistics network. We distribute our earthing products, chemical compounds, and structure rails PAN
+                  India, directly supplying major industrial projects, sub-stations, and warehouse zones.</p>
+              </div>
+            </div>
+            <!-- Q5 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Are your products suitable for industrial
+                  applications?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Absolutely. Our earthing arrays and
+                  structural components are engineered to withstand massive fault currents and harsh weather. They are
+                  deployed in high-risk zones, including power transmission yards, corporate data centers, railway
+                  projects, oil refineries, and high-rise commercial structures.</p>
+              </div>
+            </div>
+            <!-- Q6 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you provide technical support for product
+                  selection?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, our engineering team assists with
+                  system design. We review local soil resistivity reports, calculate prospective fault currents, and
+                  recommend the exact volume of chemical compounds, rod dimensions, and conductor paths required for
+                  safety compliance.</p>
+              </div>
+            </div>
+            <!-- Q7 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">What industries do you serve?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">We actively supply our products to solar
+                  developer firms, telecom infrastructure towers, electrical contractors, heavy engineering industrial
+                  plants, government distribution grids, and residential commercial real estate groups.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3: Dealers & Distributors -->
+          <div id="category-distributor" class="category-content space-y-2 hidden">
+            <h2
+              class="text-headline-md font-headline-md text-on-surface mb-6 border-b border-surface-container pb-3 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-3xl">partner_exchange</span>
+              Dealers &amp; Distributors
+            </h2>
+
+            <!-- Q1 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">How can I become a SunPlus Power dealer or
+                  distributor?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">To start the process, navigate to our
+                  Connect tab and complete the Distributor Application. Alternatively, email your corporate deck and
+                  business registration documents to sales@sunpluspower.in. Our regional channel lead will get in touch
+                  with you.</p>
+              </div>
+            </div>
+            <!-- Q2 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">What are the eligibility criteria?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Eligible entities should possess active
+                  trade licenses in electrical or solar sectors, show sound financial credit, maintain warehouse storage
+                  space, and have an established sales network of contractors or retail stores within their assigned
+                  district.</p>
+              </div>
+            </div>
+            <!-- Q3 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">What support do you provide to dealers?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">We support our partners with co-branded
+                  marketing materials, sample kits, regional technician training, wholesale price margins, and project
+                  bidding assistance. Additionally, inquiries originating from your territory are routed directly to
+                  you.</p>
+              </div>
+            </div>
+            <!-- Q4 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Is there a minimum order requirement?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, minimum transaction thresholds
+                  apply to authorize regional distributor tiers and unlock bulk pricing discounts. These volumes ensure
+                  consistent product availability across local electrical retail points.</p>
+              </div>
+            </div>
+            <!-- Q5 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you offer exclusive dealership opportunities?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, exclusive territorial rights are
+                  offered to distributors who achieve set quarterly target milestones and demonstrate deep coverage of
+                  local contractor networks.</p>
+              </div>
+            </div>
+            <!-- Q6 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">How quickly are orders dispatched?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Standard stock items (Earthing Chem
+                  Bags, standard copper-bonded rods, GI flats) are dispatched within 2 to 5 business days. Custom
+                  structure fabrication items require 7 to 15 business days depending on order size and custom design
+                  parameters.</p>
+              </div>
+            </div>
+            <!-- Q7 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">How do I place bulk orders?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Once registered and approved in our ERP,
+                  you can place bulk purchase orders through our portal, or send signed PO worksheets to
+                  purchase@sunpluspower.in for automated billing processing.</p>
+              </div>
+            </div>
+            <!-- Q8 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you provide marketing materials?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, we ship brand packages including
+                  hard-copy catalogs, display stands, sample rods, and banner designs. Co-branded digital PDF brochures
+                  can be configured by our marketing team for regional outreach.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 4: General Questions -->
+          <div id="category-general" class="category-content space-y-2 hidden">
+            <h2
+              class="text-headline-md font-headline-md text-on-surface mb-6 border-b border-surface-container pb-3 flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-3xl">help_center</span>
+              General Questions
+            </h2>
+
+            <!-- Q1 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Why choose Sunplus Power?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">SunPlus Power delivers reliability. We
+                  control the complete quality cycle: we run our own GI manufacturing plants and engineer our own solar
+                  EPC systems. By removing third-party dependencies, we assure compliance with international safety
+                  codes and provide high asset yields.</p>
+              </div>
+            </div>
+            <!-- Q2 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you offer PAN India services?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, we design, engineer, and supply
+                  equipment nationwide. Our field execution divisions build commercial rooftops and solar fields, and
+                  our supply chain distributes safety rods and components across all states.</p>
+              </div>
+            </div>
+            <!-- Q3 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">How can I request a quotation?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Submit your bill of quantities (BOQ),
+                  structure drawing sheets, or monthly electricity utility bills to sales@sunpluspower.in. Our pricing
+                  desk will generate a detailed quotation spreadsheet within 24 to 48 hours.</p>
+              </div>
+            </div>
+            <!-- Q4 -->
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <h3 class="text-body-md font-bold text-on-surface">Do you provide warranty on your products and
+                  services?</h3>
+                <span class="material-symbols-outlined text-primary faq-icon">expand_more</span>
+              </div>
+              <div class="faq-answer">
+                <p class="text-body-md text-on-surface-variant leading-relaxed">Yes, we offer clear product warranties.
+                  Our solar modules come with a 25-year performance warranty; our structural metal coatings and earthing
+                  rods carry structural defect coverage; and our engineering work is backed by a dedicated service
+                  execution warranty.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-outline-variant w-full mt-24">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-gutter px-margin-desktop py-20 w-full max-w-container-max mx-auto">
+      <div class="md:col-span-2 space-y-6">
+        <a href="index.html" class="flex items-center">
+          <img src="assets/images/logo.png" alt="SunPlus Power" class="h-20 w-auto" style="max-width:320px;" />
+        </a>
+        <p class="text-primary font-label-technical uppercase tracking-widest text-sm">Powered by the Sun.
+          Grounded in Safety.</p>
+        <p class="text-on-surface-variant max-w-sm font-body-md leading-relaxed">Engineering the global energy
+          transition through
+          rigorous technical modeling and industrial-scale solar deployment.</p>
+      </div>
+      <div>
+        <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">Quick Links
+        </h4>
+        <ul class="space-y-4 font-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">Company</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="services.html">Services</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="projects.html">Projects</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="products.html">Products</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="media.html">Solar
+              Intelligence</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="careers.html">Careers</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">Connect
+        </h4>
+        <ul class="space-y-4 font-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+              href="connect.html?tab=distributor">Apply
+              for Distributor</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+              href="connect.html?tab=warranty">Warranty
+              Registration</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-colors"
+              href="connect.html?tab=complaint">Complaint
+              / Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-label-technical text-label-technical uppercase text-on-surface mb-8 tracking-widest">Contact
+        </h4>
+        <p class="text-on-surface-variant font-body-md mb-4 leading-relaxed">
+          <b>Corporate Address:</b><br />
+          1st Floor, D134, Vibhuti Khand<br />
+          Gomti Nagar, Lucknow<br />
+          Uttar Pradesh, India - 226010
+        </p>
+        <p class="text-on-surface-variant font-body-md leading-relaxed">
+          <b>Sales Help:</b> <a class="hover:text-primary"
+            href="mailto:sales@sunpluspower.in">sales@sunpluspower.in</a><br />
+          <b>Technical Support:</b> <a class="hover:text-primary"
+            href="mailto:info@sunpluspower.in">info@sunpluspower.in</a><br />
+          <b>Official Phone:</b> +91-9648045063
+        </p>
+      </div>
+    </div>
+    <div
+      class="px-margin-desktop py-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 max-w-container-max mx-auto">
+      <div class="font-body-md text-body-md text-on-surface-variant">© 2026 SUNPLUS POWER. ALL RIGHTS RESERVED.</div>
+      <div class="flex gap-8">
+        <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+          href="connect.html">Privacy Policy</a>
+        <a class="text-on-surface-variant hover:text-on-surface text-label-technical uppercase font-label-technical tracking-widest"
+          href="connect.html">Terms of Use</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(element) {
+      const answer = element.nextElementSibling;
+      const icon = element.querySelector('.faq-icon');
+      answer.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    function switchCategory(cat) {
+      // Hide all category content sections
+      document.querySelectorAll('.category-content').forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      // Show target category content section
+      document.getElementById('category-' + cat).classList.remove('hidden');
+
+      // Update sidebar tabs active style
+      document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.className = 'category-tab w-full text-left font-label-md py-3 px-4 rounded-lg flex items-center justify-between transition-all hover:bg-surface-container text-on-surface-variant';
+      });
+
+      // Set target tab to active style
+      const activeTab = document.getElementById('tab-' + cat);
+      activeTab.className = 'category-tab w-full text-left font-label-md py-3 px-4 rounded-lg flex items-center justify-between transition-all bg-primary text-white font-bold shadow';
+    }
+  </script>
+</body>
+
+</html>

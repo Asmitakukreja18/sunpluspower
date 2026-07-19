@@ -69,7 +69,7 @@ Launch the entire system (Frontend static server, Backend API, PostgreSQL databa
 docker-compose up --build
 ```
 * **Frontend Site**: Open `http://localhost`
-* **Admin Control Panel**: Open `http://localhost/admin/login.html` (Credentials: `admin@sunpluspower.in` / `SunPlusAdmin2026!`)
+* **Admin Control Panel**: Open `http://localhost/admin/login` (Credentials: `admin@sunpluspower.in` / `SunPlusAdmin2026!`)
 * **API Documentation**: Open `http://localhost:8000/docs`
 
 ---

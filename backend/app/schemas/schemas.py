@@ -48,54 +48,6 @@ class LeadOut(LeadBase):
     class Config:
         from_attributes = True
 
-# Calculator Schemas
-class CalculatorSubmissionCreate(BaseModel):
-    name: str = Field(..., min_length=2, max_length=255)
-    email: str
-    phone: Optional[str] = None
-    monthly_bill: float = Field(..., gt=0)
-    monthly_units: Optional[float] = Field(None, gt=0)
-    location: str = Field(..., max_length=255) # State name or postal code
-    install_type: str = Field(..., pattern="^(rooftop|ground-mount)$")
-
-    @field_validator("email")
-    @classmethod
-    def validate_email(cls, v):
-        if not re.match(EMAIL_REGEX, v):
-            raise ValueError("Invalid email format")
-        return v
-
-    @field_validator("phone")
-    @classmethod
-    def validate_phone(cls, v):
-        if not v:
-            return v
-        cleaned = re.sub(r"[\s\-\(\)]", "", v)
-        if not re.match(PHONE_REGEX, cleaned):
-            raise ValueError("Invalid Indian phone number format")
-        return cleaned
-
-class CalculatorSubmissionOut(BaseModel):
-    id: int
-    name: str
-    email: str
-    phone: Optional[str]
-    monthly_bill: float
-    monthly_units: float
-    location: str
-    install_type: str
-    calculated_system_size_kw: float
-    estimated_cost: float
-    subsidy_amount: float
-    net_cost: float
-    annual_savings: float
-    payback_years: float
-    co2_offset_kg: float
-    created_at: datetime
-
-    class Config:
-        from_attributes = True
-
 # Distributor Schemas
 class DistributorApplicationCreate(BaseModel):
     company_name: str = Field(..., min_length=2, max_length=255)
@@ -307,7 +259,6 @@ class AdminUserOut(BaseModel):
 
 class DashboardStatsOut(BaseModel):
     leads_count: int
-    calculator_submissions_count: int
     distributor_applications_count: int
     complaints_count: int
     projects_count: int
