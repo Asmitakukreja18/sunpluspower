@@ -26,6 +26,11 @@ body {
   padding-top: 100px; /* Make more space for fixed nav */
 }
 
+/* Admin console pages use a sticky (not fixed) header, so they don't need this offset */
+body.admin-body {
+  padding-top: 0;
+}
+
 /* Hide scrollbars completely on EVERYTHING */
 html,
 body,

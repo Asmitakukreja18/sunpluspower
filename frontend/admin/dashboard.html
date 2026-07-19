@@ -16,33 +16,33 @@
   <script src="../assets/js/admin.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
 </head>
-<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-on-background antialiased flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] admin-body text-on-background antialiased flex flex-col min-h-screen">
 
   <!-- Header -->
   <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/60 py-3.5 shadow-md sticky top-0 z-50">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
-          <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png"/>
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="../assets/images/logo.png"/>
         </a>
         <span class="text-lg font-bold text-gray-800 tracking-wide">Control Panel</span>
       </div>
       <div class="flex items-center gap-4">
         <!-- Notifications Bell -->
-        <button class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
+        <button class="relative p-2 rounded-xl hover:bg-[#a40213]/10 text-gray-600 hover:text-[#a40213] transition-all duration-200">
           <span class="material-symbols-outlined text-[24px]">notifications</span>
-          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#a40213] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
         </button>
         <!-- Admin Profile -->
         <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">SP</div>
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#a40213] to-[#82010e] text-white flex items-center justify-center font-bold text-sm">SP</div>
           <div class="hidden md:block">
             <p class="text-sm font-semibold text-gray-800">Admin</p>
             <p class="text-xs text-gray-500">SunPlus Power</p>
           </div>
         </div>
         <!-- Logout -->
-        <button onclick="adminLogout()" class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
+        <button onclick="adminLogout()" class="text-gray-600 hover:text-[#a40213] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
           <span class="material-symbols-outlined text-[20px]">logout</span>
           <span class="hidden md:inline">Logout</span>
         </button>
@@ -60,23 +60,23 @@
         <div class="h-px bg-gray-800 mt-2.5"></div>
       </div>
       
-      <a href="dashboard.html" class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-bold transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">dashboard</span> Dashboard Overview
+      <a href="dashboard.html" class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#a40213]/20 border-l-4 border-[#a40213] text-white font-bold transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">dashboard</span> Dashboard Overview
       </a>
       <a href="submissions.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">inbox</span> Submissions inbox
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">inbox</span> Submissions inbox
       </a>
       <a href="sales.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">payments</span> Sales Console
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">payments</span> Sales Console
       </a>
       <a href="projects.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">solar_power</span> Projects Manager
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">solar_power</span> Projects Manager
       </a>
       <a href="blogs.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">article</span> Insights & Blogs
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">article</span> Insights & Blogs
       </a>
       <a href="careers.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">work</span> Careers & Jobs
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">work</span> Careers & Jobs
       </a>
     </aside>
 
@@ -93,13 +93,13 @@
         <div class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Leads & Inquiries</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">mail</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">mail</span>
             </div>
           </div>
           <div class="mt-4">
             <h2 id="stat-leads" class="text-4xl font-bold text-gray-900">-</h2>
-            <a href="submissions.html?tab=leads" class="text-xs text-[#e30613] font-bold hover:underline block mt-2 flex items-center gap-1">
+            <a href="submissions.html?tab=leads" class="text-xs text-[#a40213] font-bold hover:underline block mt-2 flex items-center gap-1">
               View leads <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
@@ -109,13 +109,13 @@
         <div class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Distributors Signups</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">handshake</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">handshake</span>
             </div>
           </div>
           <div class="mt-4">
             <h2 id="stat-dist" class="text-4xl font-bold text-gray-900">-</h2>
-            <a href="submissions.html?tab=distributor" class="text-xs text-[#e30613] font-bold hover:underline block mt-2 flex items-center gap-1">
+            <a href="submissions.html?tab=distributor" class="text-xs text-[#a40213] font-bold hover:underline block mt-2 flex items-center gap-1">
               View distributors <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
@@ -125,13 +125,13 @@
         <div class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Open Tickets</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">report_problem</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">report_problem</span>
             </div>
           </div>
           <div class="mt-4">
             <h2 id="stat-tickets" class="text-4xl font-bold text-gray-900">-</h2>
-            <a href="submissions.html?tab=complaints" class="text-xs text-[#e30613] font-bold hover:underline block mt-2 flex items-center gap-1">
+            <a href="submissions.html?tab=complaints" class="text-xs text-[#a40213] font-bold hover:underline block mt-2 flex items-center gap-1">
               View tickets <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
@@ -141,13 +141,13 @@
         <div class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Active Projects</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">solar_power</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">solar_power</span>
             </div>
           </div>
           <div class="mt-4">
             <h2 id="stat-projects" class="text-4xl font-bold text-gray-900">-</h2>
-            <a href="projects.html" class="text-xs text-[#e30613] font-bold hover:underline block mt-2 flex items-center gap-1">
+            <a href="projects.html" class="text-xs text-[#a40213] font-bold hover:underline block mt-2 flex items-center gap-1">
               Manage projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
@@ -157,13 +157,13 @@
         <div class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Active Job Positions</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">work</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">work</span>
             </div>
           </div>
           <div class="mt-4">
             <h2 id="stat-jobs" class="text-4xl font-bold text-gray-900">-</h2>
-            <a href="careers.html" class="text-xs text-[#e30613] font-bold hover:underline block mt-2 flex items-center gap-1">
+            <a href="careers.html" class="text-xs text-[#a40213] font-bold hover:underline block mt-2 flex items-center gap-1">
               Manage jobs <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
           </div>
@@ -177,7 +177,7 @@
           <p class="text-sm text-gray-400 mt-1">Create new installations or write press releases directly.</p>
         </div>
         <div class="flex gap-3">
-          <a href="projects.html" class="bg-[#e30613] hover:bg-[#c00510] text-white px-5 py-2.5 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2">
+          <a href="projects.html" class="bg-[#a40213] hover:bg-[#82010e] text-white px-5 py-2.5 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2">
             <span class="material-symbols-outlined">add</span> New Project
           </a>
           <a href="blogs.html" class="px-5 py-2.5 text-sm font-semibold rounded-xl border border-white/30 text-white hover:bg-white/10 transition-all duration-200 flex items-center gap-2">

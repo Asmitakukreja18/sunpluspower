@@ -29,12 +29,12 @@
     }
 
     .btn-primary {
-      background-color: #e30613;
+      background-color: #a40213;
       color: white;
     }
 
     .btn-primary:hover {
-      background-color: #c00510;
+      background-color: #82010e;
     }
 
     .btn-secondary {
@@ -77,29 +77,29 @@
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-on-background antialiased flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] admin-body text-on-background antialiased flex flex-col min-h-screen">
 
   <!-- Header -->
   <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/50 py-3.5 shadow-md sticky top-0 z-50">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
-          <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png" />
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="../assets/images/logo.png" />
         </a>
         <span class="text-lg font-bold text-on-surface tracking-wide">Control Panel</span>
       </div>
       <div class="flex items-center gap-4">
         <!-- Notifications Bell -->
         <button
-          class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
+          class="relative p-2 rounded-xl hover:bg-[#a40213]/10 text-gray-600 hover:text-[#a40213] transition-all duration-200">
           <span class="material-symbols-outlined text-[24px]">notifications</span>
           <span
-            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#a40213] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
         </button>
         <!-- Admin Profile -->
         <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
           <div
-            class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">
+            class="w-9 h-9 rounded-full bg-gradient-to-br from-[#a40213] to-[#82010e] text-white flex items-center justify-center font-bold text-sm">
             SP
           </div>
           <div class="hidden md:block">
@@ -109,7 +109,7 @@
         </div>
         <!-- Logout -->
         <button onclick="adminLogout()"
-          class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
+          class="text-gray-600 hover:text-[#a40213] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
           <span class="material-symbols-outlined text-[20px]">logout</span>
           <span class="hidden md:inline">Logout</span>
         </button>
@@ -129,32 +129,32 @@
 
       <a href="dashboard.html"
         class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">dashboard</span>
         Dashboard Overview
       </a>
       <a href="submissions.html"
         class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">inbox</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">inbox</span>
         Submissions inbox
       </a>
       <a href="sales.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-semibold transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">payments</span>
+        class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#a40213]/20 border-l-4 border-[#a40213] text-white font-semibold transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">payments</span>
         Sales Console
       </a>
       <a href="projects.html"
         class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">solar_power</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">solar_power</span>
         Projects Manager
       </a>
       <a href="blogs.html"
         class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">article</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">article</span>
         Insights & Blogs
       </a>
       <a href="careers.html"
         class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">work</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">work</span>
         Careers & Jobs
       </a>
     </aside>
@@ -173,8 +173,8 @@
           class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Total Sales Leads</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">mail</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">mail</span>
             </div>
           </div>
           <div class="mt-4">
@@ -188,8 +188,8 @@
           class="bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <div class="flex justify-between items-start">
             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Distributor Proposals</span>
-            <div class="p-2.5 bg-[#e30613]/10 rounded-xl">
-              <span class="material-symbols-outlined text-[#e30613] text-2xl">handshake</span>
+            <div class="p-2.5 bg-[#a40213]/10 rounded-xl">
+              <span class="material-symbols-outlined text-[#a40213] text-2xl">handshake</span>
             </div>
           </div>
           <div class="mt-4">
@@ -220,7 +220,7 @@
         <!-- Interactive Category Tabs -->
         <div class="flex gap-3">
           <button onclick="switchSalesTab('leads')" id="sales-tab-leads"
-            class="sales-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#e30613] text-white shadow-md transition-all duration-200">
+            class="sales-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#a40213] text-white shadow-md transition-all duration-200">
             Sales Leads (<span id="count-badge-leads">0</span>)
           </button>
           <button onclick="switchSalesTab('distributor')" id="sales-tab-distributor"
@@ -234,7 +234,7 @@
           <span
             class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-[22px]">search</span>
           <input onkeyup="filterSalesData(this.value)"
-            class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white text-sm outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200"
+            class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl bg-white text-sm outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200"
             placeholder="Search by name, company, region..." />
         </div>
       </div>
@@ -376,7 +376,7 @@
           <td class="p-4"><div class="font-bold text-gray-800">${l.subject}</div><div class="text-gray-500 text-xs mt-1 max-w-sm overflow-hidden text-ellipsis">${l.message}</div></td>
           <td class="p-4"><span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">${l.source_page}</span></td>
           <td class="p-4">
-            <select onchange="updateSalesStatus('leads', ${l.id}, this.value)" class="status-select border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] ${l.status === 'closed' ? 'text-green-600 font-bold' : ''}">
+            <select onchange="updateSalesStatus('leads', ${l.id}, this.value)" class="status-select border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] ${l.status === 'closed' ? 'text-green-600 font-bold' : ''}">
               <option value="new" ${l.status === 'new' ? 'selected' : ''}>New</option>
               <option value="contacted" ${l.status === 'contacted' ? 'selected' : ''}>Contacted</option>
               <option value="closed" ${l.status === 'closed' ? 'selected' : ''}>Closed</option>
@@ -403,7 +403,7 @@
           <td class="p-4 text-center font-semibold text-gray-800">${d.years_in_business} Yrs</td>
           <td class="p-4"><div class="text-xs text-gray-500 max-w-sm max-h-16 overflow-y-auto">${d.message}</div></td>
           <td class="p-4">
-            <select onchange="updateSalesStatus('distributors', ${d.id}, this.value)" class="status-select border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] ${d.status === 'approved' ? 'text-green-600 font-bold' : ''}">
+            <select onchange="updateSalesStatus('distributors', ${d.id}, this.value)" class="status-select border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] ${d.status === 'approved' ? 'text-green-600 font-bold' : ''}">
               <option value="pending" ${d.status === 'pending' ? 'selected' : ''}>Pending</option>
               <option value="approved" ${d.status === 'approved' ? 'selected' : ''}>Approved</option>
               <option value="rejected" ${d.status === 'rejected' ? 'selected' : ''}>Rejected</option>
@@ -418,11 +418,11 @@
 
       // Update Tab Headers
       document.querySelectorAll(".sales-tab-btn").forEach(btn => {
-        btn.classList.remove("bg-[#e30613]", "text-white", "shadow-md");
+        btn.classList.remove("bg-[#a40213]", "text-white", "shadow-md");
         btn.classList.add("text-gray-600", "hover:text-gray-900", "hover:bg-gray-100");
       });
       const activeBtn = document.getElementById("sales-tab-" + tab);
-      activeBtn.classList.add("bg-[#e30613]", "text-white", "shadow-md");
+      activeBtn.classList.add("bg-[#a40213]", "text-white", "shadow-md");
       activeBtn.classList.remove("text-gray-600", "hover:text-gray-900", "hover:bg-gray-100");
 
       // Update Tables Display

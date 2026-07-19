@@ -34,6 +34,7 @@ module.exports = {
         "surface-container-lowest": "var(--color-surface-container-lowest, #ffffff)",
         "tertiary-container": "var(--color-tertiary-container, #697386)",
         "primary": "var(--color-primary, #d9302f)",
+        "primary-dark": "var(--color-primary-dark, #82010e)",
         "error": "var(--color-error, #ba1a1a)",
         "on-surface-variant": "var(--color-on-surface-variant, #5b403d)",
         "tertiary-fixed-dim": "var(--color-tertiary-fixed-dim, #bdc7dc)",
@@ -96,6 +97,8 @@ module.exports = {
         "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
         "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
         "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+        "headline-xl": ["56px", { "lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
         "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
         "label-technical": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }],
         "measurement-sm": ["10px", { "lineHeight": "12px", "fontWeight": "400" }]

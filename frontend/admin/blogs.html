@@ -16,33 +16,33 @@
   <script src="../assets/js/admin.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
 </head>
-<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-on-background antialiased flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] admin-body text-on-background antialiased flex flex-col min-h-screen">
 
   <!-- Header -->
   <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/60 py-3.5 shadow-md sticky top-0 z-50">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
-          <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png"/>
+          <img alt="SunPlus Power Logo" class="h-10 w-auto object-contain" src="../assets/images/logo.png"/>
         </a>
         <span class="text-lg font-bold text-gray-800 tracking-wide">Control Panel</span>
       </div>
       <div class="flex items-center gap-4">
         <!-- Notifications Bell -->
-        <button class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
+        <button class="relative p-2 rounded-xl hover:bg-[#a40213]/10 text-gray-600 hover:text-[#a40213] transition-all duration-200">
           <span class="material-symbols-outlined text-[24px]">notifications</span>
-          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#a40213] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
         </button>
         <!-- Admin Profile -->
         <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">SP</div>
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#a40213] to-[#82010e] text-white flex items-center justify-center font-bold text-sm">SP</div>
           <div class="hidden md:block">
             <p class="text-sm font-semibold text-gray-800">Admin</p>
             <p class="text-xs text-gray-500">SunPlus Power</p>
           </div>
         </div>
         <!-- Logout -->
-        <button onclick="adminLogout()" class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
+        <button onclick="adminLogout()" class="text-gray-600 hover:text-[#a40213] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
           <span class="material-symbols-outlined text-[20px]">logout</span>
           <span class="hidden md:inline">Logout</span>
         </button>
@@ -61,27 +61,27 @@
       </div>
 
       <a href="dashboard.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">dashboard</span>
         Dashboard Overview
       </a>
       <a href="submissions.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">inbox</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">inbox</span>
         Submissions inbox
       </a>
       <a href="sales.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">payments</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">payments</span>
         Sales Console
       </a>
       <a href="projects.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">solar_power</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">solar_power</span>
         Projects Manager
       </a>
-      <a href="blogs.html" class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-bold transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">article</span>
+      <a href="blogs.html" class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#a40213]/20 border-l-4 border-[#a40213] text-white font-bold transition-all duration-200">
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">article</span>
         Insights & Blogs
       </a>
       <a href="careers.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
-        <span class="material-symbols-outlined text-[22px]">work</span>
+        <span class="material-symbols-outlined text-[22px] w-6 shrink-0 flex justify-center">work</span>
         Careers & Jobs
       </a>
     </aside>
@@ -93,7 +93,7 @@
           <h1 class="text-2xl font-bold text-gray-900">Insights & Blogs Manager</h1>
           <p class="text-gray-500 mt-1">Compose newsletters, publish solar engineering announcements, and manage press releases.</p>
         </div>
-        <button onclick="toggleCRUDModal('blogs', true)" class="bg-[#e30613] hover:bg-[#c00510] text-white px-4 py-2.5 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-1.5">
+        <button onclick="toggleCRUDModal('blogs', true)" class="bg-[#a40213] hover:bg-[#82010e] text-white px-4 py-2.5 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-1.5">
           <span class="material-symbols-outlined">add</span> Write Article
         </button>
       </div>
@@ -137,38 +137,38 @@
 
         <div class="form-group">
           <label class="block text-sm font-semibold text-gray-700 mb-2">Article Title</label>
-          <input type="text" name="title" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="SunPlus Power Achieves 500MW Installed Capacity" required oninput="document.getElementById('blog-slug').value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')"/>
+          <input type="text" name="title" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200" placeholder="SunPlus Power Achieves 500MW Installed Capacity" required oninput="document.getElementById('blog-slug').value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')"/>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div class="form-group">
             <label class="block text-sm font-semibold text-gray-700 mb-2">Slug (Unique URL Path)</label>
-            <input type="text" id="blog-slug" name="slug" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="sunplus-power-achieves-500mw" required/>
+            <input type="text" id="blog-slug" name="slug" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200" placeholder="sunplus-power-achieves-500mw" required/>
           </div>
           <div class="form-group">
             <label class="block text-sm font-semibold text-gray-700 mb-2">Author Name</label>
-            <input type="text" name="author" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="Dr. R. K. Prasad (Chief Engineer)" required/>
+            <input type="text" name="author" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200" placeholder="Dr. R. K. Prasad (Chief Engineer)" required/>
           </div>
         </div>
 
         <div class="form-group">
           <label class="block text-sm font-semibold text-gray-700 mb-2">Cover Image URL</label>
-          <input type="url" name="cover_image_url" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" placeholder="https://images.unsplash.com/..." required/>
+          <input type="url" name="cover_image_url" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200" placeholder="https://images.unsplash.com/..." required/>
         </div>
 
         <div class="form-group">
           <label class="block text-sm font-semibold text-gray-700 mb-2">Brief Excerpt</label>
-          <textarea name="excerpt" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" rows="2" placeholder="Summary snippet displayed on media directory..." required></textarea>
+          <textarea name="excerpt" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200" rows="2" placeholder="Summary snippet displayed on media directory..." required></textarea>
         </div>
 
         <div class="form-group">
           <label class="block text-sm font-semibold text-gray-700 mb-2">Article Contents (HTML or narrative text)</label>
-          <textarea name="content" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e30613]/30 focus:border-[#e30613] transition-all duration-200" rows="8" placeholder="Complete article content..." required></textarea>
+          <textarea name="content" class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a40213]/30 focus:border-[#a40213] transition-all duration-200" rows="8" placeholder="Complete article content..." required></textarea>
         </div>
 
         <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
           <label class="flex items-center gap-3 cursor-pointer">
-            <input type="checkbox" name="published" class="w-5 h-5 text-[#e30613] border-gray-300 rounded focus:ring-[#e30613]"/>
+            <input type="checkbox" name="published" class="w-5 h-5 text-[#a40213] border-gray-300 rounded focus:ring-[#a40213]"/>
             <span class="text-sm font-semibold text-gray-900">Publish immediately (will be visible on dynamic blog feeds)</span>
           </label>
         </div>
@@ -176,7 +176,7 @@
         <!-- Modal Footer Actions -->
         <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 mt-6">
           <button type="button" onclick="toggleCRUDModal('blogs', false)" class="px-4 py-2.5 text-sm font-semibold rounded-xl text-gray-700 border border-gray-200 hover:bg-gray-100 transition-all duration-200">Cancel</button>
-          <button type="submit" class="bg-[#e30613] hover:bg-[#c00510] text-white px-4 py-2.5 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">Save Article</button>
+          <button type="submit" class="bg-[#a40213] hover:bg-[#82010e] text-white px-4 py-2.5 text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">Save Article</button>
         </div>
       </form>
     </div>
