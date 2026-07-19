@@ -7,8 +7,7 @@
   <title>Submissions Inbox | SunPlus Power Control Console</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
     rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
 
   <link rel="stylesheet" href="../assets/css/variables.css" />
@@ -19,70 +18,35 @@
   <script src="../assets/js/api.js" defer></script>
   <script src="../assets/js/admin.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
-
-  <style>
-    tbody tr {
-      transition: background-color 0.15s ease;
-    }
-
-    tbody tr:hover {
-      background-color: #f9fafb;
-    }
-
-    .btn-primary {
-      background-color: #e30613;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background-color: #c00510;
-    }
-
-    .btn-secondary {
-      background-color: white;
-      color: #374151;
-      border: 1px solid #d1d5db;
-    }
-
-    .btn-secondary:hover {
-      background-color: #f9fafb;
-    }
-  </style>
 </head>
 
 <body class="bg-gradient-to-br from-[#F4F6FA] via-[#E9EEF7] to-[#F4F6FA] text-on-background antialiased flex flex-col min-h-screen">
 
   <!-- Header -->
-  <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/50 py-3.5 shadow-md sticky top-0 z-50">
+  <header class="w-full bg-white/70 backdrop-blur-2xl border-b border-white/60 py-3.5 shadow-md sticky top-0 z-50">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3">
           <img alt="SunPlus Power Logo" class="h-9 w-auto object-contain" src="../assets/images/logo.png" />
         </a>
-        <span class="text-lg font-bold text-on-surface tracking-wide">Control Panel</span>
+        <span class="text-lg font-bold text-gray-800 tracking-wide">Control Panel</span>
       </div>
       <div class="flex items-center gap-4">
         <!-- Notifications Bell -->
-        <button
-          class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
+        <button class="relative p-2 rounded-xl hover:bg-[#e30613]/10 text-gray-600 hover:text-[#e30613] transition-all duration-200">
           <span class="material-symbols-outlined text-[24px]">notifications</span>
-          <span
-            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#e30613] text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
         </button>
         <!-- Admin Profile -->
         <div class="flex items-center gap-3 pl-3 border-l border-gray-200">
-          <div
-            class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">
-            SP
-          </div>
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#e30613] to-[#c00510] text-white flex items-center justify-center font-bold text-sm">SP</div>
           <div class="hidden md:block">
             <p class="text-sm font-semibold text-gray-800">Admin</p>
             <p class="text-xs text-gray-500">SunPlus Power</p>
           </div>
         </div>
         <!-- Logout -->
-        <button onclick="adminLogout()"
-          class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
+        <button onclick="adminLogout()" class="text-gray-600 hover:text-[#e30613] text-sm font-medium flex items-center gap-1.5 border border-gray-200 px-3.5 py-2 rounded-xl hover:bg-red-50 hover:border-red-200 transition-all duration-200">
           <span class="material-symbols-outlined text-[20px]">logout</span>
           <span class="hidden md:inline">Logout</span>
         </button>
@@ -91,74 +55,63 @@
   </header>
 
   <!-- Sidebar + Main Grid -->
-  <div
-    class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-6 gap-6">
+  <div class="flex-grow flex flex-col md:flex-row max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-6 gap-6">
     <!-- Sidebar Navigation -->
     <aside class="w-full md:w-64 bg-[#111111] rounded-2xl p-5 space-y-1.5 shrink-0 shadow-xl">
       <div class="p-3 mb-4">
-        <h4 class="font-bold text-xs uppercase tracking-widest text-gray-500">Console Directory</h4>
+        <h4 class="font-bold text-xs uppercase tracking-wider text-gray-500">Console Directory</h4>
+        <p class="text-xs text-gray-400 mt-1">System Operator Active</p>
         <div class="h-px bg-gray-800 mt-2.5"></div>
       </div>
 
-      <a href="dashboard.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+      <a href="dashboard.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
         <span class="material-symbols-outlined text-[22px]">dashboard</span>
         Dashboard Overview
       </a>
-      <a href="submissions.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-semibold transition-all duration-200">
+      <a href="submissions.html" class="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#e30613]/20 border-l-4 border-[#e30613] text-white font-bold transition-all duration-200">
         <span class="material-symbols-outlined text-[22px]">inbox</span>
         Submissions inbox
       </a>
-      <a href="sales.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+      <a href="sales.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
         <span class="material-symbols-outlined text-[22px]">payments</span>
         Sales Console
       </a>
-      <a href="projects.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+      <a href="projects.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
         <span class="material-symbols-outlined text-[22px]">solar_power</span>
         Projects Manager
       </a>
-      <a href="blogs.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+      <a href="blogs.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
         <span class="material-symbols-outlined text-[22px]">article</span>
         Insights & Blogs
       </a>
-      <a href="careers.html"
-        class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+      <a href="careers.html" class="flex items-center gap-3.5 p-3.5 rounded-xl border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
         <span class="material-symbols-outlined text-[22px]">work</span>
         Careers & Jobs
       </a>
     </aside>
 
     <!-- Main View Section -->
-    <main id="submissions-view" class="flex-grow space-y-5">
+    <main id="submissions-view" class="flex-grow space-y-5 overflow-hidden">
       <div>
         <h1 class="text-2xl font-bold text-gray-900">Submissions Inbox</h1>
         <p class="text-gray-500 mt-1">Review contact leads, distributor applications, warranties, support tickets, and HR resumes.</p>
       </div>
 
       <!-- Tabs Suite Nav -->
-      <div class="flex gap-3 flex-wrap pb-2">
-        <button onclick="switchSubmissionsTab('leads')" id="tab-leads"
-          class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#e30613] text-white shadow-md transition-all duration-200">
+      <div class="flex gap-3 pb-2 overflow-x-auto">
+        <button onclick="switchSubmissionsTab('leads')" id="tab-leads" class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#e30613] text-white shadow-md transition-all duration-200">
           General Leads
         </button>
-        <button onclick="switchSubmissionsTab('distributor')" id="tab-distributor"
-          class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
+        <button onclick="switchSubmissionsTab('distributor')" id="tab-distributor" class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
           Distributors
         </button>
-        <button onclick="switchSubmissionsTab('warranty')" id="tab-warranty"
-          class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
+        <button onclick="switchSubmissionsTab('warranty')" id="tab-warranty" class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
           Warranty Logs
         </button>
-        <button onclick="switchSubmissionsTab('complaints')" id="tab-complaints"
-          class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
+        <button onclick="switchSubmissionsTab('complaints')" id="tab-complaints" class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
           Complaints & Tickets
         </button>
-        <button onclick="switchSubmissionsTab('job-applications')" id="tab-job-applications"
-          class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
+        <button onclick="switchSubmissionsTab('job-applications')" id="tab-job-applications" class="sub-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200">
           Job Applications
         </button>
       </div>
@@ -166,161 +119,96 @@
       <!-- Tab Content Cards -->
 
       <!-- 1. Leads Table -->
-      <div id="leads-table-container"
-        class="submission-table-container overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
+      <div id="leads-table-container" class="submission-table-container overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
         <table class="w-full text-left border-collapse min-w-[700px]">
           <thead class="bg-gray-50/80 sticky top-0 z-10">
             <tr>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Name
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Contact
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Company
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Message
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Source Page
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Status Action
-              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Name</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Contact</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Company</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Message</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Source Page</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Status Action</th>
             </tr>
           </thead>
           <tbody id="leads-table-body">
-            <!-- Dynamic rows -->
+            <!-- Dynamic rows loaded via admin.js -->
           </tbody>
         </table>
       </div>
 
       <!-- 3. Distributors Table -->
-      <div id="distributor-table-container"
-        class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
+      <div id="distributor-table-container" class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead class="bg-gray-50/80 sticky top-0 z-10">
             <tr>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Company
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Contact Details
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Territory
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Experience
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Proposal
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Status Action
-              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Company</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Contact Details</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Territory</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200 text-center">Experience</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Proposal</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Status Action</th>
             </tr>
           </thead>
           <tbody id="distributor-table-body">
-            <!-- Dynamic rows -->
+            <!-- Dynamic rows loaded via admin.js -->
           </tbody>
         </table>
       </div>
 
       <!-- 4. Warranty Table -->
-      <div id="warranty-table-container"
-        class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
+      <div id="warranty-table-container" class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
         <table class="w-full text-left border-collapse min-w-[700px]">
           <thead class="bg-gray-50/80 sticky top-0 z-10">
             <tr>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Customer
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Contact Details
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Product Category
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Serial / Project ID
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Installation Date
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Authorized Installer
-              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Customer</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Contact Details</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Product Category</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Serial / Project ID</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Installation Date</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Authorized Installer</th>
             </tr>
           </thead>
           <tbody id="warranty-table-body">
-            <!-- Dynamic rows -->
+            <!-- Dynamic rows loaded via admin.js -->
           </tbody>
         </table>
       </div>
 
       <!-- 5. Complaints Table -->
-      <div id="complaints-table-container"
-        class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
+      <div id="complaints-table-container" class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead class="bg-gray-50/80 sticky top-0 z-10">
             <tr>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Customer
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Contact Details
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Reference ID
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Category
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Description
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Photo Link
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Status Action
-              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Customer</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Contact Details</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Reference ID</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Category</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Description</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Photo Link</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Status Action</th>
             </tr>
           </thead>
           <tbody id="complaints-table-body">
-            <!-- Dynamic rows -->
+            <!-- Dynamic rows loaded via admin.js -->
           </tbody>
         </table>
       </div>
 
       <!-- 6. Job Applications Table -->
-      <div id="job-applications-table-container"
-        class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
+      <div id="job-applications-table-container" class="submission-table-container hidden overflow-x-auto bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl shadow-lg">
         <table class="w-full text-left border-collapse min-w-[800px]">
           <thead class="bg-gray-50/80 sticky top-0 z-10">
             <tr>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Candidate
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Contact Details
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Target Job
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Resume File
-              </th>
-              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">
-                Pitch / Cover Letter
-              </th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Candidate</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Contact Details</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Target Job</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Resume File</th>
+              <th class="p-4 text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-200">Pitch / Cover Letter</th>
             </tr>
           </thead>
           <tbody id="job-applications-table-body">
-            <!-- Dynamic rows -->
+            <!-- Dynamic rows loaded via admin.js -->
           </tbody>
         </table>
       </div>
@@ -329,39 +217,12 @@
 
   <!-- Footer -->
   <footer class="bg-white border-t border-gray-200 py-4 mt-auto">
-    <div
-      class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div class="text-xs text-gray-400">&copy; 2026 SunPlus Power. Control Panel v1.0</div>
+    <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-xs text-gray-400">© 2026 SunPlus Power Control Panel v1.0</div>
       <div class="text-xs text-gray-400">System Security: Active SSL / JWT</div>
     </div>
   </footer>
 
-  <script>
-    // Simple tab switch for submissions
-    function switchSubmissionsTab(tab) {
-      // Hide all containers
-      document.querySelectorAll('.submission-table-container').forEach(container => {
-        container.classList.add('hidden');
-      });
-      // Update tab buttons
-      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-        btn.classList.remove('bg-[#e30613]', 'text-white', 'shadow-md');
-        btn.classList.add('text-gray-600', 'hover:text-gray-900', 'hover:bg-gray-100');
-      });
-      // Show selected tab
-      document.getElementById(tab + '-table-container').classList.remove('hidden');
-      const activeBtn = document.getElementById('tab-' + tab);
-      activeBtn.classList.add('bg-[#e30613]', 'text-white', 'shadow-md');
-      activeBtn.classList.remove('text-gray-600', 'hover:text-gray-900', 'hover:bg-gray-100');
-    }
-
-    function adminLogout() {
-      if (typeof api !== "undefined") {
-        api.clearToken();
-      }
-      window.location.href = "login.html";
-    }
-  </script>
 </body>
 
 </html>
