@@ -76,39 +76,19 @@ class ApiClient {
 
     this.showLoader();
 
+    // Fetch is isolated in its own try/catch so only genuine network failures
+    // (backend unreachable) fall back to the demo adapter below. A response
+    // that comes back from a live backend - even a 4xx/5xx - is a real answer
+    // and must never be silently relabeled as a successful demo submission.
+    let response;
     try {
-      const response = await fetch(url, config);
-
-      // Handle unauthorized (expired JWT)
-      if (response.status === 401) {
-        // Only redirect to login if we are inside the admin dashboard
-        if (window.location.pathname.includes("/admin/") && !window.location.pathname.includes("login.html")) {
-          this.clearToken();
-          window.location.href = "/admin/login.html?expired=true";
-          return;
-        }
-      }
-
-      // Check if response is No Content (244 DELETE success)
-      if (response.status === 204) {
-        this.hideLoader();
-        return { success: true };
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || `API Request failed with status ${response.status}`);
-      }
-
-      this.hideLoader();
-      return data;
-    } catch (error) {
+      response = await fetch(url, config);
+    } catch (networkError) {
       this.hideLoader();
 
       // Only allow local demo fallback during local development.
       if (config.method === "POST" && IS_LOCAL_DEMO) {
-        console.warn(`Backend connection failed for ${endpoint}. Activating frontend demo submission adapter...`, error);
+        console.warn(`Backend unreachable for ${endpoint}. Activating frontend demo submission adapter...`, networkError);
 
         // Simulate network latency
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -144,9 +124,35 @@ class ApiClient {
         };
       }
 
-      console.error(`API Error on ${endpoint}:`, error);
-      throw error;
+      console.error(`API Error on ${endpoint}:`, networkError);
+      throw networkError;
     }
+
+    // Handle unauthorized (expired JWT)
+    if (response.status === 401) {
+      // Only redirect to login if we are inside the admin dashboard
+      if (window.location.pathname.includes("/admin/") && !window.location.pathname.includes("login.html")) {
+        this.clearToken();
+        window.location.href = "/admin/login.html?expired=true";
+        return;
+      }
+    }
+
+    // Check if response is No Content (204 DELETE success)
+    if (response.status === 204) {
+      this.hideLoader();
+      return { success: true };
+    }
+
+    const data = await response.json();
+    this.hideLoader();
+
+    if (!response.ok) {
+      console.error(`API Error on ${endpoint}:`, data);
+      throw new Error(data.message || `API Request failed with status ${response.status}`);
+    }
+
+    return data;
   }
 
   // HTTP GET Wrapper
