@@ -48,7 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Bind Job Application forms (Multipart form-data)
   setupMultipartFormSubmit("job-apply-form", null); // endpoint is set dynamically by action
-  setupMultipartFormSubmit("general-apply-form", "/careers/apply-general");
+  setupMultipartFormSubmit("general-apply-form", "/careers/apply-general", (formData) => {
+    // Backend has no dedicated "role" field, so fold the selected role into the cover letter
+    const role = formData.get("role");
+    formData.delete("role");
+    if (role && role !== "Select a position...") {
+      const existing = formData.get("cover_letter") || "";
+      formData.set("cover_letter", `Applied for: ${role}\n\n${existing}`);
+    }
+  });
 });
 
 /**
@@ -103,8 +111,9 @@ function setupFormSubmit(formId, endpoint, transformFn) {
  * Multipart/Form-data Submission Handler helper for file uploads (Complaints and Careers)
  * @param {string} formId - HTML Form element id
  * @param {string} defaultEndpoint - Fallback endpoint URL
+ * @param {function} [transformFn] - Optional hook to mutate the FormData before sending
  */
-function setupMultipartFormSubmit(formId, defaultEndpoint) {
+function setupMultipartFormSubmit(formId, defaultEndpoint, transformFn) {
   const form = document.getElementById(formId);
   if (!form) return;
 
@@ -118,11 +127,12 @@ function setupMultipartFormSubmit(formId, defaultEndpoint) {
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn.innerHTML;
-    
+
     setButtonLoading(submitBtn, true);
 
     const endpoint = defaultEndpoint || form.getAttribute("action");
     const formData = new FormData(form);
+    if (transformFn) transformFn(formData);
 
     try {
       const result = await api.post(endpoint, formData, true);

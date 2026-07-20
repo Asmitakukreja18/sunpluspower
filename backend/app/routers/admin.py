@@ -110,6 +110,15 @@ def update_complaint_status(id: int, payload: ComplaintStatusUpdate, db: Session
 def get_admin_job_applications(db: Session = Depends(get_db)):
     return db.query(JobApplication).order_by(JobApplication.created_at.desc()).all()
 
+@router.delete("/job-applications/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_job_application(id: int, db: Session = Depends(get_db)):
+    application = db.query(JobApplication).filter(JobApplication.id == id).first()
+    if not application:
+        raise HTTPException(status_code=404, detail="Application not found")
+    db.delete(application)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
 
 # --- CRUD operations for Projects ---
 

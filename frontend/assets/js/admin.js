@@ -101,11 +101,12 @@ function switchSubmissionsTab(tabName) {
 
   // Toggle tab buttons styles
   document.querySelectorAll(".sub-tab-btn").forEach(btn => {
-    btn.classList.remove("border-primary", "text-on-surface");
-    btn.classList.add("border-transparent", "text-secondary");
+    btn.classList.remove("bg-[#a40213]", "text-white", "shadow-md");
+    btn.classList.add("text-gray-600", "hover:text-gray-900", "hover:bg-gray-100");
   });
-  document.getElementById(`tab-${tabName}`).classList.add("border-primary", "text-on-surface");
-  document.getElementById(`tab-${tabName}`).classList.remove("border-transparent", "text-secondary");
+  const activeBtn = document.getElementById(`tab-${tabName}`);
+  activeBtn.classList.add("bg-[#a40213]", "text-white", "shadow-md");
+  activeBtn.classList.remove("text-gray-600", "hover:text-gray-900", "hover:bg-gray-100");
 
   // Toggle table views container
   document.querySelectorAll(".submission-table-container").forEach(table => {
@@ -254,9 +255,28 @@ function renderJobAppsTable(apps) {
         </a>
       </td>
       <td class="p-4"><small class="text-secondary">${a.cover_letter || 'No Cover Letter'}</small></td>
+      <td class="p-4 text-center">
+        <button onclick="deleteJobApplication(${a.id})" class="btn-primary px-3 py-1.5 text-xs font-bold inline-flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+        </button>
+      </td>
     </tr>
   `).join("");
 }
+
+async function deleteJobApplication(id) {
+  if (!confirm("Are you sure you want to delete this application?")) return;
+
+  try {
+    await api.delete(`/admin/job-applications/${id}`);
+    window.showToast("Application deleted successfully.", "success");
+    const jobApps = await api.get("/admin/job-applications");
+    renderJobAppsTable(jobApps);
+  } catch (err) {
+    window.showToast("Failed to delete application.", "error");
+  }
+}
+window.deleteJobApplication = deleteJobApplication;
 
 async function updateSubmissionStatus(entity, id, newStatus) {
   try {

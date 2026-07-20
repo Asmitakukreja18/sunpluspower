@@ -73,7 +73,7 @@
                             class="material-symbols-outlined text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
                     </a>
                     <div
-                        class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                         <div class="py-1" role="menu">
                             <a href="connect.html?tab=distributor"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors"
@@ -153,7 +153,7 @@
                         that India's industrial growth is powered by clean, permanent energy solutions.
                     </p>
                     <div class="aspect-video w-full rounded-lg bg-cover bg-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500"
-                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGbonbJT_qtqq20vO5CzpSxLjDxdhCV6hzWY6flR6Jyt2azJHks53_6Zd-PI3Yx8sQw2wSlgcClkTqvrgqUjlqnD1lhfaPItC29tKjdoqUPdNEvonu3rX5FpqOd2garAMEtOhUijS97M4McjB5WElK7vKvrVBFXPp-RHxAYkjqmSWWDzDOEYzUe9TKWEMPkTNeGRrBkDKVRHjZiEMZHUcHpr6ECJMAj4Fa-wXjjsETnib8ObWHvQ-M3Q')">
+                        style="background-image: url('assets/images/blog/solar-park-inauguration.webp')">
                     </div>
                 </div>
                 <!-- Engineering Excellence Card -->
@@ -168,7 +168,7 @@
                         cutting-edge data analytics to optimize performance across high-voltage infrastructure.
                     </p>
                     <div class="aspect-video w-full rounded-lg bg-cover bg-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-500"
-                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB6B-6M2qwixPsrP88MVeciYybIye8UdMuRxkTfkdRBz_fM0_QTnwOkqvM0y1vLIHDMkC7_bXEoUikL7RyyP44Oq7Y18lN0WGRzHkZ-PDcNWmaJSxeaDtD70K_hjWPv5eqtxnHQVY1Lp8DbZsFg4xO5TozGSO6setm62OSpryqS7Ww3Tzsy3_mBNwyNqkkv7EXKSoe0r4eLTDsV0E9tancW3ulkXmk6fjZRDRlg250rjwDGSzIbN6Xkhg')">
+                        style="background-image: url('assets/images/blog/solar-dealer-showroom.avif')">
                     </div>
                 </div>
             </div>
@@ -227,7 +227,7 @@
                             <span class="material-symbols-outlined text-lg">location_on</span>
                             <span class="text-label-md">Lucknow, India</span>
                         </div>
-                        <button
+                        <button type="button" onclick="applyForRole('Supervisor')"
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
@@ -248,7 +248,7 @@
                             <span class="material-symbols-outlined text-lg">location_on</span>
                             <span class="text-label-md">Uttar Pradesh, India</span>
                         </div>
-                        <button
+                        <button type="button" onclick="applyForRole('Assistant Sales Manager (ASM)')"
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
@@ -270,7 +270,7 @@
                             <span class="material-symbols-outlined text-lg">location_on</span>
                             <span class="text-label-md">Pan India</span>
                         </div>
-                        <button
+                        <button type="button" onclick="applyForRole('Business Development Manager (BDM)')"
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
@@ -291,7 +291,7 @@
                             <span class="material-symbols-outlined text-lg">location_on</span>
                             <span class="text-label-md">Lucknow, India</span>
                         </div>
-                        <button
+                        <button type="button" onclick="applyForRole('Sales & Marketing Executive')"
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
@@ -312,7 +312,7 @@
                             <span class="material-symbols-outlined text-lg">location_on</span>
                             <span class="text-label-md">Lucknow, India</span>
                         </div>
-                        <button
+                        <button type="button" onclick="applyForRole('Quality Head')"
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
@@ -333,7 +333,7 @@
                             <span class="material-symbols-outlined text-lg">location_on</span>
                             <span class="text-label-md">Uttar Pradesh, India</span>
                         </div>
-                        <button
+                        <button type="button" onclick="applyForRole('Electrician Head')"
                             class="w-full py-3.5 bg-primary text-white font-label-md rounded-lg hover:bg-primary/90 transition-all shadow-md">
                             Apply Now
                         </button>
@@ -384,42 +384,49 @@
                     </div>
                 </div>
                 <div class="bg-white p-8 md:p-12 rounded-xl border border-surface-container-highest shadow-sm">
-                    <form class="space-y-8">
+                    <form id="general-apply-form" enctype="multipart/form-data" class="space-y-8">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="flex flex-col gap-2">
                                 <label class="text-label-sm font-semibold text-on-surface-variant">FULL NAME</label>
-                                <input
+                                <input name="name" required
                                     class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all"
                                     placeholder="Enter your full name" type="text" />
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label class="text-label-sm font-semibold text-on-surface-variant">EMAIL ADDRESS</label>
-                                <input
+                                <input name="email" required
                                     class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all"
                                     placeholder="email@example.com" type="email" />
                             </div>
                         </div>
                         <div class="flex flex-col gap-2">
+                            <label class="text-label-sm font-semibold text-on-surface-variant">PHONE NUMBER</label>
+                            <input name="phone" required
+                                class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all"
+                                placeholder="Enter your phone number" type="tel" />
+                        </div>
+                        <div class="flex flex-col gap-2">
                             <label class="text-label-sm font-semibold text-on-surface-variant">DESIRED ROLE</label>
-                            <select
+                            <select id="desired-role" name="role"
                                 class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all">
                                 <option>Select a position...</option>
-                                <option>Senior PV Design Engineer</option>
-                                <option>Infrastructure Project Lead</option>
-                                <option>B2B Sales Director</option>
+                                <option>Supervisor</option>
+                                <option>Assistant Sales Manager (ASM)</option>
+                                <option>Business Development Manager (BDM)</option>
+                                <option>Sales & Marketing Executive</option>
+                                <option>Quality Head</option>
+                                <option>Electrician Head</option>
                                 <option>General Application</option>
                             </select>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <label class="text-label-sm font-semibold text-on-surface-variant">RESUME / PORTFOLIO
-                                URL</label>
-                            <input
-                                class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all"
-                                placeholder="Link to LinkedIn, Portfolio, or Cloud Drive" type="url" />
+                            <label class="text-label-sm font-semibold text-on-surface-variant">RESUME (PDF/DOC)</label>
+                            <input name="resume" required type="file" accept=".pdf,.doc,.docx"
+                                class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all" />
                         </div>
                         <div class="flex flex-col gap-2">
                             <label class="text-label-sm font-semibold text-on-surface-variant">CORE EXPERTISE</label>
-                            <textarea
+                            <textarea name="cover_letter"
                                 class="bg-surface-container-lowest border-surface-container-highest rounded-lg p-3.5 focus:ring-primary focus:border-primary transition-all"
                                 placeholder="Describe your technical background and experience..." rows="4"></textarea>
                         </div>
@@ -429,6 +436,7 @@
                             Submit Application
                             <span class="material-symbols-outlined text-lg">send</span>
                         </button>
+                        <div id="general-apply-form-feedback"></div>
                     </form>
                 </div>
             </div>
@@ -518,24 +526,19 @@
         </div>
     </footer>
     <script>
-        // Form submission animation
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = form.querySelector('button');
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">sync</span> Submitting...';
-                btn.disabled = true;
-                btn.classList.add('opacity-80', 'cursor-not-allowed');
-
-                setTimeout(() => {
-                    btn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span> Application Received';
-                    btn.classList.remove('bg-primary');
-                    btn.classList.add('bg-green-600');
-                    form.reset();
-                }, 1500);
-            });
+        // Apply Now buttons: jump to the application form and pre-select the role
+        function applyForRole(title) {
+            const select = document.getElementById('desired-role');
+            if (select) {
+                const match = Array.from(select.options).find(o => o.value === title);
+                if (match) select.value = title;
+            }
+            const applySection = document.getElementById('apply');
+            if (applySection) {
+                applySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            const nameInput = document.querySelector('#apply input[type="text"]');
+            if (nameInput) setTimeout(() => nameInput.focus(), 400);
         }
 
         // Simple scroll reveal for navbar
