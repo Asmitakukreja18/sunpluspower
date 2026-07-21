@@ -227,7 +227,7 @@ function renderComplaintsTable(complaints) {
       <td class="p-4"><span class="chip">${c.category}</span></td>
       <td class="p-4"><small class="text-secondary">${c.description}</small></td>
       <td class="p-4">
-        ${c.photo_url ? `<a href="${c.photo_url}" target="_blank" class="text-primary font-bold hover:underline">View Photo</a>` : '<span class="text-secondary">None</span>'}
+        ${c.photo_url ? `<a href="${resolveUploadUrl(c.photo_url)}" target="_blank" class="text-primary font-bold hover:underline">View Photo</a>` : '<span class="text-secondary">None</span>'}
       </td>
       <td class="p-4">
         <select onchange="updateSubmissionStatus('complaints', ${c.id}, this.value)" class="form-select text-sm p-1.5 border border-outline rounded bg-white">
@@ -249,7 +249,7 @@ function renderJobAppsTable(apps) {
       <td class="p-4">${a.email}<br><small class="text-secondary">${a.phone}</small></td>
       <td class="p-4">ID Reference: ${a.career_id || 'General Application'}</td>
       <td class="p-4">
-        <a href="${a.resume_url}" target="_blank" class="btn-primary p-1.5 text-xs rounded hover:opacity-90 inline-flex items-center gap-1">
+        <a href="${resolveUploadUrl(a.resume_url)}" target="_blank" class="btn-primary p-1.5 text-xs rounded hover:opacity-90 inline-flex items-center gap-1">
           <span class="material-symbols-outlined text-[14px]">download</span>
           Open Resume
         </a>

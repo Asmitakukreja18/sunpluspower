@@ -4,6 +4,16 @@
 
 const IS_LOCAL_DEMO = ["localhost", "127.0.0.1"].includes(window.location.hostname) || window.location.protocol === "file:";
 const API_BASE = IS_LOCAL_DEMO ? "http://localhost:8000/api" : "https://api.sunpluspower.in/api";
+const API_ORIGIN = API_BASE.replace(/\/api$/, "");
+
+// Uploaded files (resumes, complaint photos) are stored with a relative
+// "/uploads/..." path, which only resolves on the backend's own origin -
+// not the frontend domain the admin console is served from.
+function resolveUploadUrl(path) {
+  if (!path) return path;
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${API_ORIGIN}${path}`;
+}
 
 class ApiClient {
   constructor() {
