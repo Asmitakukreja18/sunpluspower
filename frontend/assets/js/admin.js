@@ -160,6 +160,11 @@ function renderLeadsTable(leads) {
           <option value="closed" ${l.status === 'closed' ? 'selected' : ''}>Closed</option>
         </select>
       </td>
+      <td class="p-4 text-center">
+        <button onclick="deleteSubmission('leads', ${l.id})" class="btn-primary px-3 py-1.5 text-xs font-bold inline-flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+        </button>
+      </td>
     </tr>
   `).join("");
 }
@@ -197,6 +202,11 @@ function renderDistributorsTable(dists) {
           <option value="rejected" ${d.status === 'rejected' ? 'selected' : ''}>Rejected</option>
         </select>
       </td>
+      <td class="p-4 text-center">
+        <button onclick="deleteSubmission('distributor-applications', ${d.id})" class="btn-primary px-3 py-1.5 text-xs font-bold inline-flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+        </button>
+      </td>
     </tr>
   `).join("");
 }
@@ -212,6 +222,11 @@ function renderWarrantiesTable(w) {
       <td class="p-4 font-mono font-semibold">${x.serial_or_project_id}</td>
       <td class="p-4">${x.installation_date}</td>
       <td class="p-4 text-secondary">${x.installer_name}</td>
+      <td class="p-4 text-center">
+        <button onclick="deleteSubmission('warranty-registrations', ${x.id})" class="btn-primary px-3 py-1.5 text-xs font-bold inline-flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+        </button>
+      </td>
     </tr>
   `).join("");
 }
@@ -235,6 +250,11 @@ function renderComplaintsTable(complaints) {
           <option value="in_progress" ${c.status === 'in_progress' ? 'selected' : ''}>In Progress</option>
           <option value="resolved" ${c.status === 'resolved' ? 'selected' : ''}>Resolved</option>
         </select>
+      </td>
+      <td class="p-4 text-center">
+        <button onclick="deleteSubmission('complaints', ${c.id})" class="btn-primary px-3 py-1.5 text-xs font-bold inline-flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+        </button>
       </td>
     </tr>
   `).join("");
@@ -277,6 +297,19 @@ async function deleteJobApplication(id) {
   }
 }
 window.deleteJobApplication = deleteJobApplication;
+
+async function deleteSubmission(entity, id) {
+  if (!confirm("Are you sure you want to delete this entry?")) return;
+
+  try {
+    await api.delete(`/admin/${entity}/${id}`);
+    window.showToast("Entry deleted successfully.", "success");
+    await loadSubmissionsData();
+  } catch (err) {
+    window.showToast("Failed to delete entry.", "error");
+  }
+}
+window.deleteSubmission = deleteSubmission;
 
 async function updateSubmissionStatus(entity, id, newStatus) {
   try {

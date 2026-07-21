@@ -74,6 +74,15 @@ def update_lead_status(id: int, payload: LeadStatusUpdate, db: Session = Depends
     db.refresh(lead)
     return lead
 
+@router.delete("/leads/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_lead(id: int, db: Session = Depends(get_db)):
+    lead = db.query(Lead).filter(Lead.id == id).first()
+    if not lead:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    db.delete(lead)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
 @router.get("/distributor-applications", response_model=List[DistributorApplicationOut])
 def get_admin_distributors(db: Session = Depends(get_db)):
     return db.query(DistributorApplication).order_by(DistributorApplication.created_at.desc()).all()
@@ -88,9 +97,27 @@ def update_distributor_status(id: int, payload: DistributorApplicationStatusUpda
     db.refresh(app)
     return app
 
+@router.delete("/distributor-applications/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_distributor_application(id: int, db: Session = Depends(get_db)):
+    app = db.query(DistributorApplication).filter(DistributorApplication.id == id).first()
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    db.delete(app)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
 @router.get("/warranty-registrations", response_model=List[WarrantyRegistrationOut])
 def get_admin_warranties(db: Session = Depends(get_db)):
     return db.query(WarrantyRegistration).order_by(WarrantyRegistration.created_at.desc()).all()
+
+@router.delete("/warranty-registrations/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_warranty_registration(id: int, db: Session = Depends(get_db)):
+    warranty = db.query(WarrantyRegistration).filter(WarrantyRegistration.id == id).first()
+    if not warranty:
+        raise HTTPException(status_code=404, detail="Warranty registration not found")
+    db.delete(warranty)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 @router.get("/complaints", response_model=List[ComplaintOut])
 def get_admin_complaints(db: Session = Depends(get_db)):
@@ -105,6 +132,15 @@ def update_complaint_status(id: int, payload: ComplaintStatusUpdate, db: Session
     db.commit()
     db.refresh(complaint)
     return complaint
+
+@router.delete("/complaints/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_complaint(id: int, db: Session = Depends(get_db)):
+    complaint = db.query(Complaint).filter(Complaint.id == id).first()
+    if not complaint:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+    db.delete(complaint)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 @router.get("/job-applications", response_model=List[JobApplicationOut])
 def get_admin_job_applications(db: Session = Depends(get_db)):
