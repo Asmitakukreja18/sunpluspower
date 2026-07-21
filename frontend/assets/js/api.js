@@ -3,7 +3,7 @@
  */
 
 const IS_LOCAL_DEMO = ["localhost", "127.0.0.1"].includes(window.location.hostname) || window.location.protocol === "file:";
-const API_BASE = IS_LOCAL_DEMO ? "http://localhost:8000/api" : "http://190.92.174.190:8000/api";
+const API_BASE = IS_LOCAL_DEMO ? "http://localhost:8000/api" : "https://api.sunpluspower.in/api";
 
 class ApiClient {
   constructor() {
