@@ -47,6 +47,10 @@
   <link rel="stylesheet" href="assets/css/components.css?v=5" />
   <link rel="stylesheet" href="assets/css/tailwind-compiled.css?v=5" />
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <script src="assets/js/api.js?v=5" defer></script>
   <script src="assets/js/main.js?v=5" defer></script>
@@ -155,43 +159,45 @@
         <label class="block text-label-md text-on-surface-variant mb-2">Search Projects</label>
         <div class="relative">
           <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-          <input
+          <input id="projectSearch" oninput="filterProjects()"
             class="w-full pl-10 pr-4 py-2.5 rounded border border-surface-container-highest bg-white focus:ring-1 focus:ring-inverse-surface focus:border-inverse-surface outline-none transition-all"
             placeholder="Search by name or location..." type="text" />
         </div>
       </div>
       <div class="w-full md:w-auto">
         <label class="block text-label-md text-on-surface-variant mb-2">Capacity</label>
-        <select
+        <select id="projectCapacityFilter" onchange="filterProjects()"
           class="w-full md:w-48 px-4 py-2.5 rounded border border-surface-container-highest bg-white focus:ring-1 focus:ring-inverse-surface outline-none appearance-none cursor-pointer">
-          <option>All Capacities</option>
-          <option>Utility (&gt;100 MW)</option>
-          <option>Commercial (10-100 MW)</option>
-          <option>Industrial (&lt;10 MW)</option>
+          <option value="all">All Capacities</option>
+          <option value="utility">Utility (&gt;100 MW)</option>
+          <option value="commercial">Commercial (10-100 MW)</option>
+          <option value="industrial">Industrial (&lt;10 MW)</option>
         </select>
       </div>
       <div class="w-full md:w-auto">
         <label class="block text-label-md text-on-surface-variant mb-2">Status</label>
-        <select
+        <select id="projectStatusFilter" onchange="filterProjects()"
           class="w-full md:w-48 px-4 py-2.5 rounded border border-surface-container-highest bg-white focus:ring-1 focus:ring-inverse-surface outline-none appearance-none cursor-pointer">
-          <option>All Status</option>
-          <option>Operational</option>
-          <option>Under Construction</option>
-          <option>Planned</option>
+          <option value="all">All Status</option>
+          <option value="operational">Operational</option>
+          <option value="under_construction">Under Construction</option>
+          <option value="planned">Planned</option>
         </select>
       </div>
       <div class="w-full md:w-auto flex items-end">
-        <button
+        <button onclick="resetProjectFilters()"
           class="w-full md:w-auto px-6 py-2.5 rounded border border-inverse-surface text-inverse-surface font-label-md hover:bg-inverse-surface hover:text-white transition-all flex items-center justify-center gap-2">
           <span class="material-symbols-outlined text-[20px]">filter_list</span>
           Reset
         </button>
       </div>
     </div>
+    <p id="noProjectsMessage" class="hidden text-center text-on-surface-variant py-16">No projects match your filters.</p>
     <!-- Grid View -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="projectsGrid">
       <!-- Project 1: Ambhora -->
-      <div
+      <div data-name="ambhora solar park" data-location="maharashtra, india" data-capacity-mw="8.0"
+        data-status="operational" data-lat="21.2833" data-lng="78.6833"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -227,7 +233,8 @@
       </div>
 
       <!-- Project 2: Ambhora Phase 2 -->
-      <div
+      <div data-name="ambhora phase 2" data-location="maharashtra, india" data-capacity-mw="8.4"
+        data-status="operational" data-lat="21.2850" data-lng="78.6850"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -263,7 +270,8 @@
       </div>
 
       <!-- Project 3: Ashti -->
-      <div
+      <div data-name="ashti solar project" data-location="maharashtra, india" data-capacity-mw="8.4"
+        data-status="operational" data-lat="21.1667" data-lng="78.1500"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -299,7 +307,8 @@
       </div>
 
       <!-- Project 4: Ashti Phase 2 -->
-      <div
+      <div data-name="ashti phase 2" data-location="maharashtra, india" data-capacity-mw="3.6"
+        data-status="operational" data-lat="21.1685" data-lng="78.1520"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -335,7 +344,8 @@
       </div>
 
       <!-- Project 5: Watambare -->
-      <div
+      <div data-name="watambare solar farm" data-location="maharashtra, india" data-capacity-mw="6.0"
+        data-status="operational" data-lat="21.0500" data-lng="79.2000"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -371,7 +381,8 @@
       </div>
 
       <!-- Project 6: Kuhi -->
-      <div
+      <div data-name="kuhi solar infrastructure" data-location="maharashtra, india" data-capacity-mw="6.0"
+        data-status="operational" data-lat="21.0167" data-lng="79.3167"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -407,7 +418,8 @@
       </div>
 
       <!-- Project 7: Pachkhedi -->
-      <div
+      <div data-name="pachkhedi solar system" data-location="maharashtra, india" data-capacity-mw="9.0"
+        data-status="operational" data-lat="21.1200" data-lng="79.0700"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -443,7 +455,8 @@
       </div>
 
       <!-- Project 8: Bhose -->
-      <div
+      <div data-name="bhose energy park" data-location="maharashtra, india" data-capacity-mw="4.8"
+        data-status="operational" data-lat="20.9500" data-lng="78.3000"
         class="group bg-white border border-surface-container-highest rounded overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
         <div class="relative h-72 overflow-hidden">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -482,24 +495,6 @@
     <div
       class="hidden h-[700px] w-full rounded overflow-hidden border border-surface-container-highest shadow-lg relative bg-surface-container"
       id="projectsMap">
-      <div class="absolute inset-0 z-0 bg-cover bg-center"
-        style="background-image: url('assets/images/projects/solar-park-sunset-02.jpg')"
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          class="bg-white/95 backdrop-blur-md px-8 py-4 rounded shadow-xl border border-inverse-surface/10 pointer-events-auto">
-          <p class="font-label-md text-inverse-surface mb-1">Interactive Global View</p>
-          <p class="text-body-md text-on-surface-variant">Active infrastructure projects in 24 countries.</p>
-        </div>
-      </div>
-      <div class="absolute top-1/4 left-1/3 w-10 h-10 -ml-5 -mt-5 flex items-center justify-center cursor-pointer">
-        <span class="material-symbols-outlined text-primary text-[40px] drop-shadow-lg"
-          style="font-variation-settings: 'FILL' 1;">location_on</span>
-      </div>
-      <div class="absolute top-1/2 right-1/4 w-10 h-10 -ml-5 -mt-5 flex items-center justify-center cursor-pointer">
-        <span class="material-symbols-outlined text-primary text-[40px] drop-shadow-lg"
-          style="font-variation-settings: 'FILL' 1;">location_on</span>
-      </div>
     </div>
     <!-- Call to Action -->
     <div
@@ -511,12 +506,12 @@
           customized feasibility study and ROI projection for your commercial or utility-scale project.</p>
       </div>
       <div class="relative z-10 flex flex-col sm:flex-row gap-4">
-        <button
-          class="px-8 py-4 bg-white text-inverse-surface font-label-md rounded hover:bg-surface-variant transition-all shadow-lg">Request
-          Proposal</button>
-        <button
-          class="px-8 py-4 border-2 border-white/30 text-white font-label-md rounded hover:bg-white/10 transition-all">Download
-          Portfolio</button>
+        <a href="connect.html"
+          class="inline-block px-8 py-4 bg-white text-inverse-surface font-label-md rounded hover:bg-surface-variant transition-all shadow-lg">Request
+          Proposal</a>
+        <a href="connect.html"
+          class="inline-block px-8 py-4 border-2 border-white/30 text-white font-label-md rounded hover:bg-white/10 transition-all">Download
+          Portfolio</a>
       </div>
       <!-- Decorative bolt -->
       <span
@@ -600,6 +595,9 @@
     </div>
   </footer>
   <script>
+    let projectsMapInstance = null;
+    let projectsMarkers = [];
+
     function toggleView(view) {
       const gridView = document.getElementById('projectsGrid');
       const mapView = document.getElementById('projectsMap');
@@ -620,7 +618,92 @@
         mapBtn.classList.remove('text-on-surface-variant', 'hover:text-inverse-surface');
         gridBtn.classList.remove('active-filter');
         gridBtn.classList.add('text-on-surface-variant', 'hover:text-inverse-surface');
+
+        initProjectsMap();
+        setTimeout(() => projectsMapInstance && projectsMapInstance.invalidateSize(), 50);
       }
+    }
+
+    function initProjectsMap() {
+      if (projectsMapInstance) return;
+
+      projectsMapInstance = L.map('projectsMap');
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(projectsMapInstance);
+
+      const cards = document.querySelectorAll('#projectsGrid > div[data-lat]');
+      const bounds = [];
+      cards.forEach(card => {
+        const lat = parseFloat(card.dataset.lat);
+        const lng = parseFloat(card.dataset.lng);
+        const name = card.querySelector('h3').textContent;
+        const location = card.dataset.location.replace(/\b\w/g, c => c.toUpperCase());
+        const capacity = card.dataset.capacityMw;
+        const status = card.dataset.status.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+        const marker = L.marker([lat, lng]).addTo(projectsMapInstance)
+          .bindPopup(`<strong>${name}</strong><br>${location}<br>${capacity} MW &middot; ${status}`);
+        marker._projectCard = card;
+        projectsMarkers.push(marker);
+        bounds.push([lat, lng]);
+      });
+
+      if (bounds.length) {
+        projectsMapInstance.fitBounds(bounds, { padding: [40, 40] });
+      } else {
+        projectsMapInstance.setView([21.15, 79.05], 8);
+      }
+    }
+
+    function capacityBucket(mw) {
+      if (mw > 100) return 'utility';
+      if (mw >= 10) return 'commercial';
+      return 'industrial';
+    }
+
+    function filterProjects() {
+      const search = document.getElementById('projectSearch').value.trim().toLowerCase();
+      const capacityFilter = document.getElementById('projectCapacityFilter').value;
+      const statusFilter = document.getElementById('projectStatusFilter').value;
+      const cards = document.querySelectorAll('#projectsGrid > div[data-name]');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const matchesSearch = !search ||
+          card.dataset.name.includes(search) ||
+          card.dataset.location.includes(search);
+        const matchesCapacity = capacityFilter === 'all' ||
+          capacityBucket(parseFloat(card.dataset.capacityMw)) === capacityFilter;
+        const matchesStatus = statusFilter === 'all' || card.dataset.status === statusFilter;
+
+        const visible = matchesSearch && matchesCapacity && matchesStatus;
+        card.classList.toggle('hidden', !visible);
+        if (visible) visibleCount++;
+      });
+
+      document.getElementById('noProjectsMessage').classList.toggle('hidden', visibleCount > 0);
+
+      // Keep the map view in sync with the same filters
+      if (projectsMarkers.length) {
+        projectsMarkers.forEach(marker => {
+          const card = marker._projectCard;
+          const visible = !card.classList.contains('hidden');
+          if (visible && !projectsMapInstance.hasLayer(marker)) {
+            marker.addTo(projectsMapInstance);
+          } else if (!visible && projectsMapInstance.hasLayer(marker)) {
+            projectsMapInstance.removeLayer(marker);
+          }
+        });
+      }
+    }
+
+    function resetProjectFilters() {
+      document.getElementById('projectSearch').value = '';
+      document.getElementById('projectCapacityFilter').value = 'all';
+      document.getElementById('projectStatusFilter').value = 'all';
+      filterProjects();
     }
   </script>
 </body>

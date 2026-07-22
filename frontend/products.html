@@ -136,7 +136,7 @@
                 </div>
                 <div class="flex gap-4 w-full md:w-auto">
                     <div class="flex-1 md:w-80 relative">
-                        <input
+                        <input id="catalogSearch" oninput="filterCatalog()"
                             class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3.5 focus:ring-1 focus:ring-on-surface focus:border-on-surface transition-all text-body-md"
                             placeholder="Search product serials or names..." type="text" />
                         <span class="material-symbols-outlined absolute right-3 top-3.5 text-outline">search</span>
@@ -146,30 +146,31 @@
         </section>
         <!-- Product Categories Filter -->
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-12">
-            <div class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
-                <button
-                    class="whitespace-nowrap bg-on-surface text-white px-8 py-2 rounded-full font-label-md text-label-md">All
+            <div class="flex gap-3 overflow-x-auto pb-4 no-scrollbar" id="catalogPills">
+                <button data-category="all" onclick="setCatalogCategory('all')"
+                    class="catalog-pill whitespace-nowrap bg-on-surface text-white px-8 py-2 rounded-full font-label-md text-label-md">All
                     Components</button>
-                <button
-                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">PV
+                <button data-category="pv-panels" onclick="setCatalogCategory('pv-panels')"
+                    class="catalog-pill whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">PV
                     Panels</button>
-                <button
-                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">String
+                <button data-category="string-inverters" onclick="setCatalogCategory('string-inverters')"
+                    class="catalog-pill whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">String
                     Inverters</button>
-                <button
-                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Mounting</button>
-                <button
-                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Cloud
+                <button data-category="mounting" onclick="setCatalogCategory('mounting')"
+                    class="catalog-pill whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Mounting</button>
+                <button data-category="cloud-monitoring" onclick="setCatalogCategory('cloud-monitoring')"
+                    class="catalog-pill whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">Cloud
                     Monitoring</button>
-                <button
-                    class="whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">BOS</button>
+                <button data-category="bos" onclick="setCatalogCategory('bos')"
+                    class="catalog-pill whitespace-nowrap bg-white border border-outline-variant text-on-surface-variant px-8 py-2 rounded-full font-label-md text-label-md hover:border-on-surface hover:text-on-surface transition-colors">BOS</button>
             </div>
+            <p id="noProductsMessage" class="hidden text-center text-on-surface-variant py-16">No products match your search.</p>
         </div>
         <!-- Catalog Bento Grid -->
-        <section
+        <section id="catalogGrid"
             class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter pb-24">
             <!-- PV Panel Product -->
-            <div
+            <div data-category="pv-panels" data-name="sunplus alpha 650w"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -209,7 +210,7 @@
                 </div>
             </div>
             <!-- Inverter Product -->
-            <div
+            <div data-category="string-inverters" data-name="sunlink pro 250kw"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -249,7 +250,7 @@
                 </div>
             </div>
             <!-- Monitoring Product -->
-            <div
+            <div data-category="cloud-monitoring" data-name="suncloud os 4.0"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -289,7 +290,7 @@
                 </div>
             </div>
             <!-- Mounting Structure -->
-            <div
+            <div data-category="mounting" data-name="terrarail g3"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -326,7 +327,7 @@
                 </div>
             </div>
             <!-- Earthing Strips -->
-            <div
+            <div data-category="bos" data-name="earthing strips"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -364,7 +365,7 @@
             </div>
 
             <!-- Earthing Rod (Copper Bonded) -->
-            <div
+            <div data-category="bos" data-name="earthing rod"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -402,7 +403,7 @@
             </div>
 
             <!-- Earthing Chemical Bag -->
-            <div
+            <div data-category="bos" data-name="earthing chemical bag"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -440,7 +441,7 @@
             </div>
 
             <!-- PVC Earthing Chamber -->
-            <div
+            <div data-category="bos" data-name="pvc earthing chamber"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -478,7 +479,7 @@
             </div>
 
             <!-- Earthing Rod Clamps -->
-            <div
+            <div data-category="bos" data-name="earthing rod clamps"
                 class="bg-white border border-outline-variant rounded-xl overflow-hidden product-card-hover transition-all duration-300 flex flex-col group">
                 <div class="h-64 relative overflow-hidden bg-surface-container">
                     <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
@@ -536,10 +537,10 @@
                             <span class="text-white font-label-md">CAD &amp; SLD Services</span>
                         </li>
                     </ul>
-                    <button
-                        class="w-full bg-white text-on-surface py-3.5 rounded font-label-md hover:bg-surface-variant transition-all mt-auto">
+                    <a href="connect.html"
+                        class="w-full bg-white text-on-surface py-3.5 rounded font-label-md hover:bg-surface-variant transition-all mt-auto block text-center">
                         Consult with Engineers
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -553,24 +554,30 @@
                         <span class="material-symbols-outlined">close</span>
                     </button>
                 </div>
-                <form class="p-8 space-y-6">
+                <form id="datasheet-form" class="p-8 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-label-md text-on-surface font-semibold">Full Name</label>
-                            <input
+                            <input id="datasheet-name"
                                 class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none"
-                                placeholder="Enter name" type="text" />
+                                placeholder="Enter name" type="text" required />
                         </div>
                         <div class="space-y-2">
                             <label class="text-label-md text-on-surface font-semibold">Work Email</label>
-                            <input
+                            <input id="datasheet-email"
                                 class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none"
-                                placeholder="email@company.com" type="email" />
+                                placeholder="email@company.com" type="email" required />
                         </div>
                     </div>
                     <div class="space-y-2">
+                        <label class="text-label-md text-on-surface font-semibold">Phone Number</label>
+                        <input id="datasheet-phone"
+                            class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none"
+                            placeholder="Enter phone number" type="tel" required />
+                    </div>
+                    <div class="space-y-2">
                         <label class="text-label-md text-on-surface font-semibold">Project Scale</label>
-                        <select
+                        <select id="datasheet-scale"
                             class="w-full border border-outline-variant rounded p-3 focus:ring-1 focus:ring-on-surface outline-none">
                             <option>Commercial (&lt; 1MW)</option>
                             <option>Industrial (1MW - 10MW)</option>
@@ -670,6 +677,38 @@
         </div>
     </footer>
     <script>
+        let activeCatalogCategory = 'all';
+
+        function setCatalogCategory(category) {
+            activeCatalogCategory = category;
+            document.querySelectorAll('.catalog-pill').forEach(pill => {
+                const isActive = pill.dataset.category === category;
+                pill.classList.toggle('bg-on-surface', isActive);
+                pill.classList.toggle('text-white', isActive);
+                pill.classList.toggle('bg-white', !isActive);
+                pill.classList.toggle('border', !isActive);
+                pill.classList.toggle('border-outline-variant', !isActive);
+                pill.classList.toggle('text-on-surface-variant', !isActive);
+            });
+            filterCatalog();
+        }
+
+        function filterCatalog() {
+            const search = document.getElementById('catalogSearch').value.trim().toLowerCase();
+            const cards = document.querySelectorAll('#catalogGrid > div[data-category]');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const matchesCategory = activeCatalogCategory === 'all' || card.dataset.category === activeCatalogCategory;
+                const matchesSearch = !search || card.dataset.name.includes(search);
+                const visible = matchesCategory && matchesSearch;
+                card.classList.toggle('hidden', !visible);
+                if (visible) visibleCount++;
+            });
+
+            document.getElementById('noProductsMessage').classList.toggle('hidden', visibleCount > 0);
+        }
+
         function toggleModal() {
             const modal = document.getElementById('datasheet-modal');
             if (modal.classList.contains('hidden')) {
@@ -698,6 +737,34 @@
             if (e.key === 'Escape') {
                 const modal = document.getElementById('datasheet-modal');
                 if (modal.classList.contains('flex')) toggleModal();
+            }
+        });
+
+        // Submit the datasheet request as a lead
+        document.getElementById('datasheet-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                await api.post('/leads', {
+                    name: document.getElementById('datasheet-name').value,
+                    email: document.getElementById('datasheet-email').value,
+                    phone: document.getElementById('datasheet-phone').value,
+                    subject: 'Product Datasheet Request',
+                    message: `Requested a datasheet PDF. Project scale: ${document.getElementById('datasheet-scale').value}`,
+                    source_page: '/products.html'
+                });
+                window.showToast('Request sent. Our team will email you the datasheet shortly.', 'success');
+                e.target.reset();
+                toggleModal();
+            } catch (err) {
+                window.showToast('Failed to send request. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             }
         });
     </script>
